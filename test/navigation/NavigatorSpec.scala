@@ -34,7 +34,16 @@ class NavigatorSpec extends SpecBase {
         case object UnknownPage extends Page
         navigator.nextPage(UnknownPage, NormalMode, UserAnswers("id")) mustBe routes.IndexController.onPageLoad()
       }
+
+      "go from Type of Participant to Art Sold Over Threshold" in {
+
+        val answers = UserAnswers("id")
+
+        navigator.nextPage(TypeOfParticipantPage, NormalMode, answers)
+            .mustBe(routes.BoughtOrSoldOverThresholdController.onPageLoad(NormalMode))
+      }
     }
+
 
     "in Check mode" must {
 

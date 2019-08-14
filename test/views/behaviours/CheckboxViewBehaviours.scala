@@ -22,10 +22,10 @@ import viewmodels.RadioOption
 
 trait CheckboxViewBehaviours[A] extends ViewBehaviours {
 
-  def checkboxPage(form: Form[Set[A]],
-                   createView: Form[Set[A]] => HtmlFormat.Appendable,
+  def checkboxPage(form: Form[Seq[A]],
+                   createView: Form[Seq[A]] => HtmlFormat.Appendable,
                    messageKeyPrefix: String,
-                   options: Set[RadioOption],
+                   options: Seq[RadioOption],
                    fieldKey: String = "value",
                    legend: Option[String] = None): Unit = {
 

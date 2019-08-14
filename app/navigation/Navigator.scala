@@ -27,7 +27,14 @@ import models._
 class Navigator @Inject()() {
 
   private val normalRoutes: Page => UserAnswers => Call = {
-    case _ => _ => routes.IndexController.onPageLoad()
+    case TypeOfParticipantPage          => _ => routes.BoughtOrSoldOverThresholdController.onPageLoad(NormalMode)
+    case BoughtOrSoldOverThresholdPage  => artSoldOverThresholdRoute
+  }
+
+  private def artSoldOverThresholdRoute(answers: UserAnswers): Call = answers.get(BoughtOrSoldOverThresholdPage) match {
+    case Some(true)  => routes.DateTransactionOverThresholdController.onPageLoad(NormalMode)
+    case Some(false) => routes.IdentifyLinkedTransactionsController.onPageLoad(NormalMode)
+    case None        => routes.SessionExpiredController.onPageLoad()
   }
 
   private val checkRouteMap: Page => UserAnswers => Call = {

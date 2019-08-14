@@ -11,3 +11,28 @@ GET        /this-service-has-been-reset                 controllers.SessionExpir
 GET        /check-your-answers                          controllers.CheckYourAnswersController.onPageLoad
 
 GET        /unauthorised                                controllers.UnauthorisedController.onPageLoad
+
+GET        /boughtOrSoldOverThreshold                        controllers.BoughtOrSoldOverThresholdController.onPageLoad(mode: Mode = NormalMode)
+POST       /boughtOrSoldOverThreshold                        controllers.BoughtOrSoldOverThresholdController.onSubmit(mode: Mode = NormalMode)
+GET        /changeBoughtOrSoldOverThreshold                  controllers.BoughtOrSoldOverThresholdController.onPageLoad(mode: Mode = CheckMode)
+POST       /changeBoughtOrSoldOverThreshold                  controllers.BoughtOrSoldOverThresholdController.onSubmit(mode: Mode = CheckMode)
+
+GET        /dateTransactionOverThreshold                  controllers.DateTransactionOverThresholdController.onPageLoad(mode: Mode = NormalMode)
+POST       /dateTransactionOverThreshold                  controllers.DateTransactionOverThresholdController.onSubmit(mode: Mode = NormalMode)
+GET        /changeDateTransactionOverThreshold                        controllers.DateTransactionOverThresholdController.onPageLoad(mode: Mode = CheckMode)
+POST       /changeDateTransactionOverThreshold                        controllers.DateTransactionOverThresholdController.onSubmit(mode: Mode = CheckMode)
+
+GET        /identifyLinkedTransactions                        controllers.IdentifyLinkedTransactionsController.onPageLoad(mode: Mode = NormalMode)
+POST       /identifyLinkedTransactions                        controllers.IdentifyLinkedTransactionsController.onSubmit(mode: Mode = NormalMode)
+GET        /changeIdentifyLinkedTransactions                  controllers.IdentifyLinkedTransactionsController.onPageLoad(mode: Mode = CheckMode)
+POST       /changeIdentifyLinkedTransactions                  controllers.IdentifyLinkedTransactionsController.onSubmit(mode: Mode = CheckMode)
+
+GET        /percentageExpectedTurnover                        controllers.PercentageExpectedTurnoverController.onPageLoad(mode: Mode = NormalMode)
+POST       /percentageExpectedTurnover                        controllers.PercentageExpectedTurnoverController.onSubmit(mode: Mode = NormalMode)
+GET        /changePercentageExpectedTurnover                  controllers.PercentageExpectedTurnoverController.onPageLoad(mode: Mode = CheckMode)
+POST       /changePercentageExpectedTurnover                  controllers.PercentageExpectedTurnoverController.onSubmit(mode: Mode = CheckMode)
+
+GET        /typeOfParticipant                        controllers.TypeOfParticipantController.onPageLoad(mode: Mode = NormalMode)
+POST       /typeOfParticipant                        controllers.TypeOfParticipantController.onSubmit(mode: Mode = NormalMode)
+GET        /changeTypeOfParticipant                  controllers.TypeOfParticipantController.onPageLoad(mode: Mode = CheckMode)
+POST       /changeTypeOfParticipant                  controllers.TypeOfParticipantController.onSubmit(mode: Mode = CheckMode)

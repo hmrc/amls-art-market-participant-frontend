@@ -29,6 +29,7 @@ class Navigator @Inject()() {
   private val normalRoutes: Page => UserAnswers => Call = {
     case TypeOfParticipantPage          => _ => routes.BoughtOrSoldOverThresholdController.onPageLoad(NormalMode)
     case BoughtOrSoldOverThresholdPage  => artSoldOverThresholdRoute
+    case _                              => _ => routes.IndexController.onPageLoad()
   }
 
   private def artSoldOverThresholdRoute(answers: UserAnswers): Call = answers.get(BoughtOrSoldOverThresholdPage) match {

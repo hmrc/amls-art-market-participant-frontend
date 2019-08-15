@@ -26,17 +26,13 @@ class NavigatorSpec extends SpecBase {
   val navigator = new Navigator
 
   "Navigator" when {
-
     "in Normal mode" must {
-
       "go to Index from a page that doesn't exist in the route map" in {
-
         case object UnknownPage extends Page
         navigator.nextPage(UnknownPage, NormalMode, UserAnswers("id")) mustBe routes.IndexController.onPageLoad()
       }
 
       "go from Type of Participant to Art Sold Over Threshold" in {
-
         val answers = UserAnswers("id")
 
         navigator.nextPage(TypeOfParticipantPage, NormalMode, answers)
@@ -58,7 +54,6 @@ class NavigatorSpec extends SpecBase {
       }
 
       "go from Date Transaction Over Threshold to Identify Linked Transactions page" in{
-
         val answers = UserAnswers("id")
 
         navigator.nextPage(DateTransactionOverThresholdPage, NormalMode, answers)
@@ -66,7 +61,6 @@ class NavigatorSpec extends SpecBase {
       }
 
       "go from Identify Linked Transactions to Percentage Turnover From Sales Over Threshold page" in{
-
         val answers = UserAnswers("id")
 
         navigator.nextPage(IdentifyLinkedTransactionsPage, NormalMode, answers)
@@ -74,7 +68,6 @@ class NavigatorSpec extends SpecBase {
       }
 
       "go from Percentage Turnover Sales Over Threshold to Check your answers page" in{
-
         val answers = UserAnswers("id")
 
         navigator.nextPage(PercentageExpectedTurnoverPage, NormalMode, answers)
@@ -83,9 +76,7 @@ class NavigatorSpec extends SpecBase {
     }
 
     "in Check mode" must {
-
       "go to CheckYourAnswers from a page that doesn't exist in the edit route map" in {
-
         case object UnknownPage extends Page
         navigator.nextPage(UnknownPage, CheckMode, UserAnswers("id")) mustBe routes.CheckYourAnswersController.onPageLoad()
       }
@@ -113,7 +104,6 @@ class NavigatorSpec extends SpecBase {
       }
 
       "go from Date Transaction Over Threshold to Check Your Answers" in{
-
         val answers = UserAnswers("id")
 
         navigator.nextPage(DateTransactionOverThresholdPage, CheckMode, answers)
@@ -121,7 +111,6 @@ class NavigatorSpec extends SpecBase {
       }
 
       "go from Identify Linked Transactions to Check Your Answers" in{
-
         val answers = UserAnswers("id")
 
         navigator.nextPage(IdentifyLinkedTransactionsPage, CheckMode, answers)
@@ -129,7 +118,6 @@ class NavigatorSpec extends SpecBase {
       }
 
       "go from Percentage Turnover Sales Over Threshold to Check your answers page" in{
-
         val answers = UserAnswers("id")
 
         navigator.nextPage(PercentageExpectedTurnoverPage, CheckMode, answers)

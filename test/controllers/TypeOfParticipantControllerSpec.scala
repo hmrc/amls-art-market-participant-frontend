@@ -131,23 +131,5 @@ class TypeOfParticipantControllerSpec extends SpecBase with MockitoSugar {
 
       application.stop()
     }
-
-    //TODO - Do we need this test in the first controller in the flow?
-//    "redirect to next controller for a POST if no existing data is found" in {
-//
-//      val application = applicationBuilder(userAnswers = None).build()
-//
-//      val request =
-//        FakeRequest(POST, typeOfParticipantRoute)
-//          .withFormUrlEncodedBody(("value[0]", TypeOfParticipant.values.head.toString))
-//
-//      val result = route(application, request).value
-//
-//      status(result) mustEqual SEE_OTHER
-//
-//      redirectLocation(result).value mustEqual routes.SessionExpiredController.onPageLoad().url
-//
-//      application.stop()
-//    }
   }
 }

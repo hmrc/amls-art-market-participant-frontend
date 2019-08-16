@@ -41,14 +41,14 @@ class Navigator @Inject()() {
     case None        => routes.SessionExpiredController.onPageLoad()
   }
 
-  private def artSoldOverThresholdRouteEdit(answers: UserAnswers): Call = answers.get(BoughtOrSoldOverThresholdPage) match {
+  private def artSoldOverThresholdRouteCheckMode(answers: UserAnswers): Call = answers.get(BoughtOrSoldOverThresholdPage) match {
     case Some(true)  => routes.DateTransactionOverThresholdController.onPageLoad(CheckMode)
     case Some(false) => routes.CheckYourAnswersController.onPageLoad()
     case None        => routes.SessionExpiredController.onPageLoad()
   }
 
   private val checkRouteMap: Page => UserAnswers => Call = {
-    case BoughtOrSoldOverThresholdPage => artSoldOverThresholdRouteEdit
+    case BoughtOrSoldOverThresholdPage => artSoldOverThresholdRouteCheckMode
     case _ => _ => routes.CheckYourAnswersController.onPageLoad()
   }
 

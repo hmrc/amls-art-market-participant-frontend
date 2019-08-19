@@ -16,11 +16,21 @@
 
 package pages
 
+import models.UserAnswers
 import play.api.libs.json.JsPath
+
+import scala.util.Try
 
 case object BoughtOrSoldOverThresholdPage extends QuestionPage[Boolean] {
 
   override def path: JsPath = JsPath \ toString
 
   override def toString: String = "boughtOrSoldOverThreshold"
+
+  override def cleanup(value: Option[Boolean], userAnswers: UserAnswers): Try[UserAnswers] =
+    if (value.contains(false)) {
+      userAnswers.remove(DateTransactionOverThresholdPage)
+    } else {
+      super.cleanup(value, userAnswers)
+    }
 }

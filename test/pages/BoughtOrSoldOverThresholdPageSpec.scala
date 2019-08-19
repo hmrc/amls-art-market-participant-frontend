@@ -27,5 +27,9 @@ class BoughtOrSoldOverThresholdPageSpec extends PageBehaviours {
     beSettable[Boolean](BoughtOrSoldOverThresholdPage)
 
     beRemovable[Boolean](BoughtOrSoldOverThresholdPage)
+
+    "cleanup the DateTransactionOverThresholdPage value where false selected" in {
+
+    }
   }
 }

@@ -17,9 +17,9 @@
 package navigation
 
 import javax.inject.{Inject, Singleton}
-
 import play.api.mvc.Call
 import controllers.routes
+import models.TypeOfParticipant.SomethingElse
 import pages._
 import models._
 
@@ -27,13 +27,23 @@ import models._
 class Navigator @Inject()() {
 
   private val normalRoutes: Page => UserAnswers => Call = {
-    case TypeOfParticipantPage            => _ => routes.BoughtOrSoldOverThresholdController.onPageLoad(NormalMode)
+    case TypeOfParticipantPage            =>      typeOfParticipantRoute
+    case TypeOfParticipantDetailPage      => _ => routes.BoughtOrSoldOverThresholdController.onPageLoad(NormalMode)
     case BoughtOrSoldOverThresholdPage    =>      artSoldOverThresholdRoute
     case DateTransactionOverThresholdPage => _ => routes.IdentifyLinkedTransactionsController.onPageLoad(NormalMode)
     case IdentifyLinkedTransactionsPage   => _ => routes.PercentageExpectedTurnoverController.onPageLoad(NormalMode)
     case PercentageExpectedTurnoverPage   => _ => routes.CheckYourAnswersController.onPageLoad()
     case _                                => _ => routes.IndexController.onPageLoad()
   }
+
+  private def typeOfParticipantRoute(answers: UserAnswers): Call = {
+    answers.get(TypeOfParticipantPage) map { ans =>
+      ans.contains(SomethingElse) match {
+        case true => routes.TypeOfParticipantDetailController.onPageLoad(NormalMode)
+        case _    => routes.BoughtOrSoldOverThresholdController.onPageLoad(NormalMode)
+      }
+    }
+  }.getOrElse(routes.SessionExpiredController.onPageLoad())
 
   private def artSoldOverThresholdRoute(answers: UserAnswers): Call = answers.get(BoughtOrSoldOverThresholdPage) match {
     case Some(true)  => routes.DateTransactionOverThresholdController.onPageLoad(NormalMode)

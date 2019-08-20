@@ -80,3 +80,9 @@ typeOfParticipant.artAuctioneer = Art auctioneer
 typeOfParticipant.somethingElse = Something else
 typeOfParticipant.checkYourAnswersLabel = What type of art market participant are you?
 typeOfParticipant.error.required = Select a type of participant
+
+typeOfParticipantDetail.title = Give further details where something else was specified?
+typeOfParticipantDetail.heading = Give further details where something else was specified?
+typeOfParticipantDetail.checkYourAnswersLabel = Give further details where something else was specified?
+typeOfParticipantDetail.error.required = Enter further details where something else was specified
+typeOfParticipantDetail.error.length = Details provided must be 256 characters or less

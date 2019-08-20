@@ -18,6 +18,7 @@ package navigation
 
 import base.SpecBase
 import controllers.routes
+import models.TypeOfParticipant.{ArtGalleryOwner, SomethingElse}
 import pages._
 import models._
 
@@ -32,11 +33,25 @@ class NavigatorSpec extends SpecBase {
         navigator.nextPage(UnknownPage, NormalMode, UserAnswers("id")) mustBe routes.IndexController.onPageLoad()
       }
 
-      "go from Type of Participant to Art Sold Over Threshold" in {
-        val answers = UserAnswers("id")
+      "go from Type of Participant to Type Of Participant Detail when specifying something else" in {
+        val answers = UserAnswers("id").set(TypeOfParticipantPage,  Seq(SomethingElse)).success.value
 
         navigator.nextPage(TypeOfParticipantPage, NormalMode, answers)
-            .mustBe(routes.BoughtOrSoldOverThresholdController.onPageLoad(NormalMode))
+          .mustBe(routes.TypeOfParticipantDetailController.onPageLoad(NormalMode))
+      }
+
+      "go from Type of Participant to Art Sold Over Threshold when not specifying something else" in {
+        val answers = UserAnswers("id").set(TypeOfParticipantPage, Seq(ArtGalleryOwner)).success.value
+
+        navigator.nextPage(TypeOfParticipantPage, NormalMode, answers)
+          .mustBe(routes.BoughtOrSoldOverThresholdController.onPageLoad(NormalMode))
+      }
+
+      "go from Type Of Participant Detail to Art Sold Over Threshold" in {
+        val answers = UserAnswers("id")
+
+        navigator.nextPage(TypeOfParticipantDetailPage, NormalMode, answers)
+          .mustBe(routes.BoughtOrSoldOverThresholdController.onPageLoad(NormalMode))
       }
 
       "go from Art Sold Over Threshold to Date Transaction Over Threshold where yes" in {

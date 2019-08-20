@@ -16,24 +16,11 @@
 
 package pages
 
-import models.TypeOfParticipant.SomethingElse
-import models.{TypeOfParticipant, UserAnswers}
 import play.api.libs.json.JsPath
 
-import scala.util.Try
-
-case object TypeOfParticipantPage extends QuestionPage[Seq[TypeOfParticipant]] {
+case object TypeOfParticipantDetailPage extends QuestionPage[String] {
 
   override def path: JsPath = JsPath \ toString
 
-  override def toString: String = "typeOfParticipant"
-
-  override def cleanup(value: Option[Seq[TypeOfParticipant]], userAnswers: UserAnswers): Try[UserAnswers] = {
-    value map { ans =>
-      ans.contains(SomethingElse) match {
-        case true => super.cleanup(value, userAnswers)
-        case _ => userAnswers.remove(TypeOfParticipantDetailPage)
-      }
-    }
-  }.getOrElse(super.cleanup(value, userAnswers))
+  override def toString: String = "typeOfParticipantDetail"
 }

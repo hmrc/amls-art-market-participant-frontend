@@ -31,12 +31,15 @@
 
         @components.error_summary(form.errors)
 
+        @components.page_heading("amp.heading")
+
         @components.heading("dateTransactionOverThreshold.heading")
 
         @components.input_date(
             field = form("value"),
             legend = messages("dateTransactionOverThreshold.heading"),
-            legendClass = "visually-hidden"
+            legendClass = "visually-hidden",
+            hint = Some(messages("dateTransactionOverThreshold.hint"))
         )
 
         @components.submit_button()

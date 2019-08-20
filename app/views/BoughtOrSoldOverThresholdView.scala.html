@@ -34,12 +34,15 @@
 
         @components.error_summary(form.errors)
 
+        @components.page_heading("amp.heading")
+
         @components.heading("boughtOrSoldOverThreshold.heading")
 
         @components.input_yes_no(
             field = form("value"),
             label = messages("boughtOrSoldOverThreshold.heading"),
-            labelClass = Some("visually-hidden")
+            labelClass = Some("visually-hidden"),
+            hint = Some(messages("boughtOrSoldOverThreshold.hint"))
         )
 
         @components.submit_button()

@@ -21,8 +21,8 @@ error.number = Please enter a valid number
 error.required = Please enter a value
 error.summary.title = There is a problem
 
-index.title = amls-art-market-participant-frontend
-index.heading = amls-art-market-participant-frontend
+index.title = Art market participant
+index.heading = Art market participant
 index.guidance = Welcome to your new frontend. Please see the README file for a guide to getting started.
 
 session_expired.title = For your security, this service has been reset
@@ -36,8 +36,8 @@ site.hidden-delete = Delete {0}
 site.hidden-edit = Change {0}
 site.no = No
 site.yes = Yes
-site.continue = Continue
-site.service_name = amls-art-market-participant-frontend
+site.continue = Save and continue
+site.service_name = Manage your anti-money laundering supervision
 site.textarea.char_limit = (Limit is {0} characters)
 
 unauthorised.title = You can’t access this service with this account
@@ -47,6 +47,7 @@ boughtOrSoldOverThreshold.title = Has your business bought or sold art for €10
 boughtOrSoldOverThreshold.heading = Has your business bought or sold art for €10,000 or more?
 boughtOrSoldOverThreshold.checkYourAnswersLabel = Has your business bought or sold art for €10,000 or more?
 boughtOrSoldOverThreshold.error.required = Select yes if your business has bought or sold art for €10,000 or more
+boughtOrSoldOverThreshold.hint = If you do not use euros you`ll need to convert the amount to the currency you use.
 
 dateTransactionOverThreshold.title = When was the first sale or purchase of art for €10,000 or more?
 dateTransactionOverThreshold.heading = When was the first sale or purchase of art for €10,000 or more?
@@ -55,6 +56,7 @@ dateTransactionOverThreshold.error.required.all = Enter the date of the first sa
 dateTransactionOverThreshold.error.required.two = The date must include {0} and {1}
 dateTransactionOverThreshold.error.required = The month must include {0}
 dateTransactionOverThreshold.error.invalid = Enter a real date Month and Year
+dateTransactionOverThreshold.hint = For example, 31 03 2017.
 
 identifyLinkedTransactions.title = Are you able to identify multiple payments linked to a single sale or purchase?
 identifyLinkedTransactions.heading = Are you able to identify multiple payments linked to a single sale or purchase?
@@ -70,9 +72,11 @@ percentageExpectedTurnover.sixtyOneToEighty = 61% to 80%
 percentageExpectedTurnover.eightyOneToOneHundred = 81% to 100%
 percentageExpectedTurnover.checkYourAnswersLabel = How much of your turnover do you expect to come from sales of art for €10,000 or more?
 percentageExpectedTurnover.error.required = Select a percentage expected turnover
+percentageExpectedTurnover.hint = If you do not use euros you`ll need to convert the amount to the currency you use.
 
 typeOfParticipant.title = What type of art market participant are you?
 typeOfParticipant.heading = What type of art market participant are you?
+typeOfParticipant.heading2 = Art market participant
 typeOfParticipant.artGalleryOwner = Art gallery owner
 typeOfParticipant.artDealer = Art dealer
 typeOfParticipant.artAgent = Art agent
@@ -81,8 +85,11 @@ typeOfParticipant.somethingElse = Something else
 typeOfParticipant.checkYourAnswersLabel = What type of art market participant are you?
 typeOfParticipant.error.required = Select a type of participant
 
-typeOfParticipantDetail.title = Give further details where something else was specified?
-typeOfParticipantDetail.heading = Give further details where something else was specified?
-typeOfParticipantDetail.checkYourAnswersLabel = Give further details where something else was specified?
-typeOfParticipantDetail.error.required = Enter further details where something else was specified
+typeOfParticipantDetail.title = What other type of art market participant are you?
+typeOfParticipantDetail.heading = What other type of art market participant are you?
+typeOfParticipantDetail.checkYourAnswersLabel = What other type of art market participant are you?
+typeOfParticipantDetail.error.required = Enter other type of art market participant
 typeOfParticipantDetail.error.length = Details provided must be 256 characters or less
+typeOfParticipantDetail.hint = Free text to specify art market participant type that was not listed on the previous page.
+
+amp.heading = Art market participant

@@ -28,21 +28,21 @@ import CheckYourAnswersHelper._
 
 class CheckYourAnswersHelper(userAnswers: UserAnswers)(implicit messages: Messages) {
 
-  def typeOfParticipantDetail: Option[AnswerRow] = userAnswers.get(TypeOfParticipantDetailPage) map {
-    x =>
-      AnswerRow(
-        HtmlFormat.escape(messages("typeOfParticipantDetail.checkYourAnswersLabel")),
-        HtmlFormat.escape(x),
-        routes.TypeOfParticipantDetailController.onPageLoad(CheckMode).url
-      )
-  }
-
   def typeOfParticipant: Option[AnswerRow] = userAnswers.get(TypeOfParticipantPage) map {
     x =>
       AnswerRow(
         HtmlFormat.escape(messages("typeOfParticipant.checkYourAnswersLabel")),
         Html(x.map(value => HtmlFormat.escape(messages(s"typeOfParticipant.$value")).toString).mkString(",<br>")),
         routes.TypeOfParticipantController.onPageLoad(CheckMode).url
+      )
+  }
+
+  def typeOfParticipantDetail: Option[AnswerRow] = userAnswers.get(TypeOfParticipantDetailPage) map {
+    x =>
+      AnswerRow(
+        HtmlFormat.escape(messages("typeOfParticipantDetail.checkYourAnswersLabel")),
+        HtmlFormat.escape(x),
+        routes.TypeOfParticipantDetailController.onPageLoad(CheckMode).url
       )
   }
 

@@ -96,9 +96,15 @@ class NavigatorSpec extends SpecBase {
         navigator.nextPage(UnknownPage, CheckMode, UserAnswers("id")) mustBe routes.CheckYourAnswersController.onPageLoad()
       }
 
-      "go from Type of Participant to Check Your Answers" in {
+      "go from Type of Participant to Type Of Participant Detail when specifying something else" in {
+        val answers = UserAnswers("id").set(TypeOfParticipantPage,  Seq(SomethingElse)).success.value
 
-        val answers = UserAnswers("id")
+        navigator.nextPage(TypeOfParticipantPage, CheckMode, answers)
+          .mustBe(routes.TypeOfParticipantDetailController.onPageLoad(CheckMode))
+      }
+
+      "go from Type of Participant to Check Your Answers when not specifying something else" in {
+        val answers = UserAnswers("id").set(TypeOfParticipantPage, Seq(ArtGalleryOwner)).success.value
 
         navigator.nextPage(TypeOfParticipantPage, CheckMode, answers)
           .mustBe(routes.CheckYourAnswersController.onPageLoad())

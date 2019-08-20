@@ -39,8 +39,19 @@ class Navigator @Inject()() {
   private def typeOfParticipantRoute(answers: UserAnswers): Call = {
     answers.get(TypeOfParticipantPage) map { ans =>
       ans.contains(SomethingElse) match {
-        case true => routes.TypeOfParticipantDetailController.onPageLoad(NormalMode)
-        case _    => routes.BoughtOrSoldOverThresholdController.onPageLoad(NormalMode)
+        case true  => routes.TypeOfParticipantDetailController.onPageLoad(NormalMode)
+        case false => routes.BoughtOrSoldOverThresholdController.onPageLoad(NormalMode)
+        case _     => routes.SessionExpiredController.onPageLoad()
+      }
+    }
+  }.getOrElse(routes.SessionExpiredController.onPageLoad())
+
+  private def typeOfParticipantRouteCheckMode(answers: UserAnswers): Call = {
+    answers.get(TypeOfParticipantPage) map { ans =>
+      ans.contains(SomethingElse) match {
+        case true  => routes.TypeOfParticipantDetailController.onPageLoad(CheckMode)
+        case false => routes.CheckYourAnswersController.onPageLoad()
+        case _     => routes.SessionExpiredController.onPageLoad()
       }
     }
   }.getOrElse(routes.SessionExpiredController.onPageLoad())
@@ -58,6 +69,7 @@ class Navigator @Inject()() {
   }
 
   private val checkRouteMap: Page => UserAnswers => Call = {
+    case TypeOfParticipantPage         => typeOfParticipantRouteCheckMode
     case BoughtOrSoldOverThresholdPage => artSoldOverThresholdRouteCheckMode
     case _ => _ => routes.CheckYourAnswersController.onPageLoad()
   }

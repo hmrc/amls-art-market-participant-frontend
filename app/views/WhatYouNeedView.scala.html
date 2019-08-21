@@ -14,26 +14,30 @@
  * limitations under the License.
  *@
 
-@import viewmodels.{AnswerSection, RepeaterAnswerSection, Section}
-
 @this(
     main_template: MainTemplate
 )
 
-@(answerSections: Seq[Section])(implicit request: Request[_], messages: Messages)
+@()(implicit request: Request[_], messages: Messages)
 
 @main_template(
-    title = messages("checkYourAnswers.title")
+    title = messages("whatYouNeed.title")
     ) {
 
-    @components.heading("checkYourAnswers.heading")</h1>
+    @components.back_link()
 
-    @for(section <- answerSections){
-        @{
-            section match {
-                case a: AnswerSection => components.answer_section(a)
-                case r: RepeaterAnswerSection => components.repeater_answer_section(r)
-            }
-        }
-    }
+    @components.page_heading("amp.heading")
+
+    @components.heading("whatYouNeed.heading")
+
+    <p>@Messages("whatYouNeed.heading2")</p>
+
+    <ul class="list list-bullet">
+        <li>@Messages("whatYouNeed.line_1")</li>
+        <li>@Messages("whatYouNeed.line_2")</li>
+        <li>@Messages("whatYouNeed.line_3")</li>
+        <li>@Messages("whatYouNeed.line_4")</li>
+    </ul>
+
+    @components.button_link("whatYouNeed.continue", "typeOfParticipant")
 }

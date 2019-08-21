@@ -1,4 +1,4 @@
-@*
+/*
  * Copyright 2019 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,28 +12,23 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *@
+ */
 
-@import viewmodels.{AnswerSection, RepeaterAnswerSection, Section}
+package views
 
-@this(
-    main_template: MainTemplate
-)
+import views.behaviours.ViewBehaviours
+import views.html.WhatYouNeedView
 
-@(answerSections: Seq[Section])(implicit request: Request[_], messages: Messages)
+class WhatYouNeedViewSpec extends ViewBehaviours {
 
-@main_template(
-    title = messages("checkYourAnswers.title")
-    ) {
+  "WhatYouNeed view" must {
 
-    @components.heading("checkYourAnswers.heading")</h1>
+    val view = viewFor[WhatYouNeedView](Some(emptyUserAnswers))
 
-    @for(section <- answerSections){
-        @{
-            section match {
-                case a: AnswerSection => components.answer_section(a)
-                case r: RepeaterAnswerSection => components.repeater_answer_section(r)
-            }
-        }
-    }
+    val applyView = view.apply()(fakeRequest, messages)
+
+    behave like normalPage(applyView, "whatYouNeed")
+
+    behave like pageWithBackLink(applyView)
+  }
 }

@@ -64,6 +64,7 @@ typeOfParticipant.artAuctioneer = Art auctioneer
 typeOfParticipant.somethingElse = Another type of art market participant
 typeOfParticipant.checkYourAnswersLabel = What type of art market participant are you?
 typeOfParticipant.error.required = Select a type of participant
+typeOfParticipant.hint = Select all the apply.
 
 typeOfParticipantDetail.title = Tell us what other type of art market participant you are
 typeOfParticipantDetail.heading = Tell us what other type of art market participant you are

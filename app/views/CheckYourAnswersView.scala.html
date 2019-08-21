@@ -26,6 +26,10 @@
     title = messages("checkYourAnswers.title")
     ) {
 
+    @components.back_link()
+
+    @components.page_heading("amp.heading")
+
     @components.heading("checkYourAnswers.heading")</h1>
 
     @for(section <- answerSections){

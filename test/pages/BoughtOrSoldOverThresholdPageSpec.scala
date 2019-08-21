@@ -16,6 +16,9 @@
 
 package pages
 
+import java.time.LocalDate
+
+import models.UserAnswers
 import pages.behaviours.PageBehaviours
 
 class BoughtOrSoldOverThresholdPageSpec extends PageBehaviours {
@@ -27,5 +30,25 @@ class BoughtOrSoldOverThresholdPageSpec extends PageBehaviours {
     beSettable[Boolean](BoughtOrSoldOverThresholdPage)
 
     beRemovable[Boolean](BoughtOrSoldOverThresholdPage)
+
+    "cleanup the DateTransactionOverThresholdPage value where false selected" in {
+
+      val testDate = LocalDate.now
+
+      val answerDateQuestion = UserAnswers("id").set(DateTransactionOverThresholdPage, testDate).success.value
+      val updatedAnswers = answerDateQuestion.set(BoughtOrSoldOverThresholdPage, false).success.value
+
+      updatedAnswers.get(DateTransactionOverThresholdPage) must be(empty)
+    }
+
+    "not cleanup the DateTransactionOverThresholdPage value where true selected" in {
+
+      val testDate = LocalDate.now
+
+      val answerDateQuestion = UserAnswers("id").set(DateTransactionOverThresholdPage, testDate).success.value
+      val updatedAnswers = answerDateQuestion.set(BoughtOrSoldOverThresholdPage, true).success.value
+
+      updatedAnswers.get(DateTransactionOverThresholdPage) mustNot be(empty)
+    }
   }
 }

@@ -36,3 +36,8 @@ GET        /typeOfParticipant                        controllers.TypeOfParticipa
 POST       /typeOfParticipant                        controllers.TypeOfParticipantController.onSubmit(mode: Mode = NormalMode)
 GET        /changeTypeOfParticipant                  controllers.TypeOfParticipantController.onPageLoad(mode: Mode = CheckMode)
 POST       /changeTypeOfParticipant                  controllers.TypeOfParticipantController.onSubmit(mode: Mode = CheckMode)
+
+GET        /typeOfParticipantDetail                        controllers.TypeOfParticipantDetailController.onPageLoad(mode: Mode = NormalMode)
+POST       /typeOfParticipantDetail                        controllers.TypeOfParticipantDetailController.onSubmit(mode: Mode = NormalMode)
+GET        /changeTypeOfParticipantDetail                  controllers.TypeOfParticipantDetailController.onPageLoad(mode: Mode = CheckMode)
+POST       /changeTypeOfParticipantDetail                  controllers.TypeOfParticipantDetailController.onSubmit(mode: Mode = CheckMode)

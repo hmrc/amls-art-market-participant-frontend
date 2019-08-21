@@ -17,37 +17,37 @@
 package controllers
 
 import controllers.actions._
-import forms.BoughtOrSoldOverThresholdFormProvider
+import forms.TypeOfParticipantDetailFormProvider
 import javax.inject.Inject
 import models.Mode
 import navigation.Navigator
-import pages.{BoughtOrSoldOverThresholdPage}
+import pages.TypeOfParticipantDetailPage
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import repositories.SessionRepository
 import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
-import views.html.BoughtOrSoldOverThresholdView
+import views.html.TypeOfParticipantDetailView
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class BoughtOrSoldOverThresholdController @Inject()(
-                                         override val messagesApi: MessagesApi,
-                                         sessionRepository: SessionRepository,
-                                         navigator: Navigator,
-                                         identify: IdentifierAction,
-                                         getData: DataRetrievalAction,
-                                         requireData: DataRequiredAction,
-                                         formProvider: BoughtOrSoldOverThresholdFormProvider,
-                                         val controllerComponents: MessagesControllerComponents,
-                                         view: BoughtOrSoldOverThresholdView
-                                 )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
+class TypeOfParticipantDetailController @Inject()(
+                                        override val messagesApi: MessagesApi,
+                                        sessionRepository: SessionRepository,
+                                        navigator: Navigator,
+                                        identify: IdentifierAction,
+                                        getData: DataRetrievalAction,
+                                        requireData: DataRequiredAction,
+                                        formProvider: TypeOfParticipantDetailFormProvider,
+                                        val controllerComponents: MessagesControllerComponents,
+                                        view: TypeOfParticipantDetailView
+                                    )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
 
   val form = formProvider()
 
   def onPageLoad(mode: Mode): Action[AnyContent] = (identify andThen getData andThen requireData) {
     implicit request =>
 
-      val preparedForm = request.userAnswers.get(BoughtOrSoldOverThresholdPage) match {
+      val preparedForm = request.userAnswers.get(TypeOfParticipantDetailPage) match {
         case None => form
         case Some(value) => form.fill(value)
       }
@@ -64,9 +64,9 @@ class BoughtOrSoldOverThresholdController @Inject()(
 
         value =>
           for {
-            updatedAnswers <- Future.fromTry(request.userAnswers.set(BoughtOrSoldOverThresholdPage, value))
+            updatedAnswers <- Future.fromTry(request.userAnswers.set(TypeOfParticipantDetailPage, value))
             _              <- sessionRepository.set(updatedAnswers)
-          } yield Redirect(navigator.nextPage(BoughtOrSoldOverThresholdPage, mode, updatedAnswers))
+          } yield Redirect(navigator.nextPage(TypeOfParticipantDetailPage, mode, updatedAnswers))
       )
   }
 }

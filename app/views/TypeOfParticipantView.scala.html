@@ -34,13 +34,16 @@
 
         @components.error_summary(form.errors)
 
+        @components.page_heading("amp.heading")
+
         @components.heading("typeOfParticipant.heading")
 
         @components.input_checkboxes(
             field = form("value"),
             legend = messages("typeOfParticipant.heading"),
             legendClass = Some("visually-hidden"),
-            inputs = TypeOfParticipant.options
+            inputs = TypeOfParticipant.options,
+            hint = Some(messages("typeOfParticipant.hint"))
         )
 
         @components.submit_button()

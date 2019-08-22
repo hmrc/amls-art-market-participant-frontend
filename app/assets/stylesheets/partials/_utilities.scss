@@ -11,6 +11,16 @@ Utility alignments
     text-align: right;
   }
 }
+
+@media screen and (min-width: 641px) {
+  .page-header .heading-secondary {
+    font-size: 27px;
+    line-height: 1.11111;
+    padding-bottom: 6px;
+    padding-top: 4px;
+  }
+}
+
 .u-align--center {
     text-align: center;
 }

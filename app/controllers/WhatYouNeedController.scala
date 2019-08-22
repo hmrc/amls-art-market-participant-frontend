@@ -29,7 +29,6 @@ class WhatYouNeedController @Inject()(
                                        override val messagesApi: MessagesApi,
                                        identify: IdentifierAction,
                                        getData: DataRetrievalAction,
-                                       requireData: DataRequiredAction,
                                        val controllerComponents: MessagesControllerComponents,
                                        view: WhatYouNeedView
                                      )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {

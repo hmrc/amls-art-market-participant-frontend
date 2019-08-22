@@ -36,7 +36,6 @@ class TypeOfParticipantController @Inject()(
                                         navigator: Navigator,
                                         identify: IdentifierAction,
                                         getData: DataRetrievalAction,
-                                        requireData: DataRequiredAction,
                                         formProvider: TypeOfParticipantFormProvider,
                                         val controllerComponents: MessagesControllerComponents,
                                         view: TypeOfParticipantView

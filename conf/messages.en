@@ -47,10 +47,10 @@ amp.heading = Art market participant
 
 whatYouNeed.title = What you need
 whatYouNeed.heading = What you need
-whatYouNeed.heading2 = In the section you`ll need to tell us:
+whatYouNeed.heading2 = In the section you’ll need to tell us:
 whatYouNeed.continue = Continue
 whatYouNeed.line_1 = the role you carry out in the art market
-whatYouNeed.line_2 = the date of the first sale or purchase of art for €10,000 or more, if you`ve made any
+whatYouNeed.line_2 = the date of the first sale or purchase of art for €10,000 or more after 10 January 2020, if you’ve made any
 whatYouNeed.line_3 = if you can identify when a sale or purchase is made up of multiple payments
 whatYouNeed.line_4 = how much of your turnover you expect to come from sales of art for €10,000 or more
 
@@ -72,11 +72,11 @@ typeOfParticipantDetail.checkYourAnswersLabel = Tell us what other type of art m
 typeOfParticipantDetail.error.required = Enter other type of art market participant
 typeOfParticipantDetail.error.length = Details provided must be 256 characters or less
 
-boughtOrSoldOverThreshold.title = Has your business bought or sold art for €10,000 or more?
+boughtOrSoldOverThreshold.title = Has your business made a sale or purchase of art for €10,000 or more after 10 January 2020?
 boughtOrSoldOverThreshold.heading = Has your business bought or sold art for €10,000 or more?
 boughtOrSoldOverThreshold.checkYourAnswersLabel = Has your business bought or sold art for €10,000 or more?
 boughtOrSoldOverThreshold.error.required = Select yes if your business has bought or sold art for €10,000 or more
-boughtOrSoldOverThreshold.hint = If you do not use euros you`ll need to convert the amount to the currency you use.
+boughtOrSoldOverThreshold.hint = If you do not use euros you’ll need to convert the amount to the currency you use.
 
 dateTransactionOverThreshold.title = When was the first sale or purchase of art for €10,000 or more?
 dateTransactionOverThreshold.heading = When was the first sale or purchase of art for €10,000 or more?

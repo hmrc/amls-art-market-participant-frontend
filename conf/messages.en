@@ -73,19 +73,19 @@ typeOfParticipantDetail.error.required = Enter other type of art market particip
 typeOfParticipantDetail.error.length = Details provided must be 256 characters or less
 
 boughtOrSoldOverThreshold.title = Has your business made a sale or purchase of art for €10,000 or more after 10 January 2020?
-boughtOrSoldOverThreshold.heading = Has your business bought or sold art for €10,000 or more?
+boughtOrSoldOverThreshold.heading = Has your business made a sale or purchase of art for €10,000 or more after 10 January 2020?
 boughtOrSoldOverThreshold.checkYourAnswersLabel = Has your business bought or sold art for €10,000 or more?
 boughtOrSoldOverThreshold.error.required = Select yes if your business has bought or sold art for €10,000 or more
 boughtOrSoldOverThreshold.hint = If you do not use euros you’ll need to convert the amount to the currency you use.
 
-dateTransactionOverThreshold.title = When was the first sale or purchase of art for €10,000 or more?
-dateTransactionOverThreshold.heading = When was the first sale or purchase of art for €10,000 or more?
+dateTransactionOverThreshold.title = When was the first sale or purchase of art for €10,000 or more after 10 January 2020?
+dateTransactionOverThreshold.heading = When was the first sale or purchase of art for €10,000 or more after 10 January 2020?
 dateTransactionOverThreshold.checkYourAnswersLabel = When was the first sale or purchase of art for €10,000 or more?
 dateTransactionOverThreshold.error.required.all = Enter the date of the first sale or purchase of art for €10,000 or more
 dateTransactionOverThreshold.error.required.two = The date must include {0} and {1}
 dateTransactionOverThreshold.error.required = The month must include {0}
 dateTransactionOverThreshold.error.invalid = Enter a real date Month and Year
-dateTransactionOverThreshold.hint = For example, 31 03 2017.
+dateTransactionOverThreshold.hint = For example, 11 01 2020.
 
 identifyLinkedTransactions.title = Are you able to identify multiple payments linked to a single sale or purchase?
 identifyLinkedTransactions.heading = Are you able to identify multiple payments linked to a single sale or purchase?

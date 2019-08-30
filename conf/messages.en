@@ -1,10 +1,22 @@
+
+############################### Banners ###############################
+urr.title = Help improve GOV.UK
+urr.bannertext = Get involved in making government services better (opens in a new window)
+urr.nothanks = No thanks
+
+############################### CYA ###############################
+
 checkYourAnswers.title = Check Your Answers
 checkYourAnswers.heading = Check Your Answers
 checkYourAnswers.guidance = Guidance for check your answers
 
+############################### Dates ###############################
+
 date.day = Day
 date.month = Month
 date.year = Year
+
+############################### Errors ###############################
 
 error.browser.title.prefix = Error:
 error.boolean = Please give an answer
@@ -21,13 +33,22 @@ error.number = Please enter a valid number
 error.required = Please enter a value
 error.summary.title = There is a problem
 
+############################### Home Page ###############################
+
 index.title = Art market participant
 index.heading = Art market participant
 index.guidance = Welcome to your new frontend. Please see the README file for a guide to getting started.
 
+############################### Session ###############################
+
 session_expired.title = For your security, this service has been reset
 session_expired.heading = For your security, this service has been reset
 session_expired.guidance = The details you have given have been deleted because you did not continue the service for 15 minutes.
+
+unauthorised.title = You can’t access this service with this account
+unauthorised.heading = You can’t access this service with this account
+
+############################### General ###############################
 
 site.back = Back
 site.delete = Remove
@@ -39,11 +60,9 @@ site.yes = Yes
 site.continue = Save and continue
 site.service_name = Manage your anti-money laundering supervision
 site.textarea.char_limit = (Limit is {0} characters)
-
-unauthorised.title = You can’t access this service with this account
-unauthorised.heading = You can’t access this service with this account
-
 amp.heading = Art market participant
+
+############################### Pages ###############################
 
 whatYouNeed.title = What you need
 whatYouNeed.heading = What you need

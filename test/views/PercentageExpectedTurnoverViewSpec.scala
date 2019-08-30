@@ -71,5 +71,12 @@ class PercentageExpectedTurnoverViewSpec extends ViewBehaviours {
         }
       }
     }
+
+    "include the correct content" in {
+      val document = asDocument(applyView(form))
+
+      assertEqualsMessage(document, "title", "How much of your turnover do you expect to come from sales of art for €10,000 or more?")
+      assertPageTitleEqualsMessage(document, "How much of your turnover do you expect to come from sales of art for €10,000 or more?")
+    }
   }
 }

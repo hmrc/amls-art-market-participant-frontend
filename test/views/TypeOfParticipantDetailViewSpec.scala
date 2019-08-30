@@ -42,5 +42,12 @@ class TypeOfParticipantDetailViewSpec extends StringViewBehaviours {
     behave like pageWithBackLink(applyView(form))
 
     behave like stringPage(form, applyView, messageKeyPrefix, routes.TypeOfParticipantDetailController.onSubmit(NormalMode).url)
+
+    "include the correct content" in {
+      val document = asDocument(applyView(form))
+
+      assertEqualsMessage(document, "title", "Tell us what other type of art market participant you are")
+      assertPageTitleEqualsMessage(document, "Tell us what other type of art market participant you are")
+    }
   }
 }

@@ -42,5 +42,12 @@ class BoughtOrSoldOverThresholdViewSpec extends YesNoViewBehaviours {
     behave like pageWithBackLink(applyView(form))
 
     behave like yesNoPage(form, applyView, messageKeyPrefix, routes.BoughtOrSoldOverThresholdController.onSubmit(NormalMode).url)
+
+    "include the correct content" in {
+      val document = asDocument(applyView(form))
+
+      assertEqualsMessage(document, "title", "Has your business bought or sold art for €10,000 or more?")
+      assertPageTitleEqualsMessage(document, "Has your business bought or sold art for €10,000 or more?")
+    }
   }
 }

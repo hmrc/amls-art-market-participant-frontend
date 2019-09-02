@@ -42,15 +42,6 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(implicit messages: Messag
     )
   }
 
-  def typeOfParticipantDetail: Option[AnswerRow] = userAnswers.get(TypeOfParticipantDetailPage) map {
-    x =>
-      AnswerRow(
-        HtmlFormat.escape(messages("typeOfParticipantDetail.checkYourAnswersLabel")),
-        HtmlFormat.escape(x),
-        routes.TypeOfParticipantDetailController.onPageLoad(CheckMode).url
-      )
-  }
-
   def percentageExpectedTurnover: Option[AnswerRow] = userAnswers.get(PercentageExpectedTurnoverPage) map {
     x =>
       AnswerRow(

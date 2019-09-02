@@ -25,6 +25,7 @@ import play.api.i18n.Messages
 import play.twirl.api.{Html, HtmlFormat}
 import viewmodels.AnswerRow
 import CheckYourAnswersHelper._
+import models.TypeOfParticipant.SomethingElse
 
 class CheckYourAnswersHelper(userAnswers: UserAnswers)(implicit messages: Messages) {
 
@@ -32,9 +33,13 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(implicit messages: Messag
     x =>
       AnswerRow(
         HtmlFormat.escape(messages("typeOfParticipant.checkYourAnswersLabel")),
-        Html(x.map(value => HtmlFormat.escape(messages(s"typeOfParticipant.$value")).toString).mkString(",<br>")),
-        routes.TypeOfParticipantController.onPageLoad(CheckMode).url
-      )
+    Html(x.map(value => if(value == SomethingElse) {
+      userAnswers.get(TypeOfParticipantDetailPage).getOrElse("")
+    } else{
+      HtmlFormat.escape(messages(s"typeOfParticipant.$value")).toString
+    }).mkString(",<br>")),
+    routes.TypeOfParticipantController.onPageLoad(CheckMode).url
+    )
   }
 
   def typeOfParticipantDetail: Option[AnswerRow] = userAnswers.get(TypeOfParticipantDetailPage) map {

@@ -57,7 +57,7 @@ class AuthenticatedIdentifierAction @Inject()(
 
     implicit val hc: HeaderCarrier = HeaderCarrierConverter.fromHeadersAndSession(request.headers, None)
 
-    authorised(Admin).retrieve(Retrievals.allEnrolments and Retrievals.credentials and Retrievals.affinityGroup) {
+    authorised(User).retrieve(Retrievals.allEnrolments and Retrievals.credentials and Retrievals.affinityGroup) {
       case enrolments ~ Some(credentials) ~ affinityGroup =>
         enrolmentMessage("AuthenticatedIdentifierAction:Refine - Enrolments:", Some(enrolments))
         Future.successful(Right(IdentifierRequest(request, credentials.providerId, affinityGroup)))

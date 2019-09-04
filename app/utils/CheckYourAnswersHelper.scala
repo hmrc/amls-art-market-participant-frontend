@@ -19,7 +19,7 @@ package utils
 import java.time.format.DateTimeFormatter
 
 import controllers.routes
-import models.{CheckMode, UserAnswers}
+import models.{CheckMode, TypeOfParticipant, UserAnswers}
 import pages._
 import play.api.i18n.Messages
 import play.twirl.api.{Html, HtmlFormat}
@@ -29,17 +29,27 @@ import models.TypeOfParticipant.SomethingElse
 
 class CheckYourAnswersHelper(userAnswers: UserAnswers)(implicit messages: Messages) {
 
-  def typeOfParticipant: Option[AnswerRow] = userAnswers.get(TypeOfParticipantPage) map {
-    x =>
-      AnswerRow(
-        HtmlFormat.escape(messages("typeOfParticipant.checkYourAnswersLabel")),
-    Html(x.map(value => if(value == SomethingElse) {
+  private def formatRowValTypeOfParticipant(x: Seq[TypeOfParticipant]): Html = {
+    val rowVal = Html(x.map(value => if(value == SomethingElse) {
       userAnswers.get(TypeOfParticipantDetailPage).getOrElse("")
     } else{
       HtmlFormat.escape(messages(s"typeOfParticipant.$value")).toString
-    }).mkString(",<br>")),
-    routes.TypeOfParticipantController.onPageLoad(CheckMode).url
-    )
+    }).mkString(",<br>"))
+
+    if (rowVal.toString().endsWith(",<br>")) {
+      Html(rowVal.toString().substring(0, rowVal.toString().length - 5))
+    } else {
+      rowVal
+    }
+  }
+
+  def typeOfParticipant: Option[AnswerRow] = userAnswers.get(TypeOfParticipantPage) map {
+    x: Seq[TypeOfParticipant] =>
+      AnswerRow(
+        HtmlFormat.escape(messages("typeOfParticipant.checkYourAnswersLabel")),
+        formatRowValTypeOfParticipant(x),
+        routes.TypeOfParticipantController.onPageLoad(CheckMode).url
+      )
   }
 
   def percentageExpectedTurnover: Option[AnswerRow] = userAnswers.get(PercentageExpectedTurnoverPage) map {

@@ -30,5 +30,12 @@ class UnauthorisedViewSpec extends ViewBehaviours {
     val applyView = view.apply()(fakeRequest, messages)
 
     behave like normalPage(applyView, "unauthorised")
+
+    "include the correct content" in {
+      val document = asDocument(applyView)
+
+      assertEqualsMessage(document, "title", "You can’t access this service with this account")
+      assertPageTitleEqualsMessage(document, "You can’t access this service with this account")
+    }
   }
 }

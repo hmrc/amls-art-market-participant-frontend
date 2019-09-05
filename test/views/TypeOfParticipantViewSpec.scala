@@ -42,5 +42,12 @@ class TypeOfParticipantViewSpec extends CheckboxViewBehaviours[TypeOfParticipant
     behave like pageWithBackLink(applyView(form))
 
     behave like checkboxPage(form, applyView, messageKeyPrefix, TypeOfParticipant.options)
+
+    "include the correct content" in {
+      val document = asDocument(applyView(form))
+
+      assertEqualsMessage(document, "title", "What type of art market participant are you?")
+      assertPageTitleEqualsMessage(document, "What type of art market participant are you?")
+    }
   }
 }

@@ -19,30 +19,36 @@ package utils
 import java.time.format.DateTimeFormatter
 
 import controllers.routes
-import models.{CheckMode, UserAnswers}
+import models.{CheckMode, TypeOfParticipant, UserAnswers}
 import pages._
 import play.api.i18n.Messages
 import play.twirl.api.{Html, HtmlFormat}
 import viewmodels.AnswerRow
 import CheckYourAnswersHelper._
+import models.TypeOfParticipant.SomethingElse
 
 class CheckYourAnswersHelper(userAnswers: UserAnswers)(implicit messages: Messages) {
 
-  def typeOfParticipant: Option[AnswerRow] = userAnswers.get(TypeOfParticipantPage) map {
-    x =>
-      AnswerRow(
-        HtmlFormat.escape(messages("typeOfParticipant.checkYourAnswersLabel")),
-        Html(x.map(value => HtmlFormat.escape(messages(s"typeOfParticipant.$value")).toString).mkString(",<br>")),
-        routes.TypeOfParticipantController.onPageLoad(CheckMode).url
-      )
+  private def typeOfParticipantHtml(x: Seq[TypeOfParticipant]): Html = {
+    val detailAnswer = userAnswers.get(TypeOfParticipantDetailPage).getOrElse("")
+
+    Html(Html("<ul class=\"list list-bullet\">" + x.map(value => if(value == SomethingElse) {
+     if (!detailAnswer.isEmpty) {
+      Html("<li>" + detailAnswer + "</li>")
+     } else {
+       detailAnswer
+     }
+    } else{
+      Html("<li>" + messages(s"typeOfParticipant.$value")).toString
+    }).mkString("</li>")) + "</ul>")
   }
 
-  def typeOfParticipantDetail: Option[AnswerRow] = userAnswers.get(TypeOfParticipantDetailPage) map {
-    x =>
+  def typeOfParticipant: Option[AnswerRow] = userAnswers.get(TypeOfParticipantPage) map {
+    x: Seq[TypeOfParticipant] =>
       AnswerRow(
-        HtmlFormat.escape(messages("typeOfParticipantDetail.checkYourAnswersLabel")),
-        HtmlFormat.escape(x),
-        routes.TypeOfParticipantDetailController.onPageLoad(CheckMode).url
+        HtmlFormat.escape(messages("typeOfParticipant.checkYourAnswersLabel")),
+        typeOfParticipantHtml(x),
+        routes.TypeOfParticipantController.onPageLoad(CheckMode).url
       )
   }
 

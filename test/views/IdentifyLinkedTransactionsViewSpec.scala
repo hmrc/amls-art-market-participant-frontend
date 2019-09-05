@@ -42,5 +42,12 @@ class IdentifyLinkedTransactionsViewSpec extends YesNoViewBehaviours {
     behave like pageWithBackLink(applyView(form))
 
     behave like yesNoPage(form, applyView, messageKeyPrefix, routes.IdentifyLinkedTransactionsController.onSubmit(NormalMode).url)
+
+    "include the correct content" in {
+      val document = asDocument(applyView(form))
+
+      assertEqualsMessage(document, "title", "Are you able to identify multiple payments linked to a single sale or purchase?")
+      assertPageTitleEqualsMessage(document, "Are you able to identify multiple payments linked to a single sale or purchase?")
+    }
   }
 }

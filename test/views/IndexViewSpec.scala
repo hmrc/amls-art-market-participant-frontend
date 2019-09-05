@@ -30,5 +30,12 @@ class IndexViewSpec extends ViewBehaviours {
     val applyView = view.apply()(fakeRequest, messages)
 
     behave like normalPage(applyView, "index", "guidance")
+
+    "include the correct content" in {
+      val document = asDocument(applyView)
+
+      assertEqualsMessage(document, "title", "Art market participant")
+      assertPageTitleEqualsMessage(document, "Art market participant")
+    }
   }
 }

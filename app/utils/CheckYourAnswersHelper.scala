@@ -29,25 +29,25 @@ import models.TypeOfParticipant.SomethingElse
 
 class CheckYourAnswersHelper(userAnswers: UserAnswers)(implicit messages: Messages) {
 
-  private def formatRowValTypeOfParticipant(x: Seq[TypeOfParticipant]): Html = {
-    val rowVal = Html(x.map(value => if(value == SomethingElse) {
-      userAnswers.get(TypeOfParticipantDetailPage).getOrElse("")
-    } else{
-      HtmlFormat.escape(messages(s"typeOfParticipant.$value")).toString
-    }).mkString(",<br>"))
+  private def typeOfParticipantHtml(x: Seq[TypeOfParticipant]): Html = {
+    val detailAnswer = userAnswers.get(TypeOfParticipantDetailPage).getOrElse("")
 
-    if (rowVal.toString().endsWith(",<br>")) {
-      Html(rowVal.toString().substring(0, rowVal.toString().length - 5))
-    } else {
-      rowVal
-    }
+    Html(Html("<ul class=\"list list-bullet\">" + x.map(value => if(value == SomethingElse) {
+     if (!detailAnswer.isEmpty) {
+      Html("<li>" + detailAnswer + "</li>")
+     } else {
+       detailAnswer
+     }
+    } else{
+      Html("<li>" + messages(s"typeOfParticipant.$value")).toString
+    }).mkString("</li>")) + "</ul>")
   }
 
   def typeOfParticipant: Option[AnswerRow] = userAnswers.get(TypeOfParticipantPage) map {
     x: Seq[TypeOfParticipant] =>
       AnswerRow(
         HtmlFormat.escape(messages("typeOfParticipant.checkYourAnswersLabel")),
-        formatRowValTypeOfParticipant(x),
+        typeOfParticipantHtml(x),
         routes.TypeOfParticipantController.onPageLoad(CheckMode).url
       )
   }

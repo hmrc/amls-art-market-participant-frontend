@@ -47,7 +47,7 @@ class CheckYourAnswersHelperSpec extends SpecBase {
         "return AnswerRow" in {
 
           val expected = AnswerRow(Html("What type of art market participant are you?"),
-            Html("Art gallery owner,<br>Art dealer,<br>Art agent,<br>Art auctioneer,<br>sdfsdf"),
+            Html("<ul class=\"list list-bullet\"><li>Art gallery owner</li><li>Art dealer</li><li>Art agent</li><li>Art auctioneer</li><li>sdfsdf</li></ul>"),
             "/amls-art-market-participant-frontend/changeTypeOfParticipant")
 
           checkYourAnswersHelper.typeOfParticipant.value mustBe expected

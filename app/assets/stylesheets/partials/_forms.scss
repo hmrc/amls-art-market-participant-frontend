@@ -65,6 +65,7 @@ Taken from GDS Elements
 
 .form-hint {
     display: block;
+    margin-bottom: 10px;
 }
 
 /*
@@ -111,6 +112,10 @@ Error styling to bring in line with GDS
     color: #b10e1e;
     font-weight: bold;
     text-decoration: underline;
+}
+
+.error-message {
+    padding-bottom: .42105em;
 }
 
 /*

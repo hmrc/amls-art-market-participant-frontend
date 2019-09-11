@@ -48,7 +48,7 @@ class CheckYourAnswersHelperSpec extends SpecBase {
 
           val expected = AnswerRow(Html("What type of art market participant are you?"),
             Html("<ul class=\"list list-bullet\"><li>Art gallery owner</li><li>Art dealer</li><li>Art agent</li><li>Art auctioneer</li><li>sdfsdf</li></ul>"),
-            "/amls-art-market-participant-frontend/changeTypeOfParticipant")
+            "/amls-art-market-participant-frontend/change-type")
 
           checkYourAnswersHelper.typeOfParticipant.value mustBe expected
         }
@@ -61,7 +61,7 @@ class CheckYourAnswersHelperSpec extends SpecBase {
 
           val expected = AnswerRow(Html("Has your business made a sale or purchase of art for €10,000 or more after 10 January 2020?"),
             Html("Yes"),
-            "/amls-art-market-participant-frontend/changeBoughtOrSoldOverThreshold")
+            "/amls-art-market-participant-frontend/change-sale-or-purchase")
 
           checkYourAnswersHelper.boughtOrSoldOverThreshold.value mustBe expected
         }
@@ -74,7 +74,7 @@ class CheckYourAnswersHelperSpec extends SpecBase {
 
           val expected = AnswerRow(Html("When was the first sale or purchase of art for €10,000 or more after 10 January 2020?"),
             Html("1 January 2010"),
-            "/amls-art-market-participant-frontend/changeDateTransactionOverThreshold")
+            "/amls-art-market-participant-frontend/change-first-sale-or-purchase")
 
           checkYourAnswersHelper.dateTransactionOverThreshold.value mustBe expected
         }
@@ -87,7 +87,7 @@ class CheckYourAnswersHelperSpec extends SpecBase {
 
           val expected = AnswerRow(Html("Are you able to identify multiple payments linked to a single sale or purchase?"),
             Html("No"),
-            "/amls-art-market-participant-frontend/changeIdentifyLinkedTransactions")
+            "/amls-art-market-participant-frontend/change-identify-linked-payments")
 
           checkYourAnswersHelper.identifyLinkedTransactions.value mustBe expected
         }
@@ -100,7 +100,7 @@ class CheckYourAnswersHelperSpec extends SpecBase {
 
           val expected = AnswerRow(Html("How much of your turnover do you expect to come from sales of art for €10,000 or more?"),
             Html("0% to 20%"),
-            "/amls-art-market-participant-frontend/changePercentageExpectedTurnover")
+            "/amls-art-market-participant-frontend/change-turnover-from-art-sales")
 
           checkYourAnswersHelper.percentageExpectedTurnover.value mustBe expected
         }

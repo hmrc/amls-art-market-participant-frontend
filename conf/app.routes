@@ -1,45 +1,45 @@
 # microservice specific routes
 
-GET        /                                            controllers.IndexController.onPageLoad
+GET        /                                                               controllers.IndexController.onPageLoad
 
-GET        /assets/*file                                controllers.Assets.versioned(path="/public", file: Asset)
+GET        /assets/*file                                                   controllers.Assets.versioned(path="/public", file: Asset)
 
-GET        /language/:lang                              controllers.LanguageSwitchController.switchToLanguage(lang: String)
+GET        /language/:lang                                                 controllers.LanguageSwitchController.switchToLanguage(lang: String)
 
-GET        /this-service-has-been-reset                 controllers.SessionExpiredController.onPageLoad
+GET        /this-service-has-been-reset                                    controllers.SessionExpiredController.onPageLoad
 
-GET        /check-your-answers                          controllers.CheckYourAnswersController.onPageLoad
+GET        /check-your-answers                                             controllers.CheckYourAnswersController.onPageLoad
 
-GET        /unauthorised                                controllers.UnauthorisedController.onPageLoad
+GET        /unauthorised                                                   controllers.UnauthorisedController.onPageLoad
 
-GET        /boughtOrSoldOverThreshold                        controllers.BoughtOrSoldOverThresholdController.onPageLoad(mode: Mode = NormalMode)
-POST       /boughtOrSoldOverThreshold                        controllers.BoughtOrSoldOverThresholdController.onSubmit(mode: Mode = NormalMode)
-GET        /changeBoughtOrSoldOverThreshold                  controllers.BoughtOrSoldOverThresholdController.onPageLoad(mode: Mode = CheckMode)
-POST       /changeBoughtOrSoldOverThreshold                  controllers.BoughtOrSoldOverThresholdController.onSubmit(mode: Mode = CheckMode)
+GET        /sale-or-purchase                        controllers.BoughtOrSoldOverThresholdController.onPageLoad(mode: Mode = NormalMode)
+POST       /sale-or-purchase                        controllers.BoughtOrSoldOverThresholdController.onSubmit(mode: Mode = NormalMode)
+GET        /change-sale-or-purchase                 controllers.BoughtOrSoldOverThresholdController.onPageLoad(mode: Mode = CheckMode)
+POST       /change-sale-or-purchase                 controllers.BoughtOrSoldOverThresholdController.onSubmit(mode: Mode = CheckMode)
 
-GET        /dateTransactionOverThreshold                  controllers.DateTransactionOverThresholdController.onPageLoad(mode: Mode = NormalMode)
-POST       /dateTransactionOverThreshold                  controllers.DateTransactionOverThresholdController.onSubmit(mode: Mode = NormalMode)
-GET        /changeDateTransactionOverThreshold                        controllers.DateTransactionOverThresholdController.onPageLoad(mode: Mode = CheckMode)
-POST       /changeDateTransactionOverThreshold                        controllers.DateTransactionOverThresholdController.onSubmit(mode: Mode = CheckMode)
+GET        /first-sale-or-purchase                  controllers.DateTransactionOverThresholdController.onPageLoad(mode: Mode = NormalMode)
+POST       /first-sale-or-purchase                  controllers.DateTransactionOverThresholdController.onSubmit(mode: Mode = NormalMode)
+GET        /change-first-sale-or-purchase           controllers.DateTransactionOverThresholdController.onPageLoad(mode: Mode = CheckMode)
+POST       /change-first-sale-or-purchase           controllers.DateTransactionOverThresholdController.onSubmit(mode: Mode = CheckMode)
 
-GET        /identifyLinkedTransactions                        controllers.IdentifyLinkedTransactionsController.onPageLoad(mode: Mode = NormalMode)
-POST       /identifyLinkedTransactions                        controllers.IdentifyLinkedTransactionsController.onSubmit(mode: Mode = NormalMode)
-GET        /changeIdentifyLinkedTransactions                  controllers.IdentifyLinkedTransactionsController.onPageLoad(mode: Mode = CheckMode)
-POST       /changeIdentifyLinkedTransactions                  controllers.IdentifyLinkedTransactionsController.onSubmit(mode: Mode = CheckMode)
+GET        /identify-linked-payments                controllers.IdentifyLinkedTransactionsController.onPageLoad(mode: Mode = NormalMode)
+POST       /identify-linked-payments                controllers.IdentifyLinkedTransactionsController.onSubmit(mode: Mode = NormalMode)
+GET        /change-identify-linked-payments         controllers.IdentifyLinkedTransactionsController.onPageLoad(mode: Mode = CheckMode)
+POST       /change-identify-linked-payments         controllers.IdentifyLinkedTransactionsController.onSubmit(mode: Mode = CheckMode)
 
-GET        /percentageExpectedTurnover                        controllers.PercentageExpectedTurnoverController.onPageLoad(mode: Mode = NormalMode)
-POST       /percentageExpectedTurnover                        controllers.PercentageExpectedTurnoverController.onSubmit(mode: Mode = NormalMode)
-GET        /changePercentageExpectedTurnover                  controllers.PercentageExpectedTurnoverController.onPageLoad(mode: Mode = CheckMode)
-POST       /changePercentageExpectedTurnover                  controllers.PercentageExpectedTurnoverController.onSubmit(mode: Mode = CheckMode)
+GET        /turnover-from-art-sales                 controllers.PercentageExpectedTurnoverController.onPageLoad(mode: Mode = NormalMode)
+POST       /turnover-from-art-sales                 controllers.PercentageExpectedTurnoverController.onSubmit(mode: Mode = NormalMode)
+GET        /change-turnover-from-art-sales          controllers.PercentageExpectedTurnoverController.onPageLoad(mode: Mode = CheckMode)
+POST       /change-turnover-from-art-sales          controllers.PercentageExpectedTurnoverController.onSubmit(mode: Mode = CheckMode)
 
-GET        /typeOfParticipant                        controllers.TypeOfParticipantController.onPageLoad(mode: Mode = NormalMode)
-POST       /typeOfParticipant                        controllers.TypeOfParticipantController.onSubmit(mode: Mode = NormalMode)
-GET        /changeTypeOfParticipant                  controllers.TypeOfParticipantController.onPageLoad(mode: Mode = CheckMode)
-POST       /changeTypeOfParticipant                  controllers.TypeOfParticipantController.onSubmit(mode: Mode = CheckMode)
+GET        /type                                    controllers.TypeOfParticipantController.onPageLoad(mode: Mode = NormalMode)
+POST       /type                                    controllers.TypeOfParticipantController.onSubmit(mode: Mode = NormalMode)
+GET        /change-type                             controllers.TypeOfParticipantController.onPageLoad(mode: Mode = CheckMode)
+POST       /change-type                             controllers.TypeOfParticipantController.onSubmit(mode: Mode = CheckMode)
 
-GET        /typeOfParticipantDetail                        controllers.TypeOfParticipantDetailController.onPageLoad(mode: Mode = NormalMode)
-POST       /typeOfParticipantDetail                        controllers.TypeOfParticipantDetailController.onSubmit(mode: Mode = NormalMode)
-GET        /changeTypeOfParticipantDetail                  controllers.TypeOfParticipantDetailController.onPageLoad(mode: Mode = CheckMode)
-POST       /changeTypeOfParticipantDetail                  controllers.TypeOfParticipantDetailController.onSubmit(mode: Mode = CheckMode)
+GET        /other-type                              controllers.TypeOfParticipantDetailController.onPageLoad(mode: Mode = NormalMode)
+POST       /other-type                              controllers.TypeOfParticipantDetailController.onSubmit(mode: Mode = NormalMode)
+GET        /change-other-type                       controllers.TypeOfParticipantDetailController.onPageLoad(mode: Mode = CheckMode)
+POST       /change-other-type                       controllers.TypeOfParticipantDetailController.onSubmit(mode: Mode = CheckMode)
 
-GET        /whatYouNeed                       controllers.WhatYouNeedController.onPageLoad()
+GET        /what-you-need                           controllers.WhatYouNeedController.onPageLoad()

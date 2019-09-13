@@ -45,6 +45,38 @@ class DateTransactionOverThresholdFormProviderSpec extends DateBehaviours {
       behave like dateFieldWithMin(form, "value", DateTransactionOverThresholdFormProvider.ampStartDate, FormError("value", minDateError))
 
       behave like dateFieldWithMax(form, "value", LocalDate.now(ZoneOffset.UTC), FormError("value", maxDateError))
+
+      "fail to bind a date with a missing value" in {
+
+        val formError = FormError("value", "dateTransactionOverThreshold.error.required", List("month"))
+
+        val validDate = DateTransactionOverThresholdFormProvider.ampStartDate
+
+        val data = Map(
+          "value.day"   -> validDate.getDayOfMonth.toString,
+          "value.month" -> "",
+          "value.year"  -> validDate.getYear.toString
+        )
+
+        val result = form.bind(data)
+        result.errors should contain only formError
+      }
+
+      "fail to bind a date with two missing values" in {
+
+        val formError = FormError("value", "dateTransactionOverThreshold.error.required.two", List("month", "year"))
+
+        val validDate = DateTransactionOverThresholdFormProvider.ampStartDate
+
+        val data = Map(
+          "value.day"   -> validDate.getDayOfMonth.toString,
+          "value.month" -> "",
+          "value.year"  -> ""
+        )
+
+        val result = form.bind(data)
+        result.errors should contain only formError
+      }
     }
   }
 }

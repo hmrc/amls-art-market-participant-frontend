@@ -21,6 +21,7 @@ import connectors.AMLSConnector
 import javax.inject.Inject
 import models.UserAnswers
 import play.api.Configuration
+import uk.gov.hmrc.http.HeaderCarrier
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -30,16 +31,27 @@ class DefaultAMLSFrontEndSessionRepository @Inject()(
                                                     )(implicit ec: ExecutionContext, m: Materializer) extends AMLSFrontEndSessionRepository {
 
 
-  override def get(id: String): Future[Option[UserAnswers]] =
-    amlsConnector.get(id)
+  def get(id: String)(implicit hc: HeaderCarrier): Future[Option[UserAnswers]] =
+    amlsConnector.get(id).map {
+      _.map {
+        json =>
+          json.as[UserAnswers]
+      }
+    } recover {
+      case _: Exception => None
+    }
 
-  override def set(userAnswers: UserAnswers): Future[Boolean] =
-    amlsConnector.set(userAnswers.id, userAnswers)
+  def set(userAnswers: UserAnswers)(implicit hc: HeaderCarrier): Future[Boolean] =
+    amlsConnector.set(userAnswers.id, userAnswers).map { r =>
+      true
+    } recover {
+      case _: Exception => false
+    }
 }
 
 trait AMLSFrontEndSessionRepository {
 
-  def get(id: String): Future[Option[UserAnswers]]
+  def get(id: String)(implicit hc: HeaderCarrier): Future[Option[UserAnswers]]
 
-  def set(userAnswers: UserAnswers): Future[Boolean]
+  def set(userAnswers: UserAnswers)(implicit hc: HeaderCarrier): Future[Boolean]
 }

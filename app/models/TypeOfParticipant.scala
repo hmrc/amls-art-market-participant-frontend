@@ -29,10 +29,10 @@ object TypeOfParticipant extends Enumerable.Implicits {
   case object SomethingElse extends WithName("somethingElse") with TypeOfParticipant
 
   val values: Seq[TypeOfParticipant] = Seq(
-    ArtGalleryOwner,
-    ArtDealer,
     ArtAgent,
     ArtAuctioneer,
+    ArtDealer,
+    ArtGalleryOwner,
     SomethingElse
   )
 

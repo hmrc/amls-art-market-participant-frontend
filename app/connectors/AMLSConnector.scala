@@ -27,20 +27,20 @@ import uk.gov.hmrc.play.bootstrap.http.HttpClient
 import scala.concurrent.{ExecutionContext, Future}
 
 class AMLSConnector @Inject()(config: Configuration,
-                              httpClient: HttpClient)
+                              implicit val httpClient: HttpClient)
                              (implicit ec: ExecutionContext) {
 
-  private val baseUrl = config.get[Service]("microservice.services.amls-frontend")
+  private val baseUrl                 = config.get[Service]("microservice.services.amls-frontend")
+  private[connectors] val url: String = s"$baseUrl/anti-money-laundering/amp/"
 
   def get(id: String)(implicit hc: HeaderCarrier): Future[Option[JsObject]] = {
-    val url = s"$baseUrl/anti-money-laundering/amp/${id}"
-
-    httpClient.GET[Option[JsObject]](url)
+    val getUrl = s"$url/$id"
+    httpClient.GET[Option[JsObject]](getUrl)
   }
-  def set(id: String, userAnswers: UserAnswers)(implicit hc: HeaderCarrier): Future[UserAnswers] = {
-    val url = s"$baseUrl/anti-money-laundering/amp/${id}"
 
-    httpClient.PUT[UserAnswers, UserAnswers](url, userAnswers)
+  def set(id: String, userAnswers: UserAnswers)(implicit hc: HeaderCarrier): Future[UserAnswers] = {
+    val putUrl = s"$url/$id"
+    httpClient.PUT[UserAnswers, UserAnswers](putUrl, userAnswers)
   }
 
 }

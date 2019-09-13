@@ -25,11 +25,9 @@ import uk.gov.hmrc.http.HeaderCarrier
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class DefaultAMLSFrontEndSessionRepository @Inject()(
-                                                      amlsConnector: AMLSConnector,
-                                                      config: Configuration
-                                                    )(implicit ec: ExecutionContext, m: Materializer) extends AMLSFrontEndSessionRepository {
-
+class DefaultAMLSFrontEndSessionRepository @Inject()(amlsConnector: AMLSConnector,
+                                                     config: Configuration)
+                                                    (implicit ec: ExecutionContext, m: Materializer) extends AMLSFrontEndSessionRepository {
 
   def get(id: String)(implicit hc: HeaderCarrier): Future[Option[UserAnswers]] =
     amlsConnector.get(id).map {
@@ -43,7 +41,7 @@ class DefaultAMLSFrontEndSessionRepository @Inject()(
 
   def set(userAnswers: UserAnswers)(implicit hc: HeaderCarrier): Future[Boolean] =
     amlsConnector.set(userAnswers.id, userAnswers).map { r =>
-      true
+      r.isInstanceOf[UserAnswers]
     } recover {
       case _: Exception => false
     }

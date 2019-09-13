@@ -16,15 +16,13 @@
 
 package forms
 
-import java.time.LocalDate
+import java.time.{LocalDate, ZoneOffset}
 
 import forms.mappings.Mappings
 import javax.inject.Inject
 import play.api.data.Form
 
 class DateTransactionOverThresholdFormProvider @Inject() extends Mappings {
-
-  private val ampStartDate = LocalDate.of(2020, 1, 11)
 
   def apply(): Form[LocalDate] =
     Form(
@@ -34,7 +32,14 @@ class DateTransactionOverThresholdFormProvider @Inject() extends Mappings {
         twoRequiredKey = "dateTransactionOverThreshold.error.required.two",
         requiredKey    = "dateTransactionOverThreshold.error.required"
       ).verifying(
-        minDate(ampStartDate, "dateTransactionOverThreshold.error.startdate"),
-        maxDate(LocalDate.now(), "dateTransactionOverThreshold.error.future"))
+        minDate(DateTransactionOverThresholdFormProvider.ampStartDate, "dateTransactionOverThreshold.error.startdate"),
+        maxDate(LocalDate.now(ZoneOffset.UTC), "dateTransactionOverThreshold.error.future"))
     )
+}
+
+object DateTransactionOverThresholdFormProvider {
+
+  // TODO: Change year to 2020 after testing
+
+  val ampStartDate = LocalDate.of(2019, 1, 11)
 }

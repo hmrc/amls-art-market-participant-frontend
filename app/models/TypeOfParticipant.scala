@@ -41,9 +41,6 @@ object TypeOfParticipant extends Enumerable.Implicits {
       RadioOption("typeOfParticipant", value.toString)
   }
 
-  //TODO - we need a text input here on conditional reveal of 'something else'...
-
-
   implicit val enumerable: Enumerable[TypeOfParticipant] =
     Enumerable(values.map(v => v.toString -> v): _*)
 }

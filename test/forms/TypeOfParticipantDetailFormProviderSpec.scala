@@ -17,11 +17,13 @@
 package forms
 
 import forms.behaviours.StringFieldBehaviours
+import forms.mappings.Constraints
 import play.api.data.FormError
 
-class TypeOfParticipantDetailFormProviderSpec extends StringFieldBehaviours {
+class TypeOfParticipantDetailFormProviderSpec extends StringFieldBehaviours with Constraints {
 
   val requiredKey = "typeOfParticipantDetail.error.required"
+  val punctuationKey = "typeOfParticipantDetail.error.punctuation"
   val lengthKey = "typeOfParticipantDetail.error.length"
   val maxLength = 256
 
@@ -31,18 +33,28 @@ class TypeOfParticipantDetailFormProviderSpec extends StringFieldBehaviours {
 
     val fieldName = "value"
 
-    behave like fieldThatBindsValidData(
-      form,
-      fieldName,
-      stringsWithMaxLength(maxLength)
-    )
+    val underMaxLength = """!@£$%^&*()?"';|Lorem ipsum dolor sit amet"""
 
-    behave like fieldWithMaxLength(
-      form,
-      fieldName,
-      maxLength = maxLength,
-      lengthError = FormError(fieldName, lengthKey, Seq(maxLength))
-    )
+    val overMaxLength = """Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+      Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+      Donec quam felis, ultricies nec, pellentesque eu, pretium quis,."""
+
+    val invalidString = """<p>Some HTML content</p>"""
+
+    "bind valid data" in {
+      val result = form.bind(Map(fieldName -> underMaxLength)).apply(fieldName)
+      result.value.value shouldBe underMaxLength
+    }
+
+    s"not bind strings longer than $maxLength characters" in {
+      val result = form.bind(Map(fieldName -> overMaxLength)).apply(fieldName)
+      result.errors shouldEqual Seq(FormError( fieldName, Seq(lengthKey), Seq(maxLength)))
+    }
+
+    s"not bind strings with invalid characters" in {
+      val result = form.bind(Map(fieldName -> invalidString)).apply(fieldName)
+      result.errors shouldEqual Seq(FormError( fieldName, Seq(punctuationKey), Seq(basicPunctuationRegex)))
+    }
 
     behave like mandatoryField(
       form,

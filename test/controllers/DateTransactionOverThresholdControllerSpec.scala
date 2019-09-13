@@ -42,7 +42,7 @@ class DateTransactionOverThresholdControllerSpec extends SpecBase with MockitoSu
 
   def onwardRoute = Call("GET", "/foo")
 
-  val validAnswer = LocalDate.now(ZoneOffset.UTC)
+  val validAnswer = DateTransactionOverThresholdFormProvider.ampStartDate.plusDays(1)
 
   lazy val dateTransactionOverThresholdRoute = routes.DateTransactionOverThresholdController.onPageLoad(NormalMode).url
 
@@ -95,27 +95,32 @@ class DateTransactionOverThresholdControllerSpec extends SpecBase with MockitoSu
       application.stop()
     }
 
-    "redirect to the next page when valid data is submitted" in {
+    // TODO: Remove check after 10th Jan 2020
 
-      val mockSessionRepository = mock[SessionRepository]
+    if(LocalDate.now(ZoneOffset.UTC).isAfter(DateTransactionOverThresholdFormProvider.ampStartDate)) {
 
-      when(mockSessionRepository.set(any())) thenReturn Future.successful(true)
+      "redirect to the next page when valid data is submitted" in {
 
-      val application =
-        applicationBuilder(userAnswers = Some(emptyUserAnswers))
-          .overrides(
-            bind[Navigator].toInstance(new FakeNavigator(onwardRoute)),
-            bind[SessionRepository].toInstance(mockSessionRepository)
-          )
-          .build()
+        val mockSessionRepository = mock[SessionRepository]
 
-      val result = route(application, postRequest).value
+        when(mockSessionRepository.set(any())) thenReturn Future.successful(true)
 
-      status(result) mustEqual SEE_OTHER
+        val application =
+          applicationBuilder(userAnswers = Some(emptyUserAnswers))
+            .overrides(
+              bind[Navigator].toInstance(new FakeNavigator(onwardRoute)),
+              bind[SessionRepository].toInstance(mockSessionRepository)
+            )
+            .build()
 
-      redirectLocation(result).value mustEqual onwardRoute.url
+        val result = route(application, postRequest).value
 
-      application.stop()
+        status(result) mustEqual SEE_OTHER
+
+        redirectLocation(result).value mustEqual onwardRoute.url
+
+        application.stop()
+      }
     }
 
     "return a Bad Request and errors when invalid data is submitted" in {

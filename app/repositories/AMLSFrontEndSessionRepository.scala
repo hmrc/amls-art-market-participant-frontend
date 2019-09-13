@@ -36,7 +36,7 @@ class DefaultAMLSFrontEndSessionRepository @Inject()(amlsConnector: AMLSConnecto
           json.as[UserAnswers]
       }
     } recover {
-      case _: Exception => throw new Exception("Failed")
+      case e: Exception => throw new Exception(e.getMessage)
     }
 
   def set(userAnswers: UserAnswers)(implicit hc: HeaderCarrier): Future[Boolean] =

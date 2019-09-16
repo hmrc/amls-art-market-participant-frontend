@@ -62,6 +62,9 @@ site.service_name = Manage your anti-money laundering supervision
 site.textarea.char_limit = (Limit is {0} characters)
 amp.heading = Art market participant
 
+link.return.renewal.progress = Return to about your business
+link.return.registration.progress = Return to about your business
+
 ############################### Pages ###############################
 
 whatYouNeed.title = What you need

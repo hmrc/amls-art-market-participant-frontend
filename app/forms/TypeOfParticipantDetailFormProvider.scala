@@ -26,6 +26,8 @@ class TypeOfParticipantDetailFormProvider @Inject() extends Mappings {
   def apply(): Form[String] =
     Form(
       "value" -> text("typeOfParticipantDetail.error.required")
-        .verifying(maxLength(256, "typeOfParticipantDetail.error.length"))
+        .verifying(
+          maxLength(255, "typeOfParticipantDetail.error.length"),
+          regexp(basicPunctuationRegex, "typeOfParticipantDetail.error.punctuation"))
     )
 }

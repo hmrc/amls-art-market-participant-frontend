@@ -29,10 +29,10 @@ object TypeOfParticipant extends Enumerable.Implicits {
   case object SomethingElse extends WithName("somethingElse") with TypeOfParticipant
 
   val values: Seq[TypeOfParticipant] = Seq(
-    ArtGalleryOwner,
-    ArtDealer,
     ArtAgent,
     ArtAuctioneer,
+    ArtDealer,
+    ArtGalleryOwner,
     SomethingElse
   )
 
@@ -40,9 +40,6 @@ object TypeOfParticipant extends Enumerable.Implicits {
     value =>
       RadioOption("typeOfParticipant", value.toString)
   }
-
-  //TODO - we need a text input here on conditional reveal of 'something else'...
-
 
   implicit val enumerable: Enumerable[TypeOfParticipant] =
     Enumerable(values.map(v => v.toString -> v): _*)

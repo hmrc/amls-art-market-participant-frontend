@@ -17,6 +17,7 @@
 package repositories
 
 import akka.stream.Materializer
+import com.google.common.util.concurrent.Futures.FutureCombiner
 import connectors.AMLSConnector
 import javax.inject.Inject
 import models.UserAnswers
@@ -29,21 +30,24 @@ class DefaultAMLSFrontEndSessionRepository @Inject()(amlsConnector: AMLSConnecto
                                                      config: Configuration)
                                                     (implicit ec: ExecutionContext, m: Materializer) extends AMLSFrontEndSessionRepository {
 
-  def get(id: String)(implicit hc: HeaderCarrier): Future[Option[UserAnswers]] =
-    amlsConnector.get(id).map {
-      _.map {
-        json =>
-          json.as[UserAnswers]
-      }
-    } recover {
-      case e: Exception => throw new Exception(e.getMessage)
-    }
+  def get(id: String)(implicit hc: HeaderCarrier): Future[Option[UserAnswers]] = {
+        amlsConnector.get(id).map {
+          _.map {
+            json =>
+              json.as[UserAnswers]
+          }
+        } recover {
+          case e: Exception => throw new Exception(e.getMessage)
+        }
+
+    Future.successful(Some(new UserAnswers(id)))
+  }
 
   def set(userAnswers: UserAnswers)(implicit hc: HeaderCarrier): Future[Boolean] =
     amlsConnector.set(userAnswers.id, userAnswers).map { r =>
-      r.isInstanceOf[UserAnswers]
+      !r.body.isEmpty
     } recover {
-      case e: Exception => throw new Exception(e.getMessage)
+      case _: Exception => false
     }
 }
 

@@ -34,13 +34,13 @@ class AMLSConnector @Inject()(config: Configuration,
   private[connectors] val url: String = s"$baseUrl/anti-money-laundering/amp"
 
   def get(id: String)(implicit hc: HeaderCarrier): Future[Option[JsObject]] = {
-    val getUrl = s"$url/$id"
+    val getUrl = s"$url/get/$id"
     httpClient.GET[Option[JsObject]](getUrl)
   }
 
-  def set(id: String, userAnswers: UserAnswers)(implicit hc: HeaderCarrier): Future[UserAnswers] = {
-    val putUrl = s"$url/$id"
-    httpClient.PUT[UserAnswers, UserAnswers](putUrl, userAnswers)
+  def set(id: String, userAnswers: UserAnswers)(implicit hc: HeaderCarrier)= {
+    val putUrl = s"$url/set/$id"
+    httpClient.PUT(putUrl, userAnswers)
   }
 
 }

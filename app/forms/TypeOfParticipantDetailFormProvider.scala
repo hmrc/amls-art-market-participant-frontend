@@ -27,7 +27,7 @@ class TypeOfParticipantDetailFormProvider @Inject() extends Mappings {
     Form(
       "value" -> text("typeOfParticipantDetail.error.required")
         .verifying(
-          maxLength(256, "typeOfParticipantDetail.error.length"),
+          maxLength(255, "typeOfParticipantDetail.error.length"),
           regexp(basicPunctuationRegex, "typeOfParticipantDetail.error.punctuation"))
     )
 }

@@ -25,7 +25,7 @@ class TypeOfParticipantDetailFormProviderSpec extends StringFieldBehaviours with
   val requiredKey = "typeOfParticipantDetail.error.required"
   val punctuationKey = "typeOfParticipantDetail.error.punctuation"
   val lengthKey = "typeOfParticipantDetail.error.length"
-  val maxLength = 256
+  val maxLength = 255
 
   val form = new TypeOfParticipantDetailFormProvider()()
 

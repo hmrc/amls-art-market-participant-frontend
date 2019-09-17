@@ -20,8 +20,8 @@ import config.Service
 import javax.inject.Inject
 import models.UserAnswers
 import play.api.Configuration
-import play.api.libs.json.JsObject
-import uk.gov.hmrc.http.HeaderCarrier
+import play.api.libs.json.{JsObject, Writes}
+import uk.gov.hmrc.http.{HeaderCarrier, HttpReads, HttpResponse}
 import uk.gov.hmrc.play.bootstrap.http.HttpClient
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -31,15 +31,21 @@ class AMLSConnector @Inject()(config: Configuration,
                              (implicit ec: ExecutionContext) {
 
   private val baseUrl                 = config.get[Service]("microservice.services.amls-frontend")
-  private[connectors] val url: String = s"$baseUrl/anti-money-laundering/amp"
+  private[connectors] val url: String = s"$baseUrl/amp"
 
   def get(credId: String)(implicit hc: HeaderCarrier): Future[Option[JsObject]] = {
+
     val getUrl = s"$url/get/$credId"
     httpClient.GET[Option[JsObject]](getUrl)
   }
 
   def set(credId: String, userAnswers: UserAnswers)(implicit hc: HeaderCarrier)= {
     val putUrl = s"$url/set/$credId"
-    httpClient.PUT(putUrl, userAnswers)
+    httpClient.PUT(putUrl, userAnswers)(
+      implicitly[Writes[UserAnswers]],
+      implicitly[HttpReads[HttpResponse]],
+      hc.withExtraHeaders("Csrf-Token" -> "nocheck"),
+      implicitly
+    )
   }
 }

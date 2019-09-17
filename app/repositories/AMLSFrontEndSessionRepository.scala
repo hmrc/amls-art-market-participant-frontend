@@ -33,7 +33,6 @@ class DefaultAMLSFrontEndSessionRepository @Inject()(amlsConnector: AMLSConnecto
         amlsConnector.get(credId).map {
           _.map {
             json =>
-              Logger.debug("repositories.DefaultAMLSFrontEndSessionRepository.get: " + json.as[UserAnswers])
               json.as[UserAnswers]
           }
         } recover {

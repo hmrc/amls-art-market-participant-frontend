@@ -23,13 +23,8 @@ import repositories.{AMLSFrontEndSessionRepository, DefaultAMLSFrontEndSessionRe
 class Module extends AbstractModule {
 
   override def configure(): Unit = {
-
     bind(classOf[DataRetrievalAction]).to(classOf[DataRetrievalActionImpl]).asEagerSingleton()
     bind(classOf[DataRequiredAction]).to(classOf[DataRequiredActionImpl]).asEagerSingleton()
-
-    // For session based storage instead of cred based, change to SessionIdentifierAction
-    //bind(classOf[IdentifierAction]).to(classOf[SessionIdentifierAction]).asEagerSingleton()
-
     bind(classOf[SessionRepository]).to(classOf[DefaultSessionRepository]).asEagerSingleton()
     bind(classOf[AMLSFrontEndSessionRepository]).to(classOf[DefaultAMLSFrontEndSessionRepository]).asEagerSingleton()
   }

@@ -51,7 +51,11 @@
     <link rel="stylesheet" href='@routes.Assets.versioned("stylesheets/amlsartmarketparticipantfrontend-app.css")' />
 }
 
-@headerNavLinks = {}
+@headerNavLinks = {
+    @if(userLoggedIn) {
+        <li><a href="@appConfig.logoutUrl">Sign out</a></li>
+    }
+}
 
 @insideHeader = {
     @header_nav(

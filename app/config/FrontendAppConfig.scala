@@ -35,9 +35,14 @@ class FrontendAppConfig @Inject() (configuration: Configuration) {
   val betaFeedbackUrl = s"$contactHost/contact/beta-feedback"
   val betaFeedbackUnauthenticatedUrl = s"$contactHost/contact/beta-feedback-unauthenticated"
 
+  val frontendBaseUrl = configuration.get[String](s"microservice.services.amls-frontend.public.url")
+  val renewalProgressUrl = s"${frontendBaseUrl}/renewal-progress"
+  val registrationProgressUrl = s"${frontendBaseUrl}/registration-progress"
+
   lazy val authUrl: String = configuration.get[Service]("auth").baseUrl
-  lazy val loginUrl: String = configuration.get[String]("urls.login")
-  lazy val loginContinueUrl: String = configuration.get[String]("urls.loginContinue")
+  lazy val loginUrl: String = configuration.get[String]("urls.login.url")
+  lazy val logoutUrl: String = configuration.get[String]("urls.logout.url")
+  lazy val loginContinueUrl: String = configuration.get[String]("urls.login.continue")
 
   lazy val languageTranslationEnabled: Boolean =
     configuration.get[Boolean]("microservice.services.features.welsh-translation")

@@ -14,17 +14,18 @@
  * limitations under the License.
  *@
 
-@import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
+@import config.FrontendAppConfig
 
 @(
+    appConfig: FrontendAppConfig,
     returnLocation: Option[String] = None
 )(implicit m: Messages)
 
 <p class="return-link">
 @if(returnLocation == Some("renewal")) {
-    <a href="http://localhost:9222/anti-money-laundering/renewal-progress">@Messages("link.return.renewal.progress")</a>
+    <a href="@{appConfig.renewalProgressUrl}">@Messages("link.return.renewal.progress")</a>
 } else {
-    <a href="http://localhost:9222/anti-money-laundering/registration-progress">@Messages("link.return.registration.progress")</a>
+    <a href="@{appConfig.registrationProgressUrl}">@Messages("link.return.registration.progress")</a>
 }
 </p>
 

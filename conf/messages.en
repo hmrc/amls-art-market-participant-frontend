@@ -58,6 +58,7 @@ site.hidden-edit = Change {0}
 site.no = No
 site.yes = Yes
 site.continue = Save and continue
+site.acceptandcomplete = Accept and complete section
 site.service_name = Manage your anti-money laundering supervision
 site.textarea.char_limit = (Limit is {0} characters)
 amp.heading = Art market participant

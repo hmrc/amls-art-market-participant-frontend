@@ -56,6 +56,6 @@ class CheckYourAnswersController @Inject()(
 
   def onSubmit(): Action[AnyContent] = (identify andThen getData andThen requireData).async {
     implicit request =>
-      Future { Redirect(Call("GET", s"${appConfig.registrationProgressUrl}")) }
+      Future { Redirect(Call("GET", s"${appConfig.frontendBaseUrl}/amp/accept")) }
   }
 }

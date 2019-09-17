@@ -28,6 +28,9 @@ class FrontendAppConfig @Inject() (configuration: Configuration) {
   private val contactHost = configuration.get[String]("contact-frontend.host")
   private val contactFormServiceIdentifier = "play26frontend"
 
+  val timeoutSeconds = configuration.get[String](s"timeout.seconds")
+  val timeoutCountdown = configuration.get[String](s"timeout.countdown")
+
   val analyticsToken: String = configuration.get[String](s"google-analytics.token")
   val analyticsHost: String = configuration.get[String](s"google-analytics.host")
   val reportAProblemPartialUrl = s"$contactHost/contact/problem_reports_ajax?service=$contactFormServiceIdentifier"

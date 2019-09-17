@@ -24,7 +24,7 @@ import navigation.Navigator
 import pages.IdentifyLinkedTransactionsPage
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import repositories.SessionRepository
+import repositories.{AMLSFrontEndSessionRepository, SessionRepository}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
 import views.html.IdentifyLinkedTransactionsView
 
@@ -32,7 +32,7 @@ import scala.concurrent.{ExecutionContext, Future}
 
 class IdentifyLinkedTransactionsController @Inject()(
                                          override val messagesApi: MessagesApi,
-                                         sessionRepository: SessionRepository,
+                                         sessionRepository: AMLSFrontEndSessionRepository,
                                          navigator: Navigator,
                                          identify: IdentifierAction,
                                          getData: DataRetrievalAction,

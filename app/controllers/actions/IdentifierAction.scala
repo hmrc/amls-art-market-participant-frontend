@@ -26,11 +26,12 @@ import play.api.mvc._
 import uk.gov.hmrc.auth.core._
 import uk.gov.hmrc.auth.core.retrieve.v2.Retrievals
 import uk.gov.hmrc.auth.core.retrieve.~
-import uk.gov.hmrc.http.{HeaderCarrier, UnauthorizedException}
+import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.HeaderCarrierConverter
 
 import scala.concurrent.{ExecutionContext, Future}
 
+@com.google.inject.ImplementedBy(classOf[AuthenticatedIdentifierAction])
 trait IdentifierAction extends ActionBuilder[IdentifierRequest, AnyContent]
 
 final case class enrolmentNotFound(msg: String = "enrolmentNotFound") extends AuthorisationException(msg)
@@ -41,6 +42,9 @@ class AuthenticatedIdentifierAction @Inject()(
                                                val parser: BodyParsers.Default
                                              )
                                              (implicit val executionContext: ExecutionContext) extends IdentifierAction with AuthorisedFunctions with ActionRefiner[Request, IdentifierRequest] {
+
+  private val amlsKey = "HMRC-MLR-ORG"
+  private val amlsNumberKey = "MLRRefNumber"
 
   def unauthorisedUrl = routes.UnauthorisedController.onPageLoad().url
 
@@ -55,59 +59,62 @@ class AuthenticatedIdentifierAction @Inject()(
 
   override protected def refine[A](request: Request[A]): Future[Either[Result, IdentifierRequest[A]]] = {
 
-    implicit val hc: HeaderCarrier = HeaderCarrierConverter.fromHeadersAndSession(request.headers, None)
+    implicit val hc: HeaderCarrier = HeaderCarrierConverter.fromHeadersAndSession(request.headers, Some(request.session))
 
-    authorised(User).retrieve(Retrievals.allEnrolments and Retrievals.credentials and Retrievals.affinityGroup) {
-      case enrolments ~ Some(credentials) ~ affinityGroup =>
-        enrolmentMessage("AuthenticatedIdentifierAction:Refine - Enrolments:", Some(enrolments))
-        Future.successful(Right(IdentifierRequest(request, credentials.providerId, affinityGroup)))
+    authorised(User).retrieve(
+      Retrievals.allEnrolments and
+        Retrievals.credentials and
+        Retrievals.affinityGroup
+    ) {
+      case enrolments ~ Some(credentials) ~ Some(affinityGroup) =>
+        Logger.debug("DefaultAuthAction:Refine - Enrolments:" + enrolments)
+
+        Future.successful(
+          Right(
+            IdentifierRequest(
+              request,
+              amlsRefNo(enrolments),
+              credentials.providerId,
+              affinityGroup
+            )
+          )
+        )
       case _ =>
-        enrolmentMessage("AuthenticatedIdentifierAction:Refine - Non match (enrolments ~ Some(credentials) ~ affinityGroup)", None)
+        Logger.debug("DefaultAuthAction:Refine - Non match (enrolments ~ Some(credentials) ~ Some(affinityGroup))")
         Future.successful(Left(Redirect(Call("GET", config.loginUrl))))
     }.recover[Either[Result, IdentifierRequest[A]]] {
       case nas: NoActiveSession =>
-        exceptionLogger(nas)
+        Logger.debug("DefaultAuthAction:Refine - NoActiveSession:" + nas)
         Left(Redirect(Call("GET", config.loginUrl)))
       case ie: InsufficientEnrolments =>
-        exceptionLogger(ie)
+        Logger.debug("DefaultAuthAction:Refine - InsufficientEnrolments:" + ie)
         Left(Redirect(Call("GET", unauthorisedUrl)))
       case icl: InsufficientConfidenceLevel =>
-        exceptionLogger(icl)
+        Logger.debug("DefaultAuthAction:Refine - InsufficientConfidenceLevel:" + icl)
         Left(Redirect(Call("GET", unauthorisedUrl)))
       case uap: UnsupportedAuthProvider =>
-        exceptionLogger(uap)
+        Logger.debug("DefaultAuthAction:Refine - UnsupportedAuthProvider:" + uap)
         Left(Redirect(Call("GET", unauthorisedUrl)))
       case uag: UnsupportedAffinityGroup =>
-        exceptionLogger(uag)
+        Logger.debug("DefaultAuthAction:Refine - UnsupportedAffinityGroup:" + uag)
         Left(Redirect(Call("GET", unauthorisedUrl)))
       case ucr: UnsupportedCredentialRole =>
-        exceptionLogger(ucr)
+        Logger.debug("DefaultAuthAction:Refine - UnsupportedCredentialRole:" + ucr)
         Left(Redirect(Call("GET", unauthorisedUrl)))
       case enf: enrolmentNotFound =>
-        exceptionLogger(enf)
+        Logger.debug("DefaultAuthAction:Refine - enrolmentNotFound:" + enf)
         Left(Redirect(Call("GET", unauthorisedUrl)))
       case e : AuthorisationException =>
-        exceptionLogger(e)
+        Logger.debug("DefaultAuthAction:Refine - AuthorisationException:" + e)
         Left(Redirect(Call("GET", unauthorisedUrl)))
     }
   }
-}
 
-class SessionIdentifierAction @Inject()(
-                                         config: FrontendAppConfig,
-                                         val parser: BodyParsers.Default
-                                       )
-                                       (implicit val executionContext: ExecutionContext) extends IdentifierAction with ActionFunction[Request, IdentifierRequest] {
-
-  override def invokeBlock[A](request: Request[A], block: IdentifierRequest[A] => Future[Result]): Future[Result] = {
-
-    implicit val hc: HeaderCarrier = HeaderCarrierConverter.fromHeadersAndSession(request.headers, Some(request.session))
-
-    hc.sessionId match {
-      case Some(session) =>
-        block(IdentifierRequest(request, session.value))
-      case None =>
-        Future.successful(Redirect(routes.SessionExpiredController.onPageLoad()))
-    }
+  private def amlsRefNo(enrolments: Enrolments): Option[String] = {
+    val amlsRefNumber = for {
+      enrolment      <- enrolments.getEnrolment(amlsKey)
+      amlsIdentifier <- enrolment.getIdentifier(amlsNumberKey)
+    } yield amlsIdentifier.value
+    amlsRefNumber
   }
 }

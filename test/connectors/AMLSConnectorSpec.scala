@@ -21,7 +21,7 @@ import java.time.{LocalDate, LocalDateTime, ZoneOffset}
 import base.SpecBase
 import models.TypeOfParticipant.SomethingElse
 import models.UserAnswers
-import org.mockito.Mockito.when
+import org.mockito.Mockito._
 import org.scalatestplus.mockito.MockitoSugar
 import play.api.Configuration
 import play.api.libs.json.{JsObject, Json}
@@ -56,7 +56,7 @@ class AMLSConnectorSpec extends SpecBase with MockitoSugar {
 
   "GET" must {
     "successfully fetch cache" in {
-      val getUrl = s"${amlsConnector.url}/someid"
+      val getUrl = s"${amlsConnector.url}/get/someid"
 
       when {
         amlsConnector.httpClient.GET[Option[JsObject]](eqTo(getUrl))(any(), any(), any())
@@ -70,15 +70,10 @@ class AMLSConnectorSpec extends SpecBase with MockitoSugar {
 
   "POST" must {
     "successfully write cache" in {
-      val putUrl = s"${amlsConnector.url}/someid"
+      val putUrl = s"${amlsConnector.url}/set/someid"
 
-      when {
-        amlsConnector.httpClient.PUT[UserAnswers, UserAnswers](eqTo(putUrl), eqTo(answers))(any(), any(), any(), any())
-      } thenReturn Future.successful(answers)
-
-      whenReady(amlsConnector.set("someid", answers)) {
-        _ mustBe answers
-      }
+      amlsConnector.set("someid", answers)
+      verify(amlsConnector.httpClient).PUT(eqTo(putUrl), eqTo(answers))(any(), any(), any(), any())
     }
   }
 }

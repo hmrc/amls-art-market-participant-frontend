@@ -20,8 +20,6 @@ import com.google.inject.Inject
 import config.FrontendAppConfig
 import controllers.routes
 import models.requests.IdentifierRequest
-import org.apache.commons.codec.binary.Base64.encodeBase64String
-import org.apache.commons.codec.digest.DigestUtils
 import play.api.Logger
 import play.api.mvc.Results._
 import play.api.mvc._
@@ -90,25 +88,25 @@ class AuthenticatedIdentifierAction @Inject()(
         Left(Redirect(Call("GET", config.loginUrl)))
       case ie: InsufficientEnrolments =>
         Logger.debug("DefaultAuthAction:Refine - InsufficientEnrolments:" + ie)
-        Left(Redirect(Call("GET", config.loginUrl)))
+        Left(Redirect(Call("GET", unauthorisedUrl)))
       case icl: InsufficientConfidenceLevel =>
         Logger.debug("DefaultAuthAction:Refine - InsufficientConfidenceLevel:" + icl)
-        Left(Redirect(Call("GET", config.loginUrl)))
+        Left(Redirect(Call("GET", unauthorisedUrl)))
       case uap: UnsupportedAuthProvider =>
         Logger.debug("DefaultAuthAction:Refine - UnsupportedAuthProvider:" + uap)
-        Left(Redirect(Call("GET", config.loginUrl)))
+        Left(Redirect(Call("GET", unauthorisedUrl)))
       case uag: UnsupportedAffinityGroup =>
         Logger.debug("DefaultAuthAction:Refine - UnsupportedAffinityGroup:" + uag)
-        Left(Redirect(Call("GET", config.loginUrl)))
+        Left(Redirect(Call("GET", unauthorisedUrl)))
       case ucr: UnsupportedCredentialRole =>
         Logger.debug("DefaultAuthAction:Refine - UnsupportedCredentialRole:" + ucr)
-        Left(Redirect(Call("GET", config.loginUrl)))
+        Left(Redirect(Call("GET", unauthorisedUrl)))
       case enf: enrolmentNotFound =>
         Logger.debug("DefaultAuthAction:Refine - enrolmentNotFound:" + enf)
-        Left(Redirect(Call("GET", config.loginUrl)))
+        Left(Redirect(Call("GET", unauthorisedUrl)))
       case e : AuthorisationException =>
         Logger.debug("DefaultAuthAction:Refine - AuthorisationException:" + e)
-        Left(Redirect(Call("GET", config.loginUrl)))
+        Left(Redirect(Call("GET", unauthorisedUrl)))
     }
   }
 

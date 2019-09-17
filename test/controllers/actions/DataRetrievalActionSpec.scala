@@ -25,6 +25,8 @@ import org.mockito.Matchers.any
 import org.mockito.Mockito.when
 import org.mockito.Matchers.{eq => eqTo}
 import org.scalatestplus.mockito.MockitoSugar
+import uk.gov.hmrc.auth.core.AffinityGroup
+
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
@@ -41,10 +43,14 @@ class DataRetrievalActionSpec extends SpecBase with MockitoSugar with ScalaFutur
       "set userAnswers to 'None' in the request" in {
 
         val sessionRepository = mock[AMLSFrontEndSessionRepository]
-        when(sessionRepository.get(eqTo("id"))(any())) thenReturn Future(None)
+        when(sessionRepository.get(eqTo("CredId"))(any())) thenReturn Future(None)
         val action = new Harness(sessionRepository)
 
-        val futureResult = action.callTransform(new IdentifierRequest(fakeRequest, "id"))
+        val futureResult = action.callTransform(new IdentifierRequest(
+          fakeRequest,
+          Some("amlsRef"),
+          "CredId",
+          AffinityGroup.Organisation))
 
         whenReady(futureResult) { result =>
           result.userAnswers.isEmpty mustBe true
@@ -57,10 +63,14 @@ class DataRetrievalActionSpec extends SpecBase with MockitoSugar with ScalaFutur
       "build a userAnswers object and add it to the request" in {
 
         val sessionRepository = mock[AMLSFrontEndSessionRepository]
-        when(sessionRepository.get(eqTo("id"))(any())) thenReturn Future(Some(new UserAnswers("id")))
+        when(sessionRepository.get(eqTo("CredId"))(any())) thenReturn Future(Some(new UserAnswers("id")))
         val action = new Harness(sessionRepository)
 
-        val futureResult = action.callTransform(new IdentifierRequest(fakeRequest, "id"))
+        val futureResult = action.callTransform(new IdentifierRequest(
+          fakeRequest,
+          Some("amlsRef"),
+          "CredId",
+          AffinityGroup.Organisation))
 
         whenReady(futureResult) { result =>
           result.userAnswers.isDefined mustBe true

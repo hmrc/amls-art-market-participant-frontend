@@ -17,11 +17,10 @@
 package repositories
 
 import akka.stream.Materializer
-import com.google.common.util.concurrent.Futures.FutureCombiner
 import connectors.AMLSConnector
 import javax.inject.Inject
 import models.UserAnswers
-import play.api.Configuration
+import play.api.{Configuration, Logger}
 import uk.gov.hmrc.http.HeaderCarrier
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -30,25 +29,26 @@ class DefaultAMLSFrontEndSessionRepository @Inject()(amlsConnector: AMLSConnecto
                                                      config: Configuration)
                                                     (implicit ec: ExecutionContext, m: Materializer) extends AMLSFrontEndSessionRepository {
 
-  def get(id: String)(implicit hc: HeaderCarrier): Future[Option[UserAnswers]] = {
-        amlsConnector.get(id).map {
+  def get(credId: String)(implicit hc: HeaderCarrier): Future[Option[UserAnswers]] = {
+        amlsConnector.get(credId).map {
           _.map {
             json =>
+              Logger.debug("repositories.DefaultAMLSFrontEndSessionRepository.get: " + json.as[UserAnswers])
               json.as[UserAnswers]
           }
         } recover {
-          case e: Exception => throw new Exception(e.getMessage)
+          case _: Exception => None
         }
-
-    Future.successful(Some(new UserAnswers(id)))
   }
 
-  def set(userAnswers: UserAnswers)(implicit hc: HeaderCarrier): Future[Boolean] =
-    amlsConnector.set(userAnswers.id, userAnswers).map { r =>
+  def set(userAnswers: UserAnswers)(implicit hc: HeaderCarrier): Future[Boolean] = {
+    val credId = userAnswers.id.replace("\"", "")
+    amlsConnector.set(credId, userAnswers).map { r =>
       !r.body.isEmpty
     } recover {
       case _: Exception => false
     }
+  }
 }
 
 trait AMLSFrontEndSessionRepository {

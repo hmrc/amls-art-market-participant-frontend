@@ -33,14 +33,13 @@ class AMLSConnector @Inject()(config: Configuration,
   private val baseUrl                 = config.get[Service]("microservice.services.amls-frontend")
   private[connectors] val url: String = s"$baseUrl/anti-money-laundering/amp"
 
-  def get(id: String)(implicit hc: HeaderCarrier): Future[Option[JsObject]] = {
-    val getUrl = s"$url/get/$id"
+  def get(credId: String)(implicit hc: HeaderCarrier): Future[Option[JsObject]] = {
+    val getUrl = s"$url/get/$credId"
     httpClient.GET[Option[JsObject]](getUrl)
   }
 
-  def set(id: String, userAnswers: UserAnswers)(implicit hc: HeaderCarrier)= {
-    val putUrl = s"$url/set/$id"
+  def set(credId: String, userAnswers: UserAnswers)(implicit hc: HeaderCarrier)= {
+    val putUrl = s"$url/set/$credId"
     httpClient.PUT(putUrl, userAnswers)
   }
-
 }

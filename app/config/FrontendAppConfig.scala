@@ -38,7 +38,7 @@ class FrontendAppConfig @Inject() (configuration: Configuration) {
   val betaFeedbackUrl = s"$contactHost/contact/beta-feedback"
   val betaFeedbackUnauthenticatedUrl = s"$contactHost/contact/beta-feedback-unauthenticated"
 
-  val frontendBaseUrl = configuration.get[String](s"microservice.services.amls-frontend.public.url")
+  val frontendBaseUrl = configuration.get[String](s"microservice.services.amls-frontend.url")
   val renewalProgressUrl = s"${frontendBaseUrl}/renewal-progress"
   val registrationProgressUrl = s"${frontendBaseUrl}/registration-progress"
 

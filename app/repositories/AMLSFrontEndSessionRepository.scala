@@ -20,7 +20,7 @@ import akka.stream.Materializer
 import connectors.AMLSConnector
 import javax.inject.Inject
 import models.UserAnswers
-import play.api.{Configuration, Logger}
+import play.api.{Configuration}
 import uk.gov.hmrc.http.HeaderCarrier
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -42,6 +42,7 @@ class DefaultAMLSFrontEndSessionRepository @Inject()(amlsConnector: AMLSConnecto
 
   def set(userAnswers: UserAnswers)(implicit hc: HeaderCarrier): Future[Boolean] = {
     val credId = userAnswers.id.replace("\"", "")
+
     amlsConnector.set(credId, userAnswers).map { r =>
       !r.body.isEmpty
     } recover {
@@ -51,8 +52,6 @@ class DefaultAMLSFrontEndSessionRepository @Inject()(amlsConnector: AMLSConnecto
 }
 
 trait AMLSFrontEndSessionRepository {
-
   def get(id: String)(implicit hc: HeaderCarrier): Future[Option[UserAnswers]]
-
   def set(userAnswers: UserAnswers)(implicit hc: HeaderCarrier): Future[Boolean]
 }

@@ -87,34 +87,37 @@ typeOfParticipant.artAgent = Art agent
 typeOfParticipant.artAuctioneer = Art auctioneer
 typeOfParticipant.somethingElse = Another type of art market participant
 typeOfParticipant.checkYourAnswersLabel = What type of art market participant are you?
-typeOfParticipant.error.required = Select a type of participant
+typeOfParticipant.error.required = Select the type of art market participant you are
 typeOfParticipant.hint = Select all the apply.
 
 typeOfParticipantDetail.title = Tell us what other type of art market participant you are
 typeOfParticipantDetail.heading = Tell us what other type of art market participant you are
 typeOfParticipantDetail.checkYourAnswersLabel = Tell us what other type of art market participant you are
-typeOfParticipantDetail.error.required = Enter other type of art market participant
-typeOfParticipantDetail.error.length = Details provided must be 256 characters or less
+typeOfParticipantDetail.error.required = Enter the other type of art market participant you are
+typeOfParticipantDetail.error.length = Other type of art market participant must be 255 characters or less
+typeOfParticipantDetail.error.punctuation = Other type of art market participant can include letters a to z, numbers, spaces, and most punctuation and special characters
 
 boughtOrSoldOverThreshold.title = Has your business made a sale or purchase of art for €10,000 or more after 10 January 2020?
 boughtOrSoldOverThreshold.heading = Has your business made a sale or purchase of art for €10,000 or more after 10 January 2020?
 boughtOrSoldOverThreshold.checkYourAnswersLabel = Has your business made a sale or purchase of art for €10,000 or more after 10 January 2020?
-boughtOrSoldOverThreshold.error.required = Select yes if your business has bought or sold art for €10,000 or more
+boughtOrSoldOverThreshold.error.required = Select yes if your business made a sale or purchase of art for €10,000 or more after 10 January 2020
 boughtOrSoldOverThreshold.hint = If you do not use euros you’ll need to convert the amount to the currency you use.
 
 dateTransactionOverThreshold.title = When was the first sale or purchase of art for €10,000 or more after 10 January 2020?
 dateTransactionOverThreshold.heading = When was the first sale or purchase of art for €10,000 or more after 10 January 2020?
 dateTransactionOverThreshold.checkYourAnswersLabel = When was the first sale or purchase of art for €10,000 or more after 10 January 2020?
-dateTransactionOverThreshold.error.required.all = Enter the date of the first sale or purchase of art for €10,000 or more
-dateTransactionOverThreshold.error.required.two = The date must include {0} and {1}
-dateTransactionOverThreshold.error.required = The month must include {0}
-dateTransactionOverThreshold.error.invalid = Enter a real date Month and Year
+dateTransactionOverThreshold.error.required.all = Enter the date of the first sale or purchase of art for €10,000 or more after 10 January 2020
+dateTransactionOverThreshold.error.required.two = Date of the first sale or purchase must include a {0} and {1}
+dateTransactionOverThreshold.error.required = Date of the first sale or purchase must include a {0}
+dateTransactionOverThreshold.error.invalid = Enter a real date for the first sale or purchase
+dateTransactionOverThreshold.error.startdate = Date of the first sale or purchase must be after 10 January 2020
+dateTransactionOverThreshold.error.future = Date of the first sale or purchase must be in the past
 dateTransactionOverThreshold.hint = For example, 11 01 2020.
 
 identifyLinkedTransactions.title = Are you able to identify multiple payments linked to a single sale or purchase?
 identifyLinkedTransactions.heading = Are you able to identify multiple payments linked to a single sale or purchase?
 identifyLinkedTransactions.checkYourAnswersLabel = Are you able to identify multiple payments linked to a single sale or purchase?
-identifyLinkedTransactions.error.required = Select yes if you are able to identify multiple payments
+identifyLinkedTransactions.error.required = Select yes if you can identify multiple payments linked to a single sale or purchase
 
 percentageExpectedTurnover.title = How much of your turnover do you expect to come from sales of art for €10,000 or more?
 percentageExpectedTurnover.heading = How much of your turnover do you expect to come from sales of art for €10,000 or more?
@@ -124,6 +127,6 @@ percentageExpectedTurnover.fortyOneToSixty = 41% to 60%
 percentageExpectedTurnover.sixtyOneToEighty = 61% to 80%
 percentageExpectedTurnover.eightyOneToOneHundred = 81% to 100%
 percentageExpectedTurnover.checkYourAnswersLabel = How much of your turnover do you expect to come from sales of art for €10,000 or more?
-percentageExpectedTurnover.error.required = Select a percentage expected turnover
+percentageExpectedTurnover.error.required = Select how much of your turnover you expect to come from sales of art for €10,000 or more
 percentageExpectedTurnover.hint = If you do not use euros you’ll need to convert the amount to the currency you use.
 

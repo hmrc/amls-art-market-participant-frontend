@@ -24,7 +24,7 @@ import navigation.Navigator
 import pages.PercentageExpectedTurnoverPage
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import repositories.{AMLSFrontEndSessionRepository, SessionRepository}
+import repositories.{AMLSFrontEndSessionRepository}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
 import views.html.PercentageExpectedTurnoverView
 

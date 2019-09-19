@@ -25,11 +25,10 @@ import org.mockito.Mockito.when
 import org.scalatestplus.mockito.MockitoSugar
 import pages.BoughtOrSoldOverThresholdPage
 import play.api.inject.bind
-import play.api.libs.json.{JsBoolean, Json}
 import play.api.mvc.Call
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
-import repositories.{AMLSFrontEndSessionRepository, SessionRepository}
+import repositories.{AMLSFrontEndSessionRepository}
 import views.html.BoughtOrSoldOverThresholdView
 
 import scala.concurrent.Future

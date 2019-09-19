@@ -30,7 +30,7 @@ import play.api.inject.bind
 import play.api.mvc.{AnyContentAsEmpty, AnyContentAsFormUrlEncoded, Call}
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
-import repositories.{AMLSFrontEndSessionRepository, SessionRepository}
+import repositories.{AMLSFrontEndSessionRepository}
 import views.html.DateTransactionOverThresholdView
 
 import scala.concurrent.Future
@@ -42,7 +42,7 @@ class DateTransactionOverThresholdControllerSpec extends SpecBase with MockitoSu
 
   def onwardRoute = Call("GET", "/foo")
 
-  val validAnswer = LocalDate.now(ZoneOffset.UTC)
+  val validAnswer = DateTransactionOverThresholdFormProvider.ampStartDate.plusDays(1)
 
   lazy val dateTransactionOverThresholdRoute = routes.DateTransactionOverThresholdController.onPageLoad(NormalMode).url
 
@@ -95,27 +95,31 @@ class DateTransactionOverThresholdControllerSpec extends SpecBase with MockitoSu
       application.stop()
     }
 
-    "redirect to the next page when valid data is submitted" in {
+    // TODO: Remove check after 10th Jan 2020
+    if(LocalDate.now(ZoneOffset.UTC).isAfter(DateTransactionOverThresholdFormProvider.ampStartDate)) {
 
-      val mockSessionRepository = mock[AMLSFrontEndSessionRepository]
+      "redirect to the next page when valid data is submitted" in {
 
-      when(mockSessionRepository.set(any())(any())) thenReturn Future.successful(true)
+        val mockSessionRepository = mock[AMLSFrontEndSessionRepository]
 
-      val application =
-        applicationBuilder(userAnswers = Some(emptyUserAnswers))
-          .overrides(
-            bind[Navigator].toInstance(new FakeNavigator(onwardRoute)),
-            bind[AMLSFrontEndSessionRepository].toInstance(mockSessionRepository)
-          )
-          .build()
+        when(mockSessionRepository.set(any())(any())) thenReturn Future.successful(true)
 
-      val result = route(application, postRequest).value
+        val application =
+          applicationBuilder(userAnswers = Some(emptyUserAnswers))
+            .overrides(
+              bind[Navigator].toInstance(new FakeNavigator(onwardRoute)),
+              bind[AMLSFrontEndSessionRepository].toInstance(mockSessionRepository)
+            )
+            .build()
 
-      status(result) mustEqual SEE_OTHER
+        val result = route(application, postRequest).value
 
-      redirectLocation(result).value mustEqual onwardRoute.url
+        status(result) mustEqual SEE_OTHER
 
-      application.stop()
+        redirectLocation(result).value mustEqual onwardRoute.url
+
+        application.stop()
+      }
     }
 
     "return a Bad Request and errors when invalid data is submitted" in {

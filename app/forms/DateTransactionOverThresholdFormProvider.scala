@@ -39,7 +39,5 @@ class DateTransactionOverThresholdFormProvider @Inject() extends Mappings {
 
 object DateTransactionOverThresholdFormProvider {
 
-  // TODO: Change year to 2020 after testing
-
-  val ampStartDate = LocalDate.of(2019, 1, 11)
+  val ampStartDate = LocalDate.of(2020, 1, 11)
 }

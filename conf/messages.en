@@ -61,6 +61,7 @@ site.continue = Save and continue
 site.acceptandcomplete = Accept and complete section
 site.service_name = Manage your anti-money laundering supervision
 site.textarea.char_limit = (Limit is {0} characters)
+site.signout = Sign out
 amp.heading = Art market participant
 
 link.return.renewal.progress = Return to about your business

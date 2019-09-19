@@ -27,7 +27,7 @@ function secondsToTime (secs) {
         title: 'You’re about to be signed out',
         message: 'For security reasons, you will be signed out of this service in',
         keep_alive_url: '/keep-alive',
-        logout_url: '/sign-out',
+        logout_url: 'http://localhost:9025/gg/sign-out',
         restart_on_yes: true,
         dialog_width: 340,
         close_on_escape: true,

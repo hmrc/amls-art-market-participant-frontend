@@ -29,8 +29,8 @@ import views.html._
 class NavigationLinksSpec extends ViewBehaviours {
 
   val signOutMsg:String = "Sign out"
-  val returnToAboutYourBusinessMsg:String = "link.return.registration.progress"
-  val acceptAndCompleteMsg: String = "site.acceptandcomplete"
+  val returnToAboutYourBusinessMsg:String = "Return to about your business"
+  val acceptAndCompleteMsg: String = "Accept and complete section"
 
   "WhatYouNeed view" must {
     val view = viewFor[WhatYouNeedView](Some(emptyUserAnswers))
@@ -124,7 +124,7 @@ class NavigationLinksSpec extends ViewBehaviours {
     }
 
     "display AcceptAndComplete button" in {
-     assertElementContainsMessage(document, "submit", messages(acceptAndCompleteMsg))
+      assertElementContainsMessage(document, "submit", messages(acceptAndCompleteMsg))
     }
   }
 

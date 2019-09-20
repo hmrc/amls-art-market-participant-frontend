@@ -51,7 +51,11 @@
     <link rel="stylesheet" href='@routes.Assets.versioned("stylesheets/amlsartmarketparticipantfrontend-app.css")' />
 }
 
-@headerNavLinks = {}
+@headerNavLinks = {
+    @if(userLoggedIn) {
+        <li><a href="@appConfig.logoutUrl">@Messages("site.signout")</a></li>
+    }
+}
 
 @insideHeader = {
     @header_nav(
@@ -81,12 +85,28 @@
 
 @afterHeader = { @URRBanner }
 
+@scripts = {
+    <script src='@routes.Assets.versioned("javascripts/timeout-dialog.js")'></script>
+    @scriptElem
+    <script>
+        @if(userLoggedIn) {
+            $.timeoutDialog({timeout: @appConfig.timeoutSeconds,
+                             countdown: @appConfig.timeoutCountdown,
+                             keep_alive_url: '@controllers.routes.AmlsController.keep_alive',
+                             logout_url: '@appConfig.logoutUrl',
+                             logout_redirect_url: '@appConfig.logoutUrl',
+                             restart_on_yes: true, background_no_scroll: true});
+           var dialogOpen;
+        }
+  </script>
+}
+
 @bodyEnd = {
     @footer(
       analyticsToken = Some(appConfig.analyticsToken),
       analyticsHost = appConfig.analyticsHost,
       ssoUrl = None,
-      scriptElem = scriptElem,
+      scriptElem = Some(scripts),
       gaCalls = None)
       <script src='@routes.Assets.versioned("javascripts/amlsartmarketparticipantfrontend-app.min.js")'> </script>
 }

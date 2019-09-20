@@ -16,10 +16,12 @@
 
 @import controllers.routes.TypeOfParticipantController
 @import models.{Mode, TypeOfParticipant}
+@import config.FrontendAppConfig
 
 @this(
     main_template: MainTemplate,
-    formHelper: FormWithCSRF
+    formHelper: FormWithCSRF,
+    appConfig: FrontendAppConfig
 )
 
 @(form: Form[Seq[TypeOfParticipant]], mode: Mode)(implicit request: Request[_], messages: Messages)
@@ -47,5 +49,7 @@
         )
 
         @components.submit_button()
+
+        @components.anchor(appConfig = appConfig)
     }
 }

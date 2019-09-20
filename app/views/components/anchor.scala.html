@@ -14,8 +14,18 @@
  * limitations under the License.
  *@
 
-@(messageKey: String = "site.continue")(implicit messages: Messages)
+@import config.FrontendAppConfig
 
-<div class="section">
-    <button id="submit" class="button">@messages(messageKey)</button>
-</div>
+@(
+    appConfig: FrontendAppConfig,
+    returnLocation: Option[String] = None
+)(implicit m: Messages)
+
+<p class="return-link">
+@if(returnLocation == Some("renewal")) {
+    <a href="@{appConfig.renewalProgressUrl}">@Messages("link.return.renewal.progress")</a>
+} else {
+    <a href="@{appConfig.registrationProgressUrl}">@Messages("link.return.registration.progress")</a>
+}
+</p>
+

@@ -20,7 +20,7 @@ import javax.inject.Inject
 import play.api.mvc.MessagesControllerComponents
 import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
 
-class AmlsController @Inject()(val controllerComponents: MessagesControllerComponents) extends FrontendBaseController {
+class SessionController @Inject()(val controllerComponents: MessagesControllerComponents) extends FrontendBaseController {
 
   val keep_alive = Action {
     implicit request =>

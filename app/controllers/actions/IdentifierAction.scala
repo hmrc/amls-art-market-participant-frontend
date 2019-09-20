@@ -84,28 +84,28 @@ class AuthenticatedIdentifierAction @Inject()(
         Future.successful(Left(Redirect(Call("GET", config.loginUrl))))
     }.recover[Either[Result, IdentifierRequest[A]]] {
       case nas: NoActiveSession =>
-        Logger.debug("DefaultAuthAction:Refine - NoActiveSession:" + nas)
+        exceptionLogger(nas)
         Left(Redirect(Call("GET", config.loginUrl)))
       case ie: InsufficientEnrolments =>
-        Logger.debug("DefaultAuthAction:Refine - InsufficientEnrolments:" + ie)
+        exceptionLogger(ie)
         Left(Redirect(Call("GET", unauthorisedUrl)))
       case icl: InsufficientConfidenceLevel =>
-        Logger.debug("DefaultAuthAction:Refine - InsufficientConfidenceLevel:" + icl)
+        exceptionLogger(icl)
         Left(Redirect(Call("GET", unauthorisedUrl)))
       case uap: UnsupportedAuthProvider =>
-        Logger.debug("DefaultAuthAction:Refine - UnsupportedAuthProvider:" + uap)
+        exceptionLogger(uap)
         Left(Redirect(Call("GET", unauthorisedUrl)))
       case uag: UnsupportedAffinityGroup =>
-        Logger.debug("DefaultAuthAction:Refine - UnsupportedAffinityGroup:" + uag)
+        exceptionLogger(uag)
         Left(Redirect(Call("GET", unauthorisedUrl)))
       case ucr: UnsupportedCredentialRole =>
-        Logger.debug("DefaultAuthAction:Refine - UnsupportedCredentialRole:" + ucr)
+        exceptionLogger(ucr)
         Left(Redirect(Call("GET", unauthorisedUrl)))
       case enf: enrolmentNotFound =>
-        Logger.debug("DefaultAuthAction:Refine - enrolmentNotFound:" + enf)
+        exceptionLogger(enf)
         Left(Redirect(Call("GET", unauthorisedUrl)))
       case e : AuthorisationException =>
-        Logger.debug("DefaultAuthAction:Refine - AuthorisationException:" + e)
+        exceptionLogger(e)
         Left(Redirect(Call("GET", unauthorisedUrl)))
     }
   }

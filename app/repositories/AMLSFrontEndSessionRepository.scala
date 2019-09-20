@@ -43,8 +43,8 @@ class DefaultAMLSFrontEndSessionRepository @Inject()(amlsConnector: AMLSConnecto
   def set(userAnswers: UserAnswers)(implicit hc: HeaderCarrier): Future[Boolean] = {
     val credId = userAnswers.id.replace("\"", "")
 
-    amlsConnector.set(credId, userAnswers).map { r =>
-      !r.body.isEmpty
+    amlsConnector.set(credId, userAnswers).map { result =>
+      result.body.nonEmpty
     } recover {
       case _: Exception => false
     }

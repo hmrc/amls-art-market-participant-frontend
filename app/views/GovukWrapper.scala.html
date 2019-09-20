@@ -92,7 +92,7 @@
         @if(userLoggedIn) {
             $.timeoutDialog({timeout: @appConfig.timeoutSeconds,
                              countdown: @appConfig.timeoutCountdown,
-                             keep_alive_url: '@controllers.routes.AmlsController.keep_alive',
+                             keep_alive_url: '@controllers.routes.SessionController.keep_alive',
                              logout_url: '@appConfig.logoutUrl',
                              logout_redirect_url: '@appConfig.logoutUrl',
                              restart_on_yes: true, background_no_scroll: true});

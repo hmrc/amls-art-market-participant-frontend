@@ -31,9 +31,7 @@ $(document).ready(function() {
     }
   })
 
-  var cookieData=GOVUK.getCookie("full-width-banner-cookie");
-
- if (cookieData == null) {
+ if (GOVUK.getCookie("full-width-banner-cookie") == null) {
      $("#full-width-banner").addClass("full-width-banner--show");
  }
 

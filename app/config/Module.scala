@@ -25,7 +25,8 @@ class Module extends AbstractModule {
   override def configure(): Unit = {
     bind(classOf[DataRetrievalAction]).to(classOf[DataRetrievalActionImpl]).asEagerSingleton()
     bind(classOf[DataRequiredAction]).to(classOf[DataRequiredActionImpl]).asEagerSingleton()
-    bind(classOf[SessionRepository]).to(classOf[DefaultSessionRepository]).asEagerSingleton()
+    // Switch out `AMLSFrontEndSessionRepository` for `SessionRepository` and `DefaultAMLSFrontEndSessionRepository`
+    // for `DefaultSessionRepository` to revert back to local Mongo cache storage
     bind(classOf[AMLSFrontEndSessionRepository]).to(classOf[DefaultAMLSFrontEndSessionRepository]).asEagerSingleton()
   }
 }

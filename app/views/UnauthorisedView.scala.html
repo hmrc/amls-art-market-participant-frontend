@@ -21,7 +21,7 @@
 @()(implicit request: Request[_], messages: Messages)
 
 @main_template(
-    title = messages("unauthorised.title")
+    title = s"${messages("unauthorised.title")} - Art market participant - Manage your anti-money laundering supervision - GOV.UK"
     ) {
 
     @components.heading("unauthorised.heading")

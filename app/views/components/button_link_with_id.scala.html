@@ -14,8 +14,12 @@
  * limitations under the License.
  *@
 
-@(messageKey: String = "site.continue")(implicit messages: Messages)
+@(
+messageKey: String = "",
+href: String,
+id: String
+)(implicit messages: Messages)
 
 <div class="section">
-    <button id="submit" name="submit" class="button">@messages(messageKey)</button>
+    <a id="@id" href="@href" role="button" class="button">@messages(messageKey)</a>
 </div>

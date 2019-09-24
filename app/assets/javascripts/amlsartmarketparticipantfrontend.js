@@ -26,7 +26,7 @@ $(document).ready(function() {
   $('#back-link').on('click', function(e){
     e.preventDefault();
     if (window.history && window.history.back && typeof window.history.back === 'function' &&
-       (docReferrer !== "" && docReferrer.indexOf(window.location.host) !== -1)) {
+       (docReferrer !== "" && docReferrer.indexOf(window.location.hostname) !== -1)) {
         window.history.back();
     }
   })

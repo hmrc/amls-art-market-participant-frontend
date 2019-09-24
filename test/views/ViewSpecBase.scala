@@ -87,6 +87,10 @@ trait ViewSpecBase extends SpecBase {
     }
   }
 
+  def assertElementContainsMessage(doc: Document, id: String, msg: String) = {
+    assert(doc.getElementById(id).html().contains(msg), s"\n\nElement $id does not contain message $msg")
+  }
+
   def assertElementHasClass(doc: Document, id: String, expectedClass: String) = {
     assert(doc.getElementById(id).hasClass(expectedClass), s"\n\nElement $id does not have class $expectedClass")
   }

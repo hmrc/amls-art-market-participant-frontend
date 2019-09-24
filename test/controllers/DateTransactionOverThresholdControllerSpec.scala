@@ -30,7 +30,7 @@ import play.api.inject.bind
 import play.api.mvc.{AnyContentAsEmpty, AnyContentAsFormUrlEncoded, Call}
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
-import repositories.SessionRepository
+import repositories.{AMLSFrontEndSessionRepository}
 import views.html.DateTransactionOverThresholdView
 
 import scala.concurrent.Future
@@ -96,20 +96,19 @@ class DateTransactionOverThresholdControllerSpec extends SpecBase with MockitoSu
     }
 
     // TODO: Remove check after 10th Jan 2020
-
     if(LocalDate.now(ZoneOffset.UTC).isAfter(DateTransactionOverThresholdFormProvider.ampStartDate)) {
 
       "redirect to the next page when valid data is submitted" in {
 
-        val mockSessionRepository = mock[SessionRepository]
+        val mockSessionRepository = mock[AMLSFrontEndSessionRepository]
 
-        when(mockSessionRepository.set(any())) thenReturn Future.successful(true)
+        when(mockSessionRepository.set(any())(any())) thenReturn Future.successful(true)
 
         val application =
           applicationBuilder(userAnswers = Some(emptyUserAnswers))
             .overrides(
               bind[Navigator].toInstance(new FakeNavigator(onwardRoute)),
-              bind[SessionRepository].toInstance(mockSessionRepository)
+              bind[AMLSFrontEndSessionRepository].toInstance(mockSessionRepository)
             )
             .build()
 

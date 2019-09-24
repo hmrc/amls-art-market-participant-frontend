@@ -25,11 +25,10 @@ import org.mockito.Mockito.when
 import org.scalatestplus.mockito.MockitoSugar
 import pages.IdentifyLinkedTransactionsPage
 import play.api.inject.bind
-import play.api.libs.json.{JsBoolean, Json}
 import play.api.mvc.Call
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
-import repositories.SessionRepository
+import repositories.{AMLSFrontEndSessionRepository}
 import views.html.IdentifyLinkedTransactionsView
 
 import scala.concurrent.Future
@@ -85,15 +84,15 @@ class IdentifyLinkedTransactionsControllerSpec extends SpecBase with MockitoSuga
 
     "redirect to the next page when valid data is submitted" in {
 
-      val mockSessionRepository = mock[SessionRepository]
+      val mockSessionRepository = mock[AMLSFrontEndSessionRepository]
 
-      when(mockSessionRepository.set(any())) thenReturn Future.successful(true)
+      when(mockSessionRepository.set(any())(any())) thenReturn Future.successful(true)
 
       val application =
         applicationBuilder(userAnswers = Some(emptyUserAnswers))
           .overrides(
             bind[Navigator].toInstance(new FakeNavigator(onwardRoute)),
-            bind[SessionRepository].toInstance(mockSessionRepository)
+            bind[AMLSFrontEndSessionRepository].toInstance(mockSessionRepository)
           )
           .build()
 

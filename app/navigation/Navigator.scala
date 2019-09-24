@@ -41,7 +41,6 @@ class Navigator @Inject()() {
       ans.contains(SomethingElse) match {
         case true  => routes.TypeOfParticipantDetailController.onPageLoad(NormalMode)
         case false => routes.BoughtOrSoldOverThresholdController.onPageLoad(NormalMode)
-        case _     => routes.SessionExpiredController.onPageLoad()
       }
     }
   }.getOrElse(routes.SessionExpiredController.onPageLoad())
@@ -51,7 +50,6 @@ class Navigator @Inject()() {
       ans.contains(SomethingElse) match {
         case true  => routes.TypeOfParticipantDetailController.onPageLoad(CheckMode)
         case false => routes.CheckYourAnswersController.onPageLoad()
-        case _     => routes.SessionExpiredController.onPageLoad()
       }
     }
   }.getOrElse(routes.SessionExpiredController.onPageLoad())

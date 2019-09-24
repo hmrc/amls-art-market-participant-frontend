@@ -34,7 +34,7 @@ class SessionExpiredViewSpec extends ViewBehaviours {
     "include the correct content" in {
       val document = asDocument(applyView)
 
-      assertEqualsMessage(document, "title", "For your security, this service has been reset")
+      assertTitleEqualsMessage(document, "title", "For your security, this service has been reset")
       assertPageTitleEqualsMessage(document, "For your security, this service has been reset")
     }
   }

@@ -34,7 +34,7 @@ class UnauthorisedViewSpec extends ViewBehaviours {
     "include the correct content" in {
       val document = asDocument(applyView)
 
-      assertEqualsMessage(document, "title", "You can’t access this service with this account")
+      assertTitleEqualsMessage(document, "title", "You can’t access this service with this account")
       assertPageTitleEqualsMessage(document, "You can’t access this service with this account")
     }
   }

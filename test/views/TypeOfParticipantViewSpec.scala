@@ -17,8 +17,7 @@
 package views
 
 import forms.TypeOfParticipantFormProvider
-import models.{TypeOfParticipant, NormalMode}
-import play.api.Application
+import models.{NormalMode, TypeOfParticipant}
 import play.api.data.Form
 import play.twirl.api.HtmlFormat
 import views.behaviours.CheckboxViewBehaviours
@@ -46,7 +45,7 @@ class TypeOfParticipantViewSpec extends CheckboxViewBehaviours[TypeOfParticipant
     "include the correct content" in {
       val document = asDocument(applyView(form))
 
-      assertEqualsMessage(document, "title", "What type of art market participant are you?")
+      assertTitleEqualsMessage(document, "title", "What type of art market participant are you?")
       assertPageTitleEqualsMessage(document, "What type of art market participant are you?")
     }
   }

@@ -39,7 +39,42 @@ trait ViewBehaviours extends ViewSpecBase {
         "display the correct browser title" in {
 
           val doc = asDocument(view)
-          assertEqualsMessage(doc, "title", s"$messageKeyPrefix.title")
+          assertTitleEqualsMessage(doc, "title", s"$messageKeyPrefix.title")
+        }
+
+        "display the correct page title" in {
+
+          val doc = asDocument(view)
+          assertPageTitleEqualsMessage(doc, s"$messageKeyPrefix.heading")
+        }
+
+        "display the correct guidance" in {
+
+          val doc = asDocument(view)
+          for (key <- expectedGuidanceKeys) assertContainsText(doc, messages(s"$messageKeyPrefix.$key"))
+        }
+      }
+    }
+  }
+
+  def indexPage(view: HtmlFormat.Appendable,
+                 messageKeyPrefix: String,
+                 expectedGuidanceKeys: String*): Unit = {
+
+    "behave like a normal page" when {
+
+      "rendered" must {
+
+        "have the correct banner title" in {
+
+          val doc = asDocument(view)
+          val nav = doc.getElementById("proposition-menu")
+          val span = nav.children.first
+        }
+
+        "display the correct browser title" in {
+          val doc = asDocument(view)
+          assertEqualsValue(doc, "title", "Art market participant - Manage your anti-money laundering supervision - GOV.UK")
         }
 
         "display the correct page title" in {

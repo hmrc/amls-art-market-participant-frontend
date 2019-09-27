@@ -46,7 +46,7 @@ class IdentifyLinkedTransactionsViewSpec extends YesNoViewBehaviours {
     "include the correct content" in {
       val document = asDocument(applyView(form))
 
-      assertEqualsMessage(document, "title", "Are you able to identify multiple payments linked to a single sale or purchase?")
+      assertTitleEqualsMessage(document, "title", "Are you able to identify multiple payments linked to a single sale or purchase?")
       assertPageTitleEqualsMessage(document, "Are you able to identify multiple payments linked to a single sale or purchase?")
     }
   }

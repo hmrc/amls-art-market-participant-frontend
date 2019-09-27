@@ -46,7 +46,7 @@ class TypeOfParticipantDetailViewSpec extends StringViewBehaviours {
     "include the correct content" in {
       val document = asDocument(applyView(form))
 
-      assertEqualsMessage(document, "title", "Tell us what other type of art market participant you are")
+      assertTitleEqualsMessage(document, "title", "Tell us what other type of art market participant you are")
       assertPageTitleEqualsMessage(document, "Tell us what other type of art market participant you are")
     }
   }

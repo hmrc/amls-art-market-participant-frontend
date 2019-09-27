@@ -34,7 +34,7 @@ class WhatYouNeedViewSpec extends ViewBehaviours {
     "include the correct content" in {
       val document = asDocument(applyView)
 
-      assertEqualsMessage(document, "title", "What you need")
+      assertTitleEqualsMessage(document, "title", "What you need")
       assertPageTitleEqualsMessage(document, "What you need")
     }
   }

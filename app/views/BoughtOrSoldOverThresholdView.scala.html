@@ -27,7 +27,7 @@
 @(form: Form[_], mode: Mode)(implicit request: Request[_], messages: Messages)
 
 @main_template(
-    title = s"${errorPrefix(form)} ${messages("boughtOrSoldOverThreshold.title")}"
+    title = s"${errorPrefix(form)} ${messages("boughtOrSoldOverThreshold.title")} - Art market participant - Manage your anti-money laundering supervision - GOV.UK".trim
     ) {
 
     @formHelper(action = BoughtOrSoldOverThresholdController.onSubmit(mode), 'autoComplete -> "off") {

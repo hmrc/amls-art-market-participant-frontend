@@ -16,14 +16,11 @@
 
 package repositories
 
-import java.time.LocalDateTime
-
 import akka.stream.Materializer
 import connectors.AMLSConnector
 import javax.inject.Inject
-import models.{MongoDateTimeFormats, UserAnswers}
+import models.UserAnswers
 import play.api.Configuration
-import play.api.libs.json.Json
 import uk.gov.hmrc.http.HeaderCarrier
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -35,20 +32,14 @@ class DefaultAMLSFrontEndSessionRepository @Inject()(amlsConnector: AMLSConnecto
   def get(credId: String)(implicit hc: HeaderCarrier): Future[Option[UserAnswers]] = {
         amlsConnector.get(credId).map {
           _.map {
-            json => {
-              val updated = Json.obj(("_id", Json.toJson(credId))) +
-                json.fields.head +
-                ("lastUpdated", MongoDateTimeFormats.localDateTimeWrite.writes(LocalDateTime.now()))
-              updated.as[UserAnswers]
-            }
+            json => json.as[UserAnswers]
           }
         } recover {
           case _: Exception => None
         }
   }
 
-  def set(userAnswers: UserAnswers)(implicit hc: HeaderCarrier): Future[Boolean] = {
-    val credId = userAnswers.id.replace("\"", "")
+  def set(credId: String, userAnswers: UserAnswers)(implicit hc: HeaderCarrier): Future[Boolean] = {
 
     amlsConnector.set(credId, userAnswers).map { result =>
       result.body.nonEmpty
@@ -60,5 +51,5 @@ class DefaultAMLSFrontEndSessionRepository @Inject()(amlsConnector: AMLSConnecto
 
 trait AMLSFrontEndSessionRepository {
   def get(id: String)(implicit hc: HeaderCarrier): Future[Option[UserAnswers]]
-  def set(userAnswers: UserAnswers)(implicit hc: HeaderCarrier): Future[Boolean]
+  def set(credId: String, userAnswers: UserAnswers)(implicit hc: HeaderCarrier): Future[Boolean]
 }

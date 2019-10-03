@@ -65,7 +65,7 @@ class DateTransactionOverThresholdController @Inject()(
         value =>
           for {
             updatedAnswers <- Future.fromTry(request.userAnswers.set(DateTransactionOverThresholdPage, value))
-            _              <- sessionRepository.set(updatedAnswers)
+            _              <- sessionRepository.set(request.internalId, updatedAnswers)
           } yield Redirect(navigator.nextPage(DateTransactionOverThresholdPage, mode, updatedAnswers))
       )
   }

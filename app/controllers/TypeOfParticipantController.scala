@@ -46,7 +46,7 @@ class TypeOfParticipantController @Inject()(
   def onPageLoad(mode: Mode): Action[AnyContent] = (identify andThen getData) {
     implicit request =>
 
-      val preparedForm = request.userAnswers.getOrElse(UserAnswers(request.internalId)).get(TypeOfParticipantPage) match {
+      val preparedForm = request.userAnswers.getOrElse(UserAnswers()).get(TypeOfParticipantPage) match {
         case None => form
         case Some(value) => form.fill(value)
       }
@@ -63,8 +63,8 @@ class TypeOfParticipantController @Inject()(
 
         value =>
           for {
-            updatedAnswers <- Future.fromTry(request.userAnswers.getOrElse(UserAnswers(request.internalId)).set(TypeOfParticipantPage, value))
-            _              <- sessionRepository.set(updatedAnswers)
+            updatedAnswers <- Future.fromTry(request.userAnswers.getOrElse(UserAnswers()).set(TypeOfParticipantPage, value))
+            _              <- sessionRepository.set(request.internalId, updatedAnswers)
           } yield Redirect(navigator.nextPage(TypeOfParticipantPage, mode, updatedAnswers))
       )
   }

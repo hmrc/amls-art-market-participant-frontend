@@ -38,7 +38,7 @@ class AMLSConnectorSpec extends SpecBase with MockitoSugar {
   implicit val hc   = HeaderCarrier()
   val amlsConnector = new AMLSConnector(config = mock[Configuration], httpClient = mock[HttpClient])
   val dateVal       = LocalDateTime.now
-  val answers       = UserAnswers("id").set(TypeOfParticipantPage,  Seq(SomethingElse)).success.value
+  val answers       = UserAnswers().set(TypeOfParticipantPage,  Seq(SomethingElse)).success.value
 
   val completeData  = Json.obj(
     "typeOfParticipant"            -> Seq("artGalleryOwner"),

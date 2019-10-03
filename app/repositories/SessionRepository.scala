@@ -16,8 +16,6 @@
 
 package repositories
 
-import java.time.LocalDateTime
-
 import akka.stream.Materializer
 import javax.inject.Inject
 import models.UserAnswers
@@ -60,21 +58,22 @@ class DefaultSessionRepository @Inject()(
 
   override def set(userAnswers: UserAnswers): Future[Boolean] = {
 
-    val selector = Json.obj(
-      "_id" -> userAnswers.id
-    )
-
-    val modifier = Json.obj(
-      "$set" -> (userAnswers copy (lastUpdated = LocalDateTime.now))
-    )
-
-    collection.flatMap {
-      _.update(selector, modifier, upsert = true).map {
-        lastError =>
-          lastError.ok
-      }
-    }
-  }
+    return Future(false)
+//    val selector = Json.obj(
+//      "_id" -> userAnswers.id
+//    )
+//
+//    val modifier = Json.obj(
+//      "$set" -> (userAnswers copy (lastUpdated = LocalDateTime.now))
+//    )
+//
+//    collection.flatMap {
+//      _.update(selector, modifier, upsert = true).map {
+//        lastError =>
+//          lastError.ok
+//      }
+//    }
+   }
 }
 
 trait SessionRepository {

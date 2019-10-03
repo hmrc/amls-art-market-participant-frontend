@@ -33,7 +33,7 @@ trait SpecBase extends PlaySpec with GuiceOneAppPerSuite with TryValues with Sca
 
   val userAnswersId = "id"
 
-  def emptyUserAnswers = UserAnswers(userAnswersId, Json.obj())
+  def emptyUserAnswers = UserAnswers(Json.obj())
 
   def injector: Injector = app.injector
 

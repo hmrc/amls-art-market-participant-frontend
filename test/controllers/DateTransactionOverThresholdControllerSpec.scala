@@ -46,7 +46,7 @@ class DateTransactionOverThresholdControllerSpec extends SpecBase with MockitoSu
 
   lazy val dateTransactionOverThresholdRoute = routes.DateTransactionOverThresholdController.onPageLoad(NormalMode).url
 
-  override val emptyUserAnswers = UserAnswers(userAnswersId)
+  override val emptyUserAnswers = UserAnswers()
 
   def getRequest(): FakeRequest[AnyContentAsEmpty.type] =
     FakeRequest(GET, dateTransactionOverThresholdRoute)
@@ -79,7 +79,7 @@ class DateTransactionOverThresholdControllerSpec extends SpecBase with MockitoSu
 
     "populate the view correctly on a GET when the question has previously been answered" in {
 
-      val userAnswers = UserAnswers(userAnswersId).set(DateTransactionOverThresholdPage, validAnswer).success.value
+      val userAnswers = UserAnswers().set(DateTransactionOverThresholdPage, validAnswer).success.value
 
       val application = applicationBuilder(userAnswers = Some(userAnswers)).build()
 
@@ -102,7 +102,7 @@ class DateTransactionOverThresholdControllerSpec extends SpecBase with MockitoSu
 
         val mockSessionRepository = mock[AMLSFrontEndSessionRepository]
 
-        when(mockSessionRepository.set(any())(any())) thenReturn Future.successful(true)
+        when(mockSessionRepository.set(any(), any())(any())) thenReturn Future.successful(true)
 
         val application =
           applicationBuilder(userAnswers = Some(emptyUserAnswers))

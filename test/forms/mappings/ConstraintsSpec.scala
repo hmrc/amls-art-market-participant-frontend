@@ -86,6 +86,18 @@ class ConstraintsSpec extends WordSpec with MustMatchers with ScalaCheckProperty
     }
   }
 
+  "inRange" must {
+    "return Valid for a number in range" in {
+      val result = inRange(1, 10, "error.not.in.range").apply(9)
+      result mustEqual Valid
+    }
+
+    "return Invalid for a number not in range" in {
+      val result = inRange(1, 10, "error.not.in.range").apply(11)
+      result mustEqual Invalid("error.not.in.range", 1, 10)
+    }
+  }
+
   "regexp" must {
 
     "return Valid for an input that matches the expression" in {
@@ -96,6 +108,18 @@ class ConstraintsSpec extends WordSpec with MustMatchers with ScalaCheckProperty
     "return Invalid for an input that does not match the expression" in {
       val result = regexp("""^\d+$""", "error.invalid")("foo")
       result mustEqual Invalid("error.invalid", """^\d+$""")
+    }
+  }
+
+  "nonEmptySet" must {
+    "return Valid for a non Empty Set" in {
+      val result = nonEmptySet("error.set.empty").apply(Set(1))
+      result mustEqual Valid
+    }
+
+    "return Invalid for an empty Set" in {
+      val result = nonEmptySet("error.set.empty").apply(Set().empty)
+      result mustEqual Invalid("error.set.empty")
     }
   }
 
@@ -170,6 +194,12 @@ class ConstraintsSpec extends WordSpec with MustMatchers with ScalaCheckProperty
           val result = minDate(min, "error.past", "foo")(date)
           result mustEqual Valid
       }
+    }
+
+    "return Valid for a date 1905-4-11" in {
+      val result = minDate(LocalDate.now(), "error.past", "foo")(LocalDate.of(1905, 4, 11))
+      result mustEqual Valid
+
     }
 
     "return Invalid for a date before the minimum" in {

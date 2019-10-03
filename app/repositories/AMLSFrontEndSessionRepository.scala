@@ -16,11 +16,14 @@
 
 package repositories
 
+import java.time.LocalDateTime
+
 import akka.stream.Materializer
 import connectors.AMLSConnector
 import javax.inject.Inject
-import models.UserAnswers
-import play.api.{Configuration}
+import models.{MongoDateTimeFormats, UserAnswers}
+import play.api.Configuration
+import play.api.libs.json.Json
 import uk.gov.hmrc.http.HeaderCarrier
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -32,8 +35,12 @@ class DefaultAMLSFrontEndSessionRepository @Inject()(amlsConnector: AMLSConnecto
   def get(credId: String)(implicit hc: HeaderCarrier): Future[Option[UserAnswers]] = {
         amlsConnector.get(credId).map {
           _.map {
-            json =>
-              json.as[UserAnswers]
+            json => {
+              val updated = Json.obj(("_id", Json.toJson(credId))) +
+                json.fields.head +
+                ("lastUpdated", MongoDateTimeFormats.localDateTimeWrite.writes(LocalDateTime.now()))
+              updated.as[UserAnswers]
+            }
           }
         } recover {
           case _: Exception => None

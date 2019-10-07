@@ -64,7 +64,7 @@ class TypeOfParticipantController @Inject()(
         value =>
           for {
             updatedAnswers <- Future.fromTry(request.userAnswers.getOrElse(UserAnswers()).set(TypeOfParticipantPage, value))
-            _              <- sessionRepository.set(request.internalId, updatedAnswers)
+            _              <- sessionRepository.set(request.credId, updatedAnswers)
           } yield Redirect(navigator.nextPage(TypeOfParticipantPage, mode, updatedAnswers))
       )
   }

@@ -65,7 +65,7 @@ class IdentifyLinkedTransactionsController @Inject()(
         value =>
           for {
             updatedAnswers <- Future.fromTry(request.userAnswers.set(IdentifyLinkedTransactionsPage, value))
-            _              <- sessionRepository.set(request.internalId, updatedAnswers)
+            _              <- sessionRepository.set(request.credId, updatedAnswers)
           } yield Redirect(navigator.nextPage(IdentifyLinkedTransactionsPage, mode, updatedAnswers))
       )
   }

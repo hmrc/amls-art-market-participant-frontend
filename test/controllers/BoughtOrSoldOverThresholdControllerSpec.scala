@@ -64,7 +64,7 @@ class BoughtOrSoldOverThresholdControllerSpec extends SpecBase with MockitoSugar
 
     "populate the view correctly on a GET when the question has previously been answered" in {
 
-      val userAnswers = UserAnswers(userAnswersId).set(BoughtOrSoldOverThresholdPage, true).success.value
+      val userAnswers = UserAnswers().set(BoughtOrSoldOverThresholdPage, true).success.value
 
       val application = applicationBuilder(userAnswers = Some(userAnswers)).build()
 
@@ -86,7 +86,7 @@ class BoughtOrSoldOverThresholdControllerSpec extends SpecBase with MockitoSugar
 
       val mockSessionRepository = mock[AMLSFrontEndSessionRepository]
 
-      when(mockSessionRepository.set(any())(any())) thenReturn Future.successful(true)
+      when(mockSessionRepository.set(any(), any())(any())) thenReturn Future.successful(true)
 
       val application =
         applicationBuilder(userAnswers = Some(emptyUserAnswers))

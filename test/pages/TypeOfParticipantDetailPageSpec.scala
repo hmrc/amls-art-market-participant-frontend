@@ -34,7 +34,7 @@ class TypeOfParticipantDetailPageSpec extends PageBehaviours {
     "cleanup the TypeOfParticipantPage value where not something else" in {
 
       val typeOfParticipant = Seq(ArtGalleryOwner)
-      val answerParticipantDetailQuestion = UserAnswers("id").set(TypeOfParticipantDetailPage, "something").success.value
+      val answerParticipantDetailQuestion = UserAnswers().set(TypeOfParticipantDetailPage, "something").success.value
       val updatedAnswers = answerParticipantDetailQuestion.set(TypeOfParticipantPage, typeOfParticipant).success.value
 
       updatedAnswers.get(TypeOfParticipantDetailPage) must be(empty)
@@ -43,7 +43,7 @@ class TypeOfParticipantDetailPageSpec extends PageBehaviours {
     "not cleanup the TypeOfParticipantPage value where something else" in {
 
       val typeOfParticipant = Seq(SomethingElse)
-      val answerParticipantDetailQuestion = UserAnswers("id").set(TypeOfParticipantDetailPage, "something").success.value
+      val answerParticipantDetailQuestion = UserAnswers().set(TypeOfParticipantDetailPage, "something").success.value
       val updatedAnswers = answerParticipantDetailQuestion.set(TypeOfParticipantPage, typeOfParticipant).success.value
 
       updatedAnswers.get(TypeOfParticipantDetailPage) mustNot be(empty)

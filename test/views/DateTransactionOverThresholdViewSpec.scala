@@ -33,7 +33,7 @@ class DateTransactionOverThresholdViewSpec extends QuestionViewBehaviours[LocalD
 
   "DateTransactionOverThresholdView view" must {
 
-    val application = applicationBuilder(userAnswers = Some(UserAnswers(userAnswersId))).build()
+    val application = applicationBuilder(userAnswers = Some(UserAnswers())).build()
 
     val view = application.injector.instanceOf[DateTransactionOverThresholdView]
 

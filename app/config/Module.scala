@@ -18,15 +18,13 @@ package config
 
 import com.google.inject.AbstractModule
 import controllers.actions._
-import repositories.{AMLSFrontEndSessionRepository, DefaultAMLSFrontEndSessionRepository, DefaultSessionRepository, SessionRepository}
+import repositories.{AMLSFrontEndSessionRepository, DefaultAMLSFrontEndSessionRepository}
 
 class Module extends AbstractModule {
 
   override def configure(): Unit = {
     bind(classOf[DataRetrievalAction]).to(classOf[DataRetrievalActionImpl]).asEagerSingleton()
     bind(classOf[DataRequiredAction]).to(classOf[DataRequiredActionImpl]).asEagerSingleton()
-    // Switch out `AMLSFrontEndSessionRepository` for `SessionRepository` and `DefaultAMLSFrontEndSessionRepository`
-    // for `DefaultSessionRepository` to revert back to local Mongo cache storage
     bind(classOf[AMLSFrontEndSessionRepository]).to(classOf[DefaultAMLSFrontEndSessionRepository]).asEagerSingleton()
   }
 }

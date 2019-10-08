@@ -17,16 +17,14 @@
 package utils
 
 import base.SpecBase
-import generators.Generators
 import models.UserAnswers
-import play.api.i18n.Messages
 import play.api.libs.json.Json
 import play.twirl.api.Html
 import viewmodels.AnswerRow
 
 class CheckYourAnswersHelperSpec extends SpecBase {
 
-  val userAnswers: UserAnswers = UserAnswers(userAnswersId, Json.obj("typeOfParticipant" -> Seq(
+  val userAnswers: UserAnswers = UserAnswers( Json.obj("typeOfParticipant" -> Seq(
     "artGalleryOwner",
     "artDealer",
     "artAgent",

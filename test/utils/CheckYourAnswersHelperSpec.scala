@@ -17,16 +17,14 @@
 package utils
 
 import base.SpecBase
-import generators.Generators
 import models.UserAnswers
-import play.api.i18n.Messages
 import play.api.libs.json.Json
 import play.twirl.api.Html
 import viewmodels.AnswerRow
 
 class CheckYourAnswersHelperSpec extends SpecBase {
 
-  val userAnswers: UserAnswers = UserAnswers(userAnswersId, Json.obj("typeOfParticipant" -> Seq(
+  val userAnswers: UserAnswers = UserAnswers( Json.obj("typeOfParticipant" -> Seq(
     "artGalleryOwner",
     "artDealer",
     "artAgent",
@@ -48,7 +46,7 @@ class CheckYourAnswersHelperSpec extends SpecBase {
 
           val expected = AnswerRow(Html("What type of art market participant are you?"),
             Html("<ul class=\"list list-bullet\"><li>Art gallery owner</li><li>Art dealer</li><li>Art agent</li><li>Art auctioneer</li><li>sdfsdf</li></ul>"),
-            "/amls-art-market-participant-frontend/change-type")
+            "/anti-money-laundering/art-market-participant/change-type")
 
           checkYourAnswersHelper.typeOfParticipant.value mustBe expected
         }
@@ -61,7 +59,7 @@ class CheckYourAnswersHelperSpec extends SpecBase {
 
           val expected = AnswerRow(Html("Has your business made a sale or purchase of art for €10,000 or more after 10 January 2020?"),
             Html("Yes"),
-            "/amls-art-market-participant-frontend/change-sale-or-purchase")
+            "/anti-money-laundering/art-market-participant/change-sale-or-purchase")
 
           checkYourAnswersHelper.boughtOrSoldOverThreshold.value mustBe expected
         }
@@ -74,7 +72,7 @@ class CheckYourAnswersHelperSpec extends SpecBase {
 
           val expected = AnswerRow(Html("When was the first sale or purchase of art for €10,000 or more after 10 January 2020?"),
             Html("1 January 2010"),
-            "/amls-art-market-participant-frontend/change-first-sale-or-purchase")
+            "/anti-money-laundering/art-market-participant/change-first-sale-or-purchase")
 
           checkYourAnswersHelper.dateTransactionOverThreshold.value mustBe expected
         }
@@ -87,7 +85,7 @@ class CheckYourAnswersHelperSpec extends SpecBase {
 
           val expected = AnswerRow(Html("Are you able to identify multiple payments linked to a single sale or purchase?"),
             Html("No"),
-            "/amls-art-market-participant-frontend/change-identify-linked-payments")
+            "/anti-money-laundering/art-market-participant/change-identify-linked-payments")
 
           checkYourAnswersHelper.identifyLinkedTransactions.value mustBe expected
         }
@@ -100,7 +98,7 @@ class CheckYourAnswersHelperSpec extends SpecBase {
 
           val expected = AnswerRow(Html("How much of your turnover do you expect to come from sales of art for €10,000 or more?"),
             Html("0% to 20%"),
-            "/amls-art-market-participant-frontend/change-turnover-from-art-sales")
+            "/anti-money-laundering/art-market-participant/change-turnover-from-art-sales")
 
           checkYourAnswersHelper.percentageExpectedTurnover.value mustBe expected
         }

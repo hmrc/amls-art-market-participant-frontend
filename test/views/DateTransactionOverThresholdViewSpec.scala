@@ -33,7 +33,7 @@ class DateTransactionOverThresholdViewSpec extends QuestionViewBehaviours[LocalD
 
   "DateTransactionOverThresholdView view" must {
 
-    val application = applicationBuilder(userAnswers = Some(UserAnswers(userAnswersId))).build()
+    val application = applicationBuilder(userAnswers = Some(UserAnswers())).build()
 
     val view = application.injector.instanceOf[DateTransactionOverThresholdView]
 
@@ -47,7 +47,7 @@ class DateTransactionOverThresholdViewSpec extends QuestionViewBehaviours[LocalD
     "include the correct content" in {
       val document = asDocument(applyView(form))
 
-      assertEqualsMessage(document, "title", "When was the first sale or purchase of art for €10,000 or more after 10 January 2020?")
+      assertTitleEqualsMessage(document, "title", "When was the first sale or purchase of art for €10,000 or more after 10 January 2020?")
       assertPageTitleEqualsMessage(document, "When was the first sale or purchase of art for €10,000 or more after 10 January 2020?")
     }
   }

@@ -25,11 +25,10 @@ import org.mockito.Mockito.when
 import org.scalatestplus.mockito.MockitoSugar
 import pages.BoughtOrSoldOverThresholdPage
 import play.api.inject.bind
-import play.api.libs.json.{JsBoolean, Json}
 import play.api.mvc.Call
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
-import repositories.SessionRepository
+import repositories.{AMLSFrontEndSessionRepository}
 import views.html.BoughtOrSoldOverThresholdView
 
 import scala.concurrent.Future
@@ -65,7 +64,7 @@ class BoughtOrSoldOverThresholdControllerSpec extends SpecBase with MockitoSugar
 
     "populate the view correctly on a GET when the question has previously been answered" in {
 
-      val userAnswers = UserAnswers(userAnswersId).set(BoughtOrSoldOverThresholdPage, true).success.value
+      val userAnswers = UserAnswers().set(BoughtOrSoldOverThresholdPage, true).success.value
 
       val application = applicationBuilder(userAnswers = Some(userAnswers)).build()
 
@@ -85,15 +84,15 @@ class BoughtOrSoldOverThresholdControllerSpec extends SpecBase with MockitoSugar
 
     "redirect to the next page when valid data is submitted" in {
 
-      val mockSessionRepository = mock[SessionRepository]
+      val mockSessionRepository = mock[AMLSFrontEndSessionRepository]
 
-      when(mockSessionRepository.set(any())) thenReturn Future.successful(true)
+      when(mockSessionRepository.set(any(), any())(any())) thenReturn Future.successful(true)
 
       val application =
         applicationBuilder(userAnswers = Some(emptyUserAnswers))
           .overrides(
             bind[Navigator].toInstance(new FakeNavigator(onwardRoute)),
-            bind[SessionRepository].toInstance(mockSessionRepository)
+            bind[AMLSFrontEndSessionRepository].toInstance(mockSessionRepository)
           )
           .build()
 

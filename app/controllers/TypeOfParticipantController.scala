@@ -24,7 +24,7 @@ import navigation.Navigator
 import pages.TypeOfParticipantPage
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import repositories.SessionRepository
+import repositories.{AMLSFrontEndSessionRepository}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
 import views.html.TypeOfParticipantView
 
@@ -32,7 +32,7 @@ import scala.concurrent.{ExecutionContext, Future}
 
 class TypeOfParticipantController @Inject()(
                                         override val messagesApi: MessagesApi,
-                                        sessionRepository: SessionRepository,
+                                        sessionRepository: AMLSFrontEndSessionRepository,
                                         navigator: Navigator,
                                         identify: IdentifierAction,
                                         getData: DataRetrievalAction,
@@ -46,7 +46,7 @@ class TypeOfParticipantController @Inject()(
   def onPageLoad(mode: Mode): Action[AnyContent] = (identify andThen getData) {
     implicit request =>
 
-      val preparedForm = request.userAnswers.getOrElse(UserAnswers(request.internalId)).get(TypeOfParticipantPage) match {
+      val preparedForm = request.userAnswers.getOrElse(UserAnswers()).get(TypeOfParticipantPage) match {
         case None => form
         case Some(value) => form.fill(value)
       }
@@ -63,8 +63,8 @@ class TypeOfParticipantController @Inject()(
 
         value =>
           for {
-            updatedAnswers <- Future.fromTry(request.userAnswers.getOrElse(UserAnswers(request.internalId)).set(TypeOfParticipantPage, value))
-            _              <- sessionRepository.set(updatedAnswers)
+            updatedAnswers <- Future.fromTry(request.userAnswers.getOrElse(UserAnswers()).set(TypeOfParticipantPage, value))
+            _              <- sessionRepository.set(request.credId, updatedAnswers)
           } yield Redirect(navigator.nextPage(TypeOfParticipantPage, mode, updatedAnswers))
       )
   }

@@ -14,14 +14,17 @@
  * limitations under the License.
  *@
 
+@import config.FrontendAppConfig
+
 @this(
-    main_template: MainTemplate
+    main_template: MainTemplate,
+    appConfig: FrontendAppConfig
 )
 
 @()(implicit request: Request[_], messages: Messages)
 
 @main_template(
-    title = messages("whatYouNeed.title")
+    title = s"${messages("whatYouNeed.title")} - Art market participant - Manage your anti-money laundering supervision - GOV.UK"
     ) {
 
     @components.back_link()
@@ -39,5 +42,7 @@
         <li>@Messages("whatYouNeed.line_4")</li>
     </ul>
 
-    @components.button_link("whatYouNeed.continue", "type")
+    @components.button_link_with_id("whatYouNeed.continue", "type", "ampwhatyouneed-button")
+
+    @components.anchor(appConfig = appConfig)
 }

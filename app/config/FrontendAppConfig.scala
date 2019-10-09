@@ -28,6 +28,9 @@ class FrontendAppConfig @Inject() (configuration: Configuration) {
   private val contactHost = configuration.get[String]("contact-frontend.host")
   private val contactFormServiceIdentifier = "play26frontend"
 
+  val timeoutSeconds = configuration.get[String](s"timeout.seconds")
+  val timeoutCountdown = configuration.get[String](s"timeout.countdown")
+
   val analyticsToken: String = configuration.get[String](s"google-analytics.token")
   val analyticsHost: String = configuration.get[String](s"google-analytics.host")
   val reportAProblemPartialUrl = s"$contactHost/contact/problem_reports_ajax?service=$contactFormServiceIdentifier"
@@ -35,9 +38,15 @@ class FrontendAppConfig @Inject() (configuration: Configuration) {
   val betaFeedbackUrl = s"$contactHost/contact/beta-feedback"
   val betaFeedbackUnauthenticatedUrl = s"$contactHost/contact/beta-feedback-unauthenticated"
 
+  val amlsFrontendBaseUrl = configuration.get[String](s"microservice.services.amls-frontend.url")
+
+  val renewalProgressUrl = s"${amlsFrontendBaseUrl}/renewal-progress"
+  val registrationProgressUrl = s"${amlsFrontendBaseUrl}/registration-progress"
+
   lazy val authUrl: String = configuration.get[Service]("auth").baseUrl
-  lazy val loginUrl: String = configuration.get[String]("urls.login")
-  lazy val loginContinueUrl: String = configuration.get[String]("urls.loginContinue")
+  lazy val loginUrl: String = configuration.get[String]("urls.login.url")
+  lazy val logoutUrl: String = configuration.get[String]("urls.logout.url")
+  lazy val loginContinueUrl: String = configuration.get[String]("urls.login.continue")
 
   lazy val languageTranslationEnabled: Boolean =
     configuration.get[Boolean]("microservice.services.features.welsh-translation")

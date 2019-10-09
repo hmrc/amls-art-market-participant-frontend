@@ -21,10 +21,10 @@ import forms.BoughtOrSoldOverThresholdFormProvider
 import javax.inject.Inject
 import models.Mode
 import navigation.Navigator
-import pages.{BoughtOrSoldOverThresholdPage}
+import pages.BoughtOrSoldOverThresholdPage
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import repositories.SessionRepository
+import repositories.{AMLSFrontEndSessionRepository}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
 import views.html.BoughtOrSoldOverThresholdView
 
@@ -32,7 +32,7 @@ import scala.concurrent.{ExecutionContext, Future}
 
 class BoughtOrSoldOverThresholdController @Inject()(
                                          override val messagesApi: MessagesApi,
-                                         sessionRepository: SessionRepository,
+                                         sessionRepository: AMLSFrontEndSessionRepository,
                                          navigator: Navigator,
                                          identify: IdentifierAction,
                                          getData: DataRetrievalAction,
@@ -65,7 +65,7 @@ class BoughtOrSoldOverThresholdController @Inject()(
         value =>
           for {
             updatedAnswers <- Future.fromTry(request.userAnswers.set(BoughtOrSoldOverThresholdPage, value))
-            _              <- sessionRepository.set(updatedAnswers)
+            _              <- sessionRepository.set(request.credId, updatedAnswers)
           } yield Redirect(navigator.nextPage(BoughtOrSoldOverThresholdPage, mode, updatedAnswers))
       )
   }

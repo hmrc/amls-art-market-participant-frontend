@@ -40,11 +40,12 @@
 
         @components.heading("boughtOrSoldOverThreshold.heading")
 
+        <p>@Messages("boughtOrSoldOverThreshold.hint")</p>
+
         @components.input_yes_no(
             field = form("value"),
             label = messages("boughtOrSoldOverThreshold.heading"),
-            labelClass = Some("visually-hidden"),
-            hint = Some(messages("boughtOrSoldOverThreshold.hint"))
+            labelClass = Some("visually-hidden")
         )
 
         @components.submit_button()

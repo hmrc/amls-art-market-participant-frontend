@@ -32,7 +32,9 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(implicit messages: Messag
   private def typeOfParticipantHtml(x: Seq[TypeOfParticipant]): Html = {
     val detailAnswer = userAnswers.get(TypeOfParticipantDetailPage).getOrElse("")
 
-    Html(Html("<ul class=\"list list-bullet\">" + x.map(value => if(value == SomethingElse) {
+    val ifBullet = if (x.size == 1) "<ul class=\"list\">" else "<ul class=\"list list-bullet\">"
+
+    Html(Html(ifBullet + x.map(value => if(value == SomethingElse) {
      if (!detailAnswer.isEmpty) {
       Html("<li>" + detailAnswer + "</li>")
      } else {

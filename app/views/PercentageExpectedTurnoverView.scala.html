@@ -40,12 +40,13 @@
 
         @components.heading("percentageExpectedTurnover.heading")
 
+        <p>@Messages("percentageExpectedTurnover.hint")</p>
+
         @components.input_radio(
             field = form("value"),
             legend = messages("percentageExpectedTurnover.heading"),
             legendClass = Some("visually-hidden"),
-            inputs = PercentageExpectedTurnover.options.toSeq,
-            hint = Some(messages("percentageExpectedTurnover.hint"))
+            inputs = PercentageExpectedTurnover.options.toSeq
         )
 
         @components.submit_button()

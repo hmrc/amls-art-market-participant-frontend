@@ -96,7 +96,7 @@ class CheckYourAnswersHelperSpec extends SpecBase {
       "called" must {
         "return AnswerRow" in {
 
-          val expected = AnswerRow(Html("How much of your turnover do you expect to come from sales of art for €10,000 or more?"),
+          val expected = AnswerRow(Html("How much of your turnover do you expect to come from sales of art for €10,000 or more in the next 12 months?"),
             Html("0% to 20%"),
             "/anti-money-laundering/art-market-participant/change-turnover-from-art-sales")
 

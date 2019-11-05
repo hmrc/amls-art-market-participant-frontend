@@ -73,25 +73,7 @@
     }
 }
 
-@URRBanner = {
-<div id="full-width-banner" class="full-width-banner no-print">
-    <section class="centered-content visible full-width-banner__container" aria-hidden="false">
-        <div class="full-width-banner__title">
-            @Messages("urr.title")
-        </div>
-        <a href="https://signup.take-part-in-research.service.gov.uk/?utm_campaign=AMLSbanner&utm_source=Other&utm_medium=gov.uk%20survey&t=HMRC&id=63" target="_blank">
-            @Messages("urr.bannertext")
-        </a>
-        <a class="full-width-banner__close" href="#" role="button">
-                <span aria-hidden="true">
-                    @Messages("urr.nothanks")
-                </span>
-        </a>
-    </section>
-</div>
-}
-
-@afterHeader = { @URRBanner }
+@afterHeader = {  }
 
 @scripts = {
     <script src='@routes.Assets.versioned("javascripts/timeout-dialog.js")'></script>

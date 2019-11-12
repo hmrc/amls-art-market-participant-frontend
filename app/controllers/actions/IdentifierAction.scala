@@ -43,10 +43,12 @@ class AuthenticatedIdentifierAction @Inject()(
                                              )
                                              (implicit val executionContext: ExecutionContext) extends IdentifierAction with AuthorisedFunctions with ActionRefiner[Request, IdentifierRequest] {
 
-  private val amlsKey = "HMRC-MLR-ORG"
+  private val amlsKey       = "HMRC-MLR-ORG"
   private val amlsNumberKey = "MLRRefNumber"
+  private val saKey         = "IR-SA"
+  private val ctKey         = "IR-CT"
 
-  def unauthorisedUrl = routes.UnauthorisedController.onPageLoad().url
+  def unauthorisedUrl= routes.UnauthorisedController.onPageLoad().url
 
   // $COVERAGE-OFF$
   def exceptionLogger(aex: AuthorisationException) = {
@@ -61,7 +63,7 @@ class AuthenticatedIdentifierAction @Inject()(
 
     implicit val hc: HeaderCarrier = HeaderCarrierConverter.fromHeadersAndSession(request.headers, Some(request.session))
 
-    authorised(User).retrieve(
+    authorised(authPredicate).retrieve(
       Retrievals.allEnrolments and
         Retrievals.credentials and
         Retrievals.affinityGroup
@@ -81,7 +83,7 @@ class AuthenticatedIdentifierAction @Inject()(
         )
       case _ =>
         Logger.debug("DefaultAuthAction:Refine - Non match (enrolments ~ Some(credentials) ~ Some(affinityGroup))")
-        Future.successful(Left(Redirect(Call("GET", config.loginUrl))))
+        Future.successful(Left(Redirect(Call("GET", unauthorisedUrl))))
     }.recover[Either[Result, IdentifierRequest[A]]] {
       case nas: NoActiveSession =>
         exceptionLogger(nas)
@@ -108,6 +110,10 @@ class AuthenticatedIdentifierAction @Inject()(
         exceptionLogger(e)
         Left(Redirect(Call("GET", unauthorisedUrl)))
     }
+  }
+
+  private def authPredicate = {
+    User and (AffinityGroup.Organisation or (Enrolment(saKey) or Enrolment(ctKey)))
   }
 
   private def amlsRefNo(enrolments: Enrolments): Option[String] = {

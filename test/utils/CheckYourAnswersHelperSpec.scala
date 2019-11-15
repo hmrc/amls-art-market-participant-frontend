@@ -42,10 +42,10 @@ class CheckYourAnswersHelperSpec extends SpecBase {
   "CheckYourAnswersHelper" must {
     "have typeOfParticipant method which" when {
       "called" must {
-        "return AnswerRow" in {
+        "return AnswerRow in alphabetical order" in {
 
           val expected = AnswerRow(Html("What type of art market participant are you?"),
-            Html("<ul class=\"list list-bullet\"><li>Art gallery owner</li><li>Art dealer</li><li>Art agent</li><li>Art auctioneer</li><li>sdfsdf</li></ul>"),
+            Html("<ul class=\"list list-bullet\"><li>Art agent</li><li>Art auctioneer</li><li>Art dealer</li><li>Art gallery owner</li><li>sdfsdf</li></ul>"),
             "/anti-money-laundering/art-market-participant/change-type")
 
           checkYourAnswersHelper.typeOfParticipant.value mustBe expected

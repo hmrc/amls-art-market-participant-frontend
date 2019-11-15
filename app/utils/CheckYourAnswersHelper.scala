@@ -25,7 +25,6 @@ import play.api.i18n.Messages
 import play.twirl.api.{Html, HtmlFormat}
 import viewmodels.AnswerRow
 import CheckYourAnswersHelper._
-import models.TypeOfParticipant.SomethingElse
 
 class CheckYourAnswersHelper(userAnswers: UserAnswers)(implicit messages: Messages) {
 
@@ -34,7 +33,9 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(implicit messages: Messag
 
     val ifBullet = if (x.size == 1) "<ul class=\"list\">" else "<ul class=\"list list-bullet\">"
 
-    Html(Html(ifBullet + x.map(value => if(value == SomethingElse) {
+    val values = x.map(value => value.toString).toList.sorted
+
+    Html(Html(ifBullet + values.map(value => if(value == "somethingElse") {
      if (!detailAnswer.isEmpty) {
       Html("<li>" + detailAnswer + "</li>")
      } else {

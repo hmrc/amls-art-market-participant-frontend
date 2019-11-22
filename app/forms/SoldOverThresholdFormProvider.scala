@@ -21,10 +21,10 @@ import javax.inject.Inject
 import forms.mappings.Mappings
 import play.api.data.Form
 
-class BoughtOrSoldOverThresholdFormProvider @Inject() extends Mappings {
+class SoldOverThresholdFormProvider @Inject() extends Mappings {
 
   def apply(): Form[Boolean] =
     Form(
-      "value" -> boolean("boughtOrSoldOverThreshold.error.required")
+      "value" -> boolean("SoldOverThreshold.error.required")
     )
 }

@@ -64,10 +64,10 @@ trait UserAnswersEntryGenerators extends PageGenerators with ModelGenerators {
       } yield (page, value)
     }
 
-  implicit lazy val arbitraryBoughtOrSoldOverThresholdUserAnswersEntry: Arbitrary[(BoughtOrSoldOverThresholdPage.type, JsValue)] =
+  implicit lazy val arbitraryBoughtOrSoldOverThresholdUserAnswersEntry: Arbitrary[(SoldOverThresholdPage.type, JsValue)] =
     Arbitrary {
       for {
-        page  <- arbitrary[BoughtOrSoldOverThresholdPage.type]
+        page  <- arbitrary[SoldOverThresholdPage.type]
         value <- arbitrary[Boolean].map(Json.toJson(_))
       } yield (page, value)
     }

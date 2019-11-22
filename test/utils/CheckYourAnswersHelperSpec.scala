@@ -57,9 +57,9 @@ class CheckYourAnswersHelperSpec extends SpecBase {
       "called" must {
         "return AnswerRow" in {
 
-          val expected = AnswerRow(Html("Has your business made a sale or purchase of art for €10,000 or more after 10 January 2020?"),
+          val expected = AnswerRow(Html("Has your business made a sale of art for €10,000 or more after 10 January 2020?"),
             Html("Yes"),
-            "/anti-money-laundering/art-market-participant/change-sale-or-purchase")
+            "/anti-money-laundering/art-market-participant/change-sale")
 
           checkYourAnswersHelper.boughtOrSoldOverThreshold.value mustBe expected
         }
@@ -70,9 +70,9 @@ class CheckYourAnswersHelperSpec extends SpecBase {
       "called" must {
         "return AnswerRow" in {
 
-          val expected = AnswerRow(Html("When was the first sale or purchase of art for €10,000 or more after 10 January 2020?"),
+          val expected = AnswerRow(Html("When was the first sale of art for €10,000 or more after 10 January 2020?"),
             Html("1 January 2010"),
-            "/anti-money-laundering/art-market-participant/change-first-sale-or-purchase")
+            "/anti-money-laundering/art-market-participant/change-first-sale")
 
           checkYourAnswersHelper.dateTransactionOverThreshold.value mustBe expected
         }
@@ -83,7 +83,7 @@ class CheckYourAnswersHelperSpec extends SpecBase {
       "called" must {
         "return AnswerRow" in {
 
-          val expected = AnswerRow(Html("Are you able to identify multiple payments linked to a single sale or purchase?"),
+          val expected = AnswerRow(Html("Are you able to identify multiple payments linked to a single sale?"),
             Html("No"),
             "/anti-money-laundering/art-market-participant/change-identify-linked-payments")
 

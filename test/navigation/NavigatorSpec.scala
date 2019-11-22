@@ -44,27 +44,27 @@ class NavigatorSpec extends SpecBase {
         val answers = UserAnswers().set(TypeOfParticipantPage, Seq(ArtGalleryOwner)).success.value
 
         navigator.nextPage(TypeOfParticipantPage, NormalMode, answers)
-          .mustBe(routes.BoughtOrSoldOverThresholdController.onPageLoad(NormalMode))
+          .mustBe(routes.SoldOverThresholdController.onPageLoad(NormalMode))
       }
 
       "go from Type Of Participant Detail to Art Sold Over Threshold" in {
         val answers = UserAnswers()
 
         navigator.nextPage(TypeOfParticipantDetailPage, NormalMode, answers)
-          .mustBe(routes.BoughtOrSoldOverThresholdController.onPageLoad(NormalMode))
+          .mustBe(routes.SoldOverThresholdController.onPageLoad(NormalMode))
       }
 
       "go from Art Sold Over Threshold to Date Transaction Over Threshold where yes" in {
-        val answers = UserAnswers().set(BoughtOrSoldOverThresholdPage, true).success.value
+        val answers = UserAnswers().set(SoldOverThresholdPage, true).success.value
 
-        navigator.nextPage(BoughtOrSoldOverThresholdPage, NormalMode, answers)
+        navigator.nextPage(SoldOverThresholdPage, NormalMode, answers)
           .mustBe(routes.DateTransactionOverThresholdController.onPageLoad(NormalMode))
       }
 
       "go from Art Sold Over Threshold to Identify Linked Transactions where no" in {
-        val answers = UserAnswers().set(BoughtOrSoldOverThresholdPage, false).success.value
+        val answers = UserAnswers().set(SoldOverThresholdPage, false).success.value
 
-        navigator.nextPage(BoughtOrSoldOverThresholdPage, NormalMode, answers)
+        navigator.nextPage(SoldOverThresholdPage, NormalMode, answers)
           .mustBe(routes.IdentifyLinkedTransactionsController.onPageLoad(NormalMode))
       }
 
@@ -111,16 +111,16 @@ class NavigatorSpec extends SpecBase {
       }
 
       "go from Art Sold Over Threshold to Check Your Answers where no" in {
-        val answers = UserAnswers().set(BoughtOrSoldOverThresholdPage, false).success.value
+        val answers = UserAnswers().set(SoldOverThresholdPage, false).success.value
 
-        navigator.nextPage(BoughtOrSoldOverThresholdPage, CheckMode, answers)
+        navigator.nextPage(SoldOverThresholdPage, CheckMode, answers)
           .mustBe(routes.CheckYourAnswersController.onPageLoad())
       }
 
       "go from Art Sold Over Threshold to Date Transaction Over Threshold where answer yes" in {
-        val answers = UserAnswers().set(BoughtOrSoldOverThresholdPage, true).success.value
+        val answers = UserAnswers().set(SoldOverThresholdPage, true).success.value
 
-        navigator.nextPage(BoughtOrSoldOverThresholdPage, CheckMode, answers)
+        navigator.nextPage(SoldOverThresholdPage, CheckMode, answers)
           .mustBe(routes.DateTransactionOverThresholdController.onPageLoad(CheckMode))
       }
 

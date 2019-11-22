@@ -28,8 +28,8 @@ class Navigator @Inject()() {
 
   private val normalRoutes: Page => UserAnswers => Call = {
     case TypeOfParticipantPage            =>      typeOfParticipantRoute
-    case TypeOfParticipantDetailPage      => _ => routes.BoughtOrSoldOverThresholdController.onPageLoad(NormalMode)
-    case BoughtOrSoldOverThresholdPage    =>      artSoldOverThresholdRoute
+    case TypeOfParticipantDetailPage      => _ => routes.SoldOverThresholdController.onPageLoad(NormalMode)
+    case SoldOverThresholdPage    =>      artSoldOverThresholdRoute
     case DateTransactionOverThresholdPage => _ => routes.IdentifyLinkedTransactionsController.onPageLoad(NormalMode)
     case IdentifyLinkedTransactionsPage   => _ => routes.PercentageExpectedTurnoverController.onPageLoad(NormalMode)
     case PercentageExpectedTurnoverPage   => _ => routes.CheckYourAnswersController.onPageLoad()
@@ -40,7 +40,7 @@ class Navigator @Inject()() {
     answers.get(TypeOfParticipantPage) map { ans =>
       ans.contains(SomethingElse) match {
         case true  => routes.TypeOfParticipantDetailController.onPageLoad(NormalMode)
-        case false => routes.BoughtOrSoldOverThresholdController.onPageLoad(NormalMode)
+        case false => routes.SoldOverThresholdController.onPageLoad(NormalMode)
       }
     }
   }.getOrElse(routes.SessionExpiredController.onPageLoad())
@@ -54,13 +54,13 @@ class Navigator @Inject()() {
     }
   }.getOrElse(routes.SessionExpiredController.onPageLoad())
 
-  private def artSoldOverThresholdRoute(answers: UserAnswers): Call = answers.get(BoughtOrSoldOverThresholdPage) match {
+  private def artSoldOverThresholdRoute(answers: UserAnswers): Call = answers.get(SoldOverThresholdPage) match {
     case Some(true)  => routes.DateTransactionOverThresholdController.onPageLoad(NormalMode)
     case Some(false) => routes.IdentifyLinkedTransactionsController.onPageLoad(NormalMode)
     case None        => routes.SessionExpiredController.onPageLoad()
   }
 
-  private def artSoldOverThresholdRouteCheckMode(answers: UserAnswers): Call = answers.get(BoughtOrSoldOverThresholdPage) match {
+  private def artSoldOverThresholdRouteCheckMode(answers: UserAnswers): Call = answers.get(SoldOverThresholdPage) match {
     case Some(true)  => routes.DateTransactionOverThresholdController.onPageLoad(CheckMode)
     case Some(false) => routes.CheckYourAnswersController.onPageLoad()
     case None        => routes.SessionExpiredController.onPageLoad()
@@ -68,7 +68,7 @@ class Navigator @Inject()() {
 
   private val checkRouteMap: Page => UserAnswers => Call = {
     case TypeOfParticipantPage         => typeOfParticipantRouteCheckMode
-    case BoughtOrSoldOverThresholdPage => artSoldOverThresholdRouteCheckMode
+    case SoldOverThresholdPage => artSoldOverThresholdRouteCheckMode
     case _ => _ => routes.CheckYourAnswersController.onPageLoad()
   }
 

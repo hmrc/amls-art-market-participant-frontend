@@ -82,12 +82,12 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(implicit messages: Messag
       )
   }
 
-  def boughtOrSoldOverThreshold: Option[AnswerRow] = userAnswers.get(BoughtOrSoldOverThresholdPage) map {
+  def boughtOrSoldOverThreshold: Option[AnswerRow] = userAnswers.get(SoldOverThresholdPage) map {
     x =>
       AnswerRow(
-        HtmlFormat.escape(messages("boughtOrSoldOverThreshold.checkYourAnswersLabel")),
+        HtmlFormat.escape(messages("SoldOverThreshold.checkYourAnswersLabel")),
         yesOrNo(x),
-        routes.BoughtOrSoldOverThresholdController.onPageLoad(CheckMode).url
+        routes.SoldOverThresholdController.onPageLoad(CheckMode).url
       )
   }
 

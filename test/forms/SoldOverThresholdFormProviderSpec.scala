@@ -14,23 +14,32 @@
  * limitations under the License.
  */
 
-package pages
+package forms
 
-import models.UserAnswers
-import play.api.libs.json.JsPath
+import forms.behaviours.BooleanFieldBehaviours
+import play.api.data.FormError
 
-import scala.util.Try
+class SoldOverThresholdFormProviderSpec extends BooleanFieldBehaviours {
 
-case object BoughtOrSoldOverThresholdPage extends QuestionPage[Boolean] {
+  val requiredKey = "SoldOverThreshold.error.required"
+  val invalidKey = "error.boolean"
 
-  override def path: JsPath = JsPath \ toString
+  val form = new SoldOverThresholdFormProvider()()
 
-  override def toString: String = "boughtOrSoldOverThreshold"
+  ".value" must {
 
-  override def cleanup(value: Option[Boolean], userAnswers: UserAnswers): Try[UserAnswers] =
-    if (value.contains(false)) {
-      userAnswers.remove(DateTransactionOverThresholdPage)
-    } else {
-      super.cleanup(value, userAnswers)
-    }
+    val fieldName = "value"
+
+    behave like booleanField(
+      form,
+      fieldName,
+      invalidError = FormError(fieldName, invalidKey)
+    )
+
+    behave like mandatoryField(
+      form,
+      fieldName,
+      requiredError = FormError(fieldName, requiredKey)
+    )
+  }
 }

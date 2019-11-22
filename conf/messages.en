@@ -74,8 +74,8 @@ whatYouNeed.heading = What you need
 whatYouNeed.heading2 = In the section you’ll need to tell us:
 whatYouNeed.continue = Continue
 whatYouNeed.line_1 = the role you carry out in the art market
-whatYouNeed.line_2 = the date of your first sale or purchase of art for €10,000 or more after 10 January 2020, if you have made any
-whatYouNeed.line_3 = if you can identify when a sale or purchase is made up of multiple payments
+whatYouNeed.line_2 = the date of your first sale of art for €10,000 or more after 10 January 2020, if you have made any
+whatYouNeed.line_3 = if you can identify when a sale is made up of multiple payments
 whatYouNeed.line_4 = the percentage of your turnover you estimate will come from sales of art for €10,000 or more in the next 12 months
 
 typeOfParticipant.title = What type of art market participant are you?
@@ -97,21 +97,21 @@ typeOfParticipantDetail.error.required = Enter the other type of art market part
 typeOfParticipantDetail.error.length = Other type of art market participant must be 255 characters or less
 typeOfParticipantDetail.error.punctuation = Other type of art market participant can include letters a to z, numbers, spaces, and most punctuation and special characters
 
-boughtOrSoldOverThreshold.title = Has your business made a sale or purchase of art for €10,000 or more after 10 January 2020?
-boughtOrSoldOverThreshold.heading = Has your business made a sale or purchase of art for €10,000 or more after 10 January 2020?
-boughtOrSoldOverThreshold.checkYourAnswersLabel = Has your business made a sale or purchase of art for €10,000 or more after 10 January 2020?
-boughtOrSoldOverThreshold.error.required = Select yes if your business made a sale or purchase of art for €10,000 or more after 10 January 2020
+boughtOrSoldOverThreshold.title = Has your business made a sale of art for €10,000 or more after 10 January 2020?
+boughtOrSoldOverThreshold.heading = Has your business made a sale of art for €10,000 or more after 10 January 2020?
+boughtOrSoldOverThreshold.checkYourAnswersLabel = Has your business made a sale of art for €10,000 or more after 10 January 2020?
+boughtOrSoldOverThreshold.error.required = Select yes if your business made a sale of art for €10,000 or more after 10 January 2020
 boughtOrSoldOverThreshold.hint = If you do not use euros, you’ll need to convert the amount to the currency you use.
 
-dateTransactionOverThreshold.title = When was the first sale or purchase of art for €10,000 or more after 10 January 2020?
-dateTransactionOverThreshold.heading = When was the first sale or purchase of art for €10,000 or more after 10 January 2020?
-dateTransactionOverThreshold.checkYourAnswersLabel = When was the first sale or purchase of art for €10,000 or more after 10 January 2020?
-dateTransactionOverThreshold.error.required.all = Enter the date of the first sale or purchase of art for €10,000 or more after 10 January 2020
-dateTransactionOverThreshold.error.required.two = Date of the first sale or purchase must include a {0} and {1}
-dateTransactionOverThreshold.error.required = Date of the first sale or purchase must include a {0}
+dateTransactionOverThreshold.title = When was the first sale of art for €10,000 or more after 10 January 2020?
+dateTransactionOverThreshold.heading = When was the first sale of art for €10,000 or more after 10 January 2020?
+dateTransactionOverThreshold.checkYourAnswersLabel = When was the first sale of art for €10,000 or more after 10 January 2020?
+dateTransactionOverThreshold.error.required.all = Enter the date of the first sale of art for €10,000 or more after 10 January 2020
+dateTransactionOverThreshold.error.required.two = Date of the first sale must include a {0} and {1}
+dateTransactionOverThreshold.error.required = Date of the first sale must include a {0}
 dateTransactionOverThreshold.error.invalid = Enter a real date for the first sale or purchase
-dateTransactionOverThreshold.error.startdate = Date of the first sale or purchase must be after 10 January 2020
-dateTransactionOverThreshold.error.future = Date of the first sale or purchase must be in the past
+dateTransactionOverThreshold.error.startdate = Date of the first sale must be after 10 January 2020
+dateTransactionOverThreshold.error.future = Date of the first sale must be in the past
 dateTransactionOverThreshold.hint = For example, 11 01 2020.
 
 identifyLinkedTransactions.title = Are you able to identify multiple payments linked to a single sale or purchase?

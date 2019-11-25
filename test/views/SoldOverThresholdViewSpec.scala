@@ -26,7 +26,7 @@ import views.html.SoldOverThresholdView
 
 class SoldOverThresholdViewSpec extends YesNoViewBehaviours {
 
-  val messageKeyPrefix = "SoldOverThreshold"
+  val messageKeyPrefix = "soldOverThreshold"
 
   val form = new SoldOverThresholdFormProvider()()
 

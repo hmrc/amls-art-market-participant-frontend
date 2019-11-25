@@ -97,11 +97,11 @@ typeOfParticipantDetail.error.required = Enter the other type of art market part
 typeOfParticipantDetail.error.length = Other type of art market participant must be 255 characters or less
 typeOfParticipantDetail.error.punctuation = Other type of art market participant can include letters a to z, numbers, spaces, and most punctuation and special characters
 
-SoldOverThreshold.title = Has your business made a sale of art for €10,000 or more after 10 January 2020?
-SoldOverThreshold.heading = Has your business made a sale of art for €10,000 or more after 10 January 2020?
-SoldOverThreshold.checkYourAnswersLabel = Has your business made a sale of art for €10,000 or more after 10 January 2020?
-SoldOverThreshold.error.required = Select yes if your business made a sale of art for €10,000 or more after 10 January 2020
-SoldOverThreshold.hint = If you do not use euros, you’ll need to convert the amount to the currency you use.
+soldOverThreshold.title = Has your business made a sale of art for €10,000 or more after 10 January 2020?
+soldOverThreshold.heading = Has your business made a sale of art for €10,000 or more after 10 January 2020?
+soldOverThreshold.checkYourAnswersLabel = Has your business made a sale of art for €10,000 or more after 10 January 2020?
+soldOverThreshold.error.required = Select yes if your business made a sale of art for €10,000 or more after 10 January 2020
+soldOverThreshold.hint = If you do not use euros, you’ll need to convert the amount to the currency you use.
 
 dateTransactionOverThreshold.title = When was the first sale of art for €10,000 or more after 10 January 2020?
 dateTransactionOverThreshold.heading = When was the first sale of art for €10,000 or more after 10 January 2020?
@@ -118,6 +118,7 @@ identifyLinkedTransactions.title = Are you able to identify multiple payments li
 identifyLinkedTransactions.heading = Are you able to identify multiple payments linked to a single sale?
 identifyLinkedTransactions.checkYourAnswersLabel = Are you able to identify multiple payments linked to a single sale?
 identifyLinkedTransactions.error.required = Select yes if you can identify multiple payments linked to a single sale
+
 
 percentageExpectedTurnover.title = How much of your turnover do you expect to come from sales of art for €10,000 or more in the next 12 months?
 percentageExpectedTurnover.heading = How much of your turnover do you expect to come from sales of art for €10,000 or more in the next 12 months?

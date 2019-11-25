@@ -25,7 +25,7 @@ case object SoldOverThresholdPage extends QuestionPage[Boolean] {
 
   override def path: JsPath = JsPath \ toString
 
-  override def toString: String = "boughtOrSoldOverThreshold"
+  override def toString: String = "soldOverThreshold"
 
   override def cleanup(value: Option[Boolean], userAnswers: UserAnswers): Try[UserAnswers] =
     if (value.contains(false)) {

@@ -31,7 +31,7 @@ class CheckYourAnswersHelperSpec extends SpecBase {
     "artAuctioneer",
     "somethingElse"),
     "typeOfParticipantDetail"  -> "sdfsdf",
-    "boughtOrSoldOverThreshold" -> true,
+    "soldOverThreshold" -> true,
     "dateTransactionOverThreshold" -> "2010-01-01",
     "identifyLinkedTransactions" -> false,
     "percentageExpectedTurnover" -> "zeroToTwenty"
@@ -53,7 +53,7 @@ class CheckYourAnswersHelperSpec extends SpecBase {
       }
     }
 
-    "have boughtOrSoldOverThreshold method which" when {
+    "have soldOverThreshold method which" when {
       "called" must {
         "return AnswerRow" in {
 
@@ -61,7 +61,7 @@ class CheckYourAnswersHelperSpec extends SpecBase {
             Html("Yes"),
             "/anti-money-laundering/art-market-participant/change-sale")
 
-          checkYourAnswersHelper.boughtOrSoldOverThreshold.value mustBe expected
+          checkYourAnswersHelper.soldOverThreshold.value mustBe expected
         }
       }
     }

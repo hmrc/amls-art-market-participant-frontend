@@ -52,7 +52,7 @@ class AuthenticatedIdentifierAction @Inject()(
 
   // $COVERAGE-OFF$
   def exceptionLogger(aex: AuthorisationException) = {
-    Logger.debug(s"AuthenticatedIdentifierAction:Refine - ${aex.getClass}: $aex")
+    Logger.debug(s"AuthenticatedIdentifierAction:Refine - ${aex.getClass}:", aex)
   }
   def enrolmentMessage(message: String, parameters: Option[Enrolments]) = {
     Logger.debug(message + parameters.getOrElse(""))

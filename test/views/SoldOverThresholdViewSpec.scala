@@ -46,8 +46,8 @@ class SoldOverThresholdViewSpec extends YesNoViewBehaviours {
     "include the correct content" in {
       val document = asDocument(applyView(form))
 
-      assertTitleEqualsMessage(document, "title", "Has your business made a sale of art for €10,000 or more after 10 January 2020?")
-      assertPageTitleEqualsMessage(document, "Has your business made a sale of art for €10,000 or more after 10 January 2020?")
+      assertTitleEqualsMessage(document, "title", "Has your business made a sale of art for €10,000 or more on or after 10 January 2020?")
+      assertPageTitleEqualsMessage(document, "Has your business made a sale of art for €10,000 or more on or after 10 January 2020?")
     }
   }
 }

@@ -57,7 +57,7 @@ class CheckYourAnswersHelperSpec extends SpecBase {
       "called" must {
         "return AnswerRow" in {
 
-          val expected = AnswerRow(Html("Has your business made a sale of art for €10,000 or more after 10 January 2020?"),
+          val expected = AnswerRow(Html("Has your business made a sale of art for €10,000 or more on or after 10 January 2020?"),
             Html("Yes"),
             "/anti-money-laundering/art-market-participant/change-sale")
 
@@ -70,7 +70,7 @@ class CheckYourAnswersHelperSpec extends SpecBase {
       "called" must {
         "return AnswerRow" in {
 
-          val expected = AnswerRow(Html("When was the first sale of art for €10,000 or more after 10 January 2020?"),
+          val expected = AnswerRow(Html("When was the first sale of art for €10,000 or more on or after 10 January 2020?"),
             Html("1 January 2010"),
             "/anti-money-laundering/art-market-participant/change-first-sale")
 

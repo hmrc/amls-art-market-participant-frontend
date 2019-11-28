@@ -45,7 +45,7 @@ class CheckYourAnswersController @Inject()(
 
       val sections = Seq(AnswerSection(None, Seq(
         checkYourAnswersHelper.typeOfParticipant,
-        checkYourAnswersHelper.boughtOrSoldOverThreshold,
+        checkYourAnswersHelper.soldOverThreshold,
         checkYourAnswersHelper.dateTransactionOverThreshold,
         checkYourAnswersHelper.identifyLinkedTransactions,
         checkYourAnswersHelper.percentageExpectedTurnover

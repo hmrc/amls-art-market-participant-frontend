@@ -17,42 +17,42 @@
 package controllers
 
 import base.SpecBase
-import forms.BoughtOrSoldOverThresholdFormProvider
+import forms.SoldOverThresholdFormProvider
 import models.{NormalMode, UserAnswers}
 import navigation.{FakeNavigator, Navigator}
 import org.mockito.Matchers.any
 import org.mockito.Mockito.when
 import org.scalatestplus.mockito.MockitoSugar
-import pages.BoughtOrSoldOverThresholdPage
+import pages.SoldOverThresholdPage
 import play.api.inject.bind
 import play.api.mvc.Call
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
-import repositories.{AMLSFrontEndSessionRepository}
-import views.html.BoughtOrSoldOverThresholdView
+import repositories.AMLSFrontEndSessionRepository
+import views.html.SoldOverThresholdView
 
 import scala.concurrent.Future
 
-class BoughtOrSoldOverThresholdControllerSpec extends SpecBase with MockitoSugar {
+class SoldOverThresholdControllerSpec extends SpecBase with MockitoSugar {
 
   def onwardRoute = Call("GET", "/foo")
 
-  val formProvider = new BoughtOrSoldOverThresholdFormProvider()
+  val formProvider = new SoldOverThresholdFormProvider()
   val form = formProvider()
 
-  lazy val boughtOrSoldOverThresholdRoute = routes.BoughtOrSoldOverThresholdController.onPageLoad(NormalMode).url
+  lazy val SoldOverThresholdRoute = routes.SoldOverThresholdController.onPageLoad(NormalMode).url
 
-  "BoughtOrSoldOverThreshold Controller" must {
+  "SoldOverThreshold Controller" must {
 
     "return OK and the correct view for a GET" in {
 
       val application = applicationBuilder(userAnswers = Some(emptyUserAnswers)).build()
 
-      val request = FakeRequest(GET, boughtOrSoldOverThresholdRoute)
+      val request = FakeRequest(GET, SoldOverThresholdRoute)
 
       val result = route(application, request).value
 
-      val view = application.injector.instanceOf[BoughtOrSoldOverThresholdView]
+      val view = application.injector.instanceOf[SoldOverThresholdView]
 
       status(result) mustEqual OK
 
@@ -64,13 +64,13 @@ class BoughtOrSoldOverThresholdControllerSpec extends SpecBase with MockitoSugar
 
     "populate the view correctly on a GET when the question has previously been answered" in {
 
-      val userAnswers = UserAnswers().set(BoughtOrSoldOverThresholdPage, true).success.value
+      val userAnswers = UserAnswers().set(SoldOverThresholdPage, true).success.value
 
       val application = applicationBuilder(userAnswers = Some(userAnswers)).build()
 
-      val request = FakeRequest(GET, boughtOrSoldOverThresholdRoute)
+      val request = FakeRequest(GET, SoldOverThresholdRoute)
 
-      val view = application.injector.instanceOf[BoughtOrSoldOverThresholdView]
+      val view = application.injector.instanceOf[SoldOverThresholdView]
 
       val result = route(application, request).value
 
@@ -97,7 +97,7 @@ class BoughtOrSoldOverThresholdControllerSpec extends SpecBase with MockitoSugar
           .build()
 
       val request =
-        FakeRequest(POST, boughtOrSoldOverThresholdRoute)
+        FakeRequest(POST, SoldOverThresholdRoute)
           .withFormUrlEncodedBody(("value", "true"))
 
       val result = route(application, request).value
@@ -114,12 +114,12 @@ class BoughtOrSoldOverThresholdControllerSpec extends SpecBase with MockitoSugar
       val application = applicationBuilder(userAnswers = Some(emptyUserAnswers)).build()
 
       val request =
-        FakeRequest(POST, boughtOrSoldOverThresholdRoute)
+        FakeRequest(POST, SoldOverThresholdRoute)
           .withFormUrlEncodedBody(("value", ""))
 
       val boundForm = form.bind(Map("value" -> ""))
 
-      val view = application.injector.instanceOf[BoughtOrSoldOverThresholdView]
+      val view = application.injector.instanceOf[SoldOverThresholdView]
 
       val result = route(application, request).value
 
@@ -135,7 +135,7 @@ class BoughtOrSoldOverThresholdControllerSpec extends SpecBase with MockitoSugar
 
       val application = applicationBuilder(userAnswers = None).build()
 
-      val request = FakeRequest(GET, boughtOrSoldOverThresholdRoute)
+      val request = FakeRequest(GET, SoldOverThresholdRoute)
 
       val result = route(application, request).value
 
@@ -151,7 +151,7 @@ class BoughtOrSoldOverThresholdControllerSpec extends SpecBase with MockitoSugar
       val application = applicationBuilder(userAnswers = None).build()
 
       val request =
-        FakeRequest(POST, boughtOrSoldOverThresholdRoute)
+        FakeRequest(POST, SoldOverThresholdRoute)
           .withFormUrlEncodedBody(("value", "true"))
 
       val result = route(application, request).value

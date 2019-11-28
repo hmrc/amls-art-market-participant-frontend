@@ -32,7 +32,7 @@ trait UserAnswersGenerator extends TryValues {
     arbitrary[(PercentageExpectedTurnoverPage.type, JsValue)] ::
     arbitrary[(IdentifyLinkedTransactionsPage.type, JsValue)] ::
     arbitrary[(DateTransactionOverThresholdPage.type, JsValue)] ::
-    arbitrary[(BoughtOrSoldOverThresholdPage.type, JsValue)] ::
+    arbitrary[(SoldOverThresholdPage.type, JsValue)] ::
     Nil
 
   implicit lazy val arbitraryUserData: Arbitrary[UserAnswers] = {

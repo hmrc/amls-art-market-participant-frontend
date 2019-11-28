@@ -36,6 +36,6 @@ trait PageGenerators {
   implicit lazy val arbitraryDateTransactionOverThresholdPage: Arbitrary[DateTransactionOverThresholdPage.type] =
     Arbitrary(DateTransactionOverThresholdPage)
 
-  implicit lazy val arbitraryBoughtOrSoldOverThresholdPage: Arbitrary[BoughtOrSoldOverThresholdPage.type] =
-    Arbitrary(BoughtOrSoldOverThresholdPage)
+  implicit lazy val arbitraryBoughtOrSoldOverThresholdPage: Arbitrary[SoldOverThresholdPage.type] =
+    Arbitrary(SoldOverThresholdPage)
 }

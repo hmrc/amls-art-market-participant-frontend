@@ -17,22 +17,22 @@
 package views
 
 import controllers.routes
-import forms.BoughtOrSoldOverThresholdFormProvider
+import forms.SoldOverThresholdFormProvider
 import models.NormalMode
 import play.api.data.Form
 import play.twirl.api.HtmlFormat
 import views.behaviours.YesNoViewBehaviours
-import views.html.BoughtOrSoldOverThresholdView
+import views.html.SoldOverThresholdView
 
-class BoughtOrSoldOverThresholdViewSpec extends YesNoViewBehaviours {
+class SoldOverThresholdViewSpec extends YesNoViewBehaviours {
 
-  val messageKeyPrefix = "boughtOrSoldOverThreshold"
+  val messageKeyPrefix = "soldOverThreshold"
 
-  val form = new BoughtOrSoldOverThresholdFormProvider()()
+  val form = new SoldOverThresholdFormProvider()()
 
-  "BoughtOrSoldOverThreshold view" must {
+  "SoldOverThreshold view" must {
 
-    val view = viewFor[BoughtOrSoldOverThresholdView](Some(emptyUserAnswers))
+    val view = viewFor[SoldOverThresholdView](Some(emptyUserAnswers))
 
     def applyView(form: Form[_]): HtmlFormat.Appendable =
       view.apply(form, NormalMode)(fakeRequest, messages)
@@ -41,13 +41,13 @@ class BoughtOrSoldOverThresholdViewSpec extends YesNoViewBehaviours {
 
     behave like pageWithBackLink(applyView(form))
 
-    behave like yesNoPage(form, applyView, messageKeyPrefix, routes.BoughtOrSoldOverThresholdController.onSubmit(NormalMode).url)
+    behave like yesNoPage(form, applyView, messageKeyPrefix, routes.SoldOverThresholdController.onSubmit(NormalMode).url)
 
     "include the correct content" in {
       val document = asDocument(applyView(form))
 
-      assertTitleEqualsMessage(document, "title", "Has your business made a sale or purchase of art for €10,000 or more after 10 January 2020?")
-      assertPageTitleEqualsMessage(document, "Has your business made a sale or purchase of art for €10,000 or more after 10 January 2020?")
+      assertTitleEqualsMessage(document, "title", "Has your business made a sale of art for €10,000 or more on or after 10 January 2020?")
+      assertPageTitleEqualsMessage(document, "Has your business made a sale of art for €10,000 or more on or after 10 January 2020?")
     }
   }
 }

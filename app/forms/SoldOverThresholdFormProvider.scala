@@ -14,23 +14,17 @@
  * limitations under the License.
  */
 
-package pages
+package forms
 
-import models.UserAnswers
-import play.api.libs.json.JsPath
+import javax.inject.Inject
 
-import scala.util.Try
+import forms.mappings.Mappings
+import play.api.data.Form
 
-case object BoughtOrSoldOverThresholdPage extends QuestionPage[Boolean] {
+class SoldOverThresholdFormProvider @Inject() extends Mappings {
 
-  override def path: JsPath = JsPath \ toString
-
-  override def toString: String = "boughtOrSoldOverThreshold"
-
-  override def cleanup(value: Option[Boolean], userAnswers: UserAnswers): Try[UserAnswers] =
-    if (value.contains(false)) {
-      userAnswers.remove(DateTransactionOverThresholdPage)
-    } else {
-      super.cleanup(value, userAnswers)
-    }
+  def apply(): Form[Boolean] =
+    Form(
+      "value" -> boolean("soldOverThreshold.error.required")
+    )
 }

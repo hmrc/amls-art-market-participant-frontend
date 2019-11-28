@@ -15,15 +15,15 @@ POST       /check-your-answers                                             contr
 
 GET        /unauthorised                                                   controllers.UnauthorisedController.onPageLoad
 
-GET        /sale-or-purchase                        controllers.BoughtOrSoldOverThresholdController.onPageLoad(mode: Mode = NormalMode)
-POST       /sale-or-purchase                        controllers.BoughtOrSoldOverThresholdController.onSubmit(mode: Mode = NormalMode)
-GET        /change-sale-or-purchase                 controllers.BoughtOrSoldOverThresholdController.onPageLoad(mode: Mode = CheckMode)
-POST       /change-sale-or-purchase                 controllers.BoughtOrSoldOverThresholdController.onSubmit(mode: Mode = CheckMode)
+GET        /sale                                    controllers.SoldOverThresholdController.onPageLoad(mode: Mode = NormalMode)
+POST       /sale                                    controllers.SoldOverThresholdController.onSubmit(mode: Mode = NormalMode)
+GET        /change-sale                             controllers.SoldOverThresholdController.onPageLoad(mode: Mode = CheckMode)
+POST       /change-sale                             controllers.SoldOverThresholdController.onSubmit(mode: Mode = CheckMode)
 
-GET        /first-sale-or-purchase                  controllers.DateTransactionOverThresholdController.onPageLoad(mode: Mode = NormalMode)
-POST       /first-sale-or-purchase                  controllers.DateTransactionOverThresholdController.onSubmit(mode: Mode = NormalMode)
-GET        /change-first-sale-or-purchase           controllers.DateTransactionOverThresholdController.onPageLoad(mode: Mode = CheckMode)
-POST       /change-first-sale-or-purchase           controllers.DateTransactionOverThresholdController.onSubmit(mode: Mode = CheckMode)
+GET        /first-sale                              controllers.DateTransactionOverThresholdController.onPageLoad(mode: Mode = NormalMode)
+POST       /first-sale                              controllers.DateTransactionOverThresholdController.onSubmit(mode: Mode = NormalMode)
+GET        /change-first-sale                       controllers.DateTransactionOverThresholdController.onPageLoad(mode: Mode = CheckMode)
+POST       /change-first-sale                       controllers.DateTransactionOverThresholdController.onSubmit(mode: Mode = CheckMode)
 
 GET        /identify-linked-payments                controllers.IdentifyLinkedTransactionsController.onPageLoad(mode: Mode = NormalMode)
 POST       /identify-linked-payments                controllers.IdentifyLinkedTransactionsController.onSubmit(mode: Mode = NormalMode)

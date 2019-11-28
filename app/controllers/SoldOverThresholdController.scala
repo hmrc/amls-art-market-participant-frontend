@@ -17,29 +17,29 @@
 package controllers
 
 import controllers.actions._
-import forms.BoughtOrSoldOverThresholdFormProvider
+import forms.SoldOverThresholdFormProvider
 import javax.inject.Inject
 import models.Mode
 import navigation.Navigator
-import pages.BoughtOrSoldOverThresholdPage
+import pages.SoldOverThresholdPage
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import repositories.{AMLSFrontEndSessionRepository}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
-import views.html.BoughtOrSoldOverThresholdView
+import views.html.SoldOverThresholdView
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class BoughtOrSoldOverThresholdController @Inject()(
-                                         override val messagesApi: MessagesApi,
-                                         sessionRepository: AMLSFrontEndSessionRepository,
-                                         navigator: Navigator,
-                                         identify: IdentifierAction,
-                                         getData: DataRetrievalAction,
-                                         requireData: DataRequiredAction,
-                                         formProvider: BoughtOrSoldOverThresholdFormProvider,
-                                         val controllerComponents: MessagesControllerComponents,
-                                         view: BoughtOrSoldOverThresholdView
+class SoldOverThresholdController @Inject()(
+                                             override val messagesApi: MessagesApi,
+                                             sessionRepository: AMLSFrontEndSessionRepository,
+                                             navigator: Navigator,
+                                             identify: IdentifierAction,
+                                             getData: DataRetrievalAction,
+                                             requireData: DataRequiredAction,
+                                             formProvider: SoldOverThresholdFormProvider,
+                                             val controllerComponents: MessagesControllerComponents,
+                                             view: SoldOverThresholdView
                                  )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
 
   val form = formProvider()
@@ -47,7 +47,7 @@ class BoughtOrSoldOverThresholdController @Inject()(
   def onPageLoad(mode: Mode): Action[AnyContent] = (identify andThen getData andThen requireData) {
     implicit request =>
 
-      val preparedForm = request.userAnswers.get(BoughtOrSoldOverThresholdPage) match {
+      val preparedForm = request.userAnswers.get(SoldOverThresholdPage) match {
         case None => form
         case Some(value) => form.fill(value)
       }
@@ -64,9 +64,9 @@ class BoughtOrSoldOverThresholdController @Inject()(
 
         value =>
           for {
-            updatedAnswers <- Future.fromTry(request.userAnswers.set(BoughtOrSoldOverThresholdPage, value))
+            updatedAnswers <- Future.fromTry(request.userAnswers.set(SoldOverThresholdPage, value))
             _              <- sessionRepository.set(request.credId, updatedAnswers)
-          } yield Redirect(navigator.nextPage(BoughtOrSoldOverThresholdPage, mode, updatedAnswers))
+          } yield Redirect(navigator.nextPage(SoldOverThresholdPage, mode, updatedAnswers))
       )
   }
 }

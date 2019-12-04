@@ -38,13 +38,11 @@
 
         @components.page_heading("amp.heading")
 
-        @components.heading("identifyLinkedTransactions.heading")
-
         @components.input_yes_no(
             field = form("value"),
-            label = messages("identifyLinkedTransactions.heading"),
-            labelClass = Some("visually-hidden")
-        )
+            legend = messages("identifyLinkedTransactions.heading"),
+            headingIsLegend = true
+        )()
 
         @components.submit_button()
 

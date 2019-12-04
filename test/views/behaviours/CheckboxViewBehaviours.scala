@@ -102,10 +102,11 @@ trait CheckboxViewBehaviours[A] extends ViewBehaviours {
         assertRenderedById(doc, "error-summary-heading")
       }
 
-      "show an error in the value field's label" in {
+      "show an error associated with the value field" in {
         val doc = asDocument(createView(form.withError(FormError(fieldKey, "error.invalid"))))
-        val errorSpan = doc.getElementsByClass("error-notification").first
-        errorSpan.text mustBe messages("error.invalid")
+        val errorSpan = doc.getElementsByClass("error-message").first
+        errorSpan.text mustBe (messages("error.browser.title.prefix") + " " + messages("error.invalid"))
+        doc.getElementsByTag("fieldset").first.attr("aria-describedby") contains errorSpan.attr("id")
       }
     }
   }

@@ -36,14 +36,12 @@
 
         @components.page_heading("amp.heading")
 
-        @components.heading("dateTransactionOverThreshold.heading")
-
         @components.input_date(
             field = form("value"),
             legend = messages("dateTransactionOverThreshold.heading"),
-            legendClass = "visually-hidden",
-            hint = Some(messages("dateTransactionOverThreshold.hint"))
-        )
+            hint = Some(messages("dateTransactionOverThreshold.hint")),
+            headingIsLegend = true
+        )()
 
         @components.submit_button()
 

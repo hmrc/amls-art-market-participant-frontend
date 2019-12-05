@@ -38,15 +38,13 @@
 
         @components.page_heading("amp.heading")
 
-        @components.heading("typeOfParticipant.heading")
-
         @components.input_checkboxes(
             field = form("value"),
             legend = messages("typeOfParticipant.heading"),
-            legendClass = Some("visually-hidden"),
+            hint = Some(messages("typeOfParticipant.hint")),
             inputs = TypeOfParticipant.options,
-            hint = Some(messages("typeOfParticipant.hint"))
-        )
+            headingIsLegend = true
+        )()
 
         @components.submit_button()
 

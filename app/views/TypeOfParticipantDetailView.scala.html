@@ -38,13 +38,11 @@
 
         @components.page_heading("amp.heading")
 
-        @components.heading("typeOfParticipantDetail.heading")
-
         @components.input_text(
           field = form("value"),
           label = messages("typeOfParticipantDetail.heading"),
-          labelClass=Some("visually-hidden")
-        )
+          headingIsLabel = true
+        )()
 
         @components.submit_button()
 

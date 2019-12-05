@@ -36,6 +36,15 @@ class WhatYouNeedViewSpec extends ViewBehaviours {
 
       assertTitleEqualsMessage(document, "title", "What you need")
       assertPageTitleEqualsMessage(document, "What you need")
+
+      assertContainsText(document, "Automatic saving")
+      assertContainsText(document, "Information is saved automatically. If you sign out, you’ll have 28 days to complete your application.")
+
+      assertContainsText(document, "In the section you’ll need to tell us:")
+      assertContainsText(document, "the role you carry out in the art market")
+      assertContainsText(document, "the date of your first sale of art for €10,000 or more on or after 10 January 2020, if you have made any")
+      assertContainsText(document, "if you can identify when a sale is made up of multiple payments")
+      assertContainsText(document, "the percentage of your turnover you estimate will come from sales of art for €10,000 or more in the next 12 months")
     }
   }
 }

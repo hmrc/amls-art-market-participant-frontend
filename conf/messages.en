@@ -77,6 +77,8 @@ whatYouNeed.line_1 = the role you carry out in the art market
 whatYouNeed.line_2 = the date of your first sale of art for €10,000 or more on or after 10 January 2020, if you have made any
 whatYouNeed.line_3 = if you can identify when a sale is made up of multiple payments
 whatYouNeed.line_4 = the percentage of your turnover you estimate will come from sales of art for €10,000 or more in the next 12 months
+whatYouNeed.attention.title = Automatic saving
+whatYouNeed.attention.information = Information is saved automatically. If you sign out, you’ll have 28 days to complete your application.
 
 typeOfParticipant.title = What type of art market participant are you?
 typeOfParticipant.heading = What type of art market participant are you?

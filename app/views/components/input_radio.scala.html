@@ -27,7 +27,7 @@
 )(supportingContent: Html = HtmlFormat.empty)(implicit messages: Messages)
 
 <div class="form-group @if(field.hasErrors){form-group-error}">
-    <fieldset id="@{field.id}" @if(field.hasErrors || hint.nonEmpty){aria-describedby="@if(field.hasErrors){error-message-@{field.id}-input} @if(hint.nonEmpty){hint-@{field.id}}"}>
+    <fieldset @if(field.hasErrors || hint.nonEmpty){aria-describedby="@if(field.hasErrors){error-message-@{field.id}-input} @if(hint.nonEmpty){hint-@{field.id}}"}>
         @if(headingIsLegend){
             <legend>
                 <h1 @if(legendClass.nonEmpty){class="@legendClass" }else{class="heading-xlarge"}>@legend</h1>
@@ -50,7 +50,7 @@
         }
         @for(input <- inputs) {
             <div class="multiple-choice">
-                <input id="@{input.id}" type="radio" name="@{field.id}" value="@{input.value}" @if(field.value == Some(input.value)){checked="checked"} @if(trackGa){data-journey-click="amls-estate-agency-business-frontend:click:@{input.id}"} />
+                <input id="@{input.id}" type="radio" name="@{field.id}" value="@{input.value}" @if(field.value == Some(input.value)){checked="checked"} @if(trackGa){data-journey-click="amls-art-market-participant-frontend:click:@{input.id}"} />
 
                 <label class="block-label selection-button-radio" for="@{input.id}">
                     @messages(input.messageKey)

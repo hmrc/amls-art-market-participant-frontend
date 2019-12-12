@@ -35,10 +35,11 @@ class FrontendAppConfig @Inject() (configuration: Configuration) {
   val analyticsHost: String = configuration.get[String](s"google-analytics.host")
   lazy val gtmEnabled: Boolean = configuration.getOptional[Boolean](s"google-tag-manager.enabled").getOrElse(false)
   lazy val gtmAppId: String = configuration.get[String](s"google-tag-manager.id")
-  val reportAProblemPartialUrl = s"$contactHost/contact/problem_reports_ajax?service=$contactFormServiceIdentifier"
-  val reportAProblemNonJSUrl = s"$contactHost/contact/problem_reports_nonjs?service=$contactFormServiceIdentifier"
-  val betaFeedbackUrl = s"$contactHost/contact/beta-feedback"
-  val betaFeedbackUnauthenticatedUrl = s"$contactHost/contact/beta-feedback-unauthenticated"
+
+  val reportAProblemPartialUrl = configuration.get[String]("microservice.services.contact-frontend.report-problem-url.with-js")
+  val reportAProblemNonJSUrl = configuration.get[String]("microservice.services.contact-frontend.report-problem-url.non-js")
+  val betaFeedbackUrl = configuration.get[String]("microservice.services.contact-frontend.beta-feedback-url.authenticated")
+  val betaFeedbackUnauthenticatedUrl = configuration.get[String]("microservice.services.contact-frontend.beta-feedback-url.unauthenticated")
 
   val amlsFrontendBaseUrl = configuration.get[String](s"microservice.services.amls-frontend.url")
 

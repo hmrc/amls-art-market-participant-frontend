@@ -196,11 +196,12 @@ class ConstraintsSpec extends WordSpec with MustMatchers with ScalaCheckProperty
       }
     }
 
-    "return Valid for a date 1905-4-11" in {
-      val result = minDate(LocalDate.now(), "error.past", "foo")(LocalDate.of(1905, 4, 11))
-      result mustEqual Valid
-
-    }
+    // TODO: If current date is before the 10th Jan 2020 the this code may be needed as a back door for testing.
+//    "return Valid for a date 1905-4-11" in {
+//      val result = minDate(LocalDate.now(), "error.past", "foo")(LocalDate.of(1905, 4, 11))
+//      result mustEqual Valid
+//
+//    }
 
     "return Invalid for a date before the minimum" in {
 

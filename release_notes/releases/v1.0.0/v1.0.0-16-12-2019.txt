@@ -1,0 +1,12 @@
+ + [AMLS-5274] - | Auth implementation like in frontend
+ + [AMLS-5299] - "AMP FE cache repository switch out to read write to AMLS cache"
+ + [AMLS-5325] - 'Added "Return to About Your Business" links, "Accept and Complete" button, "Signout" link and JS session timeout'
+ + [AMLS-5333] - 'Updated AMP models / loading data from DES & stubs'
+ + [AMLS-5337] - 'Fixed page titles'
+ + [AMLS-5355] - 'Change the url of AMP FE to be more seemless to the user'
+ + [AMLS-5390] - 'Updated palette'
+ + [AMLS-5477] - 'Removed UR banner'
+ + [AMLS-5499] - 'Auth fix to align with AMLS FE'
+ + [AMLS-5513] - 'Implement EAB view components into AMP'
+ + [AMLS-5564] - Add automatic saving message to WYN page
+ + [AMLS-5588] - 'Configure feedback and get help urls to work correctly in all environments'

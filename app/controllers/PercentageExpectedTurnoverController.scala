@@ -42,11 +42,10 @@ class PercentageExpectedTurnoverController @Inject()(
                                        view: PercentageExpectedTurnoverView
                                      )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
 
-  val form = formProvider()
-
   def onPageLoad(mode: Mode): Action[AnyContent] = (identify andThen getData andThen requireData) {
     implicit request =>
 
+      val form = formProvider()
       val preparedForm = request.userAnswers.get(PercentageExpectedTurnoverPage) match {
         case None => form
         case Some(value) => form.fill(value)
@@ -58,6 +57,7 @@ class PercentageExpectedTurnoverController @Inject()(
   def onSubmit(mode: Mode): Action[AnyContent] = (identify andThen getData andThen requireData).async {
     implicit request =>
 
+      val form = formProvider()
       form.bindFromRequest().fold(
         formWithErrors =>
           Future.successful(BadRequest(view(formWithErrors, mode))),

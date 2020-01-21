@@ -41,11 +41,10 @@ class TypeOfParticipantController @Inject()(
                                         view: TypeOfParticipantView
                                       )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
 
-  val form = formProvider()
-
   def onPageLoad(mode: Mode): Action[AnyContent] = (identify andThen getData) {
     implicit request =>
 
+      val form = formProvider()
       val preparedForm = request.userAnswers.getOrElse(UserAnswers()).get(TypeOfParticipantPage) match {
         case None => form
         case Some(value) => form.fill(value)
@@ -57,6 +56,7 @@ class TypeOfParticipantController @Inject()(
   def onSubmit(mode: Mode): Action[AnyContent] = (identify andThen getData).async {
     implicit request =>
 
+      val form = formProvider()
       form.bindFromRequest().fold(
         formWithErrors =>
           Future.successful(BadRequest(view(formWithErrors, mode))),

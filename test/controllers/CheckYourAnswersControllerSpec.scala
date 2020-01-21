@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 HM Revenue & Customs
+ * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,12 +50,13 @@ class CheckYourAnswersControllerSpec extends SpecBase {
 
       val request = FakeRequest(GET, routes.CheckYourAnswersController.onPageLoad().url)
 
-      val result = route(application, request).value
+      val exception = intercept[Exception]{
+        val result = route(application, request).value
 
-      status(result) mustEqual SEE_OTHER
+        status(result) mustEqual SEE_OTHER
+      }
 
-      redirectLocation(result).value mustEqual routes.SessionExpiredController.onPageLoad().url
-
+      exception.getMessage must include("Unable to redirect to page")
       application.stop()
     }
   }

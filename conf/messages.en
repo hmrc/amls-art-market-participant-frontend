@@ -33,12 +33,6 @@ error.number = Please enter a valid number
 error.required = Please enter a value
 error.summary.title = There is a problem
 
-############################### Home Page ###############################
-
-index.title = Art market participant
-index.heading = Art market participant
-index.guidance = Welcome to your new frontend. Please see the README file for a guide to getting started.
-
 ############################### Session ###############################
 
 session_expired.title = For your security, this service has been reset

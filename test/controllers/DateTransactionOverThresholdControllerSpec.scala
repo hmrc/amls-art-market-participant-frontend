@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 HM Revenue & Customs
+ * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -95,31 +95,28 @@ class DateTransactionOverThresholdControllerSpec extends SpecBase with MockitoSu
       application.stop()
     }
 
-    // TODO: Remove check after 10th Jan 2020
-    if(LocalDate.now(ZoneOffset.UTC).isAfter(DateTransactionOverThresholdFormProvider.ampStartDate)) {
 
-      "redirect to the next page when valid data is submitted" in {
+    "redirect to the next page when valid data is submitted" in {
 
-        val mockSessionRepository = mock[AMLSFrontEndSessionRepository]
+      val mockSessionRepository = mock[AMLSFrontEndSessionRepository]
 
-        when(mockSessionRepository.set(any(), any())(any())) thenReturn Future.successful(true)
+      when(mockSessionRepository.set(any(), any())(any())) thenReturn Future.successful(true)
 
-        val application =
-          applicationBuilder(userAnswers = Some(emptyUserAnswers))
-            .overrides(
-              bind[Navigator].toInstance(new FakeNavigator(onwardRoute)),
-              bind[AMLSFrontEndSessionRepository].toInstance(mockSessionRepository)
-            )
-            .build()
+      val application =
+        applicationBuilder(userAnswers = Some(emptyUserAnswers))
+          .overrides(
+            bind[Navigator].toInstance(new FakeNavigator(onwardRoute)),
+            bind[AMLSFrontEndSessionRepository].toInstance(mockSessionRepository)
+          )
+          .build()
 
-        val result = route(application, postRequest).value
+      val result = route(application, postRequest).value
 
-        status(result) mustEqual SEE_OTHER
+      status(result) mustEqual SEE_OTHER
 
-        redirectLocation(result).value mustEqual onwardRoute.url
+      redirectLocation(result).value mustEqual onwardRoute.url
 
-        application.stop()
-      }
+      application.stop()
     }
 
     "return a Bad Request and errors when invalid data is submitted" in {
@@ -148,23 +145,27 @@ class DateTransactionOverThresholdControllerSpec extends SpecBase with MockitoSu
 
       val application = applicationBuilder(userAnswers = None).build()
 
-      val result = route(application, getRequest).value
+      val exception = intercept[Exception]{
+        val result = route(application, postRequest).value
 
-      status(result) mustEqual SEE_OTHER
-      redirectLocation(result).value mustEqual routes.SessionExpiredController.onPageLoad().url
+        status(result) mustEqual SEE_OTHER
+      }
+
+      exception.getMessage must include("Unable to redirect to page")
 
       application.stop()
     }
 
     "redirect to Session Expired for a POST if no existing data is found" in {
-
       val application = applicationBuilder(userAnswers = None).build()
 
-      val result = route(application, postRequest).value
+      val exception = intercept[Exception]{
+        val result = route(application, postRequest).value
 
-      status(result) mustEqual SEE_OTHER
+        status(result) mustEqual SEE_OTHER
+      }
 
-      redirectLocation(result).value mustEqual routes.SessionExpiredController.onPageLoad().url
+      exception.getMessage must include("Unable to redirect to page")
 
       application.stop()
     }

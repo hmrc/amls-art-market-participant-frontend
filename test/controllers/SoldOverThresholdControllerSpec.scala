@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 HM Revenue & Customs
+ * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -137,12 +137,13 @@ class SoldOverThresholdControllerSpec extends SpecBase with MockitoSugar {
 
       val request = FakeRequest(GET, SoldOverThresholdRoute)
 
-      val result = route(application, request).value
+      val exception = intercept[Exception]{
+        val result = route(application, request).value
 
-      status(result) mustEqual SEE_OTHER
+        status(result) mustEqual SEE_OTHER
+      }
 
-      redirectLocation(result).value mustEqual routes.SessionExpiredController.onPageLoad().url
-
+      exception.getMessage must include("Unable to redirect to page")
       application.stop()
     }
 
@@ -154,12 +155,13 @@ class SoldOverThresholdControllerSpec extends SpecBase with MockitoSugar {
         FakeRequest(POST, SoldOverThresholdRoute)
           .withFormUrlEncodedBody(("value", "true"))
 
-      val result = route(application, request).value
+      val exception = intercept[Exception]{
+        val result = route(application, request).value
 
-      status(result) mustEqual SEE_OTHER
+        status(result) mustEqual SEE_OTHER
+      }
 
-      redirectLocation(result).value mustEqual routes.SessionExpiredController.onPageLoad().url
-
+      exception.getMessage must include("Unable to redirect to page")
       application.stop()
     }
   }

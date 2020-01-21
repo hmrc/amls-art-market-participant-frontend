@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 HM Revenue & Customs
+ * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -137,10 +137,13 @@ class PercentageExpectedTurnoverControllerSpec extends SpecBase with MockitoSuga
 
       val request = FakeRequest(GET, percentageExpectedTurnoverRoute)
 
-      val result = route(application, request).value
+      val exception = intercept[Exception]{
+        val result = route(application, request).value
 
-      status(result) mustEqual SEE_OTHER
-      redirectLocation(result).value mustEqual routes.SessionExpiredController.onPageLoad().url
+        status(result) mustEqual SEE_OTHER
+      }
+
+      exception.getMessage must include("Unable to redirect to page")
 
       application.stop()
     }
@@ -153,11 +156,13 @@ class PercentageExpectedTurnoverControllerSpec extends SpecBase with MockitoSuga
         FakeRequest(POST, percentageExpectedTurnoverRoute)
           .withFormUrlEncodedBody(("value", PercentageExpectedTurnover.values.head.toString))
 
-      val result = route(application, request).value
+      val exception = intercept[Exception]{
+        val result = route(application, request).value
 
-      status(result) mustEqual SEE_OTHER
+        status(result) mustEqual SEE_OTHER
+      }
 
-      redirectLocation(result).value mustEqual routes.SessionExpiredController.onPageLoad().url
+      exception.getMessage must include("Unable to redirect to page")
 
       application.stop()
     }

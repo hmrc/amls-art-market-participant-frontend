@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 HM Revenue & Customs
+ * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,11 +28,6 @@ class NavigatorSpec extends SpecBase {
 
   "Navigator" when {
     "in Normal mode" must {
-      "go to Index from a page that doesn't exist in the route map" in {
-        case object UnknownPage extends Page
-        navigator.nextPage(UnknownPage, NormalMode, UserAnswers()) mustBe routes.IndexController.onPageLoad()
-      }
-
       "go from Type of Participant to Type Of Participant Detail when specifying something else" in {
         val answers = UserAnswers().set(TypeOfParticipantPage,  Seq(SomethingElse)).success.value
 

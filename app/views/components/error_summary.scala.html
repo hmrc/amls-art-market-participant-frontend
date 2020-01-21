@@ -23,9 +23,7 @@
         </h2>
 
         <ul role="list" class="error-summary-list">
-            @for(error <- errors) {
-                <li><a href="#@{error.key}">@messages(error.message, error.args:_*)</a></li>
-            }
+            <li><a href="#@{errors.head.key}">@messages(errors.head.message, errors.head.args:_*)</a></li>
         </ul>
 
     </div>

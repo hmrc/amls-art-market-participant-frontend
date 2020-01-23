@@ -51,14 +51,8 @@ class FrontendAppConfig @Inject() (configuration: Configuration) {
   lazy val logoutUrl: String = configuration.get[String]("urls.logout.url")
   lazy val loginContinueUrl: String = configuration.get[String]("urls.login.continue")
 
-  lazy val languageTranslationEnabled: Boolean =
-    configuration.get[Boolean]("microservice.services.features.welsh-translation")
-
   def languageMap: Map[String, Lang] = Map(
     "english" -> Lang("en"),
     "cymraeg" -> Lang("cy")
   )
-
-  def routeToSwitchLanguage: String => Call =
-    (lang: String) => routes.LanguageSwitchController.switchToLanguage(lang)
 }

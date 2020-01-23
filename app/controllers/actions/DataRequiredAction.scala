@@ -33,7 +33,7 @@ class DataRequiredActionImpl @Inject()(implicit val executionContext: ExecutionC
 
     request.userAnswers match {
       case None =>
-        Future.successful(Left(throw new Exception("Unable to redirect to page")))
+        Future.successful(Left(throw new Exception("Required data not found")))
       case Some(data) =>
         Future.successful(Right(DataRequest(request.request, request.credId, data)))
     }

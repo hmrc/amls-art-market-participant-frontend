@@ -131,21 +131,24 @@ class PercentageExpectedTurnoverControllerSpec extends SpecBase with MockitoSuga
       application.stop()
     }
 
-    "redirect to Session Expired for a GET if no existing data is found" in {
+    "raise an error for a GET if no existing data is found" in {
 
       val application = applicationBuilder(userAnswers = None).build()
 
       val request = FakeRequest(GET, percentageExpectedTurnoverRoute)
 
-      val result = route(application, request).value
+      val exception = intercept[Exception]{
+        val result = route(application, request).value
 
-      status(result) mustEqual SEE_OTHER
-      redirectLocation(result).value mustEqual routes.SessionExpiredController.onPageLoad().url
+        status(result) mustEqual SEE_OTHER
+      }
+
+      exception.getMessage must include("Required data not found")
 
       application.stop()
     }
 
-    "redirect to Session Expired for a POST if no existing data is found" in {
+    "raise an error for a POST if no existing data is found" in {
 
       val application = applicationBuilder(userAnswers = None).build()
 
@@ -153,11 +156,13 @@ class PercentageExpectedTurnoverControllerSpec extends SpecBase with MockitoSuga
         FakeRequest(POST, percentageExpectedTurnoverRoute)
           .withFormUrlEncodedBody(("value", PercentageExpectedTurnover.values.head.toString))
 
-      val result = route(application, request).value
+      val exception = intercept[Exception]{
+        val result = route(application, request).value
 
-      status(result) mustEqual SEE_OTHER
+        status(result) mustEqual SEE_OTHER
+      }
 
-      redirectLocation(result).value mustEqual routes.SessionExpiredController.onPageLoad().url
+      exception.getMessage must include("Required data not found")
 
       application.stop()
     }

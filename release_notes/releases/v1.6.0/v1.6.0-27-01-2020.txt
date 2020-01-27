@@ -1,1 +1,1 @@
- + [AMLS-5593] - 'Output only one error at a time to reduce visual load for user'
+ + [AMLS-5641] - 'Removed index and sessiopn expired pages'

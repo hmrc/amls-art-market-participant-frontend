@@ -73,7 +73,7 @@ class AMLSConnectorSpec extends SpecBase with MockitoSugar {
       val putUrl = s"${amlsConnector.url}/set/someid"
 
       amlsConnector.set("someid", answers)
-      verify(amlsConnector.httpClient).PUT(eqTo(putUrl), eqTo(answers))(any(), any(), any(), any())
+      verify(amlsConnector.httpClient).PUT(eqTo(putUrl), eqTo(answers), any())(any(), any(), any(), any())
     }
   }
 }

@@ -1,1 +1,3 @@
  + [AMLS-5593] - 'Output only one error at a time to reduce visual load for user'
+ + [AMLS-5704] - 'Libraries upgrade'
+ + [AMLS-5741] - 'Removed colon from this section is'

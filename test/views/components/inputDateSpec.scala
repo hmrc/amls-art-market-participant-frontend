@@ -15,40 +15,33 @@
  */
 
 package views
+import forms.mappings.Mappings
+import play.api.data.{Field, FormError, _}
+import views.html.components.input_date
 
-import java.time.LocalDate
+class inputDateSpec extends ViewSpecBase with Mappings {
 
-import forms.DateTransactionOverThresholdFormProvider
-import models.{NormalMode, UserAnswers}
-import play.api.data.Form
-import play.twirl.api.HtmlFormat
-import views.behaviours.QuestionViewBehaviours
-import views.html.DateTransactionOverThresholdView
-
-class inputDateSpec extends QuestionViewBehaviours[LocalDate] {
-
-  val messageKeyPrefix = "dateTransactionOverThreshold"
-
-  val form = new DateTransactionOverThresholdFormProvider()()
-
-  "DateTransactionOverThresholdView view" must {
-
-    val application = applicationBuilder(userAnswers = Some(UserAnswers())).build()
-
-    val view = application.injector.instanceOf[DateTransactionOverThresholdView]
-
-    def applyView(form: Form[_]): HtmlFormat.Appendable =
-      view.apply(form, NormalMode)(fakeRequest, messages)
-
-    behave like normalPage(applyView(form), messageKeyPrefix)
-
-    behave like pageWithBackLink(applyView(form))
-
-    "include the correct content" in {
-      val document = asDocument(applyView(form))
-
-      assertTitleEqualsMessage(document, "title", "When was the first sale of art for €10,000 or more on or after 10 January 2020?")
-      assertPageTitleEqualsMessage(document, "When was the first sale of art for €10,000 or more on or after 10 January 2020?")
+  "input_date view" must {
+    "render correct ariadescibeby attribute values (error only)" in {
+      val form = Form("value" -> text("custom.error"))
+      val field = Field(form, "field", constraints = Seq(), format = None, errors = Seq(FormError("error", "error.message")), value = None)
+      val inputDate = asDocument(input_date(field = field, legend = "someLegend")())
+      val aria = inputDate.getElementsByTag("fieldset").attr("aria-describedby")
+      aria must be("error-message-field-input")
+    }
+    "render correct ariadescibeby attribute values (error and hint)" in {
+      val form = Form("value" -> text("custom.error"))
+      val field = Field(form, "field", constraints = Seq(), format = None, errors = Seq(FormError("error", "error.message")), value = None)
+      val inputDate = asDocument(input_date(field = field, legend = "someLegend", hint = Some("hint"))())
+      val aria = inputDate.getElementsByTag("fieldset").attr("aria-describedby")
+      aria must be("error-message-field-input hint-field")
+    }
+    "render correct ariadescibeby attribute values (hint only)" in {
+      val form = Form("value" -> text("custom.error"))
+      val field = Field(form, "field", constraints = Seq(), format = None, errors = Seq(), value = None)
+      val inputDate = asDocument(input_date(field = field, legend = "someLegend", hint = Some("hint"))())
+      val aria = inputDate.getElementsByTag("fieldset").attr("aria-describedby")
+      aria must be("hint-field")
     }
   }
 }

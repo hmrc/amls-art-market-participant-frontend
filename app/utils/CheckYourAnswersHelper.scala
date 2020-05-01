@@ -48,11 +48,21 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(implicit messages: Messag
 
   def typeOfParticipant: Option[AnswerRow] = userAnswers.get(TypeOfParticipantPage) map {
     x: Seq[TypeOfParticipant] =>
-      AnswerRow(
-        HtmlFormat.escape(messages("typeOfParticipant.checkYourAnswersLabel")),
-        typeOfParticipantHtml(x),
-        routes.TypeOfParticipantController.onPageLoad(CheckMode).url
-      )
+      if(x.size > 1) {
+        AnswerRow(
+          HtmlFormat.escape(messages("typeOfParticipant.checkYourAnswersLabel")),
+          typeOfParticipantHtml(x),
+          routes.TypeOfParticipantController.onPageLoad(CheckMode).url
+        )
+      } else {
+        val v = x.map(value => value.toString).head
+        val htmlText = messages(s"typeOfParticipant.$v")
+        AnswerRow(
+          HtmlFormat.escape(messages("typeOfParticipant.checkYourAnswersLabel")),
+          HtmlFormat.escape(htmlText),
+          routes.TypeOfParticipantController.onPageLoad(CheckMode).url
+        )
+      }
   }
 
   def percentageExpectedTurnover: Option[AnswerRow] = userAnswers.get(PercentageExpectedTurnoverPage) map {

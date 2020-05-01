@@ -34,6 +34,6 @@ object ViewUtils {
   }
 
   def genericCheckboxErrorId = {
-    "_0"
+    "value_0"
   }
 }

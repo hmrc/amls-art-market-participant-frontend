@@ -14,7 +14,7 @@
  * limitations under the License.
  *@
 
-@(errors: Seq[FormError], append: String)(implicit messages: Messages)
+@(errors: Seq[FormError], id: String)(implicit messages: Messages)
 @if(errors.nonEmpty) {
     <div class="error-summary error-summary--show" role="alert" aria-labelledby="error-summary-heading" tabindex="-1">
 
@@ -23,7 +23,7 @@
         </h2>
 
         <ul role="list" class="error-summary-list">
-            <li><a href="#@{errors.head.key}@{append}">@messages(errors.head.message, errors.head.args:_*)</a></li>
+            <li><a href="#@{id}">@messages(errors.head.message, errors.head.args:_*)</a></li>
         </ul>
 
     </div>

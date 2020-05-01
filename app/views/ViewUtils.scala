@@ -25,15 +25,15 @@ object ViewUtils {
     if (form.hasErrors || form.hasGlobalErrors) messages("error.browser.title.prefix") else ""
   }
 
-  def yesNoAppendage = {
-    "-yes"
+  def genericYesNoErrorId = {
+    "value-yes"
   }
 
-  def radioAppendage = {
-    "_0"
+  def percentageExpectedTurnoverErrorId = {
+    "percentageExpectedTurnover.zeroToTwenty"
   }
 
-  def checkboxAppendage = {
+  def genericCheckboxErrorId = {
     "_0"
   }
 }

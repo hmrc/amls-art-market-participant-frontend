@@ -21,7 +21,7 @@
 
 <h2>@messages(answerSection.headingKey)</h2>
 
-<ul role="list" class="govuk-check-your-answers cya-questions-long section">
+<dl role="list" class="govuk-check-your-answers cya-questions-long section">
     @components.answer_row(answerSection.relevanceRow)
 @for(row <- answerSection.rows){
     <li>
@@ -40,6 +40,6 @@
         </div>
     </li>
 }
-</ul>
+</dl>
 
 <a href="@answerSection.addLinkUrl">@messages(answerSection.addLinkKey)</a>

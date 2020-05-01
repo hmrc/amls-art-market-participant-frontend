@@ -37,6 +37,16 @@ class CheckYourAnswersHelperSpec extends SpecBase {
     "percentageExpectedTurnover" -> "zeroToTwenty"
   ))
 
+
+  val userAnswersSingle: UserAnswers = UserAnswers( Json.obj("typeOfParticipant" -> Seq(
+    "artGalleryOwner"),
+    "typeOfParticipantDetail"  -> "sdfsdf",
+    "soldOverThreshold" -> true,
+    "dateTransactionOverThreshold" -> "2010-01-01",
+    "identifyLinkedTransactions" -> false,
+    "percentageExpectedTurnover" -> "zeroToTwenty"
+  ))
+
   val checkYourAnswersHelper = new CheckYourAnswersHelper(userAnswers)(messages)
 
   "CheckYourAnswersHelper" must {
@@ -49,6 +59,16 @@ class CheckYourAnswersHelperSpec extends SpecBase {
             "/anti-money-laundering/art-market-participant/change-type")
 
           checkYourAnswersHelper.typeOfParticipant.value mustBe expected
+        }
+        "return AnswerRow without bullets when only one user answer" in {
+
+          val checkYourAnswersHelperSingle = new CheckYourAnswersHelper(userAnswersSingle)(messages)
+
+          val expected = AnswerRow(Html("What type of art market participant are you?"),
+            Html("Art gallery owner"),
+            "/anti-money-laundering/art-market-participant/change-type")
+
+          checkYourAnswersHelperSingle.typeOfParticipant.value mustBe expected
         }
       }
     }

@@ -55,8 +55,8 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(implicit messages: Messag
           routes.TypeOfParticipantController.onPageLoad(CheckMode).url
         )
       } else {
-        val v = x.map(value => value.toString).head
-        val htmlText = messages(s"typeOfParticipant.$v")
+        val participantValue = x.map(value => value.toString).head
+        val htmlText = messages(s"typeOfParticipant.$participantValue")
         AnswerRow(
           HtmlFormat.escape(messages("typeOfParticipant.checkYourAnswersLabel")),
           HtmlFormat.escape(htmlText),

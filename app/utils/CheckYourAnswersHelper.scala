@@ -28,7 +28,8 @@ import CheckYourAnswersHelper._
 
 class CheckYourAnswersHelper(userAnswers: UserAnswers)(implicit messages: Messages) {
 
-  private def typeOfParticipantHtml(x: Seq[TypeOfParticipant]): Html = {
+  private def typeOfParticipantList(x: Seq[TypeOfParticipant]): Html = {
+
     val detailAnswer = userAnswers.get(TypeOfParticipantDetailPage).getOrElse("")
 
     val ifBullet = if (x.size == 1) "<ul class=\"list\">" else "<ul class=\"list list-bullet\">"
@@ -46,13 +47,33 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(implicit messages: Messag
     }).mkString("</li>")) + "</ul>")
   }
 
+  private def typeOfParticipantSingle(x: Seq[TypeOfParticipant]) = {
+
+    val detailAnswer = userAnswers.get(TypeOfParticipantDetailPage).getOrElse("")
+    val participantValue = x.map(value => value.toString).head
+
+    if(participantValue == "somethingElse") {
+      detailAnswer
+    } else{
+      messages(s"typeOfParticipant.$participantValue")
+    }
+  }
+
   def typeOfParticipant: Option[AnswerRow] = userAnswers.get(TypeOfParticipantPage) map {
     x: Seq[TypeOfParticipant] =>
-      AnswerRow(
-        HtmlFormat.escape(messages("typeOfParticipant.checkYourAnswersLabel")),
-        typeOfParticipantHtml(x),
-        routes.TypeOfParticipantController.onPageLoad(CheckMode).url
-      )
+      if(x.size > 1) {
+        AnswerRow(
+          HtmlFormat.escape(messages("typeOfParticipant.checkYourAnswersLabel")),
+          typeOfParticipantList(x),
+          routes.TypeOfParticipantController.onPageLoad(CheckMode).url
+        )
+      } else {
+        AnswerRow(
+          HtmlFormat.escape(messages("typeOfParticipant.checkYourAnswersLabel")),
+          HtmlFormat.escape(typeOfParticipantSingle(x)),
+          routes.TypeOfParticipantController.onPageLoad(CheckMode).url
+        )
+      }
   }
 
   def percentageExpectedTurnover: Option[AnswerRow] = userAnswers.get(PercentageExpectedTurnoverPage) map {

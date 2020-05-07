@@ -23,7 +23,7 @@
     <h2 class="heading-large">@messages(answerSection.headingKey.get)</h2>
 }
 
-<dl role="list" class="govuk-check-your-answers cya-questions-long section">
+<dl class="cya-summary-list">
     @for(row <- answerSection.rows){
         @components.answer_row(row)
     }

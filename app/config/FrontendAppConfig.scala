@@ -41,7 +41,10 @@ class FrontendAppConfig @Inject() (configuration: Configuration) {
   val betaFeedbackUrl = configuration.get[String]("microservice.services.contact-frontend.beta-feedback-url.authenticated")
   val betaFeedbackUnauthenticatedUrl = configuration.get[String]("microservice.services.contact-frontend.beta-feedback-url.unauthenticated")
 
+  val accessibilityStatementToggle = configuration.getOptional[Boolean]("microservice.services.feature-toggle.accessibility-statement").getOrElse(true)
+
   val amlsFrontendBaseUrl = configuration.get[String](s"microservice.services.amls-frontend.url")
+  val accessibilityStatementUrl = configuration.get[String](s"microservice.services.amls-frontend.url-accessibility-statement")
 
   val renewalProgressUrl = s"${amlsFrontendBaseUrl}/renewal-progress"
   val registrationProgressUrl = s"${amlsFrontendBaseUrl}/registration-progress"

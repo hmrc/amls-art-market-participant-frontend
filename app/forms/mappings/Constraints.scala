@@ -98,9 +98,6 @@ trait Constraints {
 
   protected def minDate(minimum: LocalDate, errorKey: String, args: Any*): Constraint[LocalDate] =
     Constraint {
-      // TODO: If current date is before the 10th Jan 2020 the this code may be needed as a back door for testing.
-      //case date if date.isEqual(LocalDate.of(1905, 4, 11)) =>
-      //  Valid
       case date if date.isBefore(minimum) =>
         Invalid(errorKey, args: _*)
       case _ =>

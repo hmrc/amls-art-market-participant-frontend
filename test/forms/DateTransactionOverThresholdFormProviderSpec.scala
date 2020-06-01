@@ -31,8 +31,6 @@ class DateTransactionOverThresholdFormProviderSpec extends DateBehaviours {
 
     behave like mandatoryDateField(form, "value", "dateTransactionOverThreshold.error.required.all")
 
-    // TODO: Remove check after 10th Jan 2020
-
     if(LocalDate.now(ZoneOffset.UTC).isAfter(DateTransactionOverThresholdFormProvider.ampStartDate)) {
 
       val validData = datesBetween(

@@ -102,7 +102,7 @@
 }
 
 @footerTop = {}
-@footerLinks = {}
+
 @beta = {
     @betaBanner(
         userLoggedIn = userLoggedIn,
@@ -138,4 +138,12 @@
       sidebar = sidebar)
 }
 
-@hmrcGovUkTemplate(Some(title), bodyClasses)(headContent, bodyEnd, insideHeader, afterHeader, footerTop, Some(footer_links()), true)(content)
+@footerLinks = {
+    @if(appConfig.accessibilityStatementToggle) {
+        @footer_links(accessibilityFooterUrl = Some(appConfig.accessibilityStatementUrl))
+    } else {
+        @footer_links()
+    }
+}
+
+@hmrcGovUkTemplate(Some(title), bodyClasses)(headContent, bodyEnd, insideHeader, afterHeader, footerTop, Some(footerLinks), true)(content)

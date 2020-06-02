@@ -127,3 +127,5 @@ percentageExpectedTurnover.checkYourAnswersLabel = How much of your turnover do 
 percentageExpectedTurnover.error.required = Select how much of your turnover you expect to come from sales of art for €10,000 or more in the next 12 months 
 percentageExpectedTurnover.hint = If you do not use euros, you’ll need to convert the amount to the currency you use.
 
+############################### Footer ###############################
+footer.links.accessibility.text = Accessibility statement

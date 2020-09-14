@@ -42,7 +42,6 @@ class FrontendAppConfig @Inject() (configuration: Configuration) {
   val betaFeedbackUrl = configuration.get[String]("microservice.services.contact-frontend.beta-feedback-url.authenticated")
   val betaFeedbackUnauthenticatedUrl = configuration.get[String]("microservice.services.contact-frontend.beta-feedback-url.unauthenticated")
 
-  val accessibilityStatementToggle = configuration.getOptional[Boolean]("microservice.services.feature-toggle.accessibility-statement").getOrElse(true)
 
   val amlsFrontendBaseUrl = configuration.get[String](s"microservice.services.amls-frontend.url")
 
@@ -59,10 +58,4 @@ class FrontendAppConfig @Inject() (configuration: Configuration) {
     "cymraeg" -> Lang("cy")
   )
 
-  val frontendHost: String= configuration.get[String]("microservice.services.accessibility-statement.baseUrl")
-
-  lazy val accessibilityBaseUrl: String = configuration.get[String]("microservice.services.accessibility-statement.baseUrl")
-  def accessibilityStatementUrl(referrer: String) =
-    s"$accessibilityBaseUrl/accessibility-statement/anti-money-laundering?referrerUrl=${SafeRedirectUrl(
-      frontendHost + referrer).encodedUrl}"
 }

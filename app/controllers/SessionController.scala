@@ -18,7 +18,7 @@ package controllers
 
 import javax.inject.Inject
 import play.api.mvc.MessagesControllerComponents
-import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
+import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendBaseController
 
 class SessionController @Inject()(val controllerComponents: MessagesControllerComponents) extends FrontendBaseController {
 

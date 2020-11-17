@@ -18,7 +18,7 @@ package controllers.actions
 
 import base.SpecBase
 import com.google.inject.Inject
-import controllers.actions.IdentifierActionSpec.{agentCtAuthRetrievals, agentSaAuthRetrievals, emptyAuthRetrievals, erroneousRetrievals, fakeAuthConnector, orgAuthRetrievals}
+import controllers.actions.IdentifierActionSpec.{agentCtAuthRetrievals, agentSaAuthRetrievals, emptyAuthRetrievals, fakeAuthConnector, orgAuthRetrievals}
 import controllers.routes
 import play.api.mvc.{BodyParsers, Results}
 import play.api.test.Helpers._
@@ -271,7 +271,8 @@ class FakeFailingAuthConnector @Inject()(exceptionToReturn: Throwable) extends A
 }
 
 object IdentifierActionSpec {
-  private def fakeAuthConnector[A](stubbedRetrievalResult: Future[A]) = new AuthConnector {
+
+  private def fakeAuthConnector(stubbedRetrievalResult: Future[_]) = new AuthConnector {
 
     def authorise[A](predicate: Predicate, retrieval: Retrieval[A])
                     (implicit hc: HeaderCarrier, ec: ExecutionContext): Future[A] = {
@@ -311,8 +312,5 @@ object IdentifierActionSpec {
     new ~(new ~(Enrolments(Set()), None), None)
   )
 
-  private def erroneousRetrievals = Future.successful(
-    new ~(new ~(Enrolments(Set()), None), Some(AffinityGroup.Organisation))
-  )
 }
 

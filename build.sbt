@@ -7,6 +7,7 @@ import scoverage.ScoverageKeys
 import uk.gov.hmrc.DefaultBuildSettings
 import uk.gov.hmrc.versioning.SbtGitVersioning.autoImport.majorVersion
 
+
 lazy val appName: String = "amls-art-market-participant-frontend"
 
 lazy val root = (project in file("."))
@@ -70,7 +71,6 @@ lazy val root = (project in file("."))
       "-Xlint:-missing-interpolator,_",
       "-Yno-adapted-args",
       "-Ywarn-value-discard",
-      "-Ywarn-dead-code",
       "-deprecation",
       "-feature",
       "-unchecked",

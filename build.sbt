@@ -30,10 +30,6 @@ lazy val root = (project in file("."))
       "models.Mode",
       "controllers.routes._"
     ),
-    libraryDependencies ++= Seq(
-      compilerPlugin("com.github.ghik" % "silencer-plugin" % "1.6.0" cross CrossVersion.full),
-      "com.github.ghik" % "silencer-lib" % "1.6.0" % Provided cross CrossVersion.full
-    ),
     PlayKeys.playDefaultPort := 9223,
     ScoverageKeys.coverageExcludedFiles := "<empty>;Reverse.*;.*filters.*;.*handlers.*;.*components.*;.*repositories.*;" +
       ".*BuildInfo.*;.*javascript.*;.*FrontendAuditConnector.*;.*Routes.*;.*GuiceInjector;" +

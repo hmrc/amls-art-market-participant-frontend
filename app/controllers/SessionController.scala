@@ -23,7 +23,6 @@ import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendBaseController
 class SessionController @Inject()(val controllerComponents: MessagesControllerComponents) extends FrontendBaseController {
 
   val keep_alive = Action {
-    implicit request =>
       Ok("OK")
   }
 }

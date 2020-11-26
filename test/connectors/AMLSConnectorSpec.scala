@@ -25,7 +25,7 @@ import org.mockito.Mockito._
 import org.scalatestplus.mockito.MockitoSugar
 import play.api.Configuration
 import play.api.libs.json.{JsObject, Json}
-import uk.gov.hmrc.play.bootstrap.http.HttpClient
+import uk.gov.hmrc.http.HttpClient
 import org.mockito.Matchers.{any, eq => eqTo}
 import pages.TypeOfParticipantPage
 import uk.gov.hmrc.http.HeaderCarrier

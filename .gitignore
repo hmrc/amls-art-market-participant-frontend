@@ -33,3 +33,5 @@ bin
 /*.ipr
 /.classpath
 *.iws
+package-lock.json
+node_modules/

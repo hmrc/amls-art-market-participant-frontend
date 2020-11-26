@@ -22,7 +22,7 @@ import models.UserAnswers
 import play.api.Configuration
 import play.api.libs.json.{JsObject, Writes}
 import uk.gov.hmrc.http.{HeaderCarrier, HttpReads, HttpResponse, HttpClient}
-
+import uk.gov.hmrc.http.HttpReads.Implicits._
 import scala.concurrent.{ExecutionContext, Future}
 
 class AMLSConnector @Inject()(config: Configuration,

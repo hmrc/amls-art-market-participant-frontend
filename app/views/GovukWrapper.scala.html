@@ -84,12 +84,13 @@
 
 @bodyEnd = {
     @footer(
-      analyticsToken = Some(appConfig.analyticsToken),
-      analyticsHost = appConfig.analyticsHost,
+      analyticsToken = None,
+      analyticsHost = "",
       ssoUrl = None,
-      scriptElem = Some(scripts),
-      gaCalls = None)
-      <script src='@routes.Assets.versioned("javascripts/amlsartmarketparticipantfrontend-app.min.js")'> </script>
+      scriptElem = None,
+      gaCalls = None
+    )
+    <script src='@routes.Assets.versioned("javascripts/amlsartmarketparticipantfrontend-app.min.js")'> </script>
 }
 
 @footerTop = {}

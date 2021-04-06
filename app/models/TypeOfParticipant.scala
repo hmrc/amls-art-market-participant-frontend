@@ -22,17 +22,17 @@ sealed trait TypeOfParticipant
 
 object TypeOfParticipant extends Enumerable.Implicits {
 
-  case object ArtGalleryOwner extends WithName("artGalleryOwner") with TypeOfParticipant
-  case object ArtDealer extends WithName("artDealer") with TypeOfParticipant
-  case object ArtAgent extends WithName("artAgent") with TypeOfParticipant
   case object ArtAuctioneer extends WithName("artAuctioneer") with TypeOfParticipant
+  case object ArtGalleryOwner extends WithName("artGalleryOwner") with TypeOfParticipant
+  case object ArtAgent extends WithName("artAgent") with TypeOfParticipant
+  case object ArtDealer extends WithName("artDealer") with TypeOfParticipant
   case object SomethingElse extends WithName("somethingElse") with TypeOfParticipant
 
   val values: Seq[TypeOfParticipant] = Seq(
-    ArtAgent,
     ArtAuctioneer,
-    ArtDealer,
     ArtGalleryOwner,
+    ArtAgent,
+    ArtDealer,
     SomethingElse
   )
 

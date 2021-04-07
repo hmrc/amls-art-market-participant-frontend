@@ -16,7 +16,7 @@ echo "Adding messages to conf.messages"
 echo "" >> ../conf/messages.en
 echo "typeOfParticipant.title = What type of art market participant are you?" >> ../conf/messages.en
 echo "typeOfParticipant.heading = What type of art market participant are you?" >> ../conf/messages.en
-echo "typeOfParticipant.artGalleryOwner = Art gallery owner" >> ../conf/messages.en
+echo "typeOfParticipant.artGalleryOwner = Art gallery" >> ../conf/messages.en
 echo "typeOfParticipant.artDealer = Art dealer" >> ../conf/messages.en
 echo "typeOfParticipant.checkYourAnswersLabel = What type of art market participant are you?" >> ../conf/messages.en
 echo "typeOfParticipant.error.required = Select typeOfParticipant" >> ../conf/messages.en

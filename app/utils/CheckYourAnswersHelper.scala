@@ -34,7 +34,7 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(implicit messages: Messag
 
     val ifBullet = if (x.size == 1) "<ul class=\"list\">" else "<ul class=\"list list-bullet\">"
 
-    val values = x.map(value => value.toString).toList.sorted
+    val values = x.map(value => value.toString).toList
 
     Html(Html(ifBullet + values.map(value => if(value == "somethingElse") {
      if (!detailAnswer.isEmpty) {

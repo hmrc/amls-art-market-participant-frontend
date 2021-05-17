@@ -25,10 +25,10 @@ import viewmodels.AnswerRow
 class CheckYourAnswersHelperSpec extends SpecBase {
 
   val userAnswers: UserAnswers = UserAnswers( Json.obj("typeOfParticipant" -> Seq(
-    "artAuctioneer",
-    "artGalleryOwner",
     "artAgent",
+    "artAuctioneer",
     "artDealer",
+    "artGalleryOwner",
     "somethingElse"),
     "typeOfParticipantDetail"  -> "sdfsdf",
     "soldOverThreshold" -> true,
@@ -55,7 +55,7 @@ class CheckYourAnswersHelperSpec extends SpecBase {
         "return AnswerRow in alphabetical order" in {
 
           val expected = AnswerRow(Html("What type of art market participant are you?"),
-            Html("<ul class=\"list list-bullet\"><li>Auction house</li><li>Art gallery</li><li>Art adviser or agent</li><li>Art dealer</li><li>sdfsdf</li></ul>"),
+            Html("<ul class=\"list list-bullet\"><li>Art adviser or agent</li><li>Auction house</li><li>Art dealer</li><li>Art gallery</li><li>sdfsdf</li></ul>"),
             "/anti-money-laundering/art-market-participant/change-type")
 
           checkYourAnswersHelper.typeOfParticipant.value mustBe expected

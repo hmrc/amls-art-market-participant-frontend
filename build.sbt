@@ -43,10 +43,6 @@ lazy val root = (project in file("."))
     retrieveManaged := true,
     evictionWarningOptions in update :=
       EvictionWarningOptions.default.withWarnScalaVersionEviction(false),
-    resolvers ++= Seq(
-      Resolver.bintrayRepo("hmrc", "releases"),
-      Resolver.jcenterRepo
-    ),
     // concatenate js
     Concat.groups := Seq(
       "javascripts/amlsartmarketparticipantfrontend-app.js" ->

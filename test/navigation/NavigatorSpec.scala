@@ -81,14 +81,14 @@ class NavigatorSpec extends SpecBase {
         val answers = UserAnswers()
 
         navigator.nextPage(PercentageExpectedTurnoverPage, NormalMode, answers)
-          .mustBe(routes.CheckYourAnswersController.onPageLoad())
+          .mustBe(routes.CheckYourAnswersController.onPageLoad)
       }
     }
 
     "in Check mode" must {
       "go to CheckYourAnswers from a page that doesn't exist in the edit route map" in {
         case object UnknownPage extends Page
-        navigator.nextPage(UnknownPage, CheckMode, UserAnswers()) mustBe routes.CheckYourAnswersController.onPageLoad()
+        navigator.nextPage(UnknownPage, CheckMode, UserAnswers()) mustBe routes.CheckYourAnswersController.onPageLoad
       }
 
       "go from Type of Participant to Type Of Participant Detail when specifying something else" in {
@@ -102,14 +102,14 @@ class NavigatorSpec extends SpecBase {
         val answers = UserAnswers().set(TypeOfParticipantPage, Seq(ArtGalleryOwner)).success.value
 
         navigator.nextPage(TypeOfParticipantPage, CheckMode, answers)
-          .mustBe(routes.CheckYourAnswersController.onPageLoad())
+          .mustBe(routes.CheckYourAnswersController.onPageLoad)
       }
 
       "go from Art Sold Over Threshold to Check Your Answers where no" in {
         val answers = UserAnswers().set(SoldOverThresholdPage, false).success.value
 
         navigator.nextPage(SoldOverThresholdPage, CheckMode, answers)
-          .mustBe(routes.CheckYourAnswersController.onPageLoad())
+          .mustBe(routes.CheckYourAnswersController.onPageLoad)
       }
 
       "go from Art Sold Over Threshold to Date Transaction Over Threshold where answer yes" in {
@@ -123,21 +123,21 @@ class NavigatorSpec extends SpecBase {
         val answers = UserAnswers()
 
         navigator.nextPage(DateTransactionOverThresholdPage, CheckMode, answers)
-          .mustBe(routes.CheckYourAnswersController.onPageLoad())
+          .mustBe(routes.CheckYourAnswersController.onPageLoad)
       }
 
       "go from Identify Linked Transactions to Check Your Answers" in{
         val answers = UserAnswers()
 
         navigator.nextPage(IdentifyLinkedTransactionsPage, CheckMode, answers)
-          .mustBe(routes.CheckYourAnswersController.onPageLoad())
+          .mustBe(routes.CheckYourAnswersController.onPageLoad)
       }
 
       "go from Percentage Turnover Sales Over Threshold to Check your answers page" in{
         val answers = UserAnswers()
 
         navigator.nextPage(PercentageExpectedTurnoverPage, CheckMode, answers)
-          .mustBe(routes.CheckYourAnswersController.onPageLoad())
+          .mustBe(routes.CheckYourAnswersController.onPageLoad)
       }
     }
   }

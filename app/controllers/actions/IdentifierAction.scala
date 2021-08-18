@@ -20,7 +20,7 @@ import com.google.inject.Inject
 import config.FrontendAppConfig
 import controllers.routes
 import models.requests.IdentifierRequest
-import play.api.Logger
+import play.api.Logging
 import play.api.mvc.Results._
 import play.api.mvc._
 import uk.gov.hmrc.auth.core._
@@ -41,21 +41,22 @@ class AuthenticatedIdentifierAction @Inject()(
                                                config: FrontendAppConfig,
                                                val parser: BodyParsers.Default
                                              )
-                                             (implicit val executionContext: ExecutionContext) extends IdentifierAction with AuthorisedFunctions with ActionRefiner[Request, IdentifierRequest] {
+                                             (implicit val executionContext: ExecutionContext)
+  extends IdentifierAction with AuthorisedFunctions with ActionRefiner[Request, IdentifierRequest] with Logging {
 
   private val amlsKey       = "HMRC-MLR-ORG"
   private val amlsNumberKey = "MLRRefNumber"
   private val saKey         = "IR-SA"
   private val ctKey         = "IR-CT"
 
-  def unauthorisedUrl= routes.UnauthorisedController.onPageLoad().url
+  def unauthorisedUrl= routes.UnauthorisedController.onPageLoad.url
 
   // $COVERAGE-OFF$
   def exceptionLogger(aex: AuthorisationException) = {
-    Logger.debug(s"AuthenticatedIdentifierAction:Refine - ${aex.getClass}:", aex)
+    logger.debug(s"AuthenticatedIdentifierAction:Refine - ${aex.getClass}:", aex)
   }
   def enrolmentMessage(message: String, parameters: Option[Enrolments]) = {
-    Logger.debug(message + parameters.getOrElse(""))
+    logger.debug(message + parameters.getOrElse(""))
   }
   // $COVERAGE-ON$
 
@@ -69,7 +70,7 @@ class AuthenticatedIdentifierAction @Inject()(
         Retrievals.affinityGroup
     ) {
       case enrolments ~ Some(credentials) ~ Some(affinityGroup) =>
-        Logger.debug("DefaultAuthAction:Refine - Enrolments:" + enrolments)
+        logger.debug("DefaultAuthAction:Refine - Enrolments:" + enrolments)
 
         Future.successful(
           Right(
@@ -82,7 +83,7 @@ class AuthenticatedIdentifierAction @Inject()(
           )
         )
       case _ =>
-        Logger.debug("DefaultAuthAction:Refine - Non match (enrolments ~ Some(credentials) ~ Some(affinityGroup))")
+        logger.debug("DefaultAuthAction:Refine - Non match (enrolments ~ Some(credentials) ~ Some(affinityGroup))")
         Future.successful(Left(Redirect(Call("GET", unauthorisedUrl))))
     }.recover[Either[Result, IdentifierRequest[A]]] {
       case nas: NoActiveSession =>

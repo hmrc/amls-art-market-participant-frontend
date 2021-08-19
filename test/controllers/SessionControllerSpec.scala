@@ -28,7 +28,7 @@ class SessionControllerSpec extends SpecBase {
 
       val application = applicationBuilder(userAnswers = None).build()
 
-      val request = FakeRequest(GET, routes.SessionController.keep_alive().url)
+      val request = FakeRequest(GET, routes.SessionController.keep_alive.url)
 
       val result = route(application, request).value
 

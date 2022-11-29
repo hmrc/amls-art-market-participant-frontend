@@ -35,3 +35,4 @@ bin
 *.iws
 package-lock.json
 node_modules/
+.bsp/

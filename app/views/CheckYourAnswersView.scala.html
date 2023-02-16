@@ -18,14 +18,14 @@
 @import viewmodels.{AnswerSection, RepeaterAnswerSection, Section}
 
 @this(
-    main_template: MainTemplate,
+    layout: Layout,
     formHelper: FormWithCSRF
 )
 
 @(answerSections: Seq[Section])(implicit request: Request[_], messages: Messages)
 
-@main_template(
-    title = s"${messages("checkYourAnswers.title")} - Art market participant - Manage your anti-money laundering supervision - GOV.UK"
+@layout(
+    pageTitle = Some(s"${messages("checkYourAnswers.title")} - Art market participant - Manage your anti-money laundering supervision - GOV.UK")
     ) {
     
     @components.page_heading("amp.heading")

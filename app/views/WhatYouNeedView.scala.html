@@ -17,34 +17,33 @@
 @import config.FrontendAppConfig
 
 @this(
-    main_template: MainTemplate,
+    layout: Layout,
+    button: components.button,
+    notificationBanner: components.user_attention_saving,
     appConfig: FrontendAppConfig
 )
 
 @()(implicit request: Request[_], messages: Messages)
 
-@main_template(
-    title = s"${messages("whatYouNeed.title")} - Art market participant - Manage your anti-money laundering supervision - GOV.UK"
+@layout(
+    pageTitle = Some(s"${messages("whatYouNeed.title")} - Art market participant - Manage your anti-money laundering supervision - GOV.UK")
     ) {
-
-    @components.back_link()
 
     @components.page_heading("amp.heading")
 
     @components.heading("whatYouNeed.heading")
 
-    @components.user_attention_saving()
+    @notificationBanner(messages("whatYouNeed.attention.information"))
 
-    <p>@Messages("whatYouNeed.heading2")</p>
+    <p class="govuk-body">@Messages("whatYouNeed.heading2")</p>
 
-    <ul class="list list-bullet">
+    <ul class="govuk-list govuk-list--bullet">
         <li>@Messages("whatYouNeed.line_1")</li>
         <li>@Messages("whatYouNeed.line_2")</li>
         <li>@Messages("whatYouNeed.line_3")</li>
         <li>@Messages("whatYouNeed.line_4")</li>
     </ul>
 
-    @components.button_link_with_id("whatYouNeed.continue", "type", "ampwhatyouneed-button")
-
+    @button("whatYouNeed.continue", "ampwhatyouneed-button", Some("type"))
     @components.anchor(appConfig = appConfig)
 }

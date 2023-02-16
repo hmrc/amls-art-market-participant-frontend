@@ -20,34 +20,46 @@
 @import views.ViewUtils
 
 @this(
-    main_template: MainTemplate,
+    layout: Layout,
     formHelper: FormWithCSRF,
+    button: components.button,
+    errorSummary: components.error_summary,
+    govukCheckboxes : GovukCheckboxes,
     appConfig: FrontendAppConfig
 )
 
 @(form: Form[Seq[TypeOfParticipant]], mode: Mode)(implicit request: Request[_], messages: Messages)
 
-@main_template(
-    title = s"${errorPrefix(form)} ${messages("typeOfParticipant.title")} - Art market participant - Manage your anti-money laundering supervision - GOV.UK".trim
+@layout(
+    pageTitle = Some(s"${errorPrefix(form)} ${messages("typeOfParticipant.title")} - Art market participant - Manage your anti-money laundering supervision - GOV.UK".trim)
     ) {
 
     @formHelper(action = TypeOfParticipantController.onSubmit(mode), 'autoComplete -> "off") {
 
-        @components.back_link()
-
-        @components.error_summary_with_id(form.errors, ViewUtils.genericCheckboxErrorId)
+        @errorSummary(form.errors)
 
         @components.page_heading("amp.heading")
 
-        @components.input_checkboxes(
-            field = form("value"),
-            legend = messages("typeOfParticipant.heading"),
-            hint = Some(messages("typeOfParticipant.hint")),
-            inputs = TypeOfParticipant.options,
-            headingIsLegend = true
-        )()
+        @govukCheckboxes(Checkboxes(
+            fieldset = Some(Fieldset(
+                legend = Some(Legend(
+                    content = Text(messages("typeOfParticipant.heading")),
+                    classes = "govuk-fieldset__legend--xl",
+                    isPageHeading = true
+                    ))
+                )),
+                hint = Some(Hint(
+                    content = Text(messages("typeOfParticipant.hint"))
+                )),
+                errorMessage = Some(ErrorMessage(
+                    content = Text(messages("typeOfParticipant.error.required"))
+                )),
+                name = "value",
+                items = TypeOfParticipant.options
 
-        @components.submit_button()
+        ))
+
+        @button("site.continue", "submit")
 
         @components.anchor(appConfig = appConfig)
     }

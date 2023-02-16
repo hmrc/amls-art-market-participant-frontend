@@ -21,7 +21,7 @@
     returnLocation: Option[String] = None
 )(implicit m: Messages)
 
-<p class="return-link">
+<p class="govuk-link">
 @if(returnLocation == Some("renewal")) {
     <a href="@{appConfig.renewalProgressUrl}">@Messages("link.return.renewal.progress")</a>
 } else {

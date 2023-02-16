@@ -20,7 +20,7 @@
 @import views.ViewUtils
 
 @this(
-    main_template: MainTemplate,
+    layout: Layout,
     formHelper: FormWithCSRF,
     appConfig: FrontendAppConfig
 )
@@ -31,8 +31,8 @@
     <p>@Messages("soldOverThreshold.hint")</p>
 }
 
-@main_template(
-    title = s"${errorPrefix(form)} ${messages("soldOverThreshold.title")} - Art market participant - Manage your anti-money laundering supervision - GOV.UK".trim
+@layout(
+    pageTitle = Some(s"${errorPrefix(form)} ${messages("soldOverThreshold.title")} - Art market participant - Manage your anti-money laundering supervision - GOV.UK".trim)
     ) {
 
     @formHelper(action = SoldOverThresholdController.onSubmit(mode), 'autoComplete -> "off") {

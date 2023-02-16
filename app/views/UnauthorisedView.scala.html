@@ -15,13 +15,13 @@
  *@
 
 @this(
-    main_template: MainTemplate
+    layout: Layout
 )
 
 @()(implicit request: Request[_], messages: Messages)
 
-@main_template(
-    title = s"${messages("unauthorised.title")} - Art market participant - Manage your anti-money laundering supervision - GOV.UK"
+@layout(
+    pageTitle = Some(s"${messages("unauthorised.title")} - Art market participant - Manage your anti-money laundering supervision - GOV.UK")
     ) {
 
     @components.heading("unauthorised.heading")

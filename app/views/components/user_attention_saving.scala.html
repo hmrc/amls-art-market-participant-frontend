@@ -14,10 +14,15 @@
  * limitations under the License.
  *@
 
-@()(implicit messages: Messages)
+@this(govukNotificationBanner: GovukNotificationBanner)
 
-    <div class="user-attention">
-        <h2 class="heading-small">@Messages("whatYouNeed.attention.title")</h2>
-        <p>@Messages("whatYouNeed.attention.information")</p>
-    </div>
+@(message: String)(implicit messages: Messages)
+
+@govukNotificationBanner(
+NotificationBanner(
+title = Text(messages("whatYouNeed.attention.title")),
+content = Text(message))
+)
+
+
 

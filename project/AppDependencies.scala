@@ -7,9 +7,9 @@ object AppDependencies {
     play.sbt.PlayImport.ws,
     "uk.gov.hmrc.mongo" %% "hmrc-mongo-play-28"             % "0.74.0",
     "uk.gov.hmrc"       %% "logback-json-logger"            % "5.1.0",
-    "uk.gov.hmrc"       %% "play-frontend-hmrc"             % "6.4.0-play-28",
+    "uk.gov.hmrc"       %% "play-frontend-hmrc"             % "6.6.0-play-28",
     "uk.gov.hmrc"       %% "play-conditional-form-mapping"  % "1.9.0-play-28",
-    "uk.gov.hmrc"       %% "bootstrap-frontend-play-28"     % "7.11.0",
+    "uk.gov.hmrc"       %% "bootstrap-frontend-play-28"     % "7.13.0",
     compilerPlugin("com.github.ghik" % "silencer-plugin" % "1.7.12" cross CrossVersion.full),
     "com.github.ghik" % "silencer-lib" % "1.7.12" % Provided cross CrossVersion.full
   )

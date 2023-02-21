@@ -14,21 +14,13 @@
  * limitations under the License.
  *@
 
-@this(govukErrorSummary: GovukErrorSummary)
+@import uk.gov.hmrc.govukfrontend.views.html.components.implicits._
+@import uk.gov.hmrc.hmrcfrontend.views.html.components.implicits._
 
-@(errors: Seq[FormError], errorFieldName: Option[String] = None)(implicit messages: Messages)
+@this(errorSummary: GovukErrorSummary)
 
-@if(errors.nonEmpty) {
- @defining(errors.map { error =>
-  ErrorLink(
-    href = Some(s"#${errorFieldName.getOrElse(error.key)}"),
-    content = Text(messages(error.message, error.args:_*))
-   )
-}) { errorLinks =>
-   @govukErrorSummary(ErrorSummary(
-      title = Text(messages("error.summary.title")),
-      errorList = errorLinks,
-      disableAutoFocus = Some(false)
-    ))
-  }
+@(form: Form[_])(implicit messages: Messages)
+
+@if(form.errors.nonEmpty) {
+    @errorSummary(ErrorSummary().withFormErrorsAsText(form))
 }

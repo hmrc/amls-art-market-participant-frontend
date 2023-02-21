@@ -25,7 +25,7 @@
     layout: Layout,
     formHelper: FormWithCSRF,
     button: components.button,
-    errorSummary: GovukErrorSummary,
+    errorSummary: components.error_summary,
     govukCheckboxes : GovukCheckboxes,
     appConfig: FrontendAppConfig
 )
@@ -38,9 +38,7 @@
 
     @formHelper(action = TypeOfParticipantController.onSubmit(mode), 'autoComplete -> "off") {
 
-        @if(form.errors.nonEmpty) {
-            @errorSummary(ErrorSummary().withFormErrorsAsText(form))
-        }
+        @errorSummary(form)
 
         @components.page_heading("amp.heading")
 

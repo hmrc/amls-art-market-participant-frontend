@@ -39,11 +39,13 @@ object TypeOfParticipant extends Enumerable.Implicits {
     SomethingElse
   )
 
-  def options(implicit messages: Messages): Seq[CheckboxItem] = values.map {
-    participantValue =>
+  def options(implicit messages: Messages): Seq[CheckboxItem] = values.zipWithIndex.map {
+    case (participantValue, index) =>
       CheckboxItem(
         content = Text(messages(s"typeOfParticipant.${participantValue.toString}")),
-        value = participantValue.toString
+        value = participantValue.toString,
+        id = Some(s"value_$index"),
+        name = Some(s"value[$index]")
       )
   }
 

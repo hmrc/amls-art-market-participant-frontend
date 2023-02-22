@@ -16,7 +16,9 @@
 
 package models
 
-import viewmodels.RadioOption
+import play.api.i18n.Messages
+import uk.gov.hmrc.govukfrontend.views.Aliases.Text
+import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.RadioItem
 
 sealed trait PercentageExpectedTurnover
 
@@ -32,9 +34,13 @@ object PercentageExpectedTurnover extends Enumerable.Implicits {
     ZeroToTwenty, TwentyOneToForty, FortyOneToSixty, SixtyOneToEighty, EightyOneToOneHundred
   )
 
-  val options: Seq[RadioOption] = values.map {
-    value =>
-      RadioOption("percentageExpectedTurnover", value.toString)
+  def options(implicit messages: Messages): Seq[RadioItem] = values.zipWithIndex.map {
+    case (percentageExpectedTurnover, index) =>
+      RadioItem(
+        content = Text(messages(s"percentageExpectedTurnover.${percentageExpectedTurnover.toString}")),
+        id = Some(s"value_$index"),
+        value = Some(percentageExpectedTurnover.toString)
+      )
   }
 
   implicit val enumerable: Enumerable[PercentageExpectedTurnover] =

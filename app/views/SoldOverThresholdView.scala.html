@@ -22,6 +22,9 @@
 @this(
     layout: Layout,
     formHelper: FormWithCSRF,
+    button: components.button,
+    errorSummary: components.error_summary,
+    inputYesNo: components.InputYesNo,
     appConfig: FrontendAppConfig
 )
 
@@ -37,17 +40,17 @@
 
     @formHelper(action = SoldOverThresholdController.onSubmit(mode), 'autoComplete -> "off") {
 
-        @components.error_summary_with_id(form.errors, ViewUtils.genericYesNoErrorId)
-
         @components.page_heading("amp.heading")
 
-        @components.input_yes_no(
-            field = form("value"),
-            legend = messages("soldOverThreshold.heading"),
-            headingIsLegend = true
-        )(supportingContent = supportingContent)
+        @errorSummary(form)
 
-        @components.submit_button()
+        @inputYesNo("soldOverThreshold.heading",
+            Some(Hint(
+                content = Text(messages("soldOverThreshold.hint"))
+        )
+    )
+)
+        @button("site.continue", "submit")
 
         @components.anchor(appConfig = appConfig)
     }

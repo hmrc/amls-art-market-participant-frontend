@@ -19,7 +19,6 @@ package models
 import play.api.i18n.Messages
 import uk.gov.hmrc.govukfrontend.views.Aliases.Text
 import uk.gov.hmrc.govukfrontend.views.viewmodels.checkboxes.CheckboxItem
-import viewmodels.RadioOption
 
 sealed trait TypeOfParticipant
 

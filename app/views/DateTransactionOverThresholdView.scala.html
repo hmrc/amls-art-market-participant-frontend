@@ -18,7 +18,10 @@
 
 @this(
     layout: Layout,
+    govukDateInput : GovukDateInput,
     formHelper: FormWithCSRF,
+    button: components.button,
+    errorSummary: components.error_summary,
     appConfig: FrontendAppConfig
 )
 
@@ -30,16 +33,26 @@
 
     @formHelper(action = DateTransactionOverThresholdController.onSubmit(mode), 'autoComplete -> "off") {
 
+        @errorSummary(form)
+
         @components.page_heading("amp.heading")
 
-        @components.input_date(
-            field = form("value"),
-            legend = messages("dateTransactionOverThreshold.heading"),
-            hint = Some(messages("dateTransactionOverThreshold.hint")),
-            headingIsLegend = true
-        )()
+        @govukDateInput(DateInput(
+            id = "first-sale",
+            namePrefix = Some("first-sale"),
+            hint = Some(Hint(
+                content = Text(messages("dateTransactionOverThreshold.hint"))
+            )),
+            fieldset = Some(Fieldset(
+                legend = Some(Legend(
+                content = Text(messages("dateTransactionOverThreshold.heading")),
+                classes = "govuk-fieldset__legend--xl",
+                isPageHeading = true
+            ))
+        ))
+    ))
 
-        @components.submit_button()
+        @button("site.continue", "submit")
 
         @components.anchor(appConfig = appConfig)
     }

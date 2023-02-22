@@ -20,6 +20,7 @@ import javax.inject.Inject
 
 import forms.mappings.Mappings
 import play.api.data.Form
+import play.api.data.Forms._
 import models.PercentageExpectedTurnover
 
 class PercentageExpectedTurnoverFormProvider @Inject() extends Mappings {

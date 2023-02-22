@@ -22,6 +22,9 @@
 @this(
     layout: Layout,
     formHelper: FormWithCSRF,
+    button: components.button,
+    errorSummary: components.error_summary,
+    inputYesNo: components.InputYesNo,
     appConfig: FrontendAppConfig
 )
 
@@ -33,17 +36,13 @@
 
     @formHelper(action = IdentifyLinkedTransactionsController.onSubmit(mode), 'autoComplete -> "off") {
 
-        @components.error_summary_with_id(form.errors, ViewUtils.genericYesNoErrorId)
+        @errorSummary(form)
 
         @components.page_heading("amp.heading")
 
-        @components.input_yes_no(
-            field = form("value"),
-            legend = messages("identifyLinkedTransactions.heading"),
-            headingIsLegend = true
-        )()
+        @inputYesNo("identifyLinkedTransactions.heading")
 
-        @components.submit_button()
+        @button("site.continue", "submit")
 
         @components.anchor(appConfig = appConfig)
     }

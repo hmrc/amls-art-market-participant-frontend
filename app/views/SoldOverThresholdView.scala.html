@@ -36,9 +36,7 @@
     <p>@Messages("soldOverThreshold.hint")</p>
 }
 
-@layout(
-    pageTitle = s"${errorPrefix(form)} ${messages("soldOverThreshold.title")} - Art market participant - Manage your anti-money laundering supervision - GOV.UK".trim
-    ) {
+@layout(pageTitle = s"${errorPrefix(form)} ${messages("soldOverThreshold.title")}") {
 
     @formHelper(action = SoldOverThresholdController.onSubmit(mode), 'autoComplete -> "off") {
 

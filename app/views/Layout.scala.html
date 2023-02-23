@@ -78,7 +78,7 @@
 
 
 @govukLayout(
-    pageTitle = Some(pageTitle + " - " + Messages("messages__manage_pension_schemes__title")),
+    pageTitle = Some(s"$pageTitle - ${messages("amp.heading")} - ${messages("service.name")} - ${messages("site.govuk")}"),
     headBlock = Some(hmrcHead(
     headBlock = Some(headScripts)
     )),

@@ -19,10 +19,11 @@
 @import controllers.routes._
 @import models.Mode
 @import config.FrontendAppConfig
-@import components.{Anchor, Button, FormErrorSummary}
+@import components.{Anchor, Button, FormErrorSummary, PageHeading}
 
 @this(
     layout: Layout,
+    pageHeading: PageHeading,
     formHelper: FormWithCSRF,
     appConfig: FrontendAppConfig,
     errorSummary: FormErrorSummary,
@@ -39,7 +40,7 @@
 
         @errorSummary(form)
 
-        @components.page_heading("amp.heading")
+        @pageHeading("amp.heading")
 
         @govukInput(
             Input(

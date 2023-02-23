@@ -14,10 +14,16 @@
  * limitations under the License.
  *@
 
-@(pageHeadingKey: String)(implicit messages: Messages)
+@this(govukNotificationBanner: GovukNotificationBanner)
 
-<div class="page-header">
- <p class="heading-secondary">
-  <span class="govuk-caption-xl">@messages(pageHeadingKey)</span>
- </p>
-</div>
+@(message: String)(implicit messages: Messages)
+
+@govukNotificationBanner(
+    NotificationBanner(
+        title = Text(messages("whatYouNeed.attention.title")),
+        content = Text(message)
+    )
+)
+
+
+

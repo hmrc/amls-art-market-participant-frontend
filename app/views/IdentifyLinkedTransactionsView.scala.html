@@ -18,14 +18,15 @@
 @import models.Mode
 @import config.FrontendAppConfig
 @import views.ViewUtils
-@import components.{Anchor, Button, FormErrorSummary}
+@import components.{Anchor, Button, FormErrorSummary, InputYesNo, PageHeading}
 
 @this(
     layout: Layout,
+    pageHeading: PageHeading,
     formHelper: FormWithCSRF,
     button: Button,
     errorSummary: FormErrorSummary,
-    inputYesNo: components.InputYesNo,
+    inputYesNo: InputYesNo,
     appConfig: FrontendAppConfig,
     anchor: Anchor
 )
@@ -38,7 +39,7 @@
 
         @errorSummary(form)
 
-        @components.page_heading("amp.heading")
+        @pageHeading("amp.heading")
 
         @inputYesNo(form, "identifyLinkedTransactions.heading")
 

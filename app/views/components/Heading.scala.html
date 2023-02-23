@@ -14,17 +14,8 @@
  * limitations under the License.
  *@
 
-@(errors: Seq[FormError], id: String)(implicit messages: Messages)
-    @if(errors.nonEmpty) {
-        <div class="error-summary error-summary--show" role="alert" aria-labelledby="error-summary-heading" tabindex="-1">
+@this()
 
-            <h2 class="heading-medium error-summary-heading" id="error-summary-heading">
-            @messages("error.summary.title")
-            </h2>
+@(headingKey: String, headingSize: String = "govuk-heading-xl")(implicit messages: Messages)
 
-            <ul role="list" class="error-summary-list">
-                <li><a href="#@{id}">@messages(errors.head.message, errors.head.args:_*)</a></li>
-            </ul>
-
-        </div>
-    }
+<h1 class="@headingSize">@messages(headingKey)</h1>

@@ -14,15 +14,18 @@
  * limitations under the License.
  *@
 
+@import components.Heading
+
 @this(
-    layout: Layout
+    layout: Layout,
+    heading: Heading
 )
 
 @()(implicit request: Request[_], messages: Messages)
 
 @layout(
-    pageTitle = Some(s"${messages("unauthorised.title")} - Art market participant - Manage your anti-money laundering supervision - GOV.UK")
+    pageTitle = s"${messages("unauthorised.title")} - Art market participant - Manage your anti-money laundering supervision - GOV.UK"
     ) {
 
-    @components.heading("unauthorised.heading")
+    @heading("unauthorised.heading")
 }

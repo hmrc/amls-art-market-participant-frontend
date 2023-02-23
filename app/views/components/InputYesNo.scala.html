@@ -14,11 +14,14 @@
  * limitations under the License.
  *@
 
+@import uk.gov.hmrc.govukfrontend.views.html.components.implicits._
+@import uk.gov.hmrc.hmrcfrontend.views.html.components.implicits._
+@import uk.gov.hmrc.hmrcfrontend.views.config.HmrcYesNoRadioItems
 @import uk.gov.hmrc.govukfrontend.views.html.components._
 
 @this(govukRadios : GovukRadios)
 
-@(msg: String, hintOpt: Option[Hint] = None)(implicit messages: Messages)
+@(form: Form[_], msg: String, hintOpt: Option[Hint] = None)(implicit messages: Messages)
 
 @govukRadios(Radios(
     fieldset = Some(Fieldset(
@@ -30,17 +33,8 @@
     )),
     hint = hintOpt,
     name = "value",
-    items = Seq(
-      RadioItem(
-        content = Text(messages("site.yes")),
-        value = Some("true")
-      ),
-      RadioItem(
-        content = Text(messages("site.no")),
-        value = Some("false")
-      )
-    ),
+    items = HmrcYesNoRadioItems(),
     classes = "govuk-radios--inline"
-  )
+  ).withFormField(form("value"))
 )
 

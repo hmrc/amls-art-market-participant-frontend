@@ -46,10 +46,10 @@
 
 @headScripts = {
     @if(timeoutEnabled) {
-    @hmrcTimeoutDialogHelper(
-    signOutUrl = routes.UnauthorisedController.onPageLoad.url,
-    timeout = Some(900),
-    countdown = Some(120)
+        @hmrcTimeoutDialogHelper(
+            signOutUrl = appConfig.logoutUrl,
+            timeout = Some(900),
+            countdown = Some(120)
         )
     }
 }
@@ -82,6 +82,12 @@
     headBlock = Some(hmrcHead(
     headBlock = Some(headScripts)
     )),
+    headerBlock = Some(
+        hmrcStandardHeader(
+            serviceName = Some(messages("service.name")),
+            signOutUrl = Some(appConfig.logoutUrl),
+        )
+    ),
     cspNonce = CSPNonce.get,
     beforeContentBlock = Some(beforeContentBlock),
     scriptsBlock = Some(scripts),

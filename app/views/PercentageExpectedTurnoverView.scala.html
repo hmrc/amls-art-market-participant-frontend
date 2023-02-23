@@ -40,7 +40,7 @@
 
     @formHelper(action = PercentageExpectedTurnoverController.onSubmit(mode), 'autoComplete -> "off") {
 
-        @errorSummary(form)
+        @errorSummary(form, Some(Map("value" -> "value_0")))
 
         @components.page_heading("amp.heading")
 

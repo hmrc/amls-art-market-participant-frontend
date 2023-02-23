@@ -14,6 +14,8 @@
  * limitations under the License.
  *@
 
+@import uk.gov.hmrc.govukfrontend.views.html.components.implicits._
+@import uk.gov.hmrc.hmrcfrontend.views.html.components.implicits._
 @import config.FrontendAppConfig
 
 @this(
@@ -39,18 +41,18 @@
 
         @govukDateInput(DateInput(
             id = "first-sale",
-            namePrefix = Some("first-sale"),
             hint = Some(Hint(
                 content = Text(messages("dateTransactionOverThreshold.hint"))
             )),
             fieldset = Some(Fieldset(
                 legend = Some(Legend(
-                content = Text(messages("dateTransactionOverThreshold.heading")),
-                classes = "govuk-fieldset__legend--xl",
-                isPageHeading = true
-            ))
-        ))
-    ))
+                    content = Text(messages("dateTransactionOverThreshold.heading")),
+                    classes = "govuk-fieldset__legend--xl",
+                    isPageHeading = true
+                ))
+            )),
+            attributes = Map("pattern" -> "[0-9]*")
+        ).withFormField(form("value")))
 
         @button("site.continue", "submit")
 

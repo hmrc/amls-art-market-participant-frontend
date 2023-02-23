@@ -37,7 +37,7 @@
 
     @formHelper(action = DateTransactionOverThresholdController.onSubmit(mode), 'autoComplete -> "off") {
 
-        @errorSummary(form)
+        @errorSummary(form, Some(Map("value" -> "value.day")))
 
         @components.page_heading("amp.heading")
 

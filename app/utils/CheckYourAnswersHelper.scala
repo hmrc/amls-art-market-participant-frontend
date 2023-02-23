@@ -17,6 +17,7 @@
 package utils
 
 import controllers.routes
+import models.TypeOfParticipant.SomethingElse
 import models.{CheckMode, UserAnswers}
 import pages._
 import play.api.i18n.Messages
@@ -39,14 +40,23 @@ class CheckYourAnswersHelper(userAnswers: UserAnswers)(implicit messages: Messag
 
   def typeOfParticipant: Option[SummaryListRow] = {
 
-    val participantValues: Option[Content] = userAnswers.get(TypeOfParticipantPage) match {
+    val participantUserAnswers = userAnswers.get(TypeOfParticipantPage)
+
+    val participantValues: Option[Content] = participantUserAnswers match {
       case Some(value) if value.size > 1 =>
 
         Some(
           HtmlContent(
             "<ul class=\"govuk-list govuk-list--bullet\">" +
               value.map { x =>
-                s"<li>${messages(s"typeOfParticipant.${x.toString}")}</li>"
+                if(x == SomethingElse) {
+                  userAnswers.get(TypeOfParticipantDetailPage)
+                    .fold(s"<li>${messages(s"typeOfParticipant.${x.toString}")}</li>"){ detail =>
+                    s"<li>${Text(detail).asHtml}</li>"
+                  }
+                } else {
+                  s"<li>${messages(s"typeOfParticipant.${x.toString}")}</li>"
+                }
               }.mkString +
             "</ul>"
           )

@@ -36,12 +36,13 @@
     hmrcReportTechnicalIssueHelper: HmrcReportTechnicalIssueHelper
 )
 
-@(pageTitle: Option[String] = None,
+@(
+    pageTitle: String,
     timeoutEnabled: Boolean = true,
     canSignOut: Boolean = true,
     showBackLink: Boolean = true,
     fullWidthLayout: Boolean = false
-    )(mainContent: Html)(implicit request: Request[_], messages: Messages)
+)(mainContent: Html)(implicit request: Request[_], messages: Messages)
 
 @headScripts = {
     @if(timeoutEnabled) {

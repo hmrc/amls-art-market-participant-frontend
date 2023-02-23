@@ -15,23 +15,26 @@
  *@
 
 @import config.FrontendAppConfig
+@import components.{Anchor, Button, Heading}
 
 @this(
     layout: Layout,
-    button: components.button,
+    button: Button,
+    heading: Heading,
     notificationBanner: components.user_attention_saving,
-    appConfig: FrontendAppConfig
+    appConfig: FrontendAppConfig,
+    anchor: Anchor
 )
 
 @()(implicit request: Request[_], messages: Messages)
 
 @layout(
-    pageTitle = Some(s"${messages("whatYouNeed.title")} - Art market participant - Manage your anti-money laundering supervision - GOV.UK")
+    pageTitle = s"${messages("whatYouNeed.title")} - Art market participant - Manage your anti-money laundering supervision - GOV.UK"
     ) {
 
     @components.page_heading("amp.heading")
 
-    @components.heading("whatYouNeed.heading")
+    @heading("whatYouNeed.heading")
 
     @notificationBanner(messages("whatYouNeed.attention.information"))
 
@@ -45,5 +48,5 @@
     </ul>
 
     @button("whatYouNeed.continue", "ampwhatyouneed-button", Some("type"))
-    @components.anchor(appConfig = appConfig)
+    @anchor()
 }

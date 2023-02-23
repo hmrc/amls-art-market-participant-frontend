@@ -19,10 +19,12 @@
 
 @this(
     layout: Layout,
-    formHelper: FormWithCSRF
+    formHelper: FormWithCSRF,
+    govukSummaryList: GovukSummaryList,
+    button: components.button,
 )
 
-@(answerSections: Seq[Section])(implicit request: Request[_], messages: Messages)
+@(summaryList: SummaryList)(implicit request: Request[_], messages: Messages)
 
 @layout(
     pageTitle = Some(s"${messages("checkYourAnswers.title")} - Art market participant - Manage your anti-money laundering supervision - GOV.UK")
@@ -32,16 +34,9 @@
 
     @components.heading("checkYourAnswers.heading")
 
-    @for(section <- answerSections){
-        @{
-            section match {
-                case a: AnswerSection => components.answer_section(a)
-                case r: RepeaterAnswerSection => components.repeater_answer_section(r)
-            }
-        }
-    }
+    @govukSummaryList(summaryList)
 
     @formHelper(action = CheckYourAnswersController.onSubmit) {
-        @components.submit_button("site.acceptandcomplete")
+        @button("site.acceptandcomplete")
     }
 }

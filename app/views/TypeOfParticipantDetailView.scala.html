@@ -14,6 +14,8 @@
  * limitations under the License.
  *@
 
+@import uk.gov.hmrc.govukfrontend.views.html.components.implicits._
+@import uk.gov.hmrc.hmrcfrontend.views.html.components.implicits._
 @import controllers.routes._
 @import models.Mode
 @import config.FrontendAppConfig
@@ -21,7 +23,10 @@
 @this(
     layout: Layout,
     formHelper: FormWithCSRF,
-    appConfig: FrontendAppConfig
+    appConfig: FrontendAppConfig,
+    errorSummary: components.error_summary,
+    govukInput: GovukInput,
+    button: components.button
 )
 
 @(form: Form[_], mode: Mode)(implicit request: Request[_], messages: Messages)
@@ -32,15 +37,24 @@
 
     @formHelper(action = TypeOfParticipantDetailController.onSubmit(mode), 'autoComplete -> "off") {
 
+        @errorSummary(form)
+
         @components.page_heading("amp.heading")
 
-        @components.input_text(
-          field = form("value"),
-          label = messages("typeOfParticipantDetail.heading"),
-          headingIsLabel = true
-        )()
+        @govukInput(
+            Input(
+                label = Label(
+                    isPageHeading = true,
+                    content = Text(messages("typeOfParticipantDetail.heading")),
+                    classes = "govuk-label--xl"
+                ),
+                name = "value",
+                id = "value",
+                classes = "govuk-!-width-two-thirds"
+            ).withFormField(form("value"))
+        )
 
-        @components.submit_button()
+        @button("site.continue")
 
         @components.anchor(appConfig = appConfig)
 

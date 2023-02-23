@@ -18,14 +18,15 @@
 @import models.Mode
 @import config.FrontendAppConfig
 @import views.ViewUtils
-@import components.{Anchor, Button, FormErrorSummary}
+@import components.{Anchor, Button, FormErrorSummary, InputYesNo, PageHeading}
 
 @this(
     layout: Layout,
     formHelper: FormWithCSRF,
+    pageHeading: PageHeading,
     button: Button,
     errorSummary: FormErrorSummary,
-    inputYesNo: components.InputYesNo,
+    inputYesNo: InputYesNo,
     appConfig: FrontendAppConfig,
     anchor: Anchor
 )
@@ -33,14 +34,14 @@
 @(form: Form[_], mode: Mode)(implicit request: Request[_], messages: Messages)
 
 @supportingContent = {
-    <p>@Messages("soldOverThreshold.hint")</p>
+    <p>@messages("soldOverThreshold.hint")</p>
 }
 
 @layout(pageTitle = s"${errorPrefix(form)} ${messages("soldOverThreshold.title")}") {
 
     @formHelper(action = SoldOverThresholdController.onSubmit(mode), 'autoComplete -> "off") {
 
-        @components.page_heading("amp.heading")
+        @pageHeading("amp.heading")
 
         @errorSummary(form)
 

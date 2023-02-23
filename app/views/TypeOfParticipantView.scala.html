@@ -20,10 +20,11 @@
 @import models.{Mode, TypeOfParticipant}
 @import config.FrontendAppConfig
 @import views.ViewUtils
-@import components.{Anchor, Button, FormErrorSummary}
+@import components.{Anchor, Button, FormErrorSummary, PageHeading}
 
 @this(
     layout: Layout,
+    pageHeading: PageHeading,
     formHelper: FormWithCSRF,
     button: Button,
     errorSummary: FormErrorSummary,
@@ -40,7 +41,7 @@
 
         @errorSummary(form, Some(Map("value" -> "value_0")))
 
-        @components.page_heading("amp.heading")
+        @pageHeading("amp.heading")
 
         @govukCheckboxes(
             Checkboxes(

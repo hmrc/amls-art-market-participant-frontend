@@ -15,13 +15,14 @@
  *@
 
 @import config.FrontendAppConfig
-@import components.{Anchor, Button, Heading}
+@import components.{Anchor, Button, Heading, PageHeading, NotificationBanner}
 
 @this(
     layout: Layout,
+    pageHeading: PageHeading,
     button: Button,
     heading: Heading,
-    notificationBanner: components.user_attention_saving,
+    notificationBanner: NotificationBanner,
     appConfig: FrontendAppConfig,
     anchor: Anchor
 )
@@ -30,7 +31,7 @@
 
 @layout(pageTitle = messages("whatYouNeed.title")) {
 
-    @components.page_heading("amp.heading")
+    @pageHeading("amp.heading")
 
     @heading("whatYouNeed.heading")
 

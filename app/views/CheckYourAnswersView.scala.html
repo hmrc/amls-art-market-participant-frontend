@@ -16,11 +16,12 @@
 
 @import controllers.routes.CheckYourAnswersController
 @import viewmodels.{AnswerSection, RepeaterAnswerSection, Section}
-@import components.{Button, Heading}
+@import components.{Button, Heading, PageHeading}
 
 @this(
     heading: Heading,
     layout: Layout,
+    pageHeading: PageHeading,
     formHelper: FormWithCSRF,
     govukSummaryList: GovukSummaryList,
     button: Button
@@ -30,7 +31,7 @@
 
 @layout(pageTitle = messages("checkYourAnswers.title")) {
     
-    @components.page_heading("amp.heading")
+    @pageHeading("amp.heading")
 
     @heading("checkYourAnswers.heading")
 

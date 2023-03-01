@@ -19,6 +19,7 @@ package controllers
 import base.SpecBase
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
+import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.SummaryList
 import viewmodels.AnswerSection
 import views.html.CheckYourAnswersView
 
@@ -39,7 +40,7 @@ class CheckYourAnswersControllerSpec extends SpecBase {
       status(result) mustEqual OK
 
       contentAsString(result) mustEqual
-        view(Seq(AnswerSection(None, Seq())))(request, messages).toString
+        view(SummaryList())(request, messages).toString
 
       application.stop()
     }

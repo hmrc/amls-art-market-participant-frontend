@@ -20,6 +20,9 @@ import base.SpecBase
 import models.UserAnswers
 import play.api.libs.json.Json
 import play.twirl.api.Html
+import uk.gov.hmrc.govukfrontend.views.Aliases.{ActionItem, Actions, HtmlContent, Key, Text, Value}
+import uk.gov.hmrc.govukfrontend.views.viewmodels.content.Content
+import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.SummaryListRow
 import viewmodels.AnswerRow
 
 class CheckYourAnswersHelperSpec extends SpecBase {
@@ -52,21 +55,27 @@ class CheckYourAnswersHelperSpec extends SpecBase {
   "CheckYourAnswersHelper" must {
     "have typeOfParticipant method which" when {
       "called" must {
-        "return AnswerRow in alphabetical order" in {
+        "return SummaryListRow in alphabetical order" in {
 
-          val expected = AnswerRow(Html("What type of art market participant are you?"),
-            Html("<ul class=\"list list-bullet\"><li>Auction house</li><li>Art gallery</li><li>Art adviser or agent</li><li>Art dealer</li><li>sdfsdf</li></ul>"),
-            "/anti-money-laundering/art-market-participant/change-type")
+
+          val expected = createSummaryListRow(
+            "typeOfParticipant.heading",
+            HtmlContent("<ul class=\"govuk-list govuk-list--bullet\"><li>Auction house</li><li>Art gallery</li><li>Art adviser or agent</li><li>Art dealer</li><li>sdfsdf</li></ul>"),
+            "change-type"
+          )
 
           checkYourAnswersHelper.typeOfParticipant.value mustBe expected
         }
-        "return AnswerRow without bullets when only one user answer" in {
+        "return SummaryListRow without bullets when only one user answer" in {
 
           val checkYourAnswersHelperSingle = new CheckYourAnswersHelper(userAnswersSingle)(messages)
 
-          val expected = AnswerRow(Html("What type of art market participant are you?"),
-            Html("Art gallery"),
-            "/anti-money-laundering/art-market-participant/change-type")
+
+          val expected = createSummaryListRow(
+            "typeOfParticipant.heading",
+            Text("Art gallery"),
+            "change-type"
+          )
 
           checkYourAnswersHelperSingle.typeOfParticipant.value mustBe expected
         }
@@ -75,11 +84,13 @@ class CheckYourAnswersHelperSpec extends SpecBase {
 
     "have soldOverThreshold method which" when {
       "called" must {
-        "return AnswerRow" in {
+        "return SummaryListRow" in {
 
-          val expected = AnswerRow(Html("Has your business made a sale of art for €10,000 or more on or after 10 January 2020?"),
-            Html("Yes"),
-            "/anti-money-laundering/art-market-participant/change-sale")
+          val expected = createSummaryListRow(
+            "soldOverThreshold.heading",
+            Text("Yes"),
+            "change-sale"
+          )
 
           checkYourAnswersHelper.soldOverThreshold.value mustBe expected
         }
@@ -88,11 +99,13 @@ class CheckYourAnswersHelperSpec extends SpecBase {
 
     "have dateTransactionOverThreshold method which" when {
       "called" must {
-        "return AnswerRow" in {
+        "return SummaryListRow" in {
 
-          val expected = AnswerRow(Html("When was the first sale of art for €10,000 or more on or after 10 January 2020?"),
-            Html("1 January 2010"),
-            "/anti-money-laundering/art-market-participant/change-first-sale")
+          val expected = createSummaryListRow(
+            "dateTransactionOverThreshold.heading",
+            HtmlContent("1 January 2010"),
+            "change-first-sale"
+          )
 
           checkYourAnswersHelper.dateTransactionOverThreshold.value mustBe expected
         }
@@ -101,11 +114,13 @@ class CheckYourAnswersHelperSpec extends SpecBase {
 
     "have identifyLinkedTransactions method which" when {
       "called" must {
-        "return AnswerRow" in {
+        "return SummaryListRow" in {
 
-          val expected = AnswerRow(Html("Are you able to identify multiple payments linked to a single sale?"),
-            Html("No"),
-            "/anti-money-laundering/art-market-participant/change-identify-linked-payments")
+          val expected = createSummaryListRow(
+            "identifyLinkedTransactions.heading",
+            Text("No"),
+            "change-identify-linked-payments"
+          )
 
           checkYourAnswersHelper.identifyLinkedTransactions.value mustBe expected
         }
@@ -114,15 +129,29 @@ class CheckYourAnswersHelperSpec extends SpecBase {
 
     "have percentageExpectedTurnover method which" when {
       "called" must {
-        "return AnswerRow" in {
+        "return SummaryListRow" in {
 
-          val expected = AnswerRow(Html("How much of your turnover do you expect to come from sales of art for €10,000 or more in the next 12 months?"),
-            Html("0% to 20%"),
-            "/anti-money-laundering/art-market-participant/change-turnover-from-art-sales")
+          val expected = createSummaryListRow(
+            "percentageExpectedTurnover.heading",
+            Text("0% to 20%"),
+            "change-turnover-from-art-sales"
+          )
 
           checkYourAnswersHelper.percentageExpectedTurnover.value mustBe expected
         }
       }
     }
   }
+
+  private def createSummaryListRow(heading: String, answer: Content, changeUrl: String) =
+    SummaryListRow(
+      key = Key(content = Text(messages(heading))),
+      value = Value(content = answer),
+      actions = Some(Actions(
+        items = List(ActionItem(
+          href = s"/anti-money-laundering/art-market-participant/$changeUrl",
+          content = Text(messages("site.edit")))
+        )
+      ))
+    )
 }

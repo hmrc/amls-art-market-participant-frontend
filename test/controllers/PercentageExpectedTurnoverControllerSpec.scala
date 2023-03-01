@@ -18,6 +18,7 @@ package controllers
 
 import base.SpecBase
 import forms.PercentageExpectedTurnoverFormProvider
+import models.PercentageExpectedTurnover.ZeroToTwenty
 import models.{NormalMode, PercentageExpectedTurnover, UserAnswers}
 import navigation.{FakeNavigator, Navigator}
 import org.mockito.Matchers.any
@@ -28,7 +29,7 @@ import play.api.inject.bind
 import play.api.mvc.Call
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
-import repositories.{AMLSFrontEndSessionRepository}
+import repositories.AMLSFrontEndSessionRepository
 import views.html.PercentageExpectedTurnoverView
 
 import scala.concurrent.Future
@@ -98,7 +99,7 @@ class PercentageExpectedTurnoverControllerSpec extends SpecBase with MockitoSuga
 
       val request =
         FakeRequest(POST, percentageExpectedTurnoverRoute)
-          .withFormUrlEncodedBody(("value", PercentageExpectedTurnover.options.head.value))
+          .withFormUrlEncodedBody(("value", ZeroToTwenty.toString))
 
       val result = route(application, request).value
 

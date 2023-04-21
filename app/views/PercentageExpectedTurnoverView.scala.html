@@ -37,7 +37,7 @@
 
 @layout(pageTitle = s"${errorPrefix(form)} ${messages("percentageExpectedTurnover.title")}") {
 
-    @formHelper(action = PercentageExpectedTurnoverController.onSubmit(mode), 'autoComplete -> "off") {
+    @formHelper(action = PercentageExpectedTurnoverController.onSubmit(mode), Symbol("autoComplete") -> "off") {
 
         @errorSummary(form, Some(Map("value" -> "value_0")))
 

@@ -63,14 +63,14 @@ class DateTransactionOverThresholdControllerSpec extends SpecBase with MockitoSu
 
       val application = applicationBuilder(userAnswers = Some(emptyUserAnswers)).build()
 
-      val result = route(application, getRequest).value
+      val result = route(application, getRequest()).value
 
       val view = application.injector.instanceOf[DateTransactionOverThresholdView]
 
       status(result) mustEqual OK
 
       contentAsString(result) mustEqual
-        view(form, NormalMode)(getRequest, messages).toString
+        view(form, NormalMode)(getRequest(), messages).toString
 
       application.stop()
     }
@@ -83,12 +83,12 @@ class DateTransactionOverThresholdControllerSpec extends SpecBase with MockitoSu
 
       val view = application.injector.instanceOf[DateTransactionOverThresholdView]
 
-      val result = route(application, getRequest).value
+      val result = route(application, getRequest()).value
 
       status(result) mustEqual OK
 
       contentAsString(result) mustEqual
-        view(form.fill(validAnswer), NormalMode)(getRequest, messages).toString
+        view(form.fill(validAnswer), NormalMode)(getRequest(), messages).toString
 
       application.stop()
     }
@@ -108,7 +108,7 @@ class DateTransactionOverThresholdControllerSpec extends SpecBase with MockitoSu
           )
           .build()
 
-      val result = route(application, postRequest).value
+      val result = route(application, postRequest()).value
 
       status(result) mustEqual SEE_OTHER
 
@@ -144,7 +144,7 @@ class DateTransactionOverThresholdControllerSpec extends SpecBase with MockitoSu
       val application = applicationBuilder(userAnswers = None).build()
 
       val exception = intercept[Exception]{
-        val result = route(application, postRequest).value
+        val result = route(application, postRequest()).value
 
         status(result) mustEqual SEE_OTHER
       }
@@ -158,7 +158,7 @@ class DateTransactionOverThresholdControllerSpec extends SpecBase with MockitoSu
       val application = applicationBuilder(userAnswers = None).build()
 
       val exception = intercept[Exception]{
-        val result = route(application, postRequest).value
+        val result = route(application, postRequest()).value
 
         status(result) mustEqual SEE_OTHER
       }

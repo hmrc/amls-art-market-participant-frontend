@@ -35,7 +35,7 @@
 
 @layout(pageTitle = s"${errorPrefix(form)} ${messages("identifyLinkedTransactions.title")}") {
 
-    @formHelper(action = IdentifyLinkedTransactionsController.onSubmit(mode), 'autoComplete -> "off") {
+    @formHelper(action = IdentifyLinkedTransactionsController.onSubmit(mode), Symbol("autoComplete") -> "off") {
 
         @errorSummary(form)
 

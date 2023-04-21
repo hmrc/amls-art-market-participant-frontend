@@ -47,7 +47,7 @@ class EnumerableSpec extends WordSpec with MustMatchers with EitherValues with O
     Foo.values.foreach {
       value =>
         s"bind correctly for: $value" in {
-          Json.fromJson[Foo](JsString(value.toString)).asEither.right.value mustEqual value
+          Json.fromJson[Foo](JsString(value.toString)).asEither mustBe Right(value)
         }
     }
 

@@ -37,7 +37,7 @@
 
 @layout(pageTitle = s"${errorPrefix(form)} ${messages("typeOfParticipant.title")}") {
 
-    @formHelper(action = TypeOfParticipantController.onSubmit(mode), 'autoComplete -> "off") {
+    @formHelper(action = TypeOfParticipantController.onSubmit(mode), Symbol("autoComplete") -> "off") {
 
         @errorSummary(form, Some(Map("value" -> "value_0")))
 

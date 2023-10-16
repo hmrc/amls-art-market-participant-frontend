@@ -18,13 +18,9 @@
 
 @this(appConfig: FrontendAppConfig)
 
-@(returnLocation: Option[String] = None)(implicit messages: Messages)
+@()(implicit messages: Messages)
 
 <p class="govuk-body">
-@if(returnLocation == Some("renewal")) {
-    <a href="@{appConfig.renewalProgressUrl}">@messages("link.return.renewal.progress")</a>
-} else {
     <a href="@{appConfig.registrationProgressUrl}">@messages("link.return.registration.progress")</a>
-}
 </p>
 

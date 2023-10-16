@@ -16,11 +16,9 @@
 
 @import uk.gov.hmrc.govukfrontend.views.html.components._
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers._
-@import uk.gov.hmrc.hmrcfrontend.views.config.StandardBetaBanner
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcReportTechnicalIssueHelper
 @import views.html.helper.CSPNonce
 @import config.FrontendAppConfig
-@import controllers.routes
 
 @this(
     appConfig: FrontendAppConfig,
@@ -29,7 +27,6 @@
     hmrcTimeoutDialogHelper: HmrcTimeoutDialogHelper,
     hmrcStandardFooter: HmrcStandardFooter,
     hmrcStandardHeader: HmrcStandardHeader,
-    standardBetaBanner: StandardBetaBanner,
     defaultMainContentLayout: TwoThirdsMainContent,
     hmrcScripts: HmrcScripts,
     govukBackLink: GovukBackLink,
@@ -48,8 +45,8 @@
     @if(timeoutEnabled) {
         @hmrcTimeoutDialogHelper(
             signOutUrl = appConfig.logoutUrl,
-            timeout = Some(900),
-            countdown = Some(120)
+            timeout = Some(appConfig.timeoutSeconds),
+            countdown = Some(appConfig.timeoutCountdown)
         )
     }
 }

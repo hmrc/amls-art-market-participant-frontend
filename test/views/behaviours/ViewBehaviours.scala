@@ -32,9 +32,8 @@ trait ViewBehaviours extends ViewSpecBase {
         "have the correct banner title" in {
 
           val doc = asDocument(view)
-          val nav = doc.getElementById("proposition-menu")
-          val span = nav.children.first
-          span.html().contains(messages("site.service_name"))
+          val span = doc.getElementsByClass("hmrc-header__service-name").first()
+          span.html().contains(messages("service.name"))
         }
 
         "display the correct browser title" in {
@@ -71,7 +70,7 @@ trait ViewBehaviours extends ViewSpecBase {
           val doc = asDocument(view)
           val nav = doc.getElementById("proposition-menu")
           val span = nav.children.first
-          span.html().contains(messages("site.service_name"))
+          span.html().contains(messages("service.name"))
         }
 
         "display the correct browser title" in {

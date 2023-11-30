@@ -20,6 +20,7 @@ import forms.PercentageExpectedTurnoverFormProvider
 import models.{NormalMode, PercentageExpectedTurnover}
 import play.api.data.Form
 import play.twirl.api.HtmlFormat
+import uk.gov.hmrc.govukfrontend.views.viewmodels.radios.RadioItem
 import views.behaviours.ViewBehaviours
 import views.html.PercentageExpectedTurnoverView
 
@@ -31,7 +32,7 @@ class PercentageExpectedTurnoverViewSpec extends ViewBehaviours {
 
   val view = viewFor[PercentageExpectedTurnoverView](Some(emptyUserAnswers))
 
-  def applyView(form: Form[_]): HtmlFormat.Appendable =
+  def applyView(form: Form[PercentageExpectedTurnover]): HtmlFormat.Appendable =
     view.apply(form, NormalMode)(fakeRequest, messages)
 
   "PercentageExpectedTurnoverView" must {
@@ -50,23 +51,25 @@ class PercentageExpectedTurnoverViewSpec extends ViewBehaviours {
         val doc = asDocument(applyView(form))
 
         for (option <- PercentageExpectedTurnover.options) {
-          assertContainsRadioButton(doc, option.id, "value", option.value, false)
+          assertContainsRadioButton(doc, option.id.value, "value", option.value.value, false)
         }
       }
     }
 
-    for (option <- PercentageExpectedTurnover.options) {
+    PercentageExpectedTurnover.options.zipWithIndex.foreach { case (option: RadioItem, i: Int) =>
 
-      s"rendered with a value of '${option.value}'" must {
+      s"rendered with a value of '${option.value.value}'" must {
 
-        s"have the '${option.value}' radio button selected" in {
+        s"have the '${option.value.value}' radio button selected" in {
 
-          val doc = asDocument(applyView(form.bind(Map("value" -> s"${option.value}"))))
+          val formWithRadioSelected = form.fill(PercentageExpectedTurnover.values(i))
 
-          assertContainsRadioButton(doc, option.id, "value", option.value, true)
+          def doc = asDocument(applyView(formWithRadioSelected))
+
+          assertContainsRadioButton(doc, option.id.value, "value", option.value.value, isChecked = true)
 
           for (unselectedOption <- PercentageExpectedTurnover.options.filterNot(o => o == option)) {
-            assertContainsRadioButton(doc, unselectedOption.id, "value", unselectedOption.value, false)
+            assertContainsRadioButton(doc, unselectedOption.id.value, "value", unselectedOption.value.value, isChecked = false)
           }
         }
       }

@@ -14,17 +14,16 @@
  * limitations under the License.
  *@
 
-@(errors: Seq[FormError])(implicit messages: Messages)
-@if(errors.nonEmpty) {
-    <div class="error-summary error-summary--show" role="alert" aria-labelledby="error-summary-heading" tabindex="-1">
+@import uk.gov.hmrc.hmrcfrontend.views.html.components.implicits._
 
-        <h2 class="heading-medium error-summary-heading" id="error-summary-heading">
-        @messages("error.summary.title")
-        </h2>
+@this(errorSummary: GovukErrorSummary)
 
-        <ul role="list" class="error-summary-list">
-            <li><a href="#@{errors.head.key}">@messages(errors.head.message, errors.head.args:_*)</a></li>
-        </ul>
+@(form: Form[_], mapping: Option[Map[String, String]] = None)(implicit messages: Messages)
 
-    </div>
+@if(form.errors.nonEmpty) {
+    @errorSummary(
+        mapping.fold(ErrorSummary().withFormErrorsAsText(form)){ value =>
+            ErrorSummary().withFormErrorsAsText(form, mapping = value)
+        }
+    )
 }

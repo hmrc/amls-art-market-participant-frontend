@@ -14,44 +14,56 @@
  * limitations under the License.
  *@
 
+@import uk.gov.hmrc.govukfrontend.views.html.components.implicits._
 @import controllers.routes._
 @import models.{Mode, PercentageExpectedTurnover}
 @import config.FrontendAppConfig
-@import views.ViewUtils
+@import components.{Anchor, Button, FormErrorSummary, PageHeading}
 
 @this(
-    main_template: MainTemplate,
+    layout: Layout,
+    pageHeading: PageHeading,
     formHelper: FormWithCSRF,
-    appConfig: FrontendAppConfig
+    button: Button,
+    govukRadios: GovukRadios,
+    errorSummary: FormErrorSummary,
+    appConfig: FrontendAppConfig,
+    anchor: Anchor
 )
 
-@(form: Form[_], mode: Mode)(implicit request: Request[_], messages: Messages)
+@(form: Form[PercentageExpectedTurnover], mode: Mode)(implicit request: Request[_], messages: Messages)
 
-@supportingContent = {
-    <p>@Messages("percentageExpectedTurnover.hint")</p>
-}
-
-@main_template(
-    title = s"${errorPrefix(form)} ${messages("percentageExpectedTurnover.title")} - Art market participant - Manage your anti-money laundering supervision - GOV.UK".trim
-    ) {
+@layout(pageTitle = s"${errorPrefix(form)} ${messages("percentageExpectedTurnover.title")}") {
 
     @formHelper(action = PercentageExpectedTurnoverController.onSubmit(mode), 'autoComplete -> "off") {
 
-        @components.back_link()
+        @errorSummary(form, Some(Map("value" -> "value_0")))
 
-        @components.error_summary_with_id(form.errors, ViewUtils.percentageExpectedTurnoverErrorId)
+        @pageHeading("amp.heading")
 
-        @components.page_heading("amp.heading")
+        @govukRadios(
+            Radios(
+                fieldset = Some(Fieldset(
+                    legend = Some(
+                        Legend(
+                            content = Text(messages("percentageExpectedTurnover.heading")),
+                            classes = "govuk-fieldset__legend--xl",
+                            isPageHeading = true
+                        ))
+                )),
+                hint = Some(
+                    Hint(
+                        content = Text(messages("percentageExpectedTurnover.hint"))
+                )
+            ),
+            name = "value",
+            items = PercentageExpectedTurnover.options
+        )
+        .withFormField(form("value"))
+)
 
-        @components.input_radio(
-            field = form("value"),
-            legend = messages("percentageExpectedTurnover.heading"),
-            headingIsLegend = true,
-            inputs = PercentageExpectedTurnover.options.toSeq
-        )(supportingContent = supportingContent)
+        @button("site.continue", "submit")
 
-        @components.submit_button()
-
-        @components.anchor(appConfig = appConfig)
+        @anchor()
     }
 }

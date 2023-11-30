@@ -16,7 +16,9 @@
 
 package models
 
-import viewmodels.RadioOption
+import play.api.i18n.Messages
+import uk.gov.hmrc.govukfrontend.views.Aliases.Text
+import uk.gov.hmrc.govukfrontend.views.viewmodels.checkboxes.CheckboxItem
 
 sealed trait TypeOfParticipant
 
@@ -36,9 +38,14 @@ object TypeOfParticipant extends Enumerable.Implicits {
     SomethingElse
   )
 
-  val options: Seq[RadioOption] = values.map {
-    value =>
-      RadioOption("typeOfParticipant", value.toString)
+  def options(implicit messages: Messages): Seq[CheckboxItem] = values.zipWithIndex.map {
+    case (participantValue, index) =>
+      CheckboxItem(
+        content = Text(messages(s"typeOfParticipant.${participantValue.toString}")),
+        value = participantValue.toString,
+        id = Some(s"value_$index"),
+        name = Some(s"value[$index]")
+      )
   }
 
   implicit val enumerable: Enumerable[TypeOfParticipant] =

@@ -14,17 +14,13 @@
  * limitations under the License.
  *@
 
-@import viewmodels.AnswerSection
-@import views.html._
+@import config.FrontendAppConfig
 
-@(answerSection: AnswerSection)(implicit messages: Messages)
+@this(appConfig: FrontendAppConfig)
 
-@if(answerSection.headingKey.isDefined){
-    <h2 class="heading-large">@messages(answerSection.headingKey.get)</h2>
-}
+@()(implicit messages: Messages)
 
-<dl class="cya-summary-list">
-    @for(row <- answerSection.rows){
-        @components.answer_row(row)
-    }
-</dl>
+<p class="govuk-body">
+    <a href="@{appConfig.registrationProgressUrl}">@messages("link.return.registration.progress")</a>
+</p>
+

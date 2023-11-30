@@ -14,21 +14,13 @@
  * limitations under the License.
  *@
 
-@import config.FrontendAppConfig
+@import components.Heading
 
-@this(
-    govuk_wrapper: GovukWrapper,
-    appConfig: FrontendAppConfig
-)
+@this(layout: Layout, heading: Heading)
 
-@(pageTitle: String, heading: String, message: String)(implicit request: Request[_], messages: Messages)
+@(title: String, headingText: String, message: String)(implicit request: Request[_], messages: Messages)
 
-@contentHeader = {
-  <h1>@heading</h1>
+@layout(pageTitle = title) {
+    @heading(headingText)
+    <p class="govuk-body">@{Text(message).asHtml}</p>
 }
-
-@mainContent = {
-  <p>@message</p>
-}
-
-@govuk_wrapper(appConfig = appConfig, title = pageTitle, contentHeader = Some(contentHeader), mainContent = mainContent)

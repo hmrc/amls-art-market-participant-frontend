@@ -15,36 +15,37 @@
  *@
 
 @import config.FrontendAppConfig
+@import components.{Anchor, Button, Heading, PageHeading, NotificationBanner}
 
 @this(
-    main_template: MainTemplate,
-    appConfig: FrontendAppConfig
+    layout: Layout,
+    pageHeading: PageHeading,
+    button: Button,
+    heading: Heading,
+    notificationBanner: NotificationBanner,
+    appConfig: FrontendAppConfig,
+    anchor: Anchor
 )
 
 @()(implicit request: Request[_], messages: Messages)
 
-@main_template(
-    title = s"${messages("whatYouNeed.title")} - Art market participant - Manage your anti-money laundering supervision - GOV.UK"
-    ) {
+@layout(pageTitle = messages("whatYouNeed.title")) {
 
-    @components.back_link()
+    @pageHeading("amp.heading")
 
-    @components.page_heading("amp.heading")
+    @heading("whatYouNeed.heading")
 
-    @components.heading("whatYouNeed.heading")
+    @notificationBanner(messages("whatYouNeed.attention.information"))
 
-    @components.user_attention_saving()
+    <p class="govuk-body">@messages("whatYouNeed.heading2")</p>
 
-    <p>@Messages("whatYouNeed.heading2")</p>
-
-    <ul class="list list-bullet">
-        <li>@Messages("whatYouNeed.line_1")</li>
-        <li>@Messages("whatYouNeed.line_2")</li>
-        <li>@Messages("whatYouNeed.line_3")</li>
-        <li>@Messages("whatYouNeed.line_4")</li>
+    <ul class="govuk-list govuk-list--bullet">
+        <li>@messages("whatYouNeed.line_1")</li>
+        <li>@messages("whatYouNeed.line_2")</li>
+        <li>@messages("whatYouNeed.line_3")</li>
+        <li>@messages("whatYouNeed.line_4")</li>
     </ul>
 
-    @components.button_link_with_id("whatYouNeed.continue", "type", "ampwhatyouneed-button")
-
-    @components.anchor(appConfig = appConfig)
+    @button("whatYouNeed.continue", "ampwhatyouneed-button", Some("type"))
+    @anchor()
 }

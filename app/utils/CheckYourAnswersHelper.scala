@@ -16,108 +16,129 @@
 
 package utils
 
-import java.time.format.DateTimeFormatter
-
 import controllers.routes
-import models.{CheckMode, TypeOfParticipant, UserAnswers}
+import models.TypeOfParticipant.SomethingElse
+import models.{CheckMode, UserAnswers}
 import pages._
 import play.api.i18n.Messages
-import play.twirl.api.{Html, HtmlFormat}
-import viewmodels.AnswerRow
-import CheckYourAnswersHelper._
+import uk.gov.hmrc.govukfrontend.views.Aliases.{Actions, Key, Value}
+import uk.gov.hmrc.govukfrontend.views.viewmodels.content.{Content, HtmlContent, Text}
+import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.{ActionItem, SummaryListRow}
+import utils.CheckYourAnswersHelper._
+
+import java.time.format.DateTimeFormatter
 
 class CheckYourAnswersHelper(userAnswers: UserAnswers)(implicit messages: Messages) {
 
-  private def typeOfParticipantList(x: Seq[TypeOfParticipant]): Html = {
+  def getAllRows: Seq[SummaryListRow] = Seq(
+    typeOfParticipant,
+    soldOverThreshold,
+    dateTransactionOverThreshold,
+    identifyLinkedTransactions,
+    percentageExpectedTurnover
+  ).flatten
 
-    val detailAnswer = userAnswers.get(TypeOfParticipantDetailPage).getOrElse("")
+  def typeOfParticipant: Option[SummaryListRow] = {
 
-    val ifBullet = if (x.size == 1) "<ul class=\"list\">" else "<ul class=\"list list-bullet\">"
+    val participantUserAnswers = userAnswers.get(TypeOfParticipantPage)
 
-    val values = x.map(value => value.toString).toList
+    val participantValues: Option[Content] = participantUserAnswers match {
+      case Some(value) if value.size > 1 =>
 
-    Html(Html(ifBullet + values.map(value => if(value == "somethingElse") {
-     if (!detailAnswer.isEmpty) {
-      Html("<li>" + detailAnswer + "</li>")
-     } else {
-       detailAnswer
-     }
-    } else{
-      Html("<li>" + messages(s"typeOfParticipant.$value")).toString
-    }).mkString("</li>")) + "</ul>")
-  }
+        Some(
+          HtmlContent(
+            "<ul class=\"govuk-list govuk-list--bullet\">" +
+              value.map { x =>
+                if(x == SomethingElse) {
+                  userAnswers.get(TypeOfParticipantDetailPage)
+                    .fold(s"<li>${messages(s"typeOfParticipant.${x.toString}")}</li>"){ detail =>
+                    s"<li>${Text(detail).asHtml}</li>"
+                  }
+                } else {
+                  s"<li>${messages(s"typeOfParticipant.${x.toString}")}</li>"
+                }
+              }.mkString +
+            "</ul>"
+          )
+        )
+      case Some(value) => Some(Text(messages(s"typeOfParticipant.${value.head.toString}")))
+      case None => None
+    }
 
-  private def typeOfParticipantSingle(x: Seq[TypeOfParticipant]) = {
-
-    val detailAnswer = userAnswers.get(TypeOfParticipantDetailPage).getOrElse("")
-    val participantValue = x.map(value => value.toString).head
-
-    if(participantValue == "somethingElse") {
-      detailAnswer
-    } else{
-      messages(s"typeOfParticipant.$participantValue")
+    participantValues map { values =>
+      SummaryListRow(
+        key = Key(Text(messages("typeOfParticipant.checkYourAnswersLabel"))),
+        value = Value(values),
+        actions = Some(Actions(items = Seq(
+          ActionItem(
+            href = routes.TypeOfParticipantController.onPageLoad(CheckMode).url,
+            content = Text(messages("site.edit"))
+          )
+        )))
+      )
     }
   }
 
-  def typeOfParticipant: Option[AnswerRow] = userAnswers.get(TypeOfParticipantPage) map {
-    x: Seq[TypeOfParticipant] =>
-      if(x.size > 1) {
-        AnswerRow(
-          HtmlFormat.escape(messages("typeOfParticipant.checkYourAnswersLabel")),
-          typeOfParticipantList(x),
-          routes.TypeOfParticipantController.onPageLoad(CheckMode).url
-        )
-      } else {
-        AnswerRow(
-          HtmlFormat.escape(messages("typeOfParticipant.checkYourAnswersLabel")),
-          HtmlFormat.escape(typeOfParticipantSingle(x)),
-          routes.TypeOfParticipantController.onPageLoad(CheckMode).url
-        )
-      }
-  }
-
-  def percentageExpectedTurnover: Option[AnswerRow] = userAnswers.get(PercentageExpectedTurnoverPage) map {
+  def percentageExpectedTurnover: Option[SummaryListRow] = userAnswers.get(PercentageExpectedTurnoverPage) map {
     x =>
-      AnswerRow(
-        HtmlFormat.escape(messages("percentageExpectedTurnover.checkYourAnswersLabel")),
-        HtmlFormat.escape(messages(s"percentageExpectedTurnover.$x")),
-        routes.PercentageExpectedTurnoverController.onPageLoad(CheckMode).url
+      SummaryListRow(
+        key = Key(Text(messages("percentageExpectedTurnover.checkYourAnswersLabel"))),
+        value = Value(Text(messages(s"percentageExpectedTurnover.$x"))),
+        actions = Some(Actions(items = Seq(
+          ActionItem(
+            href = routes.PercentageExpectedTurnoverController.onPageLoad(CheckMode).url,
+            content = Text(messages("site.edit"))
+          )
+        )))
       )
   }
 
-  def identifyLinkedTransactions: Option[AnswerRow] = userAnswers.get(IdentifyLinkedTransactionsPage) map {
+  def identifyLinkedTransactions: Option[SummaryListRow] = userAnswers.get(IdentifyLinkedTransactionsPage) map {
     x =>
-      AnswerRow(
-        HtmlFormat.escape(messages("identifyLinkedTransactions.checkYourAnswersLabel")),
-        yesOrNo(x),
-        routes.IdentifyLinkedTransactionsController.onPageLoad(CheckMode).url
+      SummaryListRow(
+        key = Key(Text(messages("identifyLinkedTransactions.checkYourAnswersLabel"))),
+        value = Value(yesOrNo(x)),
+        actions = withChangeLink(routes.IdentifyLinkedTransactionsController.onPageLoad(CheckMode).url)
       )
   }
 
-  def dateTransactionOverThreshold: Option[AnswerRow] = userAnswers.get(DateTransactionOverThresholdPage) map {
+  def dateTransactionOverThreshold: Option[SummaryListRow] = userAnswers.get(DateTransactionOverThresholdPage) map {
     x =>
-      AnswerRow(
-        HtmlFormat.escape(messages("dateTransactionOverThreshold.checkYourAnswersLabel")),
-        HtmlFormat.escape(x.format(dateFormatter)),
-        routes.DateTransactionOverThresholdController.onPageLoad(CheckMode).url
+      SummaryListRow(
+        key = Key(Text(messages("dateTransactionOverThreshold.checkYourAnswersLabel"))),
+        value = Value(HtmlContent(x.format(dateFormatter))),
+        actions = withChangeLink(routes.DateTransactionOverThresholdController.onPageLoad(CheckMode).url)
       )
   }
 
-  def soldOverThreshold: Option[AnswerRow] = userAnswers.get(SoldOverThresholdPage) map {
+  def soldOverThreshold: Option[SummaryListRow] = userAnswers.get(SoldOverThresholdPage) map {
     x =>
-      AnswerRow(
-        HtmlFormat.escape(messages("soldOverThreshold.checkYourAnswersLabel")),
-        yesOrNo(x),
-        routes.SoldOverThresholdController.onPageLoad(CheckMode).url
+      SummaryListRow(
+        key = Key(Text(messages("soldOverThreshold.checkYourAnswersLabel"))),
+        value = Value(yesOrNo(x)),
+        actions = withChangeLink(routes.SoldOverThresholdController.onPageLoad(CheckMode).url)
       )
   }
 
-  private def yesOrNo(answer: Boolean)(implicit messages: Messages): Html =
+  private def yesOrNo(answer: Boolean)(implicit messages: Messages): Content =
     if (answer) {
-      HtmlFormat.escape(messages("site.yes"))
+      Text(messages("site.yes"))
     } else {
-      HtmlFormat.escape(messages("site.no"))
+      Text(messages("site.no"))
     }
+
+  private def withChangeLink(url: String) =
+    Some(
+      Actions(
+        items =
+          Seq(
+            ActionItem(
+              href = url,
+              content = Text(messages("site.edit"))
+            )
+          )
+      )
+    )
 }
 
 object CheckYourAnswersHelper {

@@ -14,11 +14,12 @@
  * limitations under the License.
  *@
 
+@this()
+
 @(pageHeadingKey: String)(implicit messages: Messages)
 
 <div class="page-header">
  <p class="heading-secondary">
-  <span class="visuallyhidden">This section is </span>
-   @messages(pageHeadingKey)
+  <span class="govuk-caption-xl">@messages(pageHeadingKey)</span>
  </p>
 </div>

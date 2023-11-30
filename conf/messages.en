@@ -1,3 +1,4 @@
+service.name = Manage your anti-money laundering supervision
 
 ############################### Banners ###############################
 urr.title = Help improve GOV.UK
@@ -53,7 +54,7 @@ site.no = No
 site.yes = Yes
 site.continue = Save and continue
 site.acceptandcomplete = Accept and complete section
-site.service_name = Manage your anti-money laundering supervision
+site.govuk = GOV.UK
 site.textarea.char_limit = (Limit is {0} characters)
 site.signout = Sign out
 amp.heading = Art market participant

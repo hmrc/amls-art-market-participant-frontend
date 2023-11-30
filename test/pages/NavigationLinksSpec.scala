@@ -17,12 +17,12 @@
 package pages
 
 import java.time.LocalDate
-
 import forms._
 import models.{NormalMode, PercentageExpectedTurnover, TypeOfParticipant}
 import org.jsoup.nodes.Document
 import play.api.data.Form
 import play.twirl.api.HtmlFormat
+import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.SummaryList
 import views.behaviours.ViewBehaviours
 import views.html._
 
@@ -115,7 +115,7 @@ class NavigationLinksSpec extends ViewBehaviours {
   "CheckYourAnswers page" must {
     val view = viewFor[CheckYourAnswersView](Some(emptyUserAnswers))
 
-    val applyView = view.apply(Seq())(fakeRequest, messages)
+    val applyView = view.apply(SummaryList())(fakeRequest, messages)
 
     val document = asDocument(applyView)
 
@@ -124,7 +124,7 @@ class NavigationLinksSpec extends ViewBehaviours {
     }
 
     "display AcceptAndComplete button" in {
-      assertElementContainsMessage(document, "submit", messages(acceptAndCompleteMsg))
+      assertElementContainsMessage(document, "button", messages(acceptAndCompleteMsg))
     }
   }
 

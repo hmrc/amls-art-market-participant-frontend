@@ -14,18 +14,16 @@
  * limitations under the License.
  *@
 
-@import config.FrontendAppConfig
+@this(govukNotificationBanner: GovukNotificationBanner)
 
-@(
-    appConfig: FrontendAppConfig,
-    returnLocation: Option[String] = None
-)(implicit m: Messages)
+@(message: String)(implicit messages: Messages)
 
-<p class="return-link">
-@if(returnLocation == Some("renewal")) {
-    <a href="@{appConfig.renewalProgressUrl}">@Messages("link.return.renewal.progress")</a>
-} else {
-    <a href="@{appConfig.registrationProgressUrl}">@Messages("link.return.registration.progress")</a>
-}
-</p>
+@govukNotificationBanner(
+    NotificationBanner(
+        title = Text(messages("whatYouNeed.attention.title")),
+        content = Text(message)
+    )
+)
+
+
 

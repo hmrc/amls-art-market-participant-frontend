@@ -1,27 +1,21 @@
 import sbt._
 
 object AppDependencies {
-  import play.core.PlayVersion
+
+  private val bootstrapVersion = "8.4.0"
 
   val compile = Seq(
     play.sbt.PlayImport.ws,
-    "uk.gov.hmrc.mongo" %% "hmrc-mongo-play-28"             % "0.74.0",
-    "uk.gov.hmrc"       %% "logback-json-logger"            % "5.1.0",
-    "uk.gov.hmrc"       %% "play-frontend-hmrc"             % "6.6.0-play-28",
-    "uk.gov.hmrc"       %% "play-conditional-form-mapping"  % "1.9.0-play-28",
-    "uk.gov.hmrc"       %% "bootstrap-frontend-play-28"     % "7.13.0",
-    compilerPlugin("com.github.ghik" % "silencer-plugin" % "1.7.12" cross CrossVersion.full),
-    "com.github.ghik" % "silencer-lib" % "1.7.12" % Provided cross CrossVersion.full
+    "uk.gov.hmrc" %% "play-frontend-hmrc"            % "7.29.0-play-28",
+    "uk.gov.hmrc" %% "play-conditional-form-mapping" % "1.13.0-play-28",
+    "uk.gov.hmrc" %% "bootstrap-frontend-play-28"    % bootstrapVersion
   )
 
   val test = Seq(
-    "org.scalatest"               %% "scalatest"          % "3.0.9",
-    "org.scalatestplus.play"      %% "scalatestplus-play" % "5.0.0",
-    "org.pegdown"                 %  "pegdown"            % "1.6.0",
-    "org.jsoup"                   %  "jsoup"              % "1.14.2",
-    "com.typesafe.play"           %% "play-test"          % PlayVersion.current,
-    "org.mockito"                 %  "mockito-all"        % "1.10.19",
-    "org.scalacheck"              %% "scalacheck"         % "1.15.4"
+    "uk.gov.hmrc"         %% "bootstrap-test-play-28"  % bootstrapVersion,
+    "org.mockito"         %% "mockito-scala-scalatest" % "1.17.27",
+    "org.scalatestplus"   %% "scalacheck-1-17"         % "3.2.17.0",
+    "com.vladsch.flexmark" % "flexmark-all"            % "0.62.2",
   ).map(_ % Test)
 
   def apply(): Seq[ModuleID] = compile ++ test

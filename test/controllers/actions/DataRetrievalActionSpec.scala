@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,10 +21,9 @@ import models.UserAnswers
 import models.requests.{IdentifierRequest, OptionalDataRequest}
 import org.scalatest.concurrent.ScalaFutures
 import repositories.AMLSFrontEndSessionRepository
-import org.mockito.Matchers.any
-import org.mockito.Mockito.when
-import org.mockito.Matchers.{eq => eqTo}
-import org.scalatestplus.mockito.MockitoSugar
+import org.mockito.ArgumentMatchers.any
+import org.mockito.ArgumentMatchers.{eq => eqTo}
+import org.mockito.MockitoSugar
 import uk.gov.hmrc.auth.core.AffinityGroup
 
 import scala.concurrent.ExecutionContext.Implicits.global

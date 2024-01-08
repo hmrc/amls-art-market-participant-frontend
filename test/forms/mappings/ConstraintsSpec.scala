@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +16,19 @@
 
 package forms.mappings
 
-import java.time.LocalDate
-
 import generators.Generators
 import org.scalacheck.Gen
+import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
+import org.scalatest.wordspec.AnyWordSpec
 import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
-import org.scalatest.{MustMatchers, WordSpec}
 import play.api.data.validation.{Invalid, Valid}
 
-class ConstraintsSpec extends WordSpec with MustMatchers with ScalaCheckPropertyChecks with Generators  with Constraints {
+import java.time.LocalDate
+
+class ConstraintsSpec extends AnyWordSpec with ScalaCheckPropertyChecks with Generators  with Constraints {
 
 
-  "firstError" must {
+  "firstError" should {
 
     "return Valid when all constraints pass" in {
       val result = firstError(maxLength(10, "error.length"), regexp("""^\w+$""", "error.regexp"))("foo")
@@ -50,7 +51,7 @@ class ConstraintsSpec extends WordSpec with MustMatchers with ScalaCheckProperty
     }
   }
 
-  "minimumValue" must {
+  "minimumValue" should {
 
     "return Valid for a number greater than the threshold" in {
       val result = minimumValue(1, "error.min").apply(2)
@@ -68,7 +69,7 @@ class ConstraintsSpec extends WordSpec with MustMatchers with ScalaCheckProperty
     }
   }
 
-  "maximumValue" must {
+  "maximumValue" should {
 
     "return Valid for a number less than the threshold" in {
       val result = maximumValue(1, "error.max").apply(0)
@@ -86,7 +87,7 @@ class ConstraintsSpec extends WordSpec with MustMatchers with ScalaCheckProperty
     }
   }
 
-  "inRange" must {
+  "inRange" should {
     "return Valid for a number in range" in {
       val result = inRange(1, 10, "error.not.in.range").apply(9)
       result mustEqual Valid
@@ -98,7 +99,7 @@ class ConstraintsSpec extends WordSpec with MustMatchers with ScalaCheckProperty
     }
   }
 
-  "regexp" must {
+  "regexp" should {
 
     "return Valid for an input that matches the expression" in {
       val result = regexp("""^\w+$""", "error.invalid")("foo")
@@ -111,7 +112,7 @@ class ConstraintsSpec extends WordSpec with MustMatchers with ScalaCheckProperty
     }
   }
 
-  "nonEmptySet" must {
+  "nonEmptySet" should {
     "return Valid for a non Empty Set" in {
       val result = nonEmptySet("error.set.empty").apply(Set(1))
       result mustEqual Valid
@@ -123,7 +124,7 @@ class ConstraintsSpec extends WordSpec with MustMatchers with ScalaCheckProperty
     }
   }
 
-  "maxLength" must {
+  "maxLength" should {
 
     "return Valid for a string shorter than the allowed length" in {
       val result = maxLength(10, "error.length")("a" * 9)
@@ -146,7 +147,7 @@ class ConstraintsSpec extends WordSpec with MustMatchers with ScalaCheckProperty
     }
   }
 
-  "maxDate" must {
+  "maxDate" should {
 
     "return Valid for a date before or equal to the maximum" in {
 
@@ -179,7 +180,7 @@ class ConstraintsSpec extends WordSpec with MustMatchers with ScalaCheckProperty
     }
   }
 
-  "minDate" must {
+  "minDate" should {
 
     "return Valid for a date after or equal to the minimum" in {
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,9 @@
 package forms
 
 import java.time.{LocalDate, ZoneOffset}
-
 import forms.behaviours.DateBehaviours
+import org.scalatest.matchers.must.Matchers.contain
+import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
 import play.api.data.FormError
 
 class DateTransactionOverThresholdFormProviderSpec extends DateBehaviours {
@@ -27,7 +28,7 @@ class DateTransactionOverThresholdFormProviderSpec extends DateBehaviours {
   val minDateError = "dateTransactionOverThreshold.error.startdate"
   val maxDateError = "dateTransactionOverThreshold.error.future"
 
-  ".value" should {
+  ".value" must {
 
     behave like mandatoryDateField(form, "value", "dateTransactionOverThreshold.error.required.all")
 

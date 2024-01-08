@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,12 +18,12 @@ package pages
 
 import models.TypeOfParticipant.{ArtGalleryOwner, SomethingElse}
 import models.UserAnswers
+import org.scalatest.matchers.must.Matchers.{be, empty, convertToAnyMustWrapper}
 import pages.behaviours.PageBehaviours
-
 
 class TypeOfParticipantDetailPageSpec extends PageBehaviours {
 
-  "TypeOfParticipantDetailPage" must {
+  "TypeOfParticipantDetailPage" should {
 
     beRetrievable[String](TypeOfParticipantDetailPage)
 

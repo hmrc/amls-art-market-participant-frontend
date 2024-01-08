@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,10 @@
 package controllers
 
 import base.SpecBase
+import config.FrontendAppConfig
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.SummaryList
-import viewmodels.AnswerSection
 import views.html.CheckYourAnswersView
 
 class CheckYourAnswersControllerSpec extends SpecBase {
@@ -31,7 +31,7 @@ class CheckYourAnswersControllerSpec extends SpecBase {
 
       val application = applicationBuilder(userAnswers = Some(emptyUserAnswers)).build()
 
-      val request = FakeRequest(GET, routes.CheckYourAnswersController.onPageLoad.url)
+      val request = FakeRequest(GET, routes.CheckYourAnswersController.onPageLoad().url)
 
       val result = route(application, request).value
 
@@ -49,7 +49,7 @@ class CheckYourAnswersControllerSpec extends SpecBase {
 
       val application = applicationBuilder(userAnswers = None).build()
 
-      val request = FakeRequest(GET, routes.CheckYourAnswersController.onPageLoad.url)
+      val request = FakeRequest(GET, routes.CheckYourAnswersController.onPageLoad().url)
 
       val exception = intercept[Exception]{
         val result = route(application, request).value
@@ -58,6 +58,23 @@ class CheckYourAnswersControllerSpec extends SpecBase {
       }
 
       exception.getMessage must include("Required data not found")
+      application.stop()
+    }
+
+    "redirect to the correct url upon submission" in {
+
+      val application = applicationBuilder(userAnswers = Some(emptyUserAnswers)).build()
+
+      val appConfig = application.injector.instanceOf[FrontendAppConfig]
+
+      val request = FakeRequest(POST, routes.CheckYourAnswersController.onSubmit().url)
+
+      val result = route(application, request).value
+
+      status(result) mustEqual SEE_OTHER
+
+      redirectLocation(result) mustBe Some(s"${appConfig.amlsFrontendBaseUrl}/amp/accept")
+
       application.stop()
     }
   }

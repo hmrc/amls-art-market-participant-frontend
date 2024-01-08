@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,9 @@
 
 package models
 
-import org.scalatest.{EitherValues, OptionValues, MustMatchers, WordSpec}
+import org.scalatest.matchers.must.Matchers.{contain, convertToAnyMustWrapper}
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.{EitherValues, OptionValues}
 import play.api.libs.json._
 
 object EnumerableSpec {
@@ -34,11 +36,11 @@ object EnumerableSpec {
   }
 }
 
-class EnumerableSpec extends WordSpec with MustMatchers with EitherValues with OptionValues with Enumerable.Implicits {
+class EnumerableSpec extends AnyWordSpec with EitherValues with OptionValues with Enumerable.Implicits {
 
   import EnumerableSpec._
 
-  ".reads" must {
+  ".reads" should {
 
     "be found implicitly" in {
       implicitly[Reads[Foo]]
@@ -47,7 +49,7 @@ class EnumerableSpec extends WordSpec with MustMatchers with EitherValues with O
     Foo.values.foreach {
       value =>
         s"bind correctly for: $value" in {
-          Json.fromJson[Foo](JsString(value.toString)).asEither.right.value mustEqual value
+          Json.fromJson[Foo](JsString(value.toString)).asOpt mustBe Some(value)
         }
     }
 
@@ -56,7 +58,7 @@ class EnumerableSpec extends WordSpec with MustMatchers with EitherValues with O
     }
   }
 
-  ".writes" must {
+  ".writes" should {
 
     "be found implicitly" in {
       implicitly[Writes[Foo]]
@@ -70,7 +72,7 @@ class EnumerableSpec extends WordSpec with MustMatchers with EitherValues with O
     }
   }
 
-  ".formats" must {
+  ".formats" should {
 
     "be found implicitly" in {
       implicitly[Format[Foo]]

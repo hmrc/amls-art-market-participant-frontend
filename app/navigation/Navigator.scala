@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,23 +32,26 @@ class Navigator @Inject()() {
     case SoldOverThresholdPage            =>      artSoldOverThresholdRoute
     case DateTransactionOverThresholdPage => _ => routes.IdentifyLinkedTransactionsController.onPageLoad(NormalMode)
     case IdentifyLinkedTransactionsPage   => _ => routes.PercentageExpectedTurnoverController.onPageLoad(NormalMode)
-    case PercentageExpectedTurnoverPage   => _ => routes.CheckYourAnswersController.onPageLoad
+    case PercentageExpectedTurnoverPage   => _ => routes.CheckYourAnswersController.onPageLoad()
+    case _                                => _ => routes.WhatYouNeedController.onPageLoad()
   }
 
   private def typeOfParticipantRoute(answers: UserAnswers): Call = {
     answers.get(TypeOfParticipantPage) map { ans =>
-      ans.contains(SomethingElse) match {
-        case true  => routes.TypeOfParticipantDetailController.onPageLoad(NormalMode)
-        case false => routes.SoldOverThresholdController.onPageLoad(NormalMode)
+      if (ans.contains(SomethingElse)) {
+        routes.TypeOfParticipantDetailController.onPageLoad(NormalMode)
+      } else {
+        routes.SoldOverThresholdController.onPageLoad(NormalMode)
       }
     }
   }.getOrElse(throw new Exception("Unable to navigate to page"))
 
   private def typeOfParticipantRouteCheckMode(answers: UserAnswers): Call = {
     answers.get(TypeOfParticipantPage) map { ans =>
-      ans.contains(SomethingElse) match {
-        case true  => routes.TypeOfParticipantDetailController.onPageLoad(CheckMode)
-        case false => routes.CheckYourAnswersController.onPageLoad
+      if (ans.contains(SomethingElse)) {
+        routes.TypeOfParticipantDetailController.onPageLoad(CheckMode)
+      } else {
+        routes.CheckYourAnswersController.onPageLoad()
       }
     }
   }.getOrElse(throw new Exception("Unable to navigate to page"))
@@ -61,14 +64,14 @@ class Navigator @Inject()() {
 
   private def artSoldOverThresholdRouteCheckMode(answers: UserAnswers): Call = answers.get(SoldOverThresholdPage) match {
     case Some(true)  => routes.DateTransactionOverThresholdController.onPageLoad(CheckMode)
-    case Some(false) => routes.CheckYourAnswersController.onPageLoad
+    case Some(false) => routes.CheckYourAnswersController.onPageLoad()
     case None        => throw new Exception("Unable to navigate to page")
   }
 
   private val checkRouteMap: Page => UserAnswers => Call = {
     case TypeOfParticipantPage         => typeOfParticipantRouteCheckMode
     case SoldOverThresholdPage => artSoldOverThresholdRouteCheckMode
-    case _ => _ => routes.CheckYourAnswersController.onPageLoad
+    case _ => _ => routes.CheckYourAnswersController.onPageLoad()
   }
 
   def nextPage(page: Page, mode: Mode, userAnswers: UserAnswers): Call = mode match {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -63,32 +63,40 @@ class NavigatorSpec extends SpecBase {
           .mustBe(routes.IdentifyLinkedTransactionsController.onPageLoad(NormalMode))
       }
 
-      "go from Date Transaction Over Threshold to Identify Linked Transactions page" in{
+      "go from Date Transaction Over Threshold to Identify Linked Transactions page" in {
         val answers = UserAnswers()
 
         navigator.nextPage(DateTransactionOverThresholdPage, NormalMode, answers)
           .mustBe(routes.IdentifyLinkedTransactionsController.onPageLoad(NormalMode))
       }
 
-      "go from Identify Linked Transactions to Percentage Turnover From Sales Over Threshold page" in{
+      "go from Identify Linked Transactions to Percentage Turnover From Sales Over Threshold page" in {
         val answers = UserAnswers()
 
         navigator.nextPage(IdentifyLinkedTransactionsPage, NormalMode, answers)
           .mustBe(routes.PercentageExpectedTurnoverController.onPageLoad(NormalMode))
       }
 
-      "go from Percentage Turnover Sales Over Threshold to Check your answers page" in{
+      "go from Percentage Turnover Sales Over Threshold to Check your answers page" in {
         val answers = UserAnswers()
 
         navigator.nextPage(PercentageExpectedTurnoverPage, NormalMode, answers)
-          .mustBe(routes.CheckYourAnswersController.onPageLoad)
+          .mustBe(routes.CheckYourAnswersController.onPageLoad())
+      }
+
+      "default to What You Need page from any other page" in {
+
+        object Foo extends Page
+
+        navigator.nextPage(Foo, NormalMode, UserAnswers())
+          .mustBe(routes.WhatYouNeedController.onPageLoad())
       }
     }
 
     "in Check mode" must {
       "go to CheckYourAnswers from a page that doesn't exist in the edit route map" in {
         case object UnknownPage extends Page
-        navigator.nextPage(UnknownPage, CheckMode, UserAnswers()) mustBe routes.CheckYourAnswersController.onPageLoad
+        navigator.nextPage(UnknownPage, CheckMode, UserAnswers()) mustBe routes.CheckYourAnswersController.onPageLoad()
       }
 
       "go from Type of Participant to Type Of Participant Detail when specifying something else" in {
@@ -102,14 +110,14 @@ class NavigatorSpec extends SpecBase {
         val answers = UserAnswers().set(TypeOfParticipantPage, Seq(ArtGalleryOwner)).success.value
 
         navigator.nextPage(TypeOfParticipantPage, CheckMode, answers)
-          .mustBe(routes.CheckYourAnswersController.onPageLoad)
+          .mustBe(routes.CheckYourAnswersController.onPageLoad())
       }
 
       "go from Art Sold Over Threshold to Check Your Answers where no" in {
         val answers = UserAnswers().set(SoldOverThresholdPage, false).success.value
 
         navigator.nextPage(SoldOverThresholdPage, CheckMode, answers)
-          .mustBe(routes.CheckYourAnswersController.onPageLoad)
+          .mustBe(routes.CheckYourAnswersController.onPageLoad())
       }
 
       "go from Art Sold Over Threshold to Date Transaction Over Threshold where answer yes" in {
@@ -123,21 +131,21 @@ class NavigatorSpec extends SpecBase {
         val answers = UserAnswers()
 
         navigator.nextPage(DateTransactionOverThresholdPage, CheckMode, answers)
-          .mustBe(routes.CheckYourAnswersController.onPageLoad)
+          .mustBe(routes.CheckYourAnswersController.onPageLoad())
       }
 
       "go from Identify Linked Transactions to Check Your Answers" in{
         val answers = UserAnswers()
 
         navigator.nextPage(IdentifyLinkedTransactionsPage, CheckMode, answers)
-          .mustBe(routes.CheckYourAnswersController.onPageLoad)
+          .mustBe(routes.CheckYourAnswersController.onPageLoad())
       }
 
       "go from Percentage Turnover Sales Over Threshold to Check your answers page" in{
         val answers = UserAnswers()
 
         navigator.nextPage(PercentageExpectedTurnoverPage, CheckMode, answers)
-          .mustBe(routes.CheckYourAnswersController.onPageLoad)
+          .mustBe(routes.CheckYourAnswersController.onPageLoad())
       }
     }
   }

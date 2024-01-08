@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,16 +17,14 @@
 package connectors
 
 import java.time.{LocalDate, LocalDateTime, ZoneOffset}
-
 import base.SpecBase
 import models.TypeOfParticipant.SomethingElse
 import models.UserAnswers
-import org.mockito.Mockito._
-import org.scalatestplus.mockito.MockitoSugar
 import play.api.Configuration
 import play.api.libs.json.{JsObject, Json}
 import uk.gov.hmrc.http.HttpClient
-import org.mockito.Matchers.{any, eq => eqTo}
+import org.mockito.ArgumentMatchers.{any, eq => eqTo}
+import org.mockito.MockitoSugar
 import pages.TypeOfParticipantPage
 import uk.gov.hmrc.http.HeaderCarrier
 
@@ -35,7 +33,7 @@ import scala.concurrent.Future
 
 class AMLSConnectorSpec extends SpecBase with MockitoSugar {
 
-  implicit val hc   = HeaderCarrier()
+  implicit val hc: HeaderCarrier = HeaderCarrier()
   val amlsConnector = new AMLSConnector(config = mock[Configuration], httpClient = mock[HttpClient])
   val dateVal       = LocalDateTime.now
   val answers       = UserAnswers().set(TypeOfParticipantPage,  Seq(SomethingElse)).success.value

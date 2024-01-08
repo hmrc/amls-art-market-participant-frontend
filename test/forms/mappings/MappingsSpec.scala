@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,11 @@
 
 package forms.mappings
 
-import org.scalatest.{MustMatchers, OptionValues, WordSpec}
-import play.api.data.{Form, FormError}
 import models.Enumerable
+import org.scalatest.OptionValues
+import org.scalatest.matchers.must.Matchers.{contain, convertToAnyMustWrapper}
+import org.scalatest.wordspec.AnyWordSpec
+import play.api.data.{Form, FormError}
 
 object MappingsSpec {
 
@@ -35,11 +37,11 @@ object MappingsSpec {
   }
 }
 
-class MappingsSpec extends WordSpec with MustMatchers with OptionValues with Mappings {
+class MappingsSpec extends AnyWordSpec with OptionValues with Mappings {
 
   import MappingsSpec._
 
-  "text" must {
+  "text" should {
 
     val testForm: Form[String] =
       Form(
@@ -73,7 +75,7 @@ class MappingsSpec extends WordSpec with MustMatchers with OptionValues with Map
     }
   }
 
-  "boolean" must {
+  "boolean" should {
 
     val testForm: Form[Boolean] =
       Form(
@@ -111,7 +113,7 @@ class MappingsSpec extends WordSpec with MustMatchers with OptionValues with Map
     }
   }
 
-  "int" must {
+  "int" should {
 
     val testForm: Form[Int] =
       Form(
@@ -139,7 +141,7 @@ class MappingsSpec extends WordSpec with MustMatchers with OptionValues with Map
     }
   }
 
-  "enumerable" must {
+  "enumerable" should {
 
     val testForm = Form(
       "value" -> enumerable[Foo]()

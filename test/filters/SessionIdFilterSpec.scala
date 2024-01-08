@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,11 @@
 package filters
 
 import java.util.UUID
-
 import akka.stream.Materializer
 import com.google.inject.Inject
-import org.scalatest.{MustMatchers, OptionValues, WordSpec}
+import org.scalatest.matchers.must.Matchers.{contain, convertToAnyMustWrapper, defined}
+import org.scalatest.OptionValues
+import org.scalatest.wordspec.AnyWordSpec
 import org.scalatestplus.play.components.OneAppPerSuiteWithComponents
 import play.api.{Application, BuiltInComponents, BuiltInComponentsFromContext, NoHttpFiltersComponents}
 import play.api.inject.guice.GuiceApplicationBuilder
@@ -44,7 +45,7 @@ object SessionIdFilterSpec {
 
 }
 
-class SessionIdFilterSpec extends WordSpec with MustMatchers with OptionValues  with OneAppPerSuiteWithComponents {
+class SessionIdFilterSpec extends AnyWordSpec with OptionValues with OneAppPerSuiteWithComponents {
 
   override def components: BuiltInComponents = new BuiltInComponentsFromContext(context) with NoHttpFiltersComponents {
 
@@ -88,7 +89,7 @@ class SessionIdFilterSpec extends WordSpec with MustMatchers with OptionValues  
       .build()
   }
 
-  "session id filter" must {
+  "session id filter" should {
 
     "add a sessionId if one doesn't already exist" in {
 

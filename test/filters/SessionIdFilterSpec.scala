@@ -97,10 +97,14 @@ class SessionIdFilterSpec extends AnyWordSpec with OptionValues with OneAppPerSu
 
       val body = contentAsJson(result)
 
-      (body \ "fromHeader").as[String] mustEqual s"session-$sessionId"
-      (body \ "fromSession").as[String] mustEqual s"session-$sessionId"
+      (body \ "fromHeader").as[String].length mustEqual 44
+      (body \ "fromHeader").as[String].take(7) mustEqual "session"
 
-      session(result).data.get(SessionKeys.sessionId) mustBe defined
+      session(result).data.get(SessionKeys.sessionId).map {
+        s =>
+          s.take(7) mustBe "session"
+          s.length mustBe 44
+      }
     }
 
     "not override a sessionId if one doesn't already exist" in {

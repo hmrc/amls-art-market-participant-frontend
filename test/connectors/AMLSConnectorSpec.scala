@@ -16,18 +16,18 @@
 
 package connectors
 
-import java.time.{LocalDate, LocalDateTime, ZoneOffset}
 import base.SpecBase
 import models.TypeOfParticipant.SomethingElse
 import models.UserAnswers
+import org.mockito.ArgumentMatchers.{any, eq => eqTo}
+import org.mockito.Mockito.{verify, when}
+import org.scalatestplus.mockito.MockitoSugar
+import pages.TypeOfParticipantPage
 import play.api.Configuration
 import play.api.libs.json.{JsObject, Json}
-import uk.gov.hmrc.http.HttpClient
-import org.mockito.ArgumentMatchers.{any, eq => eqTo}
-import org.mockito.MockitoSugar
-import pages.TypeOfParticipantPage
-import uk.gov.hmrc.http.HeaderCarrier
+import uk.gov.hmrc.http.{HeaderCarrier, HttpClient}
 
+import java.time.{LocalDate, LocalDateTime, ZoneOffset}
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 

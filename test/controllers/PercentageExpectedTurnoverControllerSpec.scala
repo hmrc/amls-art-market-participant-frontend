@@ -22,7 +22,8 @@ import models.PercentageExpectedTurnover.ZeroToTwenty
 import models.{NormalMode, PercentageExpectedTurnover, UserAnswers}
 import navigation.{FakeNavigator, Navigator}
 import org.mockito.ArgumentMatchers.any
-import org.mockito.MockitoSugar
+import org.mockito.Mockito.when
+import org.scalatestplus.mockito.MockitoSugar
 import pages.PercentageExpectedTurnoverPage
 import play.api.inject.bind
 import play.api.mvc.Call

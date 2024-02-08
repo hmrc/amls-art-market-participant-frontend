@@ -19,11 +19,11 @@ package controllers.actions
 import base.SpecBase
 import models.UserAnswers
 import models.requests.{IdentifierRequest, OptionalDataRequest}
+import org.mockito.ArgumentMatchers.{any, eq => eqTo}
+import org.mockito.Mockito.when
 import org.scalatest.concurrent.ScalaFutures
+import org.scalatestplus.mockito.MockitoSugar
 import repositories.AMLSFrontEndSessionRepository
-import org.mockito.ArgumentMatchers.any
-import org.mockito.ArgumentMatchers.{eq => eqTo}
-import org.mockito.MockitoSugar
 import uk.gov.hmrc.auth.core.AffinityGroup
 
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -45,7 +45,7 @@ class DataRetrievalActionSpec extends SpecBase with MockitoSugar with ScalaFutur
         when(sessionRepository.get(eqTo("CredId"))(any())) thenReturn Future(None)
         val action = new Harness(sessionRepository)
 
-        val futureResult = action.callTransform(new IdentifierRequest(
+        val futureResult = action.callTransform(IdentifierRequest(
           fakeRequest,
           Some("amlsRef"),
           "CredId",
@@ -65,7 +65,7 @@ class DataRetrievalActionSpec extends SpecBase with MockitoSugar with ScalaFutur
         when(sessionRepository.get(eqTo("CredId"))(any())) thenReturn Future(Some(new UserAnswers()))
         val action = new Harness(sessionRepository)
 
-        val futureResult = action.callTransform(new IdentifierRequest(
+        val futureResult = action.callTransform(IdentifierRequest(
           fakeRequest,
           Some("amlsRef"),
           "CredId",

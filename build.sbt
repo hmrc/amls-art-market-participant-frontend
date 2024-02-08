@@ -39,8 +39,6 @@ lazy val root = (project in file("."))
     retrieveManaged := true,
     update / evictionWarningOptions :=
       EvictionWarningOptions.default.withWarnScalaVersionEviction(false),
-    // prevent removal of unused code which generates warning errors due to use of third-party libs
-    pipelineStages := Seq(digest),
   )
   .settings(
     scalacOptions ++= Seq(

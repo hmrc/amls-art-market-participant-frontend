@@ -1,2 +1,0 @@
- + [AMLS-5096] - 'aria-described-by changes on date page'
- + [AMLS-5844] - 'Removed space from aria described by date field'

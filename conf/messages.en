@@ -109,7 +109,7 @@ dateTransactionOverThreshold.error.required = Date of the first sale must includ
 dateTransactionOverThreshold.error.invalid = Enter a real date for the first sale
 dateTransactionOverThreshold.error.startdate = Date of the first sale must be on or after 10 January 2020
 dateTransactionOverThreshold.error.future = Date of the first sale must be in the past
-dateTransactionOverThreshold.hint = For example, 11 01 2020.
+dateTransactionOverThreshold.hint = The sale must have been on or after 10 January 2020 for example, 11 01 2020
 
 identifyLinkedTransactions.title = Are you able to identify multiple payments linked to a single sale?
 identifyLinkedTransactions.heading = Are you able to identify multiple payments linked to a single sale?

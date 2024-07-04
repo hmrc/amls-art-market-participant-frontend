@@ -100,9 +100,9 @@ soldOverThreshold.checkYourAnswersLabel = Has your business made a sale of art f
 soldOverThreshold.error.required = Select yes if your business made a sale of art for €10,000 or more on or after 10 January 2020
 soldOverThreshold.hint = If you do not use euros, you’ll need to convert the amount to the currency you use.
 
-dateTransactionOverThreshold.title = When was the first sale of art for €10,000 or more on or after 10 January 2020?
-dateTransactionOverThreshold.heading = When was the first sale of art for €10,000 or more on or after 10 January 2020?
-dateTransactionOverThreshold.checkYourAnswersLabel = When was the first sale of art for €10,000 or more on or after 10 January 2020?
+dateTransactionOverThreshold.title = When was the first sale of art for €10,000 or more?
+dateTransactionOverThreshold.heading = When was the first sale of art for €10,000 or more?
+dateTransactionOverThreshold.checkYourAnswersLabel = When was the first sale of art for €10,000 or more?
 dateTransactionOverThreshold.error.required.all = Enter the date of the first sale of art for €10,000 or more on or after 10 January 2020
 dateTransactionOverThreshold.error.required.two = Date of the first sale must include a {0} and {1}
 dateTransactionOverThreshold.error.required = Date of the first sale must include a {0}

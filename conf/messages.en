@@ -111,6 +111,15 @@ dateTransactionOverThreshold.error.startdate = Date of the first sale must be on
 dateTransactionOverThreshold.error.future = Date of the first sale must be in the past
 dateTransactionOverThreshold.hint = The sale must have been on or after 10 January 2020 for example, 11 01 2020
 
+error.date.hvd.one = The date of the first payment must include a {0}
+error.date.hvd.two = The date of the first payment must include a {0} and {1}
+error.date.hvd.all = Enter the date of the first payment
+error.date.hvd.future = The date of the first payment must be today or in the past
+error.date.hvd.real = Enter a real date for the date of the first payment
+error.date.hvd.past = The date of the first payment must be after 1900
+error.date.hvd.invalid.one = Enter the {0} of the first payment in the correct format
+error.date.hvd.invalid.multiple = The date of the first payment must only contain the numbers 0-9
+
 identifyLinkedTransactions.title = Are you able to identify multiple payments linked to a single sale?
 identifyLinkedTransactions.heading = Are you able to identify multiple payments linked to a single sale?
 identifyLinkedTransactions.checkYourAnswersLabel = Are you able to identify multiple payments linked to a single sale?

@@ -1,17 +1,18 @@
 package views.components.forms
 
-import forms.DateOfChangeFormProvider
-import models.DateOfChange
+import forms.DateTransactionOverThresholdFormProvider
 import org.jsoup.Jsoup
 import play.api.data.Form
 import utils.AmlsViewSpec
-import views.html.components.forms.DateErrorSummary
+import views.html.components.DateErrorSummary
+
+import java.time.LocalDate
 
 class DateErrorSummarySpec extends AmlsViewSpec {
 
   val component: DateErrorSummary = inject[DateErrorSummary]
-  val exampleForm = new DateOfChangeFormProvider()
-  val errorForm: Form[DateOfChange] =
+  val exampleForm = new DateTransactionOverThresholdFormProvider()
+  val errorForm: Form[LocalDate] =
     exampleForm().bind(Map("dateOfChange.day" -> "xx", "dateOfChange.month" -> "yy", "dateOfChange.year" -> "zz"))
 
   "The DateErrorSummary component" when {

@@ -44,9 +44,9 @@ trait Mappings extends Formatters with Constraints {
   protected def localDate(
                            oneInvalidKey: String,
                            multipleInvalidKey: String,
-                           allRequiredKey: String,
-                           twoRequiredKey: String,
                            oneRequiredKey: String,
+                           twoRequiredKey: String,
+                           allRequiredKey: String,
                            realDateKey: String): FieldMapping[LocalDate] =
-    of(new LocalDateFormatter(oneInvalidKey, multipleInvalidKey, allRequiredKey, twoRequiredKey, oneRequiredKey, realDateKey))
+    of(new LocalDateFormatter(oneInvalidKey, multipleInvalidKey, oneRequiredKey, twoRequiredKey, allRequiredKey, realDateKey))
 }

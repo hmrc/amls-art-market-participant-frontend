@@ -36,44 +36,44 @@ class DateErrorSummarySpec extends PlaySpec with GuiceOneAppPerSuite with Matche
   val component: DateErrorSummary = inject[DateErrorSummary]
   val exampleForm = new DateTransactionOverThresholdFormProvider()
   val errorForm: Form[LocalDate] =
-    exampleForm().bind(Map("dateOfChange.day" -> "xx", "dateOfChange.month" -> "yy", "dateOfChange.year" -> "zz"))
+    exampleForm().bind(Map("value.day" -> "xx", "value.month" -> "yy", "value.year" -> "zz"))
 
   "The DateErrorSummary component" when {
 
     "there are errors in the form" should {
 
       "have a title" in {
-        Jsoup.parse(component(errorForm, "dateOfChange").body).select("h2").text() mustBe "There is a problem"
+        Jsoup.parse(component(errorForm, "value").body).select("h2").text() mustBe "There is a problem"
       }
 
       "have an error message" in {
-        Jsoup.parse(component(errorForm, "dateOfChange").body).select("a").text() mustBe
+        Jsoup.parse(component(errorForm, "value").body).select("a").text() mustBe
           "Date of the change must only contain the numbers 0-9"
       }
 
       "have an error link to the ID of the individual field that has the error" in {
         val monthErrorForm =
-          exampleForm().bind(Map("dateOfChange.day" -> "1", "dateOfChange.month" -> "ff", "dateOfChange.year" -> "2000"))
-        Jsoup.parse(component(monthErrorForm, "dateOfChange").body).select("a").attr("href") mustBe "#dateOfChange.month"
+          exampleForm().bind(Map("value.day" -> "1", "value.month" -> "ff", "value.year" -> "2000"))
+        Jsoup.parse(component(monthErrorForm, "value").body).select("a").attr("href") mustBe "#value.month"
       }
 
       "have an error link to the ID of the first individual field that has the error when there are multiple" in {
         val dayMonthErrorForm =
-          exampleForm().bind(Map("dateOfChange.day" -> "ff", "dateOfChange.month" -> "ff", "dateOfChange.year" -> "2000"))
-        Jsoup.parse(component(dayMonthErrorForm, "dateOfChange").body).select("a").attr("href") mustBe "#dateOfChange.day"
+          exampleForm().bind(Map("value.day" -> "ff", "value.month" -> "ff", "value.year" -> "2000"))
+        Jsoup.parse(component(dayMonthErrorForm, "value").body).select("a").attr("href") mustBe "#value.day"
       }
 
       "append '.day' to the error link when the date is real but there is a validation error in the form's business logic" in {
         val dateTooEarlyErrorForm =
-          exampleForm().bind(Map("dateOfChange.day" -> "1", "dateOfChange.month" -> "1", "dateOfChange.year" -> "1800"))
-        Jsoup.parse(component(dateTooEarlyErrorForm, "dateOfChange").body).select("a").attr("href") mustBe "#dateOfChange.day"
+          exampleForm().bind(Map("value.day" -> "1", "value.month" -> "1", "value.year" -> "1800"))
+        Jsoup.parse(component(dateTooEarlyErrorForm, "value").body).select("a").attr("href") mustBe "#value.day"
       }
     }
 
     "there are no errors in the form" should {
 
       "not render" in {
-        Jsoup.parse(component(exampleForm(), "dateOfChange").body).select("div").size() mustBe 0
+        Jsoup.parse(component(exampleForm(), "value").body).select("div").size() mustBe 0
       }
     }
   }

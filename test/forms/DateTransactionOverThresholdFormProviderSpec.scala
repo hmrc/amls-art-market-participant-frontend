@@ -47,7 +47,7 @@ class DateTransactionOverThresholdFormProviderSpec extends DateBehaviours {
 
       "fail to bind a date with a missing value" in {
 
-        val formError = FormError("value", "dateTransactionOverThreshold.error.required", List("month"))
+        val formError = FormError("value.month", "error.date.fs.one", List("month"))
 
         val validDate = DateTransactionOverThresholdFormProvider.ampStartDate
 
@@ -63,7 +63,7 @@ class DateTransactionOverThresholdFormProviderSpec extends DateBehaviours {
 
       "fail to bind a date with two missing values" in {
 
-        val formError = FormError("value", "dateTransactionOverThreshold.error.required.two", List("month", "year"))
+        val formError = FormError("value", "error.date.fs.two", List("month", "year"))
 
         val validDate = DateTransactionOverThresholdFormProvider.ampStartDate
 

@@ -42,54 +42,54 @@ private[mappings] class LocalDateFormatter( oneInvalidKey: String,
         Left(Seq(FormError(key, realDateKey)))
     }
 
-private[mappings] def validateDayMonthYear(key: String,
-                                             day: Option[String],
-                                             month: Option[String],
-                                             year: Option[String]): Seq[FormError] = {
+  private[mappings] def validateDayMonthYear(key: String,
+                                               day: Option[String],
+                                               month: Option[String],
+                                               year: Option[String]): Seq[FormError] = {
 
-    def validateDay: Boolean = Try(day.get.toInt).toOption.exists(value => 1 to 31 contains value)
-    def validateMonth: Boolean = Try(month.get.toInt).toOption.exists(value => 1 to 12 contains value)
-    def validateYear: Boolean = Try(year.get.toInt).toOption.exists(value => value > 0)
+      def validateDay: Boolean = Try(day.get.toInt).toOption.exists(value => 1 to 31 contains value)
+      def validateMonth: Boolean = Try(month.get.toInt).toOption.exists(value => 1 to 12 contains value)
+      def validateYear: Boolean = Try(year.get.toInt).toOption.exists(value => value > 0)
 
-    (day, month, year) match {
-      case (Some(_), Some(_), Some(_)) =>
-        (validateDay, validateMonth, validateYear) match {
-          case (true, true, true) => Nil
-          case (false, true, true) => Seq(FormError(s"$key.day", oneInvalidKey, Seq(dayText)))
-          case (true, false, true) => Seq(FormError(s"$key.month", oneInvalidKey, Seq(monthText)))
-          case (true, true, false) => Seq(FormError(s"$key.year", oneInvalidKey, Seq(yearText)))
-          case (true, false, false) => Seq(
-            FormError(s"$key.month", multipleInvalidKey, Seq(monthText, yearText)),
-            FormError(s"$key.year", multipleInvalidKey, Seq(monthText, yearText))
-          )
-          case (false, true, false) => Seq(
-            FormError(s"$key.day", multipleInvalidKey, Seq(dayText, yearText)),
-            FormError(s"$key.year", multipleInvalidKey, Seq(dayText, yearText))
-          )
-          case (false, false, true) => Seq(
-            FormError(s"$key.day", multipleInvalidKey, Seq(dayText, monthText)),
-            FormError(s"$key.month", multipleInvalidKey, Seq(dayText, monthText))
-          )
-          case (false, false, false) => Seq(FormError(key, multipleInvalidKey))
-        }
-      case (None, Some(_), Some(_)) => Seq(FormError(s"$key.day", oneRequiredKey, Seq(dayText)))
-      case (Some(_), None, Some(_)) => Seq(FormError(s"$key.month", oneRequiredKey, Seq(monthText)))
-      case (Some(_), Some(_), None) => Seq(FormError(s"$key.year", oneRequiredKey, Seq(yearText)))
-      case (Some(_), None, None) => Seq(
-        FormError(s"$key.month", twoRequiredKey, Seq(monthText, yearText)),
-        FormError(s"$key.year", twoRequiredKey, Seq(monthText, yearText))
-      )
-      case (None, Some(_), None) => Seq(
-        FormError(s"$key.day", twoRequiredKey, Seq(dayText, yearText)),
-        FormError(s"$key.year", twoRequiredKey, Seq(dayText, yearText))
-      )
-      case (None, None, Some(_)) => Seq(
-        FormError(s"$key.day", twoRequiredKey, Seq(dayText, monthText)),
-        FormError(s"$key.month", twoRequiredKey, Seq(dayText, monthText))
-      )
-      case _ => Seq(FormError(key, allRequiredKey))
+      (day, month, year) match {
+        case (Some(_), Some(_), Some(_)) =>
+          (validateDay, validateMonth, validateYear) match {
+            case (true, true, true) => Nil
+            case (false, true, true) => Seq(FormError(s"$key.day", oneInvalidKey, Seq(dayText)))
+            case (true, false, true) => Seq(FormError(s"$key.month", oneInvalidKey, Seq(monthText)))
+            case (true, true, false) => Seq(FormError(s"$key.year", oneInvalidKey, Seq(yearText)))
+            case (true, false, false) => Seq(
+              FormError(s"$key.month", multipleInvalidKey, Seq(monthText, yearText)),
+              FormError(s"$key.year", multipleInvalidKey, Seq(monthText, yearText))
+            )
+            case (false, true, false) => Seq(
+              FormError(s"$key.day", multipleInvalidKey, Seq(dayText, yearText)),
+              FormError(s"$key.year", multipleInvalidKey, Seq(dayText, yearText))
+            )
+            case (false, false, true) => Seq(
+              FormError(s"$key.day", multipleInvalidKey, Seq(dayText, monthText)),
+              FormError(s"$key.month", multipleInvalidKey, Seq(dayText, monthText))
+            )
+            case (false, false, false) => Seq(FormError(key, multipleInvalidKey))
+          }
+        case (None, Some(_), Some(_)) => Seq(FormError(s"$key.day", oneRequiredKey, Seq(dayText)))
+        case (Some(_), None, Some(_)) => Seq(FormError(s"$key.month", oneRequiredKey, Seq(monthText)))
+        case (Some(_), Some(_), None) => Seq(FormError(s"$key.year", oneRequiredKey, Seq(yearText)))
+        case (Some(_), None, None) => Seq(
+          FormError(s"$key.month", twoRequiredKey, Seq(monthText, yearText)),
+          FormError(s"$key.year", twoRequiredKey, Seq(monthText, yearText))
+        )
+        case (None, Some(_), None) => Seq(
+          FormError(s"$key.day", twoRequiredKey, Seq(dayText, yearText)),
+          FormError(s"$key.year", twoRequiredKey, Seq(dayText, yearText))
+        )
+        case (None, None, Some(_)) => Seq(
+          FormError(s"$key.day", twoRequiredKey, Seq(dayText, monthText)),
+          FormError(s"$key.month", twoRequiredKey, Seq(dayText, monthText))
+        )
+        case _ => Seq(FormError(key, allRequiredKey))
+      }
     }
-  }
 
   override def bind(key: String, data: Map[String, String]): Either[Seq[FormError], LocalDate] = {
 

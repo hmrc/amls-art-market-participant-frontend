@@ -31,12 +31,12 @@ class DateMappingsSpec extends AnyFreeSpec with ScalaCheckPropertyChecks with Ge
 
   val form = Form(
     "value" -> localDate(
-      oneInvalidKey = "error.date.hvd.invalid.one",
-      multipleInvalidKey = "error.date.hvd.invalid.multiple",
-      oneRequiredKey = "error.date.hvd.one",
-      twoRequiredKey = "error.date.hvd.two",
-      allRequiredKey = "error.date.hvd.all",
-      realDateKey = "error.date.hvd.real"
+      oneInvalidKey = "error.date.fs.invalid.one",
+      multipleInvalidKey = "error.date.fs.invalid.multiple",
+      oneRequiredKey = "error.date.fs.one",
+      twoRequiredKey = "error.date.fs.two",
+      allRequiredKey = "error.date.fs.all",
+      realDateKey = "error.date.fs.real"
     )
   )
 

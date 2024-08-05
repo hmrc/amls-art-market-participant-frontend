@@ -5,7 +5,7 @@ GET        /assets/*file                            controllers.Assets.versioned
 
 GET        /keep-alive                              @controllers.SessionController.keep_alive
 
-GET        /check-your-answers                      controllers.CheckYourAnswersController.onPageLoad()
+GET        /check-your-answers                      controllers.CheckYourAnswersController.onPageLoad(mode: Mode = NormalMode)
 POST       /check-your-answers                      controllers.CheckYourAnswersController.onSubmit()
 
 GET        /unauthorised                            controllers.UnauthorisedController.onPageLoad

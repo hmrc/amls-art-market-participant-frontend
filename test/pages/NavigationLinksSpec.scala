@@ -115,7 +115,7 @@ class NavigationLinksSpec extends ViewBehaviours {
   "CheckYourAnswers page" must {
     val view = viewFor[CheckYourAnswersView](Some(emptyUserAnswers))
 
-    val applyView = view.apply(SummaryList())(fakeRequest, messages)
+    val applyView = view.apply(SummaryList(), NormalMode)(fakeRequest, messages)
 
     val document = asDocument(applyView)
 

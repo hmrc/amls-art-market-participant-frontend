@@ -19,7 +19,6 @@
 @import uk.gov.hmrc.hmrcfrontend.views.html.helpers.HmrcReportTechnicalIssueHelper
 @import views.html.helper.CSPNonce
 @import config.FrontendAppConfig
-@import uk.gov.hmrc.govukfrontend.views.viewmodels.backlink.BackLink
 
 @this(
     appConfig: FrontendAppConfig,
@@ -30,7 +29,6 @@
     hmrcStandardHeader: HmrcStandardHeader,
     defaultMainContentLayout: TwoThirdsMainContent,
     hmrcScripts: HmrcScripts,
-    govukBackLink: GovukBackLink,
     hmrcReportTechnicalIssueHelper: HmrcReportTechnicalIssueHelper
 )
 
@@ -49,12 +47,6 @@
             timeout = Some(appConfig.timeoutSeconds),
             countdown = Some(appConfig.timeoutCountdown)
         )
-    }
-}
-
-@beforeContentBlock = {
-    @if(showBackLink) {
-        @govukBackLink(BackLink.mimicsBrowserBackButtonViaJavaScript)
     }
 }
 
@@ -88,7 +80,6 @@
             signOutUrl = Some(appConfig.logoutUrl),
         )
     ),
-    beforeContentBlock = Some(beforeContentBlock),
     scriptsBlock = Some(scripts),
     mainContentLayout = if(fullWidthLayout) None else Some(defaultMainContentLayout(_)),
     footerBlock = Some(hmrcStandardFooter())

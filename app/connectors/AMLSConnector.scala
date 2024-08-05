@@ -17,35 +17,35 @@
 package connectors
 
 import config.Service
-import javax.inject.Inject
 import models.UserAnswers
 import play.api.Configuration
-import play.api.libs.json.{JsObject, Writes}
-import uk.gov.hmrc.http.{HeaderCarrier, HttpReads, HttpResponse, HttpClient}
+import play.api.libs.json.{JsObject, Json, Writes}
 import uk.gov.hmrc.http.HttpReads.Implicits._
+import uk.gov.hmrc.http.client.HttpClientV2
+import uk.gov.hmrc.http.{HeaderCarrier, HttpReads, HttpResponse, StringContextOps}
+
+import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
 class AMLSConnector @Inject()(config: Configuration,
-                              implicit val httpClient: HttpClient)
+                              implicit val httpClientV2: HttpClientV2)
                              (implicit ec: ExecutionContext) {
 
-  private val baseUrl                 = config.get[Service]("microservice.services.amls-frontend")
-  private[connectors] val url: String = s"$baseUrl/amp"
+  private val baseUrl = config.get[Service]("microservice.services.amls-frontend")
+  private[connectors] val amlsUrl: String = s"$baseUrl/amp"
 
   def get(credId: String)(implicit hc: HeaderCarrier): Future[Option[JsObject]] = {
-    val getUrl = s"$url/get/$credId"
+    val getUrl = s"$amlsUrl/get/$credId"
 
-    httpClient.GET[Option[JsObject]](getUrl)
+    httpClientV2.get(url"$getUrl").execute[Option[JsObject]]
   }
 
-  def set(credId: String, userAnswers: UserAnswers)(implicit hc: HeaderCarrier)= {
-    val putUrl = s"$url/set/$credId"
+  def set(credId: String, userAnswers: UserAnswers)(implicit hc: HeaderCarrier): Future[HttpResponse] = {
+    val putUrl = s"$amlsUrl/set/$credId"
+    val hcWithExtra: HeaderCarrier = hc.withExtraHeaders("Csrf-Token" -> "nocheck")
 
-    httpClient.PUT(putUrl, userAnswers)(
-      implicitly[Writes[UserAnswers]],
-      implicitly[HttpReads[HttpResponse]],
-      hc.withExtraHeaders("Csrf-Token" -> "nocheck"),
-      implicitly
-    )
+    httpClientV2.put(url"$putUrl")(hcWithExtra)
+      .withBody(Json.toJson(userAnswers))
+      .execute[HttpResponse]
   }
 }

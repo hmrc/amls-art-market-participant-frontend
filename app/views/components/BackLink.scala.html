@@ -1,5 +1,5 @@
 @*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,14 @@
  * limitations under the License.
  *@
 
-@import components.Heading
+@import uk.gov.hmrc.govukfrontend.views.html.components._
 
-@this(
-    layout: Layout,
-    heading: Heading
-)
+@this(govukBackLink : GovukBackLink)
 
-@()(implicit requestHeader: RequestHeader, messages: Messages)
+@(link: String = "javascript:history.back()")(implicit messages: Messages)
 
-@layout(pageTitle = messages("unauthorised.title")) {
-    @heading("unauthorised.heading")
-}
+@govukBackLink(BackLink(
+href = link,
+content = Text(messages("site.back")),
+attributes = Map("id" -> "back-link")
+))

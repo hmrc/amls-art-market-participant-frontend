@@ -20,6 +20,7 @@
 
 @this(
     layout: Layout,
+    backLink: components.BackLink,
     pageHeading: PageHeading,
     govukDateInput : GovukDateInput,
     formHelper: FormWithCSRF,
@@ -29,11 +30,13 @@
     anchor: Anchor
 )
 
-@(form: Form[_], mode: Mode)(implicit request: Request[_], messages: Messages)
+@(form: Form[_], mode: Mode)(implicit requestHeader: RequestHeader, messages: Messages)
 
 @layout(pageTitle = s"${errorPrefix(form)} ${messages("dateTransactionOverThreshold.title")}") {
 
     @formHelper(action = DateTransactionOverThresholdController.onSubmit(mode), Symbol("autoComplete") -> "off") {
+
+        @backLink(routes.SoldOverThresholdController.onPageLoad(mode).url)
 
         @errorSummary(form, Some(Map("value" -> "value.day")))
 

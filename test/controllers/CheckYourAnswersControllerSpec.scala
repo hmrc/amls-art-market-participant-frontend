@@ -18,6 +18,7 @@ package controllers
 
 import base.SpecBase
 import config.FrontendAppConfig
+import models.NormalMode
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.SummaryList
@@ -40,7 +41,7 @@ class CheckYourAnswersControllerSpec extends SpecBase {
       status(result) mustEqual OK
 
       contentAsString(result) mustEqual
-        view(SummaryList())(request, messages).toString
+        view(SummaryList(), NormalMode)(request, messages).toString
 
       application.stop()
     }

@@ -22,6 +22,7 @@
 
 @this(
     layout: Layout,
+    backLink: components.BackLink,
     pageHeading: PageHeading,
     formHelper: FormWithCSRF,
     button: Button,
@@ -31,11 +32,13 @@
     anchor: Anchor
 )
 
-@(form: Form[Seq[TypeOfParticipant]], mode: Mode)(implicit request: Request[_], messages: Messages)
+@(form: Form[Seq[TypeOfParticipant]], mode: Mode)(implicit requestHeader: RequestHeader, messages: Messages)
 
 @layout(pageTitle = s"${errorPrefix(form)} ${messages("typeOfParticipant.title")}") {
 
     @formHelper(action = TypeOfParticipantController.onSubmit(mode), Symbol("autoComplete") -> "off") {
+
+    @backLink(routes.WhatYouNeedController.onPageLoad().url)
 
         @errorSummary(form, Some(Map("value" -> "value_0")))
 

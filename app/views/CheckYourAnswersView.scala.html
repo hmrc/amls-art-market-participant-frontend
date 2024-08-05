@@ -16,9 +16,11 @@
 
 @import controllers.routes.CheckYourAnswersController
 @import components.{Button, Heading, PageHeading}
+@import models.Mode
 
 @this(
     heading: Heading,
+    backLink: components.BackLink,
     layout: Layout,
     pageHeading: PageHeading,
     formHelper: FormWithCSRF,
@@ -26,10 +28,12 @@
     button: Button
 )
 
-@(summaryList: SummaryList)(implicit request: Request[_], messages: Messages)
+@(summaryList: SummaryList, mode: Mode)(implicit requestHeader: RequestHeader, messages: Messages)
 
 @layout(pageTitle = messages("checkYourAnswers.title")) {
-    
+
+    @backLink(routes.PercentageExpectedTurnoverController.onPageLoad(mode).url)
+
     @pageHeading("amp.heading")
 
     @heading("checkYourAnswers.heading")

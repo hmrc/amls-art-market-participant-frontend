@@ -48,7 +48,7 @@ class DateErrorSummarySpec extends PlaySpec with GuiceOneAppPerSuite with Matche
 
       "have an error message" in {
         Jsoup.parse(component(errorForm, "value").body).select("a").text() mustBe
-          "Date of the change must only contain the numbers 0-9"
+          "The date of the first sale must only contain the numbers 0-9"
       }
 
       "have an error link to the ID of the individual field that has the error" in {

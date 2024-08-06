@@ -63,7 +63,10 @@ class DateTransactionOverThresholdFormProviderSpec extends DateBehaviours {
 
       "fail to bind a date with two missing values" in {
 
-        val formError = FormError("value", "error.date.fs.two", List("month", "year"))
+        val formError = List(
+          FormError("value.month", "error.date.fs.two", List("month", "year")),
+          FormError("value.year", "error.date.fs.two", List("month", "year"))
+        )
 
         val validDate = DateTransactionOverThresholdFormProvider.ampStartDate
 
@@ -74,7 +77,7 @@ class DateTransactionOverThresholdFormProviderSpec extends DateBehaviours {
         )
 
         val result = form.bind(data)
-        result.errors should contain only formError
+        result.errors should contain theSameElementsAs formError
       }
     }
   }

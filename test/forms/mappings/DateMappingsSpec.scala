@@ -90,7 +90,7 @@ class DateMappingsSpec extends AnyFreeSpec with ScalaCheckPropertyChecks with Ge
 
         val result = form.bind(data)
 
-        result.errors must contain only FormError("value", "error.date.fs.one", List("day"))
+        result.errors must contain only FormError("value.day", "error.date.fs.one", List("day"))
     }
   }
 
@@ -107,9 +107,11 @@ class DateMappingsSpec extends AnyFreeSpec with ScalaCheckPropertyChecks with Ge
 
         val result = form.bind(data)
 
-        result.errors must contain(
-          FormError("value.day", "error.invalid", List.empty)
+        val formError = List(
+          FormError("value.day", "error.date.fs.invalid.one", List("day"))
         )
+
+        result.errors must contain theSameElementsAs formError
     }
   }
 
@@ -130,7 +132,11 @@ class DateMappingsSpec extends AnyFreeSpec with ScalaCheckPropertyChecks with Ge
 
         val result = form.bind(data)
 
-        result.errors must contain only FormError("value.month", "error.date.fs.one", List("month"))
+        val formError = List(
+          FormError("value.month", "error.date.fs.one", List("month"))
+        )
+
+        result.errors must contain theSameElementsAs formError
     }
   }
 
@@ -147,9 +153,11 @@ class DateMappingsSpec extends AnyFreeSpec with ScalaCheckPropertyChecks with Ge
 
         val result = form.bind(data)
 
-        result.errors must contain(
-          FormError("value", "error.invalid", List.empty)
+        val formError = List(
+          FormError("value.month", "error.date.fs.invalid.one", List("month"))
         )
+
+        result.errors must contain theSameElementsAs formError
     }
   }
 
@@ -170,7 +178,7 @@ class DateMappingsSpec extends AnyFreeSpec with ScalaCheckPropertyChecks with Ge
 
         val result = form.bind(data)
 
-        result.errors must contain only FormError("value", "error.date.fs.one", List("year"))
+        result.errors must contain only FormError("value.year", "error.date.fs.one", List("year"))
     }
   }
 
@@ -187,9 +195,11 @@ class DateMappingsSpec extends AnyFreeSpec with ScalaCheckPropertyChecks with Ge
 
         val result = form.bind(data)
 
-        result.errors must contain(
-          FormError("value", "error.invalid", List.empty)
+        val formError = List(
+          FormError("value.year", "error.date.fs.invalid.one", List("year"))
         )
+
+        result.errors must contain theSameElementsAs formError
     }
   }
 
@@ -214,7 +224,12 @@ class DateMappingsSpec extends AnyFreeSpec with ScalaCheckPropertyChecks with Ge
 
         val result = form.bind(data)
 
-        result.errors must contain only FormError("value", "error.date.fs.two", List("day", "month"))
+        val formError = List(
+          FormError("value.day", "error.date.fs.two", List("day", "month")),
+          FormError("value.month", "error.date.fs.two", List("day", "month"))
+        )
+
+        result.errors must contain theSameElementsAs formError
     }
   }
 
@@ -239,7 +254,12 @@ class DateMappingsSpec extends AnyFreeSpec with ScalaCheckPropertyChecks with Ge
 
         val result = form.bind(data)
 
-        result.errors must contain only FormError("value", "error.date.fs.two", List("day", "year"))
+        val formError = List(
+          FormError("value.day", "error.date.fs.two", List("day", "year")),
+          FormError("value.year", "error.date.fs.two", List("day", "year"))
+        )
+
+        result.errors must contain theSameElementsAs formError
     }
   }
 
@@ -264,7 +284,12 @@ class DateMappingsSpec extends AnyFreeSpec with ScalaCheckPropertyChecks with Ge
 
         val result = form.bind(data)
 
-        result.errors must contain only FormError("value", "error.date.fs.two", List("month", "year"))
+        val formError = List(
+          FormError("value.month", "error.date.fs.two", List("month", "year")),
+          FormError("value.year", "error.date.fs.two", List("month", "year"))
+        )
+
+        result.errors must contain theSameElementsAs formError
     }
   }
 
@@ -281,7 +306,12 @@ class DateMappingsSpec extends AnyFreeSpec with ScalaCheckPropertyChecks with Ge
 
         val result = form.bind(data)
 
-        result.errors must contain only FormError("value", "error.invalid", List.empty)
+        val formError = List(
+          FormError("value.day", "error.date.fs.invalid.multiple", List("day", "month")),
+          FormError("value.month", "error.date.fs.invalid.multiple", List("day", "month"))
+        )
+
+        result.errors must contain theSameElementsAs formError
     }
   }
 
@@ -298,7 +328,12 @@ class DateMappingsSpec extends AnyFreeSpec with ScalaCheckPropertyChecks with Ge
 
         val result = form.bind(data)
 
-        result.errors must contain only FormError("value", "error.invalid", List.empty)
+        val formError = List(
+          FormError("value.day", "error.date.fs.invalid.multiple", List("day", "year")),
+          FormError("value.year", "error.date.fs.invalid.multiple", List("day", "year"))
+        )
+
+        result.errors must contain theSameElementsAs formError
     }
   }
 
@@ -315,7 +350,12 @@ class DateMappingsSpec extends AnyFreeSpec with ScalaCheckPropertyChecks with Ge
 
         val result = form.bind(data)
 
-        result.errors must contain only FormError("value", "error.invalid", List.empty)
+        val formError = List(
+          FormError("value.month", "error.date.fs.invalid.multiple", List("month", "year")),
+          FormError("value.year", "error.date.fs.invalid.multiple", List("month", "year"))
+        )
+
+        result.errors must contain theSameElementsAs formError
     }
   }
 
@@ -332,7 +372,11 @@ class DateMappingsSpec extends AnyFreeSpec with ScalaCheckPropertyChecks with Ge
 
         val result = form.bind(data)
 
-        result.errors must contain only FormError("value", "error.invalid", List.empty)
+        val formError = List(
+          FormError("value", "error.date.fs.invalid.multiple", List()),
+        )
+
+        result.errors must contain theSameElementsAs formError
     }
   }
 
@@ -347,7 +391,7 @@ class DateMappingsSpec extends AnyFreeSpec with ScalaCheckPropertyChecks with Ge
     val result = form.bind(data)
 
     result.errors must contain(
-      FormError("value", "error.invalid", List.empty)
+      FormError("value", "error.date.fs.real", List.empty)
     )
   }
 

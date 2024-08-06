@@ -21,7 +21,7 @@
     heading: Heading
 )
 
-@()(implicit request: Request[_], messages: Messages)
+@()(implicit requestHeader: RequestHeader, messages: Messages)
 
 @layout(pageTitle = messages("unauthorised.title")) {
     @heading("unauthorised.heading")

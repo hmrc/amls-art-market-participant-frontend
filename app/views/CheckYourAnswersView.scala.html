@@ -26,7 +26,7 @@
     button: Button
 )
 
-@(summaryList: SummaryList)(implicit requestHeader: RequestHeader, messages: Messages)
+@(summaryList: SummaryList)(implicit request: Request[_], messages: Messages)
 
 @layout(pageTitle = messages("checkYourAnswers.title")) {
     

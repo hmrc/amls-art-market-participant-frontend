@@ -27,7 +27,6 @@ import play.api.Configuration
 import play.api.libs.json.{JsObject, Json}
 import uk.gov.hmrc.http.client.{HttpClientV2, RequestBuilder}
 import uk.gov.hmrc.http.{HeaderCarrier, HttpResponse}
-
 import java.time.{LocalDate, LocalDateTime, ZoneOffset}
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
@@ -35,13 +34,9 @@ import scala.concurrent.Future
 class AMLSConnectorSpec extends SpecBase with MockitoSugar {
 
   implicit val hc: HeaderCarrier = HeaderCarrier()
-
+  val amlsConnector = new AMLSConnector(config = mock[Configuration], httpClient = mock[HttpClient])
   val dateVal       = LocalDateTime.now
   val answers       = UserAnswers().set(TypeOfParticipantPage,  Seq(SomethingElse)).success.value
-
-  val mockHttpClient: HttpClientV2 = mock[HttpClientV2]
-  val requestBuilder: RequestBuilder = mock[RequestBuilder]
-  val amlsConnector = new AMLSConnector(config = app.injector.instanceOf[Configuration], mockHttpClient)
 
   val completeData  = Json.obj(
     "typeOfParticipant"            -> Seq("artGalleryOwner"),
@@ -60,23 +55,22 @@ class AMLSConnectorSpec extends SpecBase with MockitoSugar {
   "GET" must {
     "successfully fetch cache" in {
 
-      when(mockHttpClient.get(any())(any())).thenReturn(requestBuilder)
-      when(requestBuilder.execute[Option[JsObject]](any(), any())).thenReturn(Future.successful(Some(completeJson)))
+      when {
+        amlsConnector.httpClient.GET[Option[JsObject]](any(), any(), any())(any(), any(), any())
+      } thenReturn Future.successful(Some(completeJson))
 
-      amlsConnector.get("someid").futureValue mustBe Some(completeJson)
+      whenReady(amlsConnector.get("someid")) {
+        _ mustBe Some(completeJson)
+      }
     }
   }
 
   "POST" must {
     "successfully write cache" in {
+      val putUrl = s"${amlsConnector.url}/set/someid"
 
-      val response = HttpResponse(200)
-
-      when(requestBuilder.withBody(any())(any(), any(), any())).thenReturn(requestBuilder)
-      when(requestBuilder.execute[HttpResponse](any(), any())).thenReturn(Future.successful(response))
-      when(mockHttpClient.put(any())(any())).thenReturn(requestBuilder)
-
-      amlsConnector.set("someid", answers).futureValue mustBe response
+      amlsConnector.set("someid", answers)
+      verify(amlsConnector.httpClient).PUT(eqTo(putUrl), eqTo(answers), any())(any(), any(), any(), any())
     }
   }
 }

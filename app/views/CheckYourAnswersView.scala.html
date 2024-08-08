@@ -15,6 +15,7 @@
  *@
 
 @import controllers.routes.CheckYourAnswersController
+@import models.Mode
 @import components.{Button, Heading, PageHeading}
 
 @this(
@@ -26,7 +27,7 @@
     button: Button
 )
 
-@(summaryList: SummaryList)(implicit request: Request[_], messages: Messages)
+@(summaryList: SummaryList, mode: Mode)(implicit requestHeader: RequestHeader, messages: Messages)
 
 @layout(pageTitle = messages("checkYourAnswers.title")) {
     

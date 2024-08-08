@@ -25,12 +25,12 @@ import play.api.data.FormError
 class DateTransactionOverThresholdFormProviderSpec extends DateBehaviours {
 
   val form = new DateTransactionOverThresholdFormProvider()()
-  val minDateError = "dateTransactionOverThreshold.error.startdate"
-  val maxDateError = "dateTransactionOverThreshold.error.future"
+  val minDateError = "error.date.fs.startdate"
+  val maxDateError = "error.date.fs.future"
 
   ".value" must {
 
-    behave like mandatoryDateField(form, "value", "dateTransactionOverThreshold.error.required.all")
+    behave like mandatoryDateField(form, "value", "error.date.fs.all")
 
     if(LocalDate.now(ZoneOffset.UTC).isAfter(DateTransactionOverThresholdFormProvider.ampStartDate)) {
 
@@ -47,7 +47,7 @@ class DateTransactionOverThresholdFormProviderSpec extends DateBehaviours {
 
       "fail to bind a date with a missing value" in {
 
-        val formError = FormError("value", "dateTransactionOverThreshold.error.required", List("month"))
+        val formError = FormError("value.month", "error.date.fs.one", List("month"))
 
         val validDate = DateTransactionOverThresholdFormProvider.ampStartDate
 
@@ -63,7 +63,10 @@ class DateTransactionOverThresholdFormProviderSpec extends DateBehaviours {
 
       "fail to bind a date with two missing values" in {
 
-        val formError = FormError("value", "dateTransactionOverThreshold.error.required.two", List("month", "year"))
+        val formError = List(
+          FormError("value.month", "error.date.fs.two", List("month", "year")),
+          FormError("value.year", "error.date.fs.two", List("month", "year"))
+        )
 
         val validDate = DateTransactionOverThresholdFormProvider.ampStartDate
 
@@ -74,7 +77,7 @@ class DateTransactionOverThresholdFormProviderSpec extends DateBehaviours {
         )
 
         val result = form.bind(data)
-        result.errors should contain only formError
+        result.errors should contain theSameElementsAs formError
       }
     }
   }

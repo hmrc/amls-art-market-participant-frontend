@@ -27,13 +27,15 @@ class DateTransactionOverThresholdFormProvider @Inject() extends Mappings {
   def apply(): Form[LocalDate] =
     Form(
       "value" -> localDate(
-        invalidKey     = "dateTransactionOverThreshold.error.invalid",
-        allRequiredKey = "dateTransactionOverThreshold.error.required.all",
-        twoRequiredKey = "dateTransactionOverThreshold.error.required.two",
-        requiredKey    = "dateTransactionOverThreshold.error.required"
+        oneInvalidKey = "error.date.fs.invalid.one",
+        multipleInvalidKey = "error.date.fs.invalid.multiple",
+        oneRequiredKey = "error.date.fs.one",
+        twoRequiredKey = "error.date.fs.two",
+        allRequiredKey = "error.date.fs.all",
+        realDateKey = "error.date.fs.real"
       ).verifying(
-        minDate(DateTransactionOverThresholdFormProvider.ampStartDate, "dateTransactionOverThreshold.error.startdate"),
-        maxDate(LocalDate.now(ZoneOffset.UTC), "dateTransactionOverThreshold.error.future"))
+        minDate(DateTransactionOverThresholdFormProvider.ampStartDate, "error.date.fs.startdate"),
+        maxDate(LocalDate.now(ZoneOffset.UTC), "error.date.fs.future"))
     )
 }
 

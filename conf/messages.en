@@ -62,6 +62,8 @@ amp.heading = Art market participant
 link.return.renewal.progress = Return to about your business
 link.return.registration.progress = Return to about your business
 
+err.summary = There is a problem
+
 ############################### Pages ###############################
 
 whatYouNeed.title = What you need
@@ -100,16 +102,21 @@ soldOverThreshold.checkYourAnswersLabel = Has your business made a sale of art f
 soldOverThreshold.error.required = Select yes if your business made a sale of art for €10,000 or more on or after 10 January 2020
 soldOverThreshold.hint = If you do not use euros, you’ll need to convert the amount to the currency you use.
 
-dateTransactionOverThreshold.title = When was the first sale of art for €10,000 or more on or after 10 January 2020?
-dateTransactionOverThreshold.heading = When was the first sale of art for €10,000 or more on or after 10 January 2020?
-dateTransactionOverThreshold.checkYourAnswersLabel = When was the first sale of art for €10,000 or more on or after 10 January 2020?
-dateTransactionOverThreshold.error.required.all = Enter the date of the first sale of art for €10,000 or more on or after 10 January 2020
-dateTransactionOverThreshold.error.required.two = Date of the first sale must include a {0} and {1}
-dateTransactionOverThreshold.error.required = Date of the first sale must include a {0}
-dateTransactionOverThreshold.error.invalid = Enter a real date for the first sale
-dateTransactionOverThreshold.error.startdate = Date of the first sale must be on or after 10 January 2020
-dateTransactionOverThreshold.error.future = Date of the first sale must be in the past
-dateTransactionOverThreshold.hint = For example, 11 01 2020.
+dateTransactionOverThreshold.title = When was the first sale of art for €10,000 or more?
+dateTransactionOverThreshold.heading = When was the first sale of art for €10,000 or more?
+dateTransactionOverThreshold.checkYourAnswersLabel = When was the first sale of art for €10,000 or more?
+dateTransactionOverThreshold.hint = The sale must have been on or after 10 January 2020 for example, 11 01 2020
+
+error.date.fs.one = The date of the first sale must include a {0}
+error.date.fs.two = The date of the first sale must include a {0} and {1}
+error.date.fs.all = Enter the date of the first sale
+error.date.fs.future = The date of the first sale must be today or in the past
+error.date.fs.real = Enter a real date for the date of the first sale
+error.date.fs.invalid.one = Enter the {0} of the first sale in the correct format
+error.date.fs.invalid.multiple = The date of the first sale must only contain the numbers 0-9
+error.date.fs.startdate = The date of the first sale must be on or after 10 January 2020
+error.date.fs.future = The date of the first sale must be in the past
+error.date.fs.hint = The sale must have been on or after 10 January 2020 for example, 11 01 2020
 
 identifyLinkedTransactions.title = Are you able to identify multiple payments linked to a single sale?
 identifyLinkedTransactions.heading = Are you able to identify multiple payments linked to a single sale?

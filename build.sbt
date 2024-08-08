@@ -51,6 +51,7 @@ lazy val root = (project in file("."))
     )
   )
   .settings(Global / lintUnusedKeysOnLoad := false)
+  .disablePlugins(JUnitXmlReportPlugin)
 
 // To resolve a bug with version 2.x.x of the scoverage plugin - https://github.com/sbt/sbt/issues/6997
 ThisBuild / libraryDependencySchemes += "org.scala-lang.modules" %% "scala-xml" % VersionScheme.Always

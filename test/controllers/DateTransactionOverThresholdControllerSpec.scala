@@ -93,7 +93,6 @@ class DateTransactionOverThresholdControllerSpec extends SpecBase with MockitoSu
       application.stop()
     }
 
-
     "redirect to the next page when valid data is submitted" in {
 
       val mockSessionRepository = mock[AMLSFrontEndSessionRepository]
@@ -143,7 +142,7 @@ class DateTransactionOverThresholdControllerSpec extends SpecBase with MockitoSu
 
       val application = applicationBuilder(userAnswers = None).build()
 
-      val exception = intercept[Exception]{
+      val exception = intercept[Exception] {
         val result = route(application, postRequest).value
 
         status(result) mustEqual SEE_OTHER
@@ -157,7 +156,7 @@ class DateTransactionOverThresholdControllerSpec extends SpecBase with MockitoSu
     "raise an error for a POST if no existing data is found" in {
       val application = applicationBuilder(userAnswers = None).build()
 
-      val exception = intercept[Exception]{
+      val exception = intercept[Exception] {
         val result = route(application, postRequest).value
 
         status(result) mustEqual SEE_OTHER

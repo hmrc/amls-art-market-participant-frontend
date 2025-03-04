@@ -38,7 +38,7 @@ class IdentifyLinkedTransactionsControllerSpec extends SpecBase with MockitoSuga
   def onwardRoute = Call("GET", "/foo")
 
   val formProvider = new IdentifyLinkedTransactionsFormProvider()
-  val form = formProvider()
+  val form         = formProvider()
 
   lazy val identifyLinkedTransactionsRoute = routes.IdentifyLinkedTransactionsController.onPageLoad(NormalMode).url
 
@@ -137,7 +137,7 @@ class IdentifyLinkedTransactionsControllerSpec extends SpecBase with MockitoSuga
 
       val request = FakeRequest(GET, identifyLinkedTransactionsRoute)
 
-      val exception = intercept[Exception]{
+      val exception = intercept[Exception] {
         val result = route(application, request).value
 
         status(result) mustEqual SEE_OTHER
@@ -156,7 +156,7 @@ class IdentifyLinkedTransactionsControllerSpec extends SpecBase with MockitoSuga
         FakeRequest(POST, identifyLinkedTransactionsRoute)
           .withFormUrlEncodedBody(("value", "true"))
 
-      val exception = intercept[Exception]{
+      val exception = intercept[Exception] {
         val result = route(application, request).value
 
         status(result) mustEqual SEE_OTHER

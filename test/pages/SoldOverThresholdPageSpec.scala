@@ -36,7 +36,7 @@ class SoldOverThresholdPageSpec extends PageBehaviours {
       val testDate = LocalDate.now
 
       val answerDateQuestion = UserAnswers().set(DateTransactionOverThresholdPage, testDate).success.value
-      val updatedAnswers = answerDateQuestion.set(SoldOverThresholdPage, false).success.value
+      val updatedAnswers     = answerDateQuestion.set(SoldOverThresholdPage, false).success.value
 
       updatedAnswers.get(DateTransactionOverThresholdPage) must be(empty)
     }
@@ -46,7 +46,7 @@ class SoldOverThresholdPageSpec extends PageBehaviours {
       val testDate = LocalDate.now
 
       val answerDateQuestion = UserAnswers().set(DateTransactionOverThresholdPage, testDate).success.value
-      val updatedAnswers = answerDateQuestion.set(SoldOverThresholdPage, true).success.value
+      val updatedAnswers     = answerDateQuestion.set(SoldOverThresholdPage, true).success.value
 
       updatedAnswers.get(DateTransactionOverThresholdPage) mustNot be(empty)
     }

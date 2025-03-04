@@ -41,7 +41,7 @@ class PercentageExpectedTurnoverControllerSpec extends SpecBase with MockitoSuga
   lazy val percentageExpectedTurnoverRoute = routes.PercentageExpectedTurnoverController.onPageLoad(NormalMode).url
 
   val formProvider = new PercentageExpectedTurnoverFormProvider()
-  val form = formProvider()
+  val form         = formProvider()
 
   "PercentageExpectedTurnover Controller" must {
 
@@ -65,7 +65,8 @@ class PercentageExpectedTurnoverControllerSpec extends SpecBase with MockitoSuga
 
     "populate the view correctly on a GET when the question has previously been answered" in {
 
-      val userAnswers = UserAnswers().set(PercentageExpectedTurnoverPage, PercentageExpectedTurnover.values.head).success.value
+      val userAnswers =
+        UserAnswers().set(PercentageExpectedTurnoverPage, PercentageExpectedTurnover.values.head).success.value
 
       val application = applicationBuilder(userAnswers = Some(userAnswers)).build()
 
@@ -138,7 +139,7 @@ class PercentageExpectedTurnoverControllerSpec extends SpecBase with MockitoSuga
 
       val request = FakeRequest(GET, percentageExpectedTurnoverRoute)
 
-      val exception = intercept[Exception]{
+      val exception = intercept[Exception] {
         val result = route(application, request).value
 
         status(result) mustEqual SEE_OTHER
@@ -157,7 +158,7 @@ class PercentageExpectedTurnoverControllerSpec extends SpecBase with MockitoSuga
         FakeRequest(POST, percentageExpectedTurnoverRoute)
           .withFormUrlEncodedBody(("value", PercentageExpectedTurnover.values.head.toString))
 
-      val exception = intercept[Exception]{
+      val exception = intercept[Exception] {
         val result = route(application, request).value
 
         status(result) mustEqual SEE_OTHER

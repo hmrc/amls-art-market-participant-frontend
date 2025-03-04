@@ -22,7 +22,7 @@ import play.api.data.FormError
 class SoldOverThresholdFormProviderSpec extends BooleanFieldBehaviours {
 
   val requiredKey = "soldOverThreshold.error.required"
-  val invalidKey = "error.boolean"
+  val invalidKey  = "error.boolean"
 
   val form = new SoldOverThresholdFormProvider()()
 

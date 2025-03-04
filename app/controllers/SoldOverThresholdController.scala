@@ -24,49 +24,48 @@ import navigation.Navigator
 import pages.SoldOverThresholdPage
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
-import repositories.{AMLSFrontEndSessionRepository}
+import repositories.AMLSFrontEndSessionRepository
 import uk.gov.hmrc.play.bootstrap.frontend.controller.FrontendBaseController
 import views.html.SoldOverThresholdView
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class SoldOverThresholdController @Inject()(
-                                             override val messagesApi: MessagesApi,
-                                             sessionRepository: AMLSFrontEndSessionRepository,
-                                             navigator: Navigator,
-                                             identify: IdentifierAction,
-                                             getData: DataRetrievalAction,
-                                             requireData: DataRequiredAction,
-                                             formProvider: SoldOverThresholdFormProvider,
-                                             val controllerComponents: MessagesControllerComponents,
-                                             view: SoldOverThresholdView
-                                 )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
+class SoldOverThresholdController @Inject() (
+  override val messagesApi: MessagesApi,
+  sessionRepository: AMLSFrontEndSessionRepository,
+  navigator: Navigator,
+  identify: IdentifierAction,
+  getData: DataRetrievalAction,
+  requireData: DataRequiredAction,
+  formProvider: SoldOverThresholdFormProvider,
+  val controllerComponents: MessagesControllerComponents,
+  view: SoldOverThresholdView
+)(implicit ec: ExecutionContext)
+    extends FrontendBaseController
+    with I18nSupport {
 
-  def onPageLoad(mode: Mode): Action[AnyContent] = (identify andThen getData andThen requireData) {
-    implicit request =>
+  def onPageLoad(mode: Mode): Action[AnyContent] = (identify andThen getData andThen requireData) { implicit request =>
+    val form         = formProvider()
+    val preparedForm = request.userAnswers.get(SoldOverThresholdPage) match {
+      case None        => form
+      case Some(value) => form.fill(value)
+    }
 
-      val form = formProvider()
-      val preparedForm = request.userAnswers.get(SoldOverThresholdPage) match {
-        case None => form
-        case Some(value) => form.fill(value)
-      }
-
-      Ok(view(preparedForm, mode))
+    Ok(view(preparedForm, mode))
   }
 
   def onSubmit(mode: Mode): Action[AnyContent] = (identify andThen getData andThen requireData).async {
     implicit request =>
-
       val form = formProvider()
-      form.bindFromRequest().fold(
-        formWithErrors =>
-          Future.successful(BadRequest(view(formWithErrors, mode))),
-
-        value =>
-          for {
-            updatedAnswers <- Future.fromTry(request.userAnswers.set(SoldOverThresholdPage, value))
-            _              <- sessionRepository.set(request.credId, updatedAnswers)
-          } yield Redirect(navigator.nextPage(SoldOverThresholdPage, mode, updatedAnswers))
-      )
+      form
+        .bindFromRequest()
+        .fold(
+          formWithErrors => Future.successful(BadRequest(view(formWithErrors, mode))),
+          value =>
+            for {
+              updatedAnswers <- Future.fromTry(request.userAnswers.set(SoldOverThresholdPage, value))
+              _              <- sessionRepository.set(request.credId, updatedAnswers)
+            } yield Redirect(navigator.nextPage(SoldOverThresholdPage, mode, updatedAnswers))
+        )
   }
 }

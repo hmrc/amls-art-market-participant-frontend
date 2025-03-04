@@ -18,7 +18,7 @@ package pages
 
 import models.TypeOfParticipant.{ArtGalleryOwner, SomethingElse}
 import models.UserAnswers
-import org.scalatest.matchers.must.Matchers.{be, empty, convertToAnyMustWrapper}
+import org.scalatest.matchers.must.Matchers.{be, convertToAnyMustWrapper, empty}
 import pages.behaviours.PageBehaviours
 
 class TypeOfParticipantDetailPageSpec extends PageBehaviours {
@@ -33,18 +33,18 @@ class TypeOfParticipantDetailPageSpec extends PageBehaviours {
 
     "cleanup the TypeOfParticipantPage value where not something else" in {
 
-      val typeOfParticipant = Seq(ArtGalleryOwner)
+      val typeOfParticipant               = Seq(ArtGalleryOwner)
       val answerParticipantDetailQuestion = UserAnswers().set(TypeOfParticipantDetailPage, "something").success.value
-      val updatedAnswers = answerParticipantDetailQuestion.set(TypeOfParticipantPage, typeOfParticipant).success.value
+      val updatedAnswers                  = answerParticipantDetailQuestion.set(TypeOfParticipantPage, typeOfParticipant).success.value
 
       updatedAnswers.get(TypeOfParticipantDetailPage) must be(empty)
     }
 
     "not cleanup the TypeOfParticipantPage value where something else" in {
 
-      val typeOfParticipant = Seq(SomethingElse)
+      val typeOfParticipant               = Seq(SomethingElse)
       val answerParticipantDetailQuestion = UserAnswers().set(TypeOfParticipantDetailPage, "something").success.value
-      val updatedAnswers = answerParticipantDetailQuestion.set(TypeOfParticipantPage, typeOfParticipant).success.value
+      val updatedAnswers                  = answerParticipantDetailQuestion.set(TypeOfParticipantPage, typeOfParticipant).success.value
 
       updatedAnswers.get(TypeOfParticipantDetailPage) mustNot be(empty)
     }

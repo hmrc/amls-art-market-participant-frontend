@@ -35,7 +35,8 @@ class DateTransactionOverThresholdFormProvider @Inject() extends Mappings {
         realDateKey = "error.date.fs.real"
       ).verifying(
         minDate(DateTransactionOverThresholdFormProvider.ampStartDate, "error.date.fs.startdate"),
-        maxDate(LocalDate.now(ZoneOffset.UTC), "error.date.fs.future"))
+        maxDate(LocalDate.now(ZoneOffset.UTC), "error.date.fs.future")
+      )
     )
 }
 

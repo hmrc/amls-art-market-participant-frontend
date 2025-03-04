@@ -43,13 +43,10 @@ class DataRetrievalActionSpec extends SpecBase with MockitoSugar with ScalaFutur
 
         val sessionRepository = mock[AMLSFrontEndSessionRepository]
         when(sessionRepository.get(eqTo("CredId"))(any())) thenReturn Future(None)
-        val action = new Harness(sessionRepository)
+        val action            = new Harness(sessionRepository)
 
-        val futureResult = action.callTransform(IdentifierRequest(
-          fakeRequest,
-          Some("amlsRef"),
-          "CredId",
-          AffinityGroup.Organisation))
+        val futureResult =
+          action.callTransform(IdentifierRequest(fakeRequest, Some("amlsRef"), "CredId", AffinityGroup.Organisation))
 
         whenReady(futureResult) { result =>
           result.userAnswers.isEmpty mustBe true
@@ -63,13 +60,10 @@ class DataRetrievalActionSpec extends SpecBase with MockitoSugar with ScalaFutur
 
         val sessionRepository = mock[AMLSFrontEndSessionRepository]
         when(sessionRepository.get(eqTo("CredId"))(any())) thenReturn Future(Some(new UserAnswers()))
-        val action = new Harness(sessionRepository)
+        val action            = new Harness(sessionRepository)
 
-        val futureResult = action.callTransform(IdentifierRequest(
-          fakeRequest,
-          Some("amlsRef"),
-          "CredId",
-          AffinityGroup.Organisation))
+        val futureResult =
+          action.callTransform(IdentifierRequest(fakeRequest, Some("amlsRef"), "CredId", AffinityGroup.Organisation))
 
         whenReady(futureResult) { result =>
           result.userAnswers.isDefined mustBe true

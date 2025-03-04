@@ -27,6 +27,7 @@ class TypeOfParticipantFormProvider @Inject() extends Mappings {
 
   def apply(): Form[Seq[TypeOfParticipant]] =
     Form(
-      "value" -> seq(enumerable[TypeOfParticipant]("typeOfParticipant.error.required")).verifying(nonEmptySeq("typeOfParticipant.error.required"))
+      "value" -> seq(enumerable[TypeOfParticipant]("typeOfParticipant.error.required"))
+        .verifying(nonEmptySeq("typeOfParticipant.error.required"))
     )
 }

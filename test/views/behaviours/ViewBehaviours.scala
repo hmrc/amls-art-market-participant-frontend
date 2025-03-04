@@ -21,17 +21,14 @@ import views.ViewSpecBase
 
 trait ViewBehaviours extends ViewSpecBase {
 
-  def normalPage(view: HtmlFormat.Appendable,
-                 messageKeyPrefix: String,
-                 expectedGuidanceKeys: String*): Unit = {
-
+  def normalPage(view: HtmlFormat.Appendable, messageKeyPrefix: String, expectedGuidanceKeys: String*): Unit =
     "behave like a normal page" when {
 
       "rendered" must {
 
         "have the correct banner title" in {
 
-          val doc = asDocument(view)
+          val doc  = asDocument(view)
           val span = doc.getElementsByClass("govuk-header__service-name").first()
           span.html().contains(messages("service.name"))
         }
@@ -55,27 +52,27 @@ trait ViewBehaviours extends ViewSpecBase {
         }
       }
     }
-  }
 
-  def indexPage(view: HtmlFormat.Appendable,
-                 messageKeyPrefix: String,
-                 expectedGuidanceKeys: String*): Unit = {
-
+  def indexPage(view: HtmlFormat.Appendable, messageKeyPrefix: String, expectedGuidanceKeys: String*): Unit =
     "behave like a normal page" when {
 
       "rendered" must {
 
         "have the correct banner title" in {
 
-          val doc = asDocument(view)
-          val nav = doc.getElementById("proposition-menu")
+          val doc  = asDocument(view)
+          val nav  = doc.getElementById("proposition-menu")
           val span = nav.children.first
           span.html().contains(messages("service.name"))
         }
 
         "display the correct browser title" in {
           val doc = asDocument(view)
-          assertEqualsValue(doc, "title", "Art market participant - Manage your anti-money laundering supervision - GOV.UK")
+          assertEqualsValue(
+            doc,
+            "title",
+            "Art market participant - Manage your anti-money laundering supervision - GOV.UK"
+          )
         }
 
         "display the correct page title" in {
@@ -91,10 +88,8 @@ trait ViewBehaviours extends ViewSpecBase {
         }
       }
     }
-  }
 
-  def pageWithBackLink(view: HtmlFormat.Appendable): Unit = {
-
+  def pageWithBackLink(view: HtmlFormat.Appendable): Unit =
     "behave like a page with a back link" must {
 
       "have a back link" in {
@@ -103,5 +98,4 @@ trait ViewBehaviours extends ViewSpecBase {
         assertRenderedByClass(doc, "back-link")
       }
     }
-  }
 }

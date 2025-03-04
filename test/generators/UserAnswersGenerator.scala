@@ -28,12 +28,12 @@ trait UserAnswersGenerator extends TryValues {
 
   val generators: Seq[Gen[(QuestionPage[_], JsValue)]] =
     arbitrary[(TypeOfParticipantDetailPage.type, JsValue)] ::
-    arbitrary[(TypeOfParticipantPage.type, JsValue)] ::
-    arbitrary[(PercentageExpectedTurnoverPage.type, JsValue)] ::
-    arbitrary[(IdentifyLinkedTransactionsPage.type, JsValue)] ::
-    arbitrary[(DateTransactionOverThresholdPage.type, JsValue)] ::
-    arbitrary[(SoldOverThresholdPage.type, JsValue)] ::
-    Nil
+      arbitrary[(TypeOfParticipantPage.type, JsValue)] ::
+      arbitrary[(PercentageExpectedTurnoverPage.type, JsValue)] ::
+      arbitrary[(IdentifyLinkedTransactionsPage.type, JsValue)] ::
+      arbitrary[(DateTransactionOverThresholdPage.type, JsValue)] ::
+      arbitrary[(SoldOverThresholdPage.type, JsValue)] ::
+      Nil
 
   implicit lazy val arbitraryUserData: Arbitrary[UserAnswers] = {
 
@@ -41,14 +41,13 @@ trait UserAnswersGenerator extends TryValues {
 
     Arbitrary {
       for {
-        data    <- generators match {
-          case Nil => Gen.const(Map[QuestionPage[_], JsValue]())
-          case _   => Gen.mapOf(oneOf(generators))
-        }
-      } yield UserAnswers (
-        data = data.foldLeft(Json.obj()) {
-          case (obj, (path, value)) =>
-            obj.setObject(path.path, value).get
+        data <- generators match {
+                  case Nil => Gen.const(Map[QuestionPage[_], JsValue]())
+                  case _   => Gen.mapOf(oneOf(generators))
+                }
+      } yield UserAnswers(
+        data = data.foldLeft(Json.obj()) { case (obj, (path, value)) =>
+          obj.setObject(path.path, value).get
         }
       )
     }

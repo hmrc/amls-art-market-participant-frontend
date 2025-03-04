@@ -29,27 +29,27 @@ import views.html.CheckYourAnswersView
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class CheckYourAnswersController @Inject()(
-                                            override val messagesApi: MessagesApi,
-                                            identify: IdentifierAction,
-                                            getData: DataRetrievalAction,
-                                            requireData: DataRequiredAction,
-                                            val controllerComponents: MessagesControllerComponents,
-                                            view: CheckYourAnswersView,
-                                            appConfig: FrontendAppConfig
-                                          )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
+class CheckYourAnswersController @Inject() (
+  override val messagesApi: MessagesApi,
+  identify: IdentifierAction,
+  getData: DataRetrievalAction,
+  requireData: DataRequiredAction,
+  val controllerComponents: MessagesControllerComponents,
+  view: CheckYourAnswersView,
+  appConfig: FrontendAppConfig
+)(implicit ec: ExecutionContext)
+    extends FrontendBaseController
+    with I18nSupport {
 
-  def onPageLoad(mode: Mode): Action[AnyContent] = (identify andThen getData andThen requireData) {
-    implicit request =>
+  def onPageLoad(mode: Mode): Action[AnyContent] = (identify andThen getData andThen requireData) { implicit request =>
+    val summaryList = SummaryList(
+      rows = new CheckYourAnswersHelper(request.userAnswers).getAllRows
+    )
 
-      val summaryList = SummaryList(
-        rows = new CheckYourAnswersHelper(request.userAnswers).getAllRows
-      )
-
-      Ok(view(summaryList, mode))
+    Ok(view(summaryList, mode))
   }
 
   def onSubmit(): Action[AnyContent] = (identify andThen getData andThen requireData).async {
-      Future { Redirect(Call("GET", s"${appConfig.amlsFrontendBaseUrl}/amp/accept")) }
+    Future(Redirect(Call("GET", s"${appConfig.amlsFrontendBaseUrl}/amp/accept")))
   }
 }

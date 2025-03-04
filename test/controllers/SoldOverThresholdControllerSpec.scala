@@ -38,7 +38,7 @@ class SoldOverThresholdControllerSpec extends SpecBase with MockitoSugar {
   def onwardRoute = Call("GET", "/foo")
 
   val formProvider = new SoldOverThresholdFormProvider()
-  val form = formProvider()
+  val form         = formProvider()
 
   lazy val SoldOverThresholdRoute = routes.SoldOverThresholdController.onPageLoad(NormalMode).url
 
@@ -137,7 +137,7 @@ class SoldOverThresholdControllerSpec extends SpecBase with MockitoSugar {
 
       val request = FakeRequest(GET, SoldOverThresholdRoute)
 
-      val exception = intercept[Exception]{
+      val exception = intercept[Exception] {
         val result = route(application, request).value
 
         status(result) mustEqual SEE_OTHER
@@ -155,7 +155,7 @@ class SoldOverThresholdControllerSpec extends SpecBase with MockitoSugar {
         FakeRequest(POST, SoldOverThresholdRoute)
           .withFormUrlEncodedBody(("value", "true"))
 
-      val exception = intercept[Exception]{
+      val exception = intercept[Exception] {
         val result = route(application, request).value
 
         status(result) mustEqual SEE_OTHER

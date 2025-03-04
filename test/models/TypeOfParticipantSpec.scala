@@ -32,10 +32,8 @@ class TypeOfParticipantSpec extends AnyWordSpec with ScalaCheckPropertyChecks wi
 
       val gen = arbitrary[TypeOfParticipant]
 
-      forAll(gen) {
-        typeOfParticipant =>
-
-          JsString(typeOfParticipant.toString).validate[TypeOfParticipant].asOpt.value mustEqual typeOfParticipant
+      forAll(gen) { typeOfParticipant =>
+        JsString(typeOfParticipant.toString).validate[TypeOfParticipant].asOpt.value mustEqual typeOfParticipant
       }
     }
 
@@ -43,10 +41,8 @@ class TypeOfParticipantSpec extends AnyWordSpec with ScalaCheckPropertyChecks wi
 
       val gen = arbitrary[String] suchThat (!TypeOfParticipant.values.map(_.toString).contains(_))
 
-      forAll(gen) {
-        invalidValue =>
-
-          JsString(invalidValue).validate[TypeOfParticipant] mustEqual JsError("error.invalid")
+      forAll(gen) { invalidValue =>
+        JsString(invalidValue).validate[TypeOfParticipant] mustEqual JsError("error.invalid")
       }
     }
 
@@ -54,10 +50,8 @@ class TypeOfParticipantSpec extends AnyWordSpec with ScalaCheckPropertyChecks wi
 
       val gen = arbitrary[TypeOfParticipant]
 
-      forAll(gen) {
-        typeOfParticipant =>
-
-          Json.toJson(typeOfParticipant) mustEqual JsString(typeOfParticipant.toString)
+      forAll(gen) { typeOfParticipant =>
+        Json.toJson(typeOfParticipant) mustEqual JsString(typeOfParticipant.toString)
       }
     }
   }

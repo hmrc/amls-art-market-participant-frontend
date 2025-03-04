@@ -27,11 +27,11 @@ import uk.gov.hmrc.http.{HeaderCarrier, HttpResponse, StringContextOps}
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
-class AMLSConnector @Inject()(config: Configuration,
-                              implicit val httpClientV2: HttpClientV2)
-                             (implicit ec: ExecutionContext) {
+class AMLSConnector @Inject() (config: Configuration, implicit val httpClientV2: HttpClientV2)(implicit
+  ec: ExecutionContext
+) {
 
-  private val baseUrl = config.get[Service]("microservice.services.amls-frontend")
+  private val baseUrl                     = config.get[Service]("microservice.services.amls-frontend")
   private[connectors] val amlsUrl: String = s"$baseUrl/amp"
 
   def get(credId: String)(implicit hc: HeaderCarrier): Future[Option[JsObject]] = {
@@ -41,10 +41,11 @@ class AMLSConnector @Inject()(config: Configuration,
   }
 
   def set(credId: String, userAnswers: UserAnswers)(implicit hc: HeaderCarrier): Future[HttpResponse] = {
-    val putUrl = s"$amlsUrl/set/$credId"
+    val putUrl                     = s"$amlsUrl/set/$credId"
     val hcWithExtra: HeaderCarrier = hc.withExtraHeaders("Csrf-Token" -> "nocheck")
 
-    httpClientV2.put(url"$putUrl")(hcWithExtra)
+    httpClientV2
+      .put(url"$putUrl")(hcWithExtra)
       .withBody(Json.toJson(userAnswers))
       .execute[HttpResponse]
   }

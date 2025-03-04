@@ -36,22 +36,22 @@ class AMLSConnectorSpec extends SpecBase with MockitoSugar {
 
   implicit val hc: HeaderCarrier = HeaderCarrier()
 
-  val dateVal       = LocalDateTime.now
-  val answers       = UserAnswers().set(TypeOfParticipantPage,  Seq(SomethingElse)).success.value
+  val dateVal = LocalDateTime.now
+  val answers = UserAnswers().set(TypeOfParticipantPage, Seq(SomethingElse)).success.value
 
-  val mockHttpClient: HttpClientV2 = mock[HttpClientV2]
+  val mockHttpClient: HttpClientV2   = mock[HttpClientV2]
   val requestBuilder: RequestBuilder = mock[RequestBuilder]
-  val amlsConnector = new AMLSConnector(config = app.injector.instanceOf[Configuration], mockHttpClient)
+  val amlsConnector                  = new AMLSConnector(config = app.injector.instanceOf[Configuration], mockHttpClient)
 
-  val completeData  = Json.obj(
+  val completeData = Json.obj(
     "typeOfParticipant"            -> Seq("artGalleryOwner"),
-    "soldOverThreshold"    -> true,
+    "soldOverThreshold"            -> true,
     "dateTransactionOverThreshold" -> LocalDate.now,
     "identifyLinkedTransactions"   -> true,
     "percentageExpectedTurnover"   -> "fortyOneToSixty"
   )
 
-  val completeJson  = Json.obj(
+  val completeJson = Json.obj(
     "_id"         -> "someid",
     "data"        -> completeData,
     "lastUpdated" -> Json.obj("$date" -> dateVal.atZone(ZoneOffset.UTC).toInstant.toEpochMilli)

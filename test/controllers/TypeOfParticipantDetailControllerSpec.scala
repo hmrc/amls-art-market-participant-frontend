@@ -38,7 +38,7 @@ class TypeOfParticipantDetailControllerSpec extends SpecBase with MockitoSugar {
   def onwardRoute = Call("GET", "/foo")
 
   val formProvider = new TypeOfParticipantDetailFormProvider()
-  val form = formProvider()
+  val form         = formProvider()
 
   lazy val typeOfParticipantDetailRoute = routes.TypeOfParticipantDetailController.onPageLoad(NormalMode).url
 
@@ -136,7 +136,7 @@ class TypeOfParticipantDetailControllerSpec extends SpecBase with MockitoSugar {
 
       val request = FakeRequest(GET, typeOfParticipantDetailRoute)
 
-      val exception = intercept[Exception]{
+      val exception = intercept[Exception] {
         val result = route(application, request).value
 
         status(result) mustEqual SEE_OTHER
@@ -155,7 +155,7 @@ class TypeOfParticipantDetailControllerSpec extends SpecBase with MockitoSugar {
         FakeRequest(POST, typeOfParticipantDetailRoute)
           .withFormUrlEncodedBody(("value", "answer"))
 
-      val exception = intercept[Exception]{
+      val exception = intercept[Exception] {
         val result = route(application, request).value
 
         status(result) mustEqual SEE_OTHER

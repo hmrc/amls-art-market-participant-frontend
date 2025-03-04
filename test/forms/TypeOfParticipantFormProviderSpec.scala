@@ -26,13 +26,13 @@ class TypeOfParticipantFormProviderSpec extends CheckboxFieldBehaviours {
 
   ".value" must {
 
-    val fieldName = "value"
+    val fieldName   = "value"
     val requiredKey = "typeOfParticipant.error.required"
 
     behave like checkboxField[TypeOfParticipant](
       form,
       fieldName,
-      validValues  = TypeOfParticipant.values,
+      validValues = TypeOfParticipant.values,
       invalidError = FormError(s"$fieldName[0]", "error.invalid")
     )
 

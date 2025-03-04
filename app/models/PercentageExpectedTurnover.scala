@@ -31,7 +31,11 @@ object PercentageExpectedTurnover extends Enumerable.Implicits {
   case object EightyOneToOneHundred extends WithName("eightyOneToOneHundred") with PercentageExpectedTurnover
 
   val values: Seq[PercentageExpectedTurnover] = Seq(
-    ZeroToTwenty, TwentyOneToForty, FortyOneToSixty, SixtyOneToEighty, EightyOneToOneHundred
+    ZeroToTwenty,
+    TwentyOneToForty,
+    FortyOneToSixty,
+    SixtyOneToEighty,
+    EightyOneToOneHundred
   )
 
   def options(implicit messages: Messages): Seq[RadioItem] = values.zipWithIndex.map {

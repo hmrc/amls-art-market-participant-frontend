@@ -26,13 +26,13 @@ class PercentageExpectedTurnoverFormProviderSpec extends OptionFieldBehaviours {
 
   ".value" must {
 
-    val fieldName = "value"
+    val fieldName   = "value"
     val requiredKey = "percentageExpectedTurnover.error.required"
 
     behave like optionsField[PercentageExpectedTurnover](
       form,
       fieldName,
-      validValues  = PercentageExpectedTurnover.values,
+      validValues = PercentageExpectedTurnover.values,
       invalidError = FormError(fieldName, "error.invalid")
     )
 

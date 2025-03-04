@@ -17,9 +17,11 @@
 package models.requests
 
 import play.api.mvc.{Request, WrappedRequest}
-import uk.gov.hmrc.auth.core.{AffinityGroup}
+import uk.gov.hmrc.auth.core.AffinityGroup
 
-case class IdentifierRequest[A] (request: Request[A],
-                                 amlsRefNumber: Option[String],
-                                 credId: String,
-                                 affinityGroup: AffinityGroup) extends WrappedRequest[A](request)
+case class IdentifierRequest[A](
+  request: Request[A],
+  amlsRefNumber: Option[String],
+  credId: String,
+  affinityGroup: AffinityGroup
+) extends WrappedRequest[A](request)

@@ -50,14 +50,12 @@ class PercentageExpectedTurnoverViewSpec extends ViewBehaviours {
 
         val doc = asDocument(applyView(form))
 
-        for (option <- PercentageExpectedTurnover.options) {
+        for (option <- PercentageExpectedTurnover.options)
           assertContainsRadioButton(doc, option.id.value, "value", option.value.value, false)
-        }
       }
     }
 
     PercentageExpectedTurnover.options.zipWithIndex.foreach { case (option: RadioItem, i: Int) =>
-
       s"rendered with a value of '${option.value.value}'" must {
 
         s"have the '${option.value.value}' radio button selected" in {
@@ -68,9 +66,14 @@ class PercentageExpectedTurnoverViewSpec extends ViewBehaviours {
 
           assertContainsRadioButton(doc, option.id.value, "value", option.value.value, isChecked = true)
 
-          for (unselectedOption <- PercentageExpectedTurnover.options.filterNot(o => o == option)) {
-            assertContainsRadioButton(doc, unselectedOption.id.value, "value", unselectedOption.value.value, isChecked = false)
-          }
+          for (unselectedOption <- PercentageExpectedTurnover.options.filterNot(o => o == option))
+            assertContainsRadioButton(
+              doc,
+              unselectedOption.id.value,
+              "value",
+              unselectedOption.value.value,
+              isChecked = false
+            )
         }
       }
     }
@@ -78,8 +81,15 @@ class PercentageExpectedTurnoverViewSpec extends ViewBehaviours {
     "include the correct content" in {
       val document = asDocument(applyView(form))
 
-      assertTitleEqualsMessage(document, "title", "How much of your turnover do you expect to come from sales of art for €10,000 or more in the next 12 months?")
-      assertPageTitleEqualsMessage(document, "How much of your turnover do you expect to come from sales of art for €10,000 or more in the next 12 months?")
+      assertTitleEqualsMessage(
+        document,
+        "title",
+        "How much of your turnover do you expect to come from sales of art for €10,000 or more in the next 12 months?"
+      )
+      assertPageTitleEqualsMessage(
+        document,
+        "How much of your turnover do you expect to come from sales of art for €10,000 or more in the next 12 months?"
+      )
     }
   }
 }

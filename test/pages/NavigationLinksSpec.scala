@@ -28,9 +28,9 @@ import views.html._
 
 class NavigationLinksSpec extends ViewBehaviours {
 
-  val signOutMsg:String = "Sign out"
-  val returnToAboutYourBusinessMsg:String = "Return to about your business"
-  val acceptAndCompleteMsg: String = "Accept and complete section"
+  val signOutMsg: String                   = "Sign out"
+  val returnToAboutYourBusinessMsg: String = "Return to about your business"
+  val acceptAndCompleteMsg: String         = "Accept and complete section"
 
   "WhatYouNeed view" must {
     val view = viewFor[WhatYouNeedView](Some(emptyUserAnswers))

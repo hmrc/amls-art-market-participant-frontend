@@ -24,7 +24,8 @@ import play.api.libs.json.{JsValue, Json}
 
 trait UserAnswersEntryGenerators extends PageGenerators with ModelGenerators {
 
-  implicit lazy val arbitraryTypeOfParticipantDetailUserAnswersEntry: Arbitrary[(TypeOfParticipantDetailPage.type, JsValue)] =
+  implicit lazy val arbitraryTypeOfParticipantDetailUserAnswersEntry
+    : Arbitrary[(TypeOfParticipantDetailPage.type, JsValue)] =
     Arbitrary {
       for {
         page  <- arbitrary[TypeOfParticipantDetailPage.type]
@@ -40,7 +41,8 @@ trait UserAnswersEntryGenerators extends PageGenerators with ModelGenerators {
       } yield (page, value)
     }
 
-  implicit lazy val arbitraryPercentageExpectedTurnoverUserAnswersEntry: Arbitrary[(PercentageExpectedTurnoverPage.type, JsValue)] =
+  implicit lazy val arbitraryPercentageExpectedTurnoverUserAnswersEntry
+    : Arbitrary[(PercentageExpectedTurnoverPage.type, JsValue)] =
     Arbitrary {
       for {
         page  <- arbitrary[PercentageExpectedTurnoverPage.type]
@@ -48,7 +50,8 @@ trait UserAnswersEntryGenerators extends PageGenerators with ModelGenerators {
       } yield (page, value)
     }
 
-  implicit lazy val arbitraryIdentifyLinkedTransactionsUserAnswersEntry: Arbitrary[(IdentifyLinkedTransactionsPage.type, JsValue)] =
+  implicit lazy val arbitraryIdentifyLinkedTransactionsUserAnswersEntry
+    : Arbitrary[(IdentifyLinkedTransactionsPage.type, JsValue)] =
     Arbitrary {
       for {
         page  <- arbitrary[IdentifyLinkedTransactionsPage.type]
@@ -56,7 +59,8 @@ trait UserAnswersEntryGenerators extends PageGenerators with ModelGenerators {
       } yield (page, value)
     }
 
-  implicit lazy val arbitraryDateTransactionOverThresholdUserAnswersEntry: Arbitrary[(DateTransactionOverThresholdPage.type, JsValue)] =
+  implicit lazy val arbitraryDateTransactionOverThresholdUserAnswersEntry
+    : Arbitrary[(DateTransactionOverThresholdPage.type, JsValue)] =
     Arbitrary {
       for {
         page  <- arbitrary[DateTransactionOverThresholdPage.type]
@@ -64,7 +68,8 @@ trait UserAnswersEntryGenerators extends PageGenerators with ModelGenerators {
       } yield (page, value)
     }
 
-  implicit lazy val arbitraryBoughtOrSoldOverThresholdUserAnswersEntry: Arbitrary[(SoldOverThresholdPage.type, JsValue)] =
+  implicit lazy val arbitraryBoughtOrSoldOverThresholdUserAnswersEntry
+    : Arbitrary[(SoldOverThresholdPage.type, JsValue)] =
     Arbitrary {
       for {
         page  <- arbitrary[SoldOverThresholdPage.type]

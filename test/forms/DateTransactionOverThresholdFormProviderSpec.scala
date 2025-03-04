@@ -24,7 +24,7 @@ import play.api.data.FormError
 
 class DateTransactionOverThresholdFormProviderSpec extends DateBehaviours {
 
-  val form = new DateTransactionOverThresholdFormProvider()()
+  val form         = new DateTransactionOverThresholdFormProvider()()
   val minDateError = "error.date.fs.startdate"
   val maxDateError = "error.date.fs.future"
 
@@ -32,7 +32,7 @@ class DateTransactionOverThresholdFormProviderSpec extends DateBehaviours {
 
     behave like mandatoryDateField(form, "value", "error.date.fs.all")
 
-    if(LocalDate.now(ZoneOffset.UTC).isAfter(DateTransactionOverThresholdFormProvider.ampStartDate)) {
+    if (LocalDate.now(ZoneOffset.UTC).isAfter(DateTransactionOverThresholdFormProvider.ampStartDate)) {
 
       val validData = datesBetween(
         min = DateTransactionOverThresholdFormProvider.ampStartDate,
@@ -41,7 +41,12 @@ class DateTransactionOverThresholdFormProviderSpec extends DateBehaviours {
 
       behave like dateField(form, "value", validData)
 
-      behave like dateFieldWithMin(form, "value", DateTransactionOverThresholdFormProvider.ampStartDate, FormError("value", minDateError))
+      behave like dateFieldWithMin(
+        form,
+        "value",
+        DateTransactionOverThresholdFormProvider.ampStartDate,
+        FormError("value", minDateError)
+      )
 
       behave like dateFieldWithMax(form, "value", LocalDate.now(ZoneOffset.UTC), FormError("value", maxDateError))
 

@@ -52,7 +52,7 @@ class CheckYourAnswersControllerSpec extends SpecBase {
 
       val request = FakeRequest(GET, routes.CheckYourAnswersController.onPageLoad().url)
 
-      val exception = intercept[Exception]{
+      val exception = intercept[Exception] {
         val result = route(application, request).value
 
         status(result) mustEqual SEE_OTHER

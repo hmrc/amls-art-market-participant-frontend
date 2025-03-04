@@ -23,10 +23,10 @@ import play.api.data.FormError
 
 class TypeOfParticipantDetailFormProviderSpec extends StringFieldBehaviours with Constraints {
 
-  val requiredKey = "typeOfParticipantDetail.error.required"
+  val requiredKey    = "typeOfParticipantDetail.error.required"
   val punctuationKey = "typeOfParticipantDetail.error.punctuation"
-  val lengthKey = "typeOfParticipantDetail.error.length"
-  val maxLength = 255
+  val lengthKey      = "typeOfParticipantDetail.error.length"
+  val maxLength      = 255
 
   val form = new TypeOfParticipantDetailFormProvider()()
 
@@ -49,12 +49,12 @@ class TypeOfParticipantDetailFormProviderSpec extends StringFieldBehaviours with
 
     s"not bind strings longer than $maxLength characters" in {
       val result = form.bind(Map(fieldName -> overMaxLength)).apply(fieldName)
-      result.errors shouldEqual Seq(FormError( fieldName, Seq(lengthKey), Seq(maxLength)))
+      result.errors shouldEqual Seq(FormError(fieldName, Seq(lengthKey), Seq(maxLength)))
     }
 
     s"not bind strings with invalid characters" in {
       val result = form.bind(Map(fieldName -> invalidString)).apply(fieldName)
-      result.errors shouldEqual Seq(FormError( fieldName, Seq(punctuationKey), Seq(basicPunctuationRegex)))
+      result.errors shouldEqual Seq(FormError(fieldName, Seq(punctuationKey), Seq(basicPunctuationRegex)))
     }
 
     behave like mandatoryField(

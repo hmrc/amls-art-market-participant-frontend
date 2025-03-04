@@ -32,7 +32,7 @@ case object TypeOfParticipantPage extends QuestionPage[Seq[TypeOfParticipant]] {
     value map { ans =>
       ans.contains(SomethingElse) match {
         case true => super.cleanup(value, userAnswers)
-        case _ => userAnswers.remove(TypeOfParticipantDetailPage)
+        case _    => userAnswers.remove(TypeOfParticipantDetailPage)
       }
     }
   }.getOrElse(super.cleanup(value, userAnswers))

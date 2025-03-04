@@ -25,7 +25,7 @@ class FakeDataRetrievalAction(dataToReturn: Option[UserAnswers]) extends DataRet
 
   override protected def transform[A](request: IdentifierRequest[A]): Future[OptionalDataRequest[A]] =
     dataToReturn match {
-      case None =>
+      case None              =>
         Future(OptionalDataRequest(request.request, request.credId, None))
       case Some(userAnswers) =>
         Future(OptionalDataRequest(request.request, request.credId, Some(userAnswers)))

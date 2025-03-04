@@ -24,12 +24,12 @@ import pages._
 import models._
 
 @Singleton
-class Navigator @Inject()() {
+class Navigator @Inject() () {
 
   private val normalRoutes: Page => UserAnswers => Call = {
-    case TypeOfParticipantPage            =>      typeOfParticipantRoute
+    case TypeOfParticipantPage            => typeOfParticipantRoute
     case TypeOfParticipantDetailPage      => _ => routes.SoldOverThresholdController.onPageLoad(NormalMode)
-    case SoldOverThresholdPage            =>      artSoldOverThresholdRoute
+    case SoldOverThresholdPage            => artSoldOverThresholdRoute
     case DateTransactionOverThresholdPage => _ => routes.IdentifyLinkedTransactionsController.onPageLoad(NormalMode)
     case IdentifyLinkedTransactionsPage   => _ => routes.PercentageExpectedTurnoverController.onPageLoad(NormalMode)
     case PercentageExpectedTurnoverPage   => _ => routes.CheckYourAnswersController.onPageLoad()
@@ -62,22 +62,23 @@ class Navigator @Inject()() {
     case None        => throw new Exception("Unable to navigate to page")
   }
 
-  private def artSoldOverThresholdRouteCheckMode(answers: UserAnswers): Call = answers.get(SoldOverThresholdPage) match {
-    case Some(true)  => routes.DateTransactionOverThresholdController.onPageLoad(CheckMode)
-    case Some(false) => routes.CheckYourAnswersController.onPageLoad()
-    case None        => throw new Exception("Unable to navigate to page")
-  }
+  private def artSoldOverThresholdRouteCheckMode(answers: UserAnswers): Call =
+    answers.get(SoldOverThresholdPage) match {
+      case Some(true)  => routes.DateTransactionOverThresholdController.onPageLoad(CheckMode)
+      case Some(false) => routes.CheckYourAnswersController.onPageLoad()
+      case None        => throw new Exception("Unable to navigate to page")
+    }
 
   private val checkRouteMap: Page => UserAnswers => Call = {
-    case TypeOfParticipantPage         => typeOfParticipantRouteCheckMode
+    case TypeOfParticipantPage => typeOfParticipantRouteCheckMode
     case SoldOverThresholdPage => artSoldOverThresholdRouteCheckMode
-    case _ => _ => routes.CheckYourAnswersController.onPageLoad()
+    case _                     => _ => routes.CheckYourAnswersController.onPageLoad()
   }
 
   def nextPage(page: Page, mode: Mode, userAnswers: UserAnswers): Call = mode match {
     case NormalMode =>
       normalRoutes(page)(userAnswers)
-    case CheckMode =>
+    case CheckMode  =>
       checkRouteMap(page)(userAnswers)
   }
 }

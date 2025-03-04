@@ -25,28 +25,27 @@ import uk.gov.hmrc.govukfrontend.views.viewmodels.summarylist.SummaryListRow
 
 class CheckYourAnswersHelperSpec extends SpecBase {
 
-  val userAnswers: UserAnswers = UserAnswers( Json.obj("typeOfParticipant" -> Seq(
-    "artAuctioneer",
-    "artGalleryOwner",
-    "artAgent",
-    "artDealer",
-    "somethingElse"),
-    "typeOfParticipantDetail"  -> "sdfsdf",
-    "soldOverThreshold" -> true,
-    "dateTransactionOverThreshold" -> "2010-01-01",
-    "identifyLinkedTransactions" -> false,
-    "percentageExpectedTurnover" -> "zeroToTwenty"
-  ))
+  val userAnswers: UserAnswers = UserAnswers(
+    Json.obj(
+      "typeOfParticipant"            -> Seq("artAuctioneer", "artGalleryOwner", "artAgent", "artDealer", "somethingElse"),
+      "typeOfParticipantDetail"      -> "sdfsdf",
+      "soldOverThreshold"            -> true,
+      "dateTransactionOverThreshold" -> "2010-01-01",
+      "identifyLinkedTransactions"   -> false,
+      "percentageExpectedTurnover"   -> "zeroToTwenty"
+    )
+  )
 
-
-  val userAnswersSingle: UserAnswers = UserAnswers( Json.obj("typeOfParticipant" -> Seq(
-    "artGalleryOwner"),
-    "typeOfParticipantDetail"  -> "sdfsdf",
-    "soldOverThreshold" -> true,
-    "dateTransactionOverThreshold" -> "2010-01-01",
-    "identifyLinkedTransactions" -> false,
-    "percentageExpectedTurnover" -> "zeroToTwenty"
-  ))
+  val userAnswersSingle: UserAnswers = UserAnswers(
+    Json.obj(
+      "typeOfParticipant"            -> Seq("artGalleryOwner"),
+      "typeOfParticipantDetail"      -> "sdfsdf",
+      "soldOverThreshold"            -> true,
+      "dateTransactionOverThreshold" -> "2010-01-01",
+      "identifyLinkedTransactions"   -> false,
+      "percentageExpectedTurnover"   -> "zeroToTwenty"
+    )
+  )
 
   val checkYourAnswersHelper = new CheckYourAnswersHelper(userAnswers)(messages)
 
@@ -55,10 +54,11 @@ class CheckYourAnswersHelperSpec extends SpecBase {
       "called" must {
         "return SummaryListRow in alphabetical order" in {
 
-
           val expected = createSummaryListRow(
             "typeOfParticipant.heading",
-            HtmlContent("<ul class=\"govuk-list govuk-list--bullet\"><li>Auction house</li><li>Art gallery</li><li>Art adviser or agent</li><li>Art dealer</li><li>sdfsdf</li></ul>"),
+            HtmlContent(
+              "<ul class=\"govuk-list govuk-list--bullet\"><li>Auction house</li><li>Art gallery</li><li>Art adviser or agent</li><li>Art dealer</li><li>sdfsdf</li></ul>"
+            ),
             "change-type"
           )
 
@@ -67,7 +67,6 @@ class CheckYourAnswersHelperSpec extends SpecBase {
         "return SummaryListRow without bullets when only one user answer" in {
 
           val checkYourAnswersHelperSingle = new CheckYourAnswersHelper(userAnswersSingle)(messages)
-
 
           val expected = createSummaryListRow(
             "typeOfParticipant.heading",
@@ -145,11 +144,15 @@ class CheckYourAnswersHelperSpec extends SpecBase {
     SummaryListRow(
       key = Key(content = Text(messages(heading))),
       value = Value(content = answer),
-      actions = Some(Actions(
-        items = List(ActionItem(
-          href = s"/anti-money-laundering/art-market-participant/$changeUrl",
-          content = Text(messages("site.edit")))
+      actions = Some(
+        Actions(
+          items = List(
+            ActionItem(
+              href = s"/anti-money-laundering/art-market-participant/$changeUrl",
+              content = Text(messages("site.edit"))
+            )
+          )
         )
-      ))
+      )
     )
 }

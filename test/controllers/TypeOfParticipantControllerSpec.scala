@@ -40,7 +40,7 @@ class TypeOfParticipantControllerSpec extends SpecBase with MockitoSugar {
   lazy val typeOfParticipantRoute = routes.TypeOfParticipantController.onPageLoad(NormalMode).url
 
   val formProvider = new TypeOfParticipantFormProvider()
-  val form = formProvider()
+  val form         = formProvider()
 
   "TypeOfParticipant Controller" must {
 

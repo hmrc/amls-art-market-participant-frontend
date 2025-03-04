@@ -9,6 +9,7 @@ addSbtPlugin("uk.gov.hmrc" % "sbt-distributables" % "2.5.0")
 addSbtPlugin("org.playframework" % "sbt-plugin" % "3.0.6")
 addSbtPlugin("org.scalastyle" %% "scalastyle-sbt-plugin" % "1.0.0")
 addSbtPlugin("org.scoverage" % "sbt-scoverage" % "2.2.2")
+addSbtPlugin("org.scalameta"    % "sbt-scalafmt"    % "2.5.2")
 addSbtPlugin("com.timushev.sbt"   %  "sbt-updates"            % "0.6.4")
 
 // To resolve a bug with version 2.x.x of the scoverage plugin - https://github.com/sbt/sbt/issues/6997

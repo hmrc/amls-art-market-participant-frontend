@@ -32,10 +32,11 @@ class PercentageExpectedTurnoverSpec extends AnyWordSpec with ScalaCheckProperty
 
       val gen = Gen.oneOf(PercentageExpectedTurnover.values.toSeq)
 
-      forAll(gen) {
-        percentageExpectedTurnover =>
-
-          JsString(percentageExpectedTurnover.toString).validate[PercentageExpectedTurnover].asOpt.value mustEqual percentageExpectedTurnover
+      forAll(gen) { percentageExpectedTurnover =>
+        JsString(percentageExpectedTurnover.toString)
+          .validate[PercentageExpectedTurnover]
+          .asOpt
+          .value mustEqual percentageExpectedTurnover
       }
     }
 
@@ -43,10 +44,8 @@ class PercentageExpectedTurnoverSpec extends AnyWordSpec with ScalaCheckProperty
 
       val gen = arbitrary[String] suchThat (!PercentageExpectedTurnover.values.map(_.toString).contains(_))
 
-      forAll(gen) {
-        invalidValue =>
-
-          JsString(invalidValue).validate[PercentageExpectedTurnover] mustEqual JsError("error.invalid")
+      forAll(gen) { invalidValue =>
+        JsString(invalidValue).validate[PercentageExpectedTurnover] mustEqual JsError("error.invalid")
       }
     }
 
@@ -54,10 +53,8 @@ class PercentageExpectedTurnoverSpec extends AnyWordSpec with ScalaCheckProperty
 
       val gen = Gen.oneOf(PercentageExpectedTurnover.values.toSeq)
 
-      forAll(gen) {
-        percentageExpectedTurnover =>
-
-          Json.toJson(percentageExpectedTurnover) mustEqual JsString(percentageExpectedTurnover.toString)
+      forAll(gen) { percentageExpectedTurnover =>
+        Json.toJson(percentageExpectedTurnover) mustEqual JsString(percentageExpectedTurnover.toString)
       }
     }
   }

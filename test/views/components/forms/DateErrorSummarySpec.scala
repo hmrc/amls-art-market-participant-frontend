@@ -28,14 +28,14 @@ import views.html.components.DateErrorSummary
 
 import java.time.LocalDate
 
-class DateErrorSummarySpec extends PlaySpec with GuiceOneAppPerSuite with Matchers with Injecting  {
+class DateErrorSummarySpec extends PlaySpec with GuiceOneAppPerSuite with Matchers with Injecting {
 
   implicit lazy val messagesApi: MessagesApi = app.injector.instanceOf(classOf[MessagesApi])
-  implicit lazy val messages: Messages = messagesApi.preferred(FakeRequest())
+  implicit lazy val messages: Messages       = messagesApi.preferred(FakeRequest())
 
   val component: DateErrorSummary = inject[DateErrorSummary]
-  val exampleForm = new DateTransactionOverThresholdFormProvider()
-  val errorForm: Form[LocalDate] =
+  val exampleForm                 = new DateTransactionOverThresholdFormProvider()
+  val errorForm: Form[LocalDate]  =
     exampleForm().bind(Map("value.day" -> "xx", "value.month" -> "yy", "value.year" -> "zz"))
 
   "The DateErrorSummary component" when {

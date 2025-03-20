@@ -11,7 +11,7 @@ lazy val root = (project in file("."))
   .disablePlugins(JUnitXmlReportPlugin) // Disabling JUnit XML Reporter due to known issue
   .settings(DefaultBuildSettings.scalaSettings: _*)
   .settings(DefaultBuildSettings.defaultSettings(): _*)
-  .settings(scalaVersion := "2.13.15")
+  .settings(scalaVersion := "2.13.16")
   .settings(inConfig(Test)(testSettings): _*)
   .settings(majorVersion := 1)
   .settings(

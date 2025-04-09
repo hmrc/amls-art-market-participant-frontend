@@ -85,13 +85,13 @@ typeOfParticipant.artGalleryOwner = Art gallery
 typeOfParticipant.artAgent = Art adviser or agent
 typeOfParticipant.artDealer = Art dealer
 typeOfParticipant.somethingElse = Another type of art market participant
-typeOfParticipant.checkYourAnswersLabel = What type of art market participant are you?
+typeOfParticipant.checkYourAnswersLabel = Type of art market participant
 typeOfParticipant.error.required = Select the type of art market participant you are
 typeOfParticipant.hint = Select all that apply.
 
 typeOfParticipantDetail.title = Tell us what other type of art market participant you are
 typeOfParticipantDetail.heading = Tell us what other type of art market participant you are
-typeOfParticipantDetail.checkYourAnswersLabel = Tell us what other type of art market participant you are
+typeOfParticipantDetail.checkYourAnswersLabel = Description of other type of art market participant
 typeOfParticipantDetail.error.required = Enter the other type of art market participant you are
 typeOfParticipantDetail.error.length = Other type of art market participant must be 255 characters or less
 typeOfParticipantDetail.error.punctuation = Other type of art market participant can include letters a to z, numbers, spaces, and most punctuation and special characters
@@ -104,7 +104,7 @@ soldOverThreshold.hint = If you do not use euros, you’ll need to convert the a
 
 dateTransactionOverThreshold.title = When was the first sale of art for €10,000 or more?
 dateTransactionOverThreshold.heading = When was the first sale of art for €10,000 or more?
-dateTransactionOverThreshold.checkYourAnswersLabel = When was the first sale of art for €10,000 or more?
+dateTransactionOverThreshold.checkYourAnswersLabel = Date you first sold art for €10,000 or more
 dateTransactionOverThreshold.hint = The sale must have been on or after 10 January 2020 for example, 11 01 2020
 
 error.date.fs.one = The date of the first sale must include a {0}
@@ -131,7 +131,7 @@ percentageExpectedTurnover.twentyOneToForty = 21% to 40%
 percentageExpectedTurnover.fortyOneToSixty = 41% to 60%
 percentageExpectedTurnover.sixtyOneToEighty = 61% to 80%
 percentageExpectedTurnover.eightyOneToOneHundred = 81% to 100%
-percentageExpectedTurnover.checkYourAnswersLabel = How much of your turnover do you expect to come from sales of art for €10,000 or more in the next 12 months?
+percentageExpectedTurnover.checkYourAnswersLabel = Amount of turnover you expect to come from sales of art for €10,000 or more in next 12 months
 percentageExpectedTurnover.error.required = Select how much of your turnover you expect to come from sales of art for €10,000 or more in the next 12 months 
 percentageExpectedTurnover.hint = If you do not use euros, you’ll need to convert the amount to the currency you use.
 

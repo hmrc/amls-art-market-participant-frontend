@@ -55,7 +55,7 @@ class CheckYourAnswersHelperSpec extends SpecBase {
         "return SummaryListRow in alphabetical order" in {
 
           val expected = createSummaryListRow(
-            "typeOfParticipant.heading",
+            "typeOfParticipant.checkYourAnswersLabel",
             HtmlContent(
               "<ul class=\"govuk-list govuk-list--bullet\"><li>Auction house</li><li>Art gallery</li><li>Art adviser or agent</li><li>Art dealer</li><li>sdfsdf</li></ul>"
             ),
@@ -69,7 +69,7 @@ class CheckYourAnswersHelperSpec extends SpecBase {
           val checkYourAnswersHelperSingle = new CheckYourAnswersHelper(userAnswersSingle)(messages)
 
           val expected = createSummaryListRow(
-            "typeOfParticipant.heading",
+            "typeOfParticipant.checkYourAnswersLabel",
             Text("Art gallery"),
             "change-type"
           )
@@ -99,7 +99,7 @@ class CheckYourAnswersHelperSpec extends SpecBase {
         "return SummaryListRow" in {
 
           val expected = createSummaryListRow(
-            "dateTransactionOverThreshold.heading",
+            "dateTransactionOverThreshold.checkYourAnswersLabel",
             HtmlContent("1 January 2010"),
             "change-first-sale"
           )
@@ -129,7 +129,7 @@ class CheckYourAnswersHelperSpec extends SpecBase {
         "return SummaryListRow" in {
 
           val expected = createSummaryListRow(
-            "percentageExpectedTurnover.heading",
+            "percentageExpectedTurnover.checkYourAnswersLabel",
             Text("0% to 20%"),
             "change-turnover-from-art-sales"
           )

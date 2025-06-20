@@ -9,8 +9,6 @@ lazy val appName: String = "amls-art-market-participant-frontend"
 lazy val root = (project in file("."))
   .enablePlugins(PlayScala, SbtDistributablesPlugin)
   .disablePlugins(JUnitXmlReportPlugin) // Disabling JUnit XML Reporter due to known issue
-  .settings(DefaultBuildSettings.scalaSettings: _*)
-  .settings(DefaultBuildSettings.defaultSettings(): _*)
   .settings(scalaVersion := "2.13.16")
   .settings(inConfig(Test)(testSettings): _*)
   .settings(majorVersion := 1)

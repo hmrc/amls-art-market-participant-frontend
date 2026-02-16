@@ -33,6 +33,7 @@ lazy val root = (project in file("."))
     ScoverageKeys.coverageHighlighting := true,
     scalacOptions ++= Seq("-feature"),
     libraryDependencies ++= AppDependencies(),
+    excludeDependencies += ExclusionRule("org.lz4", "lz4-java"),
     dependencyOverrides += "commons-codec" % "commons-codec" % "1.12",
     retrieveManaged := true,
     update / evictionWarningOptions :=

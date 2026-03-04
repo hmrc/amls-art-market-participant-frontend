@@ -15,6 +15,7 @@
  */
 
 package views.behaviours
+import org.scalatest.matchers.must.Matchers._
 
 import play.api.data.Form
 import play.twirl.api.HtmlFormat

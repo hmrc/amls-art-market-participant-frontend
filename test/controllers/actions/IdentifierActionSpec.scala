@@ -15,6 +15,7 @@
  */
 
 package controllers.actions
+import org.scalatest.matchers.must.Matchers._
 
 import base.SpecBase
 import com.google.inject.Inject
@@ -33,7 +34,7 @@ import scala.concurrent.{ExecutionContext, Future}
 class IdentifierActionSpec extends SpecBase {
 
   class Harness(authAction: IdentifierAction) {
-    def onPageLoad() = authAction(_ => Results.Ok)
+    def onPageLoad() = authAction((_: models.requests.IdentifierRequest[_]) => Results.Ok)
   }
 
   "Auth Action" when {

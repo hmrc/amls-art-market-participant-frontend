@@ -15,12 +15,13 @@
  */
 
 package pages.behaviours
+import org.scalatest.matchers.must.Matchers._
 
 import generators.Generators
 import models.UserAnswers
 import org.scalacheck.Arbitrary.arbitrary
 import org.scalacheck.{Arbitrary, Gen}
-import org.scalatest.matchers.must.Matchers.{be, convertToAnyMustWrapper, empty}
+
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.{OptionValues, TryValues}
 import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks

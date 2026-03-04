@@ -36,7 +36,12 @@ object EnumerableSpec {
   }
 }
 
-class EnumerableSpec extends AnyWordSpec with org.scalatest.matchers.must.Matchers with EitherValues with OptionValues with Enumerable.Implicits {
+class EnumerableSpec
+    extends AnyWordSpec
+    with org.scalatest.matchers.must.Matchers
+    with EitherValues
+    with OptionValues
+    with Enumerable.Implicits {
 
   import EnumerableSpec._
 

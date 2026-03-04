@@ -15,10 +15,11 @@
  */
 
 package pages
+import org.scalatest.matchers.must.Matchers._
 
 import java.time.LocalDate
 import models.UserAnswers
-import org.scalatest.matchers.must.Matchers.{be, convertToAnyMustWrapper, empty}
+
 import pages.behaviours.PageBehaviours
 
 class SoldOverThresholdPageSpec extends PageBehaviours {

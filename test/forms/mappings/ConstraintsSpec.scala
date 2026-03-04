@@ -25,7 +25,12 @@ import play.api.data.validation.{Invalid, Valid}
 
 import java.time.LocalDate
 
-class ConstraintsSpec extends AnyWordSpec with org.scalatest.matchers.must.Matchers with ScalaCheckPropertyChecks with Generators with Constraints {
+class ConstraintsSpec
+    extends AnyWordSpec
+    with org.scalatest.matchers.must.Matchers
+    with ScalaCheckPropertyChecks
+    with Generators
+    with Constraints {
 
   "firstError" should {
 

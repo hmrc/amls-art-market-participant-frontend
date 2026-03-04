@@ -20,7 +20,6 @@ import play.api.data.Form
 import forms.FormSpec
 import models._
 
-
 trait FormBehaviours extends FormSpec {
 
   val validData: Map[String, String]

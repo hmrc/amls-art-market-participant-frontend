@@ -15,7 +15,7 @@
  */
 
 package models
-
+import org.scalatest.matchers.must.Matchers._
 
 import org.scalatest.wordspec.AnyWordSpec
 

@@ -29,7 +29,7 @@ import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
 class AMLSConnector @Inject() (config: Configuration, implicit val httpClientV2: HttpClientV2)(implicit
-                                                                                               ec: ExecutionContext
+  ec: ExecutionContext
 ) {
 
   private val baseUrl                     = config.get[Service]("microservice.services.amls-frontend")

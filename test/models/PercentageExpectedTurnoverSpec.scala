@@ -24,7 +24,11 @@ import org.scalatest.wordspec.AnyWordSpec
 import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
 import play.api.libs.json.{JsError, JsString, Json}
 
-class PercentageExpectedTurnoverSpec extends AnyWordSpec with org.scalatest.matchers.must.Matchers with ScalaCheckPropertyChecks with OptionValues {
+class PercentageExpectedTurnoverSpec
+    extends AnyWordSpec
+    with org.scalatest.matchers.must.Matchers
+    with ScalaCheckPropertyChecks
+    with OptionValues {
 
   "PercentageExpectedTurnover" should {
 

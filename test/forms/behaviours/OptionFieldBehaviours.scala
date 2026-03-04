@@ -16,7 +16,6 @@
 
 package forms.behaviours
 
-
 import play.api.data.{Form, FormError}
 
 class OptionFieldBehaviours extends FieldBehaviours {

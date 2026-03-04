@@ -18,7 +18,7 @@ package forms
 
 import forms.behaviours.StringFieldBehaviours
 import forms.mappings.Constraints
-import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
+
 import play.api.data.FormError
 
 class TypeOfParticipantDetailFormProviderSpec extends StringFieldBehaviours with Constraints {

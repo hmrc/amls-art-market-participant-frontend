@@ -19,7 +19,7 @@ package models
 import generators.ModelGenerators
 import org.scalacheck.Arbitrary.arbitrary
 import org.scalatest.OptionValues
-import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
+
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
 import play.api.libs.json.{JsError, JsString, Json}

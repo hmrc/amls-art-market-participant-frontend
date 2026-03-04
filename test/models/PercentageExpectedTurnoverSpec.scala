@@ -19,12 +19,12 @@ package models
 import org.scalacheck.Arbitrary.arbitrary
 import org.scalacheck.Gen
 import org.scalatest.OptionValues
-import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
+
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
 import play.api.libs.json.{JsError, JsString, Json}
 
-class PercentageExpectedTurnoverSpec extends AnyWordSpec with ScalaCheckPropertyChecks with OptionValues {
+class PercentageExpectedTurnoverSpec extends AnyWordSpec with org.scalatest.matchers.must.Matchers with ScalaCheckPropertyChecks with OptionValues {
 
   "PercentageExpectedTurnover" should {
 

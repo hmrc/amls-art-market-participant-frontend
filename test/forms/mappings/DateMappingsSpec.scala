@@ -20,7 +20,7 @@ import generators.Generators
 import org.scalacheck.Gen
 import org.scalatest.OptionValues
 import org.scalatest.freespec.AnyFreeSpec
-import org.scalatest.matchers.must.Matchers.{contain, convertToAnyMustWrapper}
+import org.scalatest.matchers.must.Matchers.contain
 import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
 import play.api.data.{Form, FormError}
 

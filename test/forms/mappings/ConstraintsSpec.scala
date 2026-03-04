@@ -18,14 +18,14 @@ package forms.mappings
 
 import generators.Generators
 import org.scalacheck.Gen
-import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
+
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
 import play.api.data.validation.{Invalid, Valid}
 
 import java.time.LocalDate
 
-class ConstraintsSpec extends AnyWordSpec with ScalaCheckPropertyChecks with Generators with Constraints {
+class ConstraintsSpec extends AnyWordSpec with org.scalatest.matchers.must.Matchers with ScalaCheckPropertyChecks with Generators with Constraints {
 
   "firstError" should {
 

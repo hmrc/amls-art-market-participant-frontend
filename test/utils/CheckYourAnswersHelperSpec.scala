@@ -15,6 +15,7 @@
  */
 
 package utils
+import org.scalatest.matchers.must.Matchers._
 
 import base.SpecBase
 import models.UserAnswers

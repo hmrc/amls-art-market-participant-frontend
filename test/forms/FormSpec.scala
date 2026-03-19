@@ -18,11 +18,11 @@ package forms
 
 import org.scalatest.OptionValues
 import org.scalatest.matchers.must.Matchers.contain
-import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
+
 import org.scalatest.wordspec.AnyWordSpec
 import play.api.data.{Form, FormError}
 
-trait FormSpec extends AnyWordSpec with OptionValues {
+trait FormSpec extends AnyWordSpec with OptionValues with org.scalatest.matchers.should.Matchers {
 
   def checkForError(form: Form[_], data: Map[String, String], expectedErrors: Seq[FormError]) =
     form

@@ -15,7 +15,6 @@
  *@
 
 @import uk.gov.hmrc.govukfrontend.views.html.components.implicits._
-@import controllers.routes._
 @import models.{Mode, PercentageExpectedTurnover}
 @import config.FrontendAppConfig
 @import components.{Anchor, Button, FormErrorSummary, PageHeading}
@@ -35,7 +34,7 @@
 
 @layout(pageTitle = s"${errorPrefix(form)} ${messages("percentageExpectedTurnover.title")}") {
 
-    @formHelper(action = PercentageExpectedTurnoverController.onSubmit(mode), Symbol("autoComplete") -> "off") {
+    @formHelper(action = controllers.routes.PercentageExpectedTurnoverController.onSubmit(mode), Symbol("autoComplete") -> "off") {
 
         @errorSummary(form, Some(Map("value" -> "value_0")))
 

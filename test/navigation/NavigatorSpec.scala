@@ -15,6 +15,7 @@
  */
 
 package navigation
+import org.scalatest.matchers.must.Matchers._
 
 import base.SpecBase
 import controllers.routes
@@ -44,6 +45,12 @@ class NavigatorSpec extends SpecBase {
           .mustBe(routes.SoldOverThresholdController.onPageLoad(NormalMode))
       }
 
+      "throw an exception when TypeOfParticipantPage has no answer in Normal mode" in {
+        intercept[Exception] {
+          navigator.nextPage(TypeOfParticipantPage, NormalMode, UserAnswers())
+        }.getMessage mustEqual "Unable to navigate to page"
+      }
+
       "go from Type Of Participant Detail to Art Sold Over Threshold" in {
         val answers = UserAnswers()
 
@@ -66,6 +73,12 @@ class NavigatorSpec extends SpecBase {
         navigator
           .nextPage(SoldOverThresholdPage, NormalMode, answers)
           .mustBe(routes.IdentifyLinkedTransactionsController.onPageLoad(NormalMode))
+      }
+
+      "throw an exception when SoldOverThresholdPage has no answer in Normal mode" in {
+        intercept[Exception] {
+          navigator.nextPage(SoldOverThresholdPage, NormalMode, UserAnswers())
+        }.getMessage mustEqual "Unable to navigate to page"
       }
 
       "go from Date Transaction Over Threshold to Identify Linked Transactions page" in {
@@ -124,6 +137,12 @@ class NavigatorSpec extends SpecBase {
           .mustBe(routes.CheckYourAnswersController.onPageLoad())
       }
 
+      "throw an exception when TypeOfParticipantPage has no answer in Check mode" in {
+        intercept[Exception] {
+          navigator.nextPage(TypeOfParticipantPage, CheckMode, UserAnswers())
+        }.getMessage mustEqual "Unable to navigate to page"
+      }
+
       "go from Art Sold Over Threshold to Check Your Answers where no" in {
         val answers = UserAnswers().set(SoldOverThresholdPage, false).success.value
 
@@ -138,6 +157,12 @@ class NavigatorSpec extends SpecBase {
         navigator
           .nextPage(SoldOverThresholdPage, CheckMode, answers)
           .mustBe(routes.DateTransactionOverThresholdController.onPageLoad(CheckMode))
+      }
+
+      "throw an exception when SoldOverThresholdPage has no answer in Check mode" in {
+        intercept[Exception] {
+          navigator.nextPage(SoldOverThresholdPage, CheckMode, UserAnswers())
+        }.getMessage mustEqual "Unable to navigate to page"
       }
 
       "go from Date Transaction Over Threshold to Check Your Answers" in {

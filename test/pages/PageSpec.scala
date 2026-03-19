@@ -14,22 +14,21 @@
  * limitations under the License.
  */
 
-package viewmodels
+package pages
+
 import org.scalatest.matchers.must.Matchers._
+import org.scalatest.wordspec.AnyWordSpec
 
-import base.SpecBase
+class PageSpec extends AnyWordSpec {
 
-class RadioOptionSpec extends SpecBase {
+  private case object TestPage extends Page {
+    override def toString: String = "testPage"
+  }
 
-  "Radio Option" must {
-
-    "build correctly from a key prefix and option" in {
-
-      val radioOption = RadioOption("prefix", "option")
-
-      radioOption.id mustEqual "prefix.option"
-      radioOption.value mustEqual "option"
-      radioOption.messageKey mustEqual "prefix.option"
+  "Page" must {
+    "implicitly convert a Page to its string representation" in {
+      val result: String = Page.toString(TestPage)
+      result mustEqual "testPage"
     }
   }
 }

@@ -15,12 +15,13 @@
  */
 
 package models
+import org.scalatest.matchers.must.Matchers._
 
 import generators.ModelGenerators
 import org.scalacheck.{Gen, Shrink}
 import org.scalatest.OptionValues
 import org.scalatest.freespec.AnyFreeSpec
-import org.scalatest.matchers.must.Matchers.{convertToAnyMustWrapper, equal}
+
 import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
 import play.api.libs.json._
 

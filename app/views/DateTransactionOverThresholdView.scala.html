@@ -33,7 +33,7 @@
 
 @layout(pageTitle = s"${errorPrefix(form)} ${messages("dateTransactionOverThreshold.title")}") {
 
-    @formHelper(action = DateTransactionOverThresholdController.onSubmit(mode), Symbol("autoComplete") -> "off") {
+    @formHelper(action = controllers.routes.DateTransactionOverThresholdController.onSubmit(mode), Symbol("autoComplete") -> "off") {
 
         @errorSummary(form, "value")
 

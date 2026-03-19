@@ -16,7 +16,7 @@
 
 package models
 
-import org.scalatest.matchers.must.Matchers.{contain, convertToAnyMustWrapper}
+import org.scalatest.matchers.must.Matchers.contain
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.{EitherValues, OptionValues}
 import play.api.libs.json._
@@ -36,7 +36,12 @@ object EnumerableSpec {
   }
 }
 
-class EnumerableSpec extends AnyWordSpec with EitherValues with OptionValues with Enumerable.Implicits {
+class EnumerableSpec
+    extends AnyWordSpec
+    with org.scalatest.matchers.must.Matchers
+    with EitherValues
+    with OptionValues
+    with Enumerable.Implicits {
 
   import EnumerableSpec._
 

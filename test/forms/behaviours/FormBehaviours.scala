@@ -19,7 +19,6 @@ package forms.behaviours
 import play.api.data.Form
 import forms.FormSpec
 import models._
-import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
 
 trait FormBehaviours extends FormSpec {
 

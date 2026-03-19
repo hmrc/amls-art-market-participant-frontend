@@ -14,16 +14,15 @@
  * limitations under the License.
  *@
 
+@import uk.gov.hmrc.govukfrontend.views.viewmodels.notificationbanner.{NotificationBanner => NotificationBannerViewModel}
+
 @this(govukNotificationBanner: GovukNotificationBanner)
 
 @(message: String)(implicit messages: Messages)
 
 @govukNotificationBanner(
-    NotificationBanner(
+    new NotificationBannerViewModel(
         title = Text(messages("whatYouNeed.attention.title")),
         content = Text(message)
     )
 )
-
-
-

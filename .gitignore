@@ -36,3 +36,5 @@ bin
 package-lock.json
 node_modules/
 .bsp/
+/.metals
+/.vscode

@@ -16,7 +16,7 @@
 
 @import models.Mode
 @import config.FrontendAppConfig
-@import components.{Anchor, Button, FormErrorSummary, InputYesNo, PageHeading}
+@import components.{Anchor, Button, FormErrorSummary, InputYesNo, PageHeading, ImportantBanner}
 
 @this(
     layout: Layout,
@@ -24,6 +24,7 @@
     pageHeading: PageHeading,
     button: Button,
     errorSummary: FormErrorSummary,
+    importantBanner: ImportantBanner,
     inputYesNo: InputYesNo,
     appConfig: FrontendAppConfig,
     anchor: Anchor
@@ -34,6 +35,10 @@
 @layout(pageTitle = s"${errorPrefix(form)} ${messages("soldOverThreshold.title")}") {
 
     @formHelper(action = controllers.routes.SoldOverThresholdController.onSubmit(mode), Symbol("autoComplete") -> "off") {
+
+        @if(mode == CheckMode){
+            @importantBanner()
+        }
 
         @pageHeading("amp.heading")
 

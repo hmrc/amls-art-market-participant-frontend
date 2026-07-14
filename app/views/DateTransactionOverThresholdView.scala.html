@@ -16,13 +16,14 @@
 
 @import uk.gov.hmrc.hmrcfrontend.views.html.components.implicits._
 @import config.FrontendAppConfig
-@import components.{Anchor, Button, DateErrorSummary, PageHeading}
+@import components.{Anchor, Button, DateErrorSummary, PageHeading, ImportantBanner}
 
 @this(
     layout: Layout,
     pageHeading: PageHeading,
     govukDateInput : GovukDateInput,
     formHelper: FormWithCSRF,
+    importantBanner: ImportantBanner,
     button: Button,
     errorSummary: DateErrorSummary,
     appConfig: FrontendAppConfig,
@@ -36,6 +37,10 @@
     @formHelper(action = controllers.routes.DateTransactionOverThresholdController.onSubmit(mode), Symbol("autoComplete") -> "off") {
 
         @errorSummary(form, "value")
+
+        @if(mode == CheckMode){
+            @importantBanner()
+        }
 
         @pageHeading("amp.heading")
 

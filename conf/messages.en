@@ -71,9 +71,9 @@ whatYouNeed.heading = What you need
 whatYouNeed.heading2 = In the section you’ll need to tell us:
 whatYouNeed.continue = Continue
 whatYouNeed.line_1 = the role you carry out in the art market
-whatYouNeed.line_2 = the date of your first sale of art for €10,000 or more on or after 10 January 2020, if you have made any
+whatYouNeed.line_2 = the date of your first sale of art for £10,000 or more on or after 10 January 2020, if you have made any
 whatYouNeed.line_3 = if you can identify when a sale is made up of multiple payments
-whatYouNeed.line_4 = the percentage of your turnover you estimate will come from sales of art for €10,000 or more in the next 12 months
+whatYouNeed.line_4 = the percentage of your turnover you estimate will come from sales of art for £10,000 or more in the next 12 months
 whatYouNeed.attention.title = Automatic saving
 whatYouNeed.attention.information = Information is saved automatically. If you sign out, you’ll have 28 days to complete your application.
 
@@ -96,15 +96,18 @@ typeOfParticipantDetail.error.required = Enter the other type of art market part
 typeOfParticipantDetail.error.length = Other type of art market participant must be 255 characters or less
 typeOfParticipantDetail.error.punctuation = Other type of art market participant can include letters a to z, numbers, spaces, and most punctuation and special characters
 
-soldOverThreshold.title = Has your business made a sale of art for €10,000 or more on or after 10 January 2020?
-soldOverThreshold.heading = Has your business made a sale of art for €10,000 or more on or after 10 January 2020?
-soldOverThreshold.checkYourAnswersLabel = Has your business made a sale of art for €10,000 or more on or after 10 January 2020?
-soldOverThreshold.error.required = Select yes if your business made a sale of art for €10,000 or more on or after 10 January 2020
-soldOverThreshold.hint = If you do not use euros, you’ll need to convert the amount to the currency you use.
+soldOverThreshold.title = Has your business made a sale of art for £10,000 or more on or after 10 January 2020?
+soldOverThreshold.heading = Has your business made a sale of art for £10,000 or more on or after 10 January 2020?
+soldOverThreshold.checkYourAnswersLabel = Has your business made a sale of art for £10,000 or more on or after 10 January 2020?
+soldOverThreshold.error.required = Select yes if your business made a sale of art for £10,000 or more on or after 10 January 2020
+soldOverThreshold.hint = If you do not use pounds, you’ll need to convert the amount to the currency you use.
 
-dateTransactionOverThreshold.title = When was the first sale of art for €10,000 or more?
-dateTransactionOverThreshold.heading = When was the first sale of art for €10,000 or more?
-dateTransactionOverThreshold.checkYourAnswersLabel = Date you first sold art for €10,000 or more
+important.bannerTitle = Important
+important.bannerText = The threshold has changed from €10,000 to £10,000. Make sure you use the correct currency when answering.
+
+dateTransactionOverThreshold.title = When was the first sale of art for £10,000 or more?
+dateTransactionOverThreshold.heading = When was the first sale of art for £10,000 or more?
+dateTransactionOverThreshold.checkYourAnswersLabel = Date you first sold art for £10,000 or more
 dateTransactionOverThreshold.hint = The sale must have been on or after 10 January 2020 for example, 11 01 2020
 
 error.date.fs.one = The date of the first sale must include a {0}
@@ -123,17 +126,16 @@ identifyLinkedTransactions.heading = Are you able to identify multiple payments 
 identifyLinkedTransactions.checkYourAnswersLabel = Are you able to identify multiple payments linked to a single sale?
 identifyLinkedTransactions.error.required = Select yes if you can identify multiple payments linked to a single sale
 
-
-percentageExpectedTurnover.title = How much of your turnover do you expect to come from sales of art for €10,000 or more in the next 12 months?
-percentageExpectedTurnover.heading = How much of your turnover do you expect to come from sales of art for €10,000 or more in the next 12 months?
+percentageExpectedTurnover.title = How much of your turnover do you expect to come from sales of art for £10,000 or more in the next 12 months?
+percentageExpectedTurnover.heading = How much of your turnover do you expect to come from sales of art for £10,000 or more in the next 12 months?
 percentageExpectedTurnover.zeroToTwenty = 0% to 20%
 percentageExpectedTurnover.twentyOneToForty = 21% to 40%
 percentageExpectedTurnover.fortyOneToSixty = 41% to 60%
 percentageExpectedTurnover.sixtyOneToEighty = 61% to 80%
 percentageExpectedTurnover.eightyOneToOneHundred = 81% to 100%
-percentageExpectedTurnover.checkYourAnswersLabel = Amount of turnover you expect to come from sales of art for €10,000 or more in next 12 months
-percentageExpectedTurnover.error.required = Select how much of your turnover you expect to come from sales of art for €10,000 or more in the next 12 months 
-percentageExpectedTurnover.hint = If you do not use euros, you’ll need to convert the amount to the currency you use.
+percentageExpectedTurnover.checkYourAnswersLabel = Amount of turnover you expect to come from sales of art for £10,000 or more in next 12 months
+percentageExpectedTurnover.error.required = Select how much of your turnover you expect to come from sales of art for £10,000 or more in the next 12 months
+percentageExpectedTurnover.hint = If you do not use pounds, you’ll need to convert the amount to the currency you use.
 
 ############################### Footer ###############################
 footer.links.accessibility.text = Accessibility statement

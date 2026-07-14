@@ -84,11 +84,11 @@ class PercentageExpectedTurnoverViewSpec extends ViewBehaviours {
       assertTitleEqualsMessage(
         document,
         "title",
-        "How much of your turnover do you expect to come from sales of art for €10,000 or more in the next 12 months?"
+        "How much of your turnover do you expect to come from sales of art for £10,000 or more in the next 12 months?"
       )
       assertPageTitleEqualsMessage(
         document,
-        "How much of your turnover do you expect to come from sales of art for €10,000 or more in the next 12 months?"
+        "How much of your turnover do you expect to come from sales of art for £10,000 or more in the next 12 months?"
       )
     }
   }

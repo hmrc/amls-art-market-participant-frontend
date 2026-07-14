@@ -54,11 +54,11 @@ class SoldOverThresholdViewSpec extends YesNoViewBehaviours {
       assertTitleEqualsMessage(
         document,
         "title",
-        "Has your business made a sale of art for €10,000 or more on or after 10 January 2020?"
+        "Has your business made a sale of art for £10,000 or more on or after 10 January 2020?"
       )
       assertPageTitleEqualsMessage(
         document,
-        "Has your business made a sale of art for €10,000 or more on or after 10 January 2020?"
+        "Has your business made a sale of art for £10,000 or more on or after 10 January 2020?"
       )
     }
   }

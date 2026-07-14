@@ -47,8 +47,8 @@ class DateTransactionOverThresholdViewSpec extends QuestionViewBehaviours[LocalD
     "include the correct content" in {
       val document = asDocument(applyView(form))
 
-      assertTitleEqualsMessage(document, "title", "When was the first sale of art for €10,000 or more?")
-      assertPageTitleEqualsMessage(document, "When was the first sale of art for €10,000 or more?")
+      assertTitleEqualsMessage(document, "title", "When was the first sale of art for £10,000 or more?")
+      assertPageTitleEqualsMessage(document, "When was the first sale of art for £10,000 or more?")
     }
   }
 }

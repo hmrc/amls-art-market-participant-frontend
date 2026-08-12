@@ -38,3 +38,5 @@ node_modules/
 .bsp/
 /.metals
 /.vscode
+/project/project/metals.sbt
+/project/metals.sbt

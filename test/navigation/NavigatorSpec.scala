@@ -48,7 +48,7 @@ class NavigatorSpec extends SpecBase {
       "throw an exception when TypeOfParticipantPage has no answer in Normal mode" in {
         intercept[Exception] {
           navigator.nextPage(TypeOfParticipantPage, NormalMode, UserAnswers())
-        }.getMessage mustEqual "Unable to navigate to page"
+        }.getMessage mustEqual "[Navigator][typeOfParticipantRoute] - TypeOfParticipantPage answer missing, unable to navigate"
       }
 
       "go from Type Of Participant Detail to Art Sold Over Threshold" in {
@@ -78,7 +78,7 @@ class NavigatorSpec extends SpecBase {
       "throw an exception when SoldOverThresholdPage has no answer in Normal mode" in {
         intercept[Exception] {
           navigator.nextPage(SoldOverThresholdPage, NormalMode, UserAnswers())
-        }.getMessage mustEqual "Unable to navigate to page"
+        }.getMessage mustEqual "[Navigator][artSoldOverThresholdRoute] - SoldOverThresholdPage answer missing, unable to navigate"
       }
 
       "go from Date Transaction Over Threshold to Identify Linked Transactions page" in {
@@ -140,7 +140,7 @@ class NavigatorSpec extends SpecBase {
       "throw an exception when TypeOfParticipantPage has no answer in Check mode" in {
         intercept[Exception] {
           navigator.nextPage(TypeOfParticipantPage, CheckMode, UserAnswers())
-        }.getMessage mustEqual "Unable to navigate to page"
+        }.getMessage mustEqual "[Navigator][typeOfParticipantRouteCheckMode] - TypeOfParticipantPage answer missing, unable to navigate"
       }
 
       "go from Art Sold Over Threshold to Check Your Answers where no" in {
@@ -162,7 +162,7 @@ class NavigatorSpec extends SpecBase {
       "throw an exception when SoldOverThresholdPage has no answer in Check mode" in {
         intercept[Exception] {
           navigator.nextPage(SoldOverThresholdPage, CheckMode, UserAnswers())
-        }.getMessage mustEqual "Unable to navigate to page"
+        }.getMessage mustEqual "[Navigator][artSoldOverThresholdRouteCheckMode] - SoldOverThresholdPage answer missing, unable to navigate"
       }
 
       "go from Date Transaction Over Threshold to Check Your Answers" in {

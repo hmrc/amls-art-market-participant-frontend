@@ -44,7 +44,11 @@ class Navigator @Inject() () {
         routes.SoldOverThresholdController.onPageLoad(NormalMode)
       }
     }
-  }.getOrElse(throw new Exception("Unable to navigate to page"))
+  }.getOrElse(
+    throw new Exception(
+      "[Navigator][typeOfParticipantRoute] - TypeOfParticipantPage answer missing, unable to navigate"
+    )
+  )
 
   private def typeOfParticipantRouteCheckMode(answers: UserAnswers): Call = {
     answers.get(TypeOfParticipantPage) map { ans =>
@@ -54,19 +58,29 @@ class Navigator @Inject() () {
         routes.CheckYourAnswersController.onPageLoad()
       }
     }
-  }.getOrElse(throw new Exception("Unable to navigate to page"))
+  }.getOrElse(
+    throw new Exception(
+      "[Navigator][typeOfParticipantRouteCheckMode] - TypeOfParticipantPage answer missing, unable to navigate"
+    )
+  )
 
   private def artSoldOverThresholdRoute(answers: UserAnswers): Call = answers.get(SoldOverThresholdPage) match {
     case Some(true)  => routes.DateTransactionOverThresholdController.onPageLoad(NormalMode)
     case Some(false) => routes.IdentifyLinkedTransactionsController.onPageLoad(NormalMode)
-    case None        => throw new Exception("Unable to navigate to page")
+    case None        =>
+      throw new Exception(
+        "[Navigator][artSoldOverThresholdRoute] - SoldOverThresholdPage answer missing, unable to navigate"
+      )
   }
 
   private def artSoldOverThresholdRouteCheckMode(answers: UserAnswers): Call =
     answers.get(SoldOverThresholdPage) match {
       case Some(true)  => routes.DateTransactionOverThresholdController.onPageLoad(CheckMode)
       case Some(false) => routes.CheckYourAnswersController.onPageLoad()
-      case None        => throw new Exception("Unable to navigate to page")
+      case None        =>
+        throw new Exception(
+          "[Navigator][artSoldOverThresholdRouteCheckMode] - SoldOverThresholdPage answer missing, unable to navigate"
+        )
     }
 
   private val checkRouteMap: Page => UserAnswers => Call = {
